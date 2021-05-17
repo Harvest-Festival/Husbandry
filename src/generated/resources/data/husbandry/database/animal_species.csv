@@ -1,0 +1,13 @@
+Name,Min Age,Max Age,Treat Item,Generic Treats,Species Treats,Days to Birth,Days to Maturity,Product Frequency,Products Loot Table
+cat,10,20,husbandry:cat_treat,3,24,5,7,0,none
+chicken,3,10,husbandry:chicken_treat,5,26,3,3,1,husbandry:entities/products/chicken_egg
+cow,12,20,husbandry:cow_treat,7,24,9,14,1,husbandry:entities/products/milk
+dog,10,13,husbandry:dog_treat,24,3,5,7,0,none
+donkey,25,30,husbandry:horse_treat,22,11,24,12,0,none
+duck,5,10,husbandry:duck_treat,9,23,4,4,2,husbandry:entities/products/duck_egg
+horse,25,30,husbandry:horse_treat,22,10,24,12,0,none
+llama,15,25,husbandry:sheep_treat,7,24,11,10,0,none
+parrot,25,50,husbandry:parrot_treat,3,24,4,36,0,none
+pig,6,10,husbandry:pig_treat,20,10,4,4,1,husbandry:entities/products/truffle
+rabbit,8,12,husbandry:rabbit_treat,14,14,4,3,4,husbandry:entities/products/rabbit_foot
+sheep,8,12,husbandry:sheep_treat,2,29,5,4,7,husbandry:entities/products/wool

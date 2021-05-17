@@ -1,0 +1,17 @@
+{
+  "replace": false,
+  "values": [
+    "husbandry:generic_treat",
+    "husbandry:cat_treat",
+    "husbandry:chicken_treat",
+    "husbandry:cow_treat",
+    "husbandry:dog_treat",
+    "husbandry:horse_treat",
+    "husbandry:pig_treat",
+    "husbandry:rabbit_treat",
+    "husbandry:sheep_treat",
+    "husbandry:duck_treat",
+    "husbandry:parrot_treat",
+    "husbandry:llama_treat"
+  ]
+}

@@ -1,0 +1,13 @@
+Profession,Tier,Input Item,Input Amount,Output Item,Output Amount,Max Trades,Experience,Price Multiplier
+minecraft:shepherd,1,minecraft:emerald,1,husbandry:generic_treat,5,32,16,2.0
+minecraft:shepherd,2,minecraft:emerald,2,husbandry:cat_treat,3,32,16,2.0
+minecraft:shepherd,2,minecraft:emerald,2,husbandry:chicken_treat,3,32,16,2.0
+minecraft:shepherd,2,minecraft:emerald,2,husbandry:cow_treat,3,32,16,2.0
+minecraft:shepherd,2,minecraft:emerald,2,husbandry:dog_treat,3,32,16,2.0
+minecraft:shepherd,2,minecraft:emerald,2,husbandry:duck_treat,3,32,16,2.0
+minecraft:shepherd,2,minecraft:emerald,2,husbandry:horse_treat,3,32,16,2.0
+minecraft:shepherd,2,minecraft:emerald,2,husbandry:llama_treat,3,32,16,2.0
+minecraft:shepherd,2,minecraft:emerald,2,husbandry:parrot_treat,3,32,16,2.0
+minecraft:shepherd,2,minecraft:emerald,2,husbandry:pig_treat,3,32,16,2.0
+minecraft:shepherd,2,minecraft:emerald,2,husbandry:rabbit_treat,3,32,16,2.0
+minecraft:shepherd,2,minecraft:emerald,2,husbandry:sheep_treat,3,32,16,2.0

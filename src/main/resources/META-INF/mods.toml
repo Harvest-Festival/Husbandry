@@ -1,0 +1,27 @@
+modLoader="javafml"
+loaderVersion="[36,)"
+license="MIT"
+[[mods]]
+    modId="husbandry"
+    version="${mod_version}"
+    displayName="Husbandry"
+    authors="joshiejack"
+    description='''Booya'''
+[[dependencies.husbandry]]
+    modId="forge"
+    mandatory=true
+    versionRange="${forge_range}"
+    ordering="NONE"
+    side="BOTH"
+[[dependencies.husbandry]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="${minecraft_range}"
+    ordering="NONE"
+    side="BOTH"
+[[dependencies.husbandry]]
+    modId="penguinlib"
+    mandatory=true
+    versionRange="${penguinlib_range}"
+    ordering="NONE"
+    side="BOTH"

@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "husbandry:dog_food",
+    "minecraft:rabbit",
+    "minecraft:beef",
+    "minecraft:porkchop",
+    "minecraft:mutton",
+    "minecraft:chicken"
+  ]
+}

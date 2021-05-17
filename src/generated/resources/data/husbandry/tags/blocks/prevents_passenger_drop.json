@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "#minecraft:buttons",
+    "#minecraft:doors",
+    "#minecraft:fence_gates",
+    "#forge:chests",
+    "minecraft:lever"
+  ]
+}

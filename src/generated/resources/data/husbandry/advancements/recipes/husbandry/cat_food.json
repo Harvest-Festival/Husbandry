@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "husbandry:cat_food"
+    ]
+  },
+  "criteria": {
+    "has_fish": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:seeds"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "husbandry:cat_food"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_fish",
+      "has_the_recipe"
+    ]
+  ]
+}

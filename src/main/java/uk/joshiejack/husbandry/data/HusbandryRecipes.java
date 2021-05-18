@@ -43,9 +43,9 @@ public class HusbandryRecipes extends RecipeProvider {
         ShapedRecipeBuilder.shaped(HusbandryItems.SICKLE::get).define('S', Items.FLINT).define('W', Tags.Items.RODS_WOODEN).pattern("SS").pattern(" W").pattern("W ").unlockedBy("has_cobble", has(Tags.Items.COBBLESTONE)).save(consumer, rl("stone_sickle"));
 
         ShapelessRecipeBuilder.shapeless(HusbandryItems.BIRD_FEED.get(), 12).requires(Tags.Items.SEEDS).requires(Tags.Items.SEEDS).requires(Tags.Items.SEEDS).unlockedBy("has_seeds", has(Tags.Items.SEEDS)).save(consumer, rl("bird_feed"));
-        ShapelessRecipeBuilder.shapeless(HusbandryItems.CAT_FOOD.get(), 12).requires(ItemTags.FISHES).requires(Items.CHICKEN).unlockedBy("has_fish", has(Tags.Items.SEEDS)).save(consumer, rl("cat_food"));
-        ShapelessRecipeBuilder.shapeless(HusbandryItems.DOG_FOOD.get(), 4).requires(Items.BEEF).requires(Items.BONE).unlockedBy("has_beef", has(Items.BEEF)).save(consumer, rl("dog_food"));
-        ShapelessRecipeBuilder.shapeless(HusbandryItems.RABBIT_FOOD.get(), 4).requires(Tags.Items.CROPS_CARROT).unlockedBy("has_carrot", has(Tags.Items.CROPS_CARROT)).save(consumer, rl("rabbit_food"));
+        ShapelessRecipeBuilder.shapeless(HusbandryItems.CAT_FOOD.get(), 8).requires(ItemTags.FISHES).requires(Items.CHICKEN).unlockedBy("has_fish", has(Tags.Items.SEEDS)).save(consumer, rl("cat_food"));
+        ShapelessRecipeBuilder.shapeless(HusbandryItems.DOG_FOOD.get(), 8).requires(Items.BEEF).requires(Items.BONE).unlockedBy("has_beef", has(Items.BEEF)).save(consumer, rl("dog_food"));
+        ShapelessRecipeBuilder.shapeless(HusbandryItems.RABBIT_FOOD.get(), 12).requires(Tags.Items.CROPS_CARROT).requires(Tags.Items.CROPS_CARROT).requires(Tags.Items.CROPS_CARROT).unlockedBy("has_carrot", has(Tags.Items.CROPS_CARROT)).save(consumer, rl("rabbit_food"));
         ShapelessRecipeBuilder.shapeless(HusbandryItems.SLOP.get(), 4).requires(PenguinTags.BREAD).requires(PenguinTags.MELON).requires(Tags.Items.CROPS_WHEAT).unlockedBy("has_bread", has(PenguinTags.BREAD)).save(consumer, rl("slop"));
 
         //        RecipeHelper helper = new RecipeHelper(event.getRegistry(), MODID);//

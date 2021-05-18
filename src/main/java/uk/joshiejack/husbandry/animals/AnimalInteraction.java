@@ -28,8 +28,12 @@ public class AnimalInteraction {
         } else {
             AnimalStats<?> stats = AnimalStats.getStats(event.getTarget());
             if (stats != null) {
+                int happiness = stats.getHappiness();
                 boolean canceled = stats.onRightClick(event.getPlayer(), event.getHand());
                 if (canceled) {
+                    int newHappiness = stats.getHappiness();
+                    if (newHappiness != happiness)
+                        event.getPlayer().giveExperiencePoints((int) Math.ceil((newHappiness - happiness)/100D));
                     event.setCanceled(true);
                 }
             }

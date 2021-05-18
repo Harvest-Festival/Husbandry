@@ -49,6 +49,7 @@ public class Husbandry {
 
     public Husbandry() {
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
+        eventBus.addListener(this::registerRegistries);
         Husbandry.CONTAINERS.register(eventBus);
         HusbandryBlocks.BLOCKS.register(eventBus);
         HusbandryItems.ITEMS.register(eventBus);
@@ -57,8 +58,7 @@ public class Husbandry {
         HusbandryTileEntities.TILE_ENTITIES.register(eventBus);
     }
 
-    @SubscribeEvent
-    public static void onCollectForRegistration(CollectRegistryEvent.Loader event) {
+    private void registerRegistries(CollectRegistryEvent.Loader event) {
         event.add(AnimalTrait.class, (data, string) -> AnimalTrait.TRAITS.put(string, ReflectionHelper.newInstance(ReflectionHelper.getConstructor(data, String.class), string)));
     }
 
@@ -79,64 +79,4 @@ public class Husbandry {
             generator.addProvider(new HusbandryItemModels(generator, event.getExistingFileHelper()));
         }
     }
-
-//    @SuppressWarnings("ConstantConditions")
-//    public static final CreativeTabs TAB = new PenguinTab(MODID, () ->  HusbandryItems.TOOL.getStackFromEnum(ItemTool.Tool.MILKER));
-//
-//    @Mod.Instance(MODID)
-//    public static Husbandry instance;
-//    public static Logger logger;
-//
-//    @SidedProxy
-//    public static ServerProxy proxy;
-//
-//    public static class ServerProxy { public void preInit() {} public void postInit() {}}
-//    @SideOnly(Dist.CLIENT)
-//    public static class ClientProxy extends ServerProxy {
-//        @Override
-//        public void preInit() {
-//            RenderingRegistry.registerEntityRenderingHandler(EntityDuck.class, RenderDuck::new);
-//        }
-//
-//        @Override
-//        public void postInit() {
-//            Page.REGISTRY.put("animal_stats", PageStats.INSTANCE);
-//        }
-//    }
-//
-//    @Mod.EventHandler
-//    public void preInit(FMLPreInitializationEvent event) {
-//        logger = event.getModLog();
-//        CapabilityStatsHandler.register();
-//        NetworkRegistry.INSTANCE.registerGuiHandler(instance, instance);
-//    }
-//
-//    @Mod.EventHandler
-//    public void init(FMLInitializationEvent event) {
-//        HusbandryItems.init();
-//        if (HusbandryConfig.enableTreatTrades) {
-//            VillagerRegistry.VillagerProfession farmer = ForgeRegistries.VILLAGER_PROFESSIONS.getValue(new ResourceLocation("minecraft:farmer"));
-//            if (farmer != null) { //2 = shepherd
-//                farmer.getCareer(2).addTrade(1, new HusbandryTrades.Generic()); //Tier 1 generic
-//                farmer.getCareer(2).addTrade(2, new HusbandryTrades.Special()); //Tier 2 special
-//            }
-//        }
-//    }
-//
-//    @Mod.EventHandler
-//    public void postInit(FMLPostInitializationEvent event) {
-//        proxy.postInit();
-//    }
-//
-//    @Nullable
-//    @Override
-//    public Object getServerGuiElement(int ID, PlayerEntity player, World world, int x, int y, int z) {
-//        return null;
-//    }
-//
-//    @Nullable
-//    @Override
-//    public Object getClientGuiElement(int ID, PlayerEntity player, World world, int x, int y, int z) {
-//        return GuiTracker.INSTANCE;
-//    }
 }

@@ -63,6 +63,7 @@ public class AnimalStats<E extends AgeableEntity> implements ICapabilityProvider
     private boolean eaten; //If the animal has eaten today
     private boolean special; //If the animal is special
     private boolean wasOutsideInSun; //If the animal was outside last time
+    private boolean annoyed; //If the player has insulted the animal today
     private final Map<String, IDataTrait> data;
     private final AnimalTraitProduct products;
     private final LazyOptional<AnimalStats<?>> capability;
@@ -145,6 +146,7 @@ public class AnimalStats<E extends AgeableEntity> implements ICapabilityProvider
         treated = false;
         loved = false;
         eaten = false;
+        annoyed = false;
 
         if (entity.isBaby()) {
             childhood++;
@@ -188,7 +190,7 @@ public class AnimalStats<E extends AgeableEntity> implements ICapabilityProvider
      * @return true if the event should be canceled
      */
     public boolean onRightClick(PlayerEntity player, Hand hand) {
-        List<IInteractiveTrait> traits = type.getTraits(AnimalTraits.Type.BI_HOURLY);
+        List<IInteractiveTrait> traits = type.getTraits(AnimalTraits.Type.ACTION);
         return canTreat(player, hand) || traits.stream().anyMatch(trait ->
                 trait.onRightClick(this, player, hand));
     }
@@ -198,8 +200,9 @@ public class AnimalStats<E extends AgeableEntity> implements ICapabilityProvider
         if (!TREATS.contains(held.getItem())) return false;
         boolean generic = held.getItem() == HusbandryItems.GENERIC_TREAT.get();
         if (!generic) { //Feeding the wrong treat will upset them!
-            if (type.getTreat() != held.getItem()) {
-                decreaseHappiness(20);
+            if (type.getTreat() != held.getItem() && !annoyed) {
+                annoyed = true;
+                decreaseHappiness(500);
                 held.shrink(1);
                 return true;
             }
@@ -318,6 +321,7 @@ public class AnimalStats<E extends AgeableEntity> implements ICapabilityProvider
         tag.putBoolean("Special", special);
         tag.putBoolean("InSun", wasOutsideInSun);
         tag.putBoolean("Treated", treated);
+        tag.putBoolean("Annoyed", annoyed);
         tag.putInt("GenericTreats", genericTreatsGiven);
         tag.putInt("TypeTreats", speciesTreatsGiven);
         CompoundNBT traits = new CompoundNBT();
@@ -346,6 +350,7 @@ public class AnimalStats<E extends AgeableEntity> implements ICapabilityProvider
         treated = nbt.getBoolean("Treated");
         genericTreatsGiven = nbt.getInt("GenericTreats");
         speciesTreatsGiven = nbt.getInt("TypeTreats");
+        annoyed = nbt.getBoolean("Annoyed");
         CompoundNBT traits = nbt.getCompound("Traits");
         for (Map.Entry<String, IDataTrait> entry : this.data.entrySet()) {
             entry.getValue().deserializeNBT(traits.getCompound(entry.getKey()));

@@ -26,10 +26,6 @@ donkey,eats_hay
 donkey,mammal
 donkey,pet
 donkey,pettable
-duck,carriable
-duck,eats_bird_feed
-duck,lays_egg
-duck,more_product_chance
 horse,cleanable
 horse,eats_grass
 horse,eats_hay

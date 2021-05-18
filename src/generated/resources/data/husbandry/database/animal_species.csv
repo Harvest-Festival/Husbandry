@@ -4,7 +4,6 @@ chicken,3,10,husbandry:chicken_treat,5,26,3,3,1,husbandry:entities/products/chic
 cow,12,20,husbandry:cow_treat,7,24,9,14,1,husbandry:entities/products/milk
 dog,10,13,husbandry:dog_treat,24,3,5,7,0,none
 donkey,25,30,husbandry:horse_treat,22,11,24,12,0,none
-duck,5,10,husbandry:duck_treat,9,23,4,4,2,husbandry:entities/products/duck_egg
 horse,25,30,husbandry:horse_treat,22,10,24,12,0,none
 llama,15,25,husbandry:sheep_treat,7,24,11,10,0,none
 parrot,25,50,husbandry:parrot_treat,3,24,4,36,0,none

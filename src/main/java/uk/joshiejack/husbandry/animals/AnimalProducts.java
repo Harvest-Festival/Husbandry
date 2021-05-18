@@ -37,7 +37,7 @@ public class AnimalProducts {
         LootContext.Builder lootcontext$builder = (new LootContext.Builder((ServerWorld)entity.level))
                 .withParameter(LootParameters.ORIGIN, entity.position())
                 .withParameter(LootParameters.THIS_ENTITY, entity)
-                .withParameter(LootParameters.KILLER_ENTITY, entity)
+                .withParameter(LootParameters.KILLER_ENTITY, player)
                 .withRandom(entity.getRandom());
         LootTable loottable = Objects.requireNonNull(entity.level.getServer()).getLootTables().get(lootTable);
         return loottable.getRandomItems(lootcontext$builder.create(LootParameterSets.CHEST));

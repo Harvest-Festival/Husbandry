@@ -7,7 +7,6 @@ import net.minecraft.item.Item;
 import net.minecraft.util.RangedInteger;
 import net.minecraft.util.ResourceLocation;
 import uk.joshiejack.husbandry.Husbandry;
-import uk.joshiejack.husbandry.entity.HusbandryEntities;
 import uk.joshiejack.husbandry.item.HusbandryItems;
 import uk.joshiejack.husbandry.tileentity.HusbandryTileEntities;
 import uk.joshiejack.penguinlib.data.TimeUnitRegistry;
@@ -28,8 +27,6 @@ public class HusbandryDatabase extends AbstractDatabaseProvider {
     @Override
     protected void addDatabaseEntries() {
         addTimeUnitForMachine(HusbandryTileEntities.INCUBATOR.get(), TimeUnitRegistry.Defaults.WEEK.getValue());
-        addTimeUnitForMachine(HusbandryTileEntities.SPINNING_WHEEL.get(), TimeUnitRegistry.Defaults.HALF_DAY.getValue());
-        addTimeUnitForMachine(HusbandryTileEntities.OIL_MAKER.get(), TimeUnitRegistry.Defaults.DAY.getValue());
         new Trade(VillagerProfession.SHEPHERD, 1, HusbandryItems.GENERIC_TREAT.get()).setOutputAmount(5).build(this);
         new Trade(VillagerProfession.SHEPHERD, 2, HusbandryItems.CAT_TREAT.get()).setOutputAmount(3).setInputAmount(2).build(this);
         new Trade(VillagerProfession.SHEPHERD, 2, HusbandryItems.CHICKEN_TREAT.get()).setOutputAmount(3).setInputAmount(2).build(this);
@@ -39,15 +36,14 @@ public class HusbandryDatabase extends AbstractDatabaseProvider {
         new Trade(VillagerProfession.SHEPHERD, 2, HusbandryItems.PIG_TREAT.get()).setOutputAmount(3).setInputAmount(2).build(this);
         new Trade(VillagerProfession.SHEPHERD, 2, HusbandryItems.RABBIT_TREAT.get()).setOutputAmount(3).setInputAmount(2).build(this);
         new Trade(VillagerProfession.SHEPHERD, 2, HusbandryItems.SHEEP_TREAT.get()).setOutputAmount(3).setInputAmount(2).build(this);
-        new Trade(VillagerProfession.SHEPHERD, 2, HusbandryItems.DUCK_TREAT.get()).setOutputAmount(3).setInputAmount(2).build(this);
         new Trade(VillagerProfession.SHEPHERD, 2, HusbandryItems.PARROT_TREAT.get()).setOutputAmount(3).setInputAmount(2).build(this);
         new Trade(VillagerProfession.SHEPHERD, 2, HusbandryItems.LLAMA_TREAT.get()).setOutputAmount(3).setInputAmount(2).build(this);
         new AnimalType("cow").withLifespan(12, 20).withTreat(HusbandryItems.COW_TREAT.get()).levelUpWith(7, 24).withGestationPeriod(9).withMaturityAt(14).withProducts(1, "milk")
                 .assign(EntityType.COW).withTraits("eats_grass", "eats_hay", "cleanable", "pettable", "mammal", "milkable", "more_product").build(this);
         new AnimalType("chicken").withLifespan(3, 10).withTreat(HusbandryItems.CHICKEN_TREAT.get()).levelUpWith(5,26).withGestationPeriod(3).withMaturityAt(3).withProducts(1, "chicken_egg")
                 .assign(EntityType.CHICKEN).withTraits("eats_bird_feed", "carriable", "lays_egg", "more_product").build(this);
-        new AnimalType("pig").withLifespan(6, 10).withTreat(HusbandryItems.PIG_TREAT.get()).levelUpWith(20, 10).withGestationPeriod(4).withMaturityAt(4).withProducts(1, "truffle")
-                .assign(EntityType.PIG).withTraits("eats_slop", "cleanable",  "finds_product", "pettable", "mammal", "more_product_chance").build(this);
+        new AnimalType("pig").withLifespan(6, 10).withTreat(HusbandryItems.PIG_TREAT.get()).levelUpWith(20, 10).withGestationPeriod(4).withMaturityAt(4)
+                .assign(EntityType.PIG).withTraits("eats_slop", "cleanable", "pettable", "mammal").build(this);
         new AnimalType("sheep").withLifespan(8,12).withTreat(HusbandryItems.SHEEP_TREAT.get()).levelUpWith(2,29).withGestationPeriod(5).withMaturityAt(4).withProducts(7, "wool")
                 .assign(EntityType.SHEEP).withTraits("eats_grass", "eats_hay", "cleanable", "pettable", "mammal", "shearable", "faster_product_reset").build(this);
         new AnimalType("horse").withLifespan(25,30).withTreat(HusbandryItems.HORSE_TREAT.get()).levelUpWith(22,10).withGestationPeriod(24).withMaturityAt(12).assign(EntityType.HORSE)
@@ -62,8 +58,6 @@ public class HusbandryDatabase extends AbstractDatabaseProvider {
                 .assign(EntityType.WOLF).withTraits("eats_dog_food", "cleanable", "pettable", "mammal", "pet").build(this);
         new AnimalType("donkey").withLifespan(25,30).withTreat(HusbandryItems.HORSE_TREAT.get()).levelUpWith(22,11).withGestationPeriod(24).withMaturityAt(12)
                 .assign(EntityType.DONKEY).assign(EntityType.MULE).withTraits("eats_grass", "eats_hay", "cleanable", "pettable", "mammal", "pet").build(this);
-        new AnimalType("duck").withLifespan(5,10).withTreat(HusbandryItems.DUCK_TREAT.get()).levelUpWith(9,23).withGestationPeriod(4).withMaturityAt(4).withProducts(2, "duck_egg")
-                .assign(HusbandryEntities.DUCK.get()).withTraits("eats_bird_feed", "carriable", "lays_egg", "more_product_chance").build(this);
         new AnimalType("parrot").withLifespan(25,50).withTreat(HusbandryItems.PARROT_TREAT.get()).levelUpWith(3,24).withGestationPeriod(4).withMaturityAt(36)
                 .assign(EntityType.PARROT).withTraits("eats_bird_feed", "carriable", "pet").build(this);
     }

@@ -11,15 +11,10 @@ import net.minecraft.data.loot.EntityLootTables;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.Items;
 import net.minecraft.loot.*;
-import net.minecraft.loot.conditions.EntityHasProperty;
-import net.minecraft.loot.functions.LootingEnchantBonus;
-import net.minecraft.loot.functions.SetCount;
-import net.minecraft.loot.functions.Smelt;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.registries.ForgeRegistries;
 import uk.joshiejack.husbandry.Husbandry;
 import uk.joshiejack.husbandry.block.HusbandryBlocks;
-import uk.joshiejack.husbandry.entity.HusbandryEntities;
 
 import javax.annotation.Nonnull;
 import java.util.List;
@@ -47,6 +42,7 @@ public class HusbandryLootTables extends LootTableProvider {
     }
 
     public static class Entities extends EntityLootTables {
+        @Nonnull
         @Override
         protected Iterable<EntityType<?>> getKnownEntities() {
             return ForgeRegistries.ENTITIES.getValues().stream()
@@ -56,8 +52,6 @@ public class HusbandryLootTables extends LootTableProvider {
 
         @Override
         protected void addTables() {
-            //add(HusbandryEntities.DUCK.get(), LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantRange.exactly(1)).add(ItemLootEntry.lootTableItem(Items.FEATHER).apply(SetCount.setCount(RandomValueRange.between(0.0F, 3.0F))).apply(LootingEnchantBonus.lootingMultiplier(RandomValueRange.between(0.0F, 1.0F))))).withPool(LootPool.lootPool().setRolls(ConstantRange.exactly(1)).add(ItemLootEntry.lootTableItem(HusbandryItems.DUCK.get()).apply(Smelt.smelted().when(EntityHasProperty.hasProperties(LootContext.EntityTarget.THIS, ENTITY_ON_FIRE))).apply(LootingEnchantBonus.lootingMultiplier(RandomValueRange.between(0.0F, 1.0F))))));
-            add(HusbandryEntities.DUCK.get(), LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantRange.exactly(1)).add(ItemLootEntry.lootTableItem(Items.FEATHER).apply(SetCount.setCount(RandomValueRange.between(0.0F, 3.0F))).apply(LootingEnchantBonus.lootingMultiplier(RandomValueRange.between(0.0F, 1.0F))))).withPool(LootPool.lootPool().setRolls(ConstantRange.exactly(1)).add(ItemLootEntry.lootTableItem(Items.COD).apply(Smelt.smelted().when(EntityHasProperty.hasProperties(LootContext.EntityTarget.THIS, ENTITY_ON_FIRE))).apply(LootingEnchantBonus.lootingMultiplier(RandomValueRange.between(0.0F, 1.0F))))));
             addProducts("milk", LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantRange.exactly(1)).add(ItemLootEntry.lootTableItem(Items.MILK_BUCKET))));
         }
 
@@ -78,14 +72,10 @@ public class HusbandryLootTables extends LootTableProvider {
 
         @Override
         protected void addTables() {
-            dropSelf(HusbandryBlocks.FERMENTER.get());
-            dropSelf(HusbandryBlocks.SPINNING_WHEEL.get());
-            dropSelf(HusbandryBlocks.OIL_MAKER.get());
             dropSelf(HusbandryBlocks.FEEDING_TRAY.get());
             dropSelf(HusbandryBlocks.BOWL.get());
             dropSelf(HusbandryBlocks.NEST.get());
             dropSelf(HusbandryBlocks.INCUBATOR.get());
-            dropSelf(HusbandryBlocks.TRUFFLE.get());
         }
     }
 

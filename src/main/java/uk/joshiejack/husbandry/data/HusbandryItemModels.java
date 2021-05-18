@@ -10,7 +10,6 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import uk.joshiejack.husbandry.Husbandry;
-import uk.joshiejack.husbandry.entity.HusbandryEntities;
 import uk.joshiejack.husbandry.item.HusbandryItems;
 
 import java.util.Objects;
@@ -49,6 +48,5 @@ public class HusbandryItemModels extends ItemModelProvider {
     @Override
     protected void registerModels() {
         registerModels(HusbandryItems.ITEMS);
-        registerModels(HusbandryEntities.ITEMS);
     }
 }

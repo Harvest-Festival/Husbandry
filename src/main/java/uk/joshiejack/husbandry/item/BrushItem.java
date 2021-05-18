@@ -21,6 +21,7 @@ public class BrushItem extends Item {
         super(new Item.Properties().stacksTo(1).durability(64).tab(Husbandry.TAB));
     }
 
+    @Nonnull
     @Override
     public ActionResultType interactLivingEntity(@Nonnull ItemStack stack, PlayerEntity player, @Nonnull LivingEntity target, @Nonnull Hand hand) {
         AnimalStats<?> stats = AnimalStats.getStats(target);

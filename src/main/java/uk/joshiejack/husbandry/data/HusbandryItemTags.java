@@ -30,7 +30,7 @@ public class HusbandryItemTags extends ItemTagsProvider {
                 .add(HusbandryItems.GENERIC_TREAT.get(), HusbandryItems.CAT_TREAT.get(), HusbandryItems.CHICKEN_TREAT.get()
                         , HusbandryItems.COW_TREAT.get(), HusbandryItems.DOG_TREAT.get(), HusbandryItems.HORSE_TREAT.get()
                         , HusbandryItems.PIG_TREAT.get(), HusbandryItems.RABBIT_TREAT.get(), HusbandryItems.SHEEP_TREAT.get()
-                        , HusbandryItems.DUCK_TREAT.get(), HusbandryItems.PARROT_TREAT.get(), HusbandryItems.LLAMA_TREAT.get());
+                        , HusbandryItems.PARROT_TREAT.get(), HusbandryItems.LLAMA_TREAT.get());
         tag(EatsBirdFeedTrait.BIRD_FEED).add(Items.WHEAT_SEEDS, HusbandryItems.BIRD_FEED.get());
         tag(EatsSlopTrait.SLOP).add(Items.CARROT, HusbandryItems.SLOP.get());
         tag(MammalTrait.IMPREGNATES_MAMMALS).add(HusbandryItems.MIRACLE_POTION.get());

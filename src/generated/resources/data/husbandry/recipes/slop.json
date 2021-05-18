@@ -5,7 +5,7 @@
       "tag": "forge:bread"
     },
     {
-      "item": "minecraft:melon"
+      "tag": "forge:crops/melon"
     },
     {
       "tag": "forge:crops/wheat"

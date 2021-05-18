@@ -22,7 +22,6 @@ import uk.joshiejack.husbandry.animals.traits.AnimalTrait;
 import uk.joshiejack.husbandry.block.HusbandryBlocks;
 import uk.joshiejack.husbandry.crafting.HusbandryRecipes;
 import uk.joshiejack.husbandry.data.*;
-import uk.joshiejack.husbandry.entity.HusbandryEntities;
 import uk.joshiejack.husbandry.inventory.AnimalTrackerContainer;
 import uk.joshiejack.husbandry.item.HusbandryItems;
 import uk.joshiejack.husbandry.tileentity.HusbandryTileEntities;
@@ -53,8 +52,6 @@ public class Husbandry {
         Husbandry.CONTAINERS.register(eventBus);
         HusbandryBlocks.BLOCKS.register(eventBus);
         HusbandryItems.ITEMS.register(eventBus);
-        HusbandryEntities.ENTITIES.register(eventBus);
-        HusbandryEntities.ITEMS.register(eventBus);
         HusbandryRecipes.SERIALIZERS.register(eventBus);
         HusbandrySounds.SOUNDS.register(eventBus);
         HusbandryTileEntities.TILE_ENTITIES.register(eventBus);

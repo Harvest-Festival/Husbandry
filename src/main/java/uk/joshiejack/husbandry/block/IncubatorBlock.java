@@ -29,6 +29,7 @@ public class IncubatorBlock extends AbstractRotatableBlock {
 
     public IncubatorBlock() {
         super(AbstractBlock.Properties.of(Material.WOOD).strength(1.5F).sound(SoundType.WOOD));
+        hasInventory = true;
     }
 
     @Nonnull

@@ -5,6 +5,8 @@ import net.minecraft.data.DataGenerator;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundEvent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.extensions.IForgeContainerType;
@@ -20,7 +22,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import uk.joshiejack.husbandry.animals.traits.AnimalTrait;
 import uk.joshiejack.husbandry.block.HusbandryBlocks;
-import uk.joshiejack.husbandry.crafting.HusbandryRecipes;
+import uk.joshiejack.husbandry.crafting.HusbandryRegistries;
 import uk.joshiejack.husbandry.data.*;
 import uk.joshiejack.husbandry.inventory.AnimalTrackerContainer;
 import uk.joshiejack.husbandry.item.HusbandryItems;
@@ -53,7 +55,7 @@ public class Husbandry {
         Husbandry.CONTAINERS.register(eventBus);
         HusbandryBlocks.BLOCKS.register(eventBus);
         HusbandryItems.ITEMS.register(eventBus);
-        HusbandryRecipes.SERIALIZERS.register(eventBus);
+        HusbandryRegistries.SERIALIZERS.register(eventBus);
         HusbandrySounds.SOUNDS.register(eventBus);
         HusbandryTileEntities.TILE_ENTITIES.register(eventBus);
     }
@@ -70,13 +72,23 @@ public class Husbandry {
             BlockTagsProvider blockTags = new HusbandryBlockTags(generator, event.getExistingFileHelper());
             generator.addProvider(blockTags);
             generator.addProvider(new HusbandryItemTags(generator, blockTags, event.getExistingFileHelper()));
-            generator.addProvider(new uk.joshiejack.husbandry.data.HusbandryRecipes(generator));
+            generator.addProvider(new HusbandryRecipes(generator));
             generator.addProvider(new HusbandryDatabase(generator));
+            generator.addProvider(new HusbandryBlockStates(generator, event.getExistingFileHelper()));
         }
 
         if (event.includeClient()) {
             generator.addProvider(new HusbandryLanguage(generator));
             generator.addProvider(new HusbandryItemModels(generator, event.getExistingFileHelper()));
+        }
+    }
+
+    public static class HusbandrySounds {
+        public static final DeferredRegister<SoundEvent> SOUNDS = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, MODID);
+        public static final RegistryObject<SoundEvent> BRUSH = createSoundEvent("brush");
+
+        private static RegistryObject<SoundEvent> createSoundEvent(@Nonnull String name) {
+            return SOUNDS.register(name, () -> new SoundEvent(new ResourceLocation(MODID, name)));
         }
     }
 }

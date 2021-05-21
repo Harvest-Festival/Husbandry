@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smoking",
+  "ingredient": {
+    "item": "husbandry:mug_of_milk"
+  },
+  "result": "husbandry:hot_milk",
+  "experience": 0.3,
+  "cookingtime": 100
+}

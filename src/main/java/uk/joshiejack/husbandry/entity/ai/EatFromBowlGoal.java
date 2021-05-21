@@ -22,7 +22,7 @@ public class EatFromBowlGoal extends AbstractMoveToBlockGoal {
 
     @Override
     public boolean canUse() {
-        return !stats.hasEaten() && entity.getRandom().nextInt(5) == 0 && super.canUse();
+        return stats.isHungry() && entity.getRandom().nextInt(5) == 0 && super.canUse();
     }
 
     @Override

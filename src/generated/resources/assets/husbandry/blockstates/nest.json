@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "husbandry:block/nest"
+    }
+  }
+}

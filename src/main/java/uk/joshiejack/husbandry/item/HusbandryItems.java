@@ -18,8 +18,9 @@ public class HusbandryItems {
     public static final RegistryObject<Item> DINNER_ROLL = ITEMS.register("dinner_roll", () -> new Item(new Item.Properties().food(HusbandryFoods.DINNER_ROLL).tab(Husbandry.TAB)));
     public static final RegistryObject<Item> BOILED_EGG = ITEMS.register("boiled_egg", () -> new Item(new Item.Properties().food(HusbandryFoods.BOILED_EGG).tab(Husbandry.TAB)));
     public static final RegistryObject<Item> ICE_CREAM = ITEMS.register("ice_cream", () -> new Item(new Item.Properties().food(HusbandryFoods.ICE_CREAM).tab(Husbandry.TAB)));
-    public static final RegistryObject<Item> CHEESE = ITEMS.register("cheese", () -> new Item(new Item.Properties().food(HusbandryFoods.CHEESE).tab(Husbandry.TAB)));
+    public static final RegistryObject<Item> MUG_OF_MILK = ITEMS.register("mug_of_milk", () -> new PenguinItem(new PenguinItem.Properties().useAction(UseAction.DRINK).food(HusbandryFoods.MUG_OF_MILK).tab(Husbandry.TAB)));
     public static final RegistryObject<Item> HOT_MILK = ITEMS.register("hot_milk", () -> new PenguinItem(new PenguinItem.Properties().useAction(UseAction.DRINK).food(HusbandryFoods.HOT_MILK).tab(Husbandry.TAB)));
+    public static final RegistryObject<Item> TRUFFLE = ITEMS.register("truffle", () -> new Item(new Item.Properties().food(HusbandryFoods.TRUFFLE).tab(Husbandry.TAB)));
     public static final RegistryObject<Item> ANIMAL_TRACKER = ITEMS.register("animal_tracker", () -> new BookItem(new Item.Properties().stacksTo(1).tab(Husbandry.TAB), Husbandry.BOOK::get));
     public static final RegistryObject<Item> BRUSH = ITEMS.register("brush", BrushItem::new);
     public static final RegistryObject<Item> MIRACLE_POTION = ITEMS.register("miracle_potion", () -> new Item(new Item.Properties().stacksTo(16).tab(Husbandry.TAB)));
@@ -49,4 +50,5 @@ public class HusbandryItems {
     public static final RegistryObject<Item> NEST = ITEMS.register("nest", () -> new BlockItem(HusbandryBlocks.NEST.get(), new Item.Properties().tab(Husbandry.TAB)));
     //public static final RegistryObject<Item> TROUGH = ITEMS.register("trough", () -> new BlockItem(HusbandryBlocks.TROUGH.get(), new Item.Properties().tab(Husbandry.TAB)));
     public static final RegistryObject<Item> INCUBATOR = ITEMS.register("incubator", () -> new BlockItem(HusbandryBlocks.INCUBATOR.get(), new Item.Properties().tab(Husbandry.TAB)));
+    public static final RegistryObject<Item> TRUFFLE_BLOCK = ITEMS.register("truffle_block", () -> new BlockItem(HusbandryBlocks.TRUFFLE_BLOCK.get(), new Item.Properties().tab(Husbandry.TAB)));
 }

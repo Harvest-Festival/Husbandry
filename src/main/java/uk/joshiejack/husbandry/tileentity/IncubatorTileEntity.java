@@ -7,7 +7,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.server.ServerWorld;
-import uk.joshiejack.husbandry.crafting.HusbandryRecipes;
+import uk.joshiejack.husbandry.crafting.HusbandryRegistries;
 import uk.joshiejack.husbandry.crafting.IncubatorRecipe;
 import uk.joshiejack.penguinlib.network.PenguinNetwork;
 import uk.joshiejack.penguinlib.network.packet.SetInventorySlotPacket;
@@ -22,7 +22,7 @@ import java.util.Set;
 @SuppressWarnings("ConstantConditions")
 public class IncubatorTileEntity extends AbstractIRecipeMachine<IncubatorRecipe> {
     public IncubatorTileEntity() {
-        super(HusbandryTileEntities.INCUBATOR.get(), HusbandryRecipes.INCUBATOR);
+        super(HusbandryTileEntities.INCUBATOR.get(), HusbandryRegistries.INCUBATOR);
     }
 
 //    @Override

@@ -1,0 +1,15 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:feather",
+    "minecraft:chicken",
+    "minecraft:porkchop",
+    "minecraft:beef",
+    "minecraft:leather",
+    "minecraft:rabbit",
+    "minecraft:rabbit_foot",
+    "minecraft:rabbit_hide",
+    "minecraft:mutton",
+    "#minecraft:wool"
+  ]
+}

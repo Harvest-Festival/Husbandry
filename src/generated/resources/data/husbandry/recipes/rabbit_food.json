@@ -3,10 +3,16 @@
   "ingredients": [
     {
       "tag": "forge:crops/carrot"
+    },
+    {
+      "tag": "forge:crops/carrot"
+    },
+    {
+      "tag": "forge:crops/carrot"
     }
   ],
   "result": {
     "item": "husbandry:rabbit_food",
-    "count": 4
+    "count": 12
   }
 }

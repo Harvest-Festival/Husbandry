@@ -1,7 +1,6 @@
 package uk.joshiejack.husbandry.animals.traits.food;
 
-import net.minecraft.entity.AgeableEntity;
-import net.minecraft.entity.ai.goal.Goal;
+import net.minecraft.entity.ai.goal.GoalSelector;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -12,8 +11,8 @@ import net.minecraft.util.ResourceLocation;
 import uk.joshiejack.husbandry.Husbandry;
 import uk.joshiejack.husbandry.animals.stats.AnimalStats;
 import uk.joshiejack.husbandry.animals.traits.AnimalTrait;
-import uk.joshiejack.husbandry.animals.traits.types.IInteractiveTrait;
 import uk.joshiejack.husbandry.animals.traits.types.IGoalTrait;
+import uk.joshiejack.husbandry.animals.traits.types.IInteractiveTrait;
 import uk.joshiejack.husbandry.entity.ai.EatFromBowlGoal;
 import uk.joshiejack.penguinlib.util.PenguinLoader;
 
@@ -26,13 +25,8 @@ public class EatsRabbitFoodTrait extends AnimalTrait implements IGoalTrait, IInt
     }
 
     @Override
-    public int getPriority() {
-        return 2;
-    }
-
-    @Override
-    public Goal getGoal(AgeableEntity ageable, AnimalStats<?> stats) {
-        return new EatFromBowlGoal(ageable, stats, RABBIT_FOOD);
+    public void modifyGoals(AnimalStats<?> stats, GoalSelector selector) {
+        selector.addGoal(2, new EatFromBowlGoal(stats.getEntity(), stats, RABBIT_FOOD));
     }
 
     @Override

@@ -16,7 +16,7 @@ public class PettableTrait extends AbstractLoveableTrait implements IInteractive
     @Override
     public boolean onRightClick(AnimalStats<?> stats, PlayerEntity player, Hand hand) {
         ItemStack held = player.getItemInHand(hand);
-        if (held.isEmpty() && !stats.hasBeenLoved()) {
+        if (held.isEmpty() && stats.isUnloved()) {
             return stats.setLoved();
         }
 

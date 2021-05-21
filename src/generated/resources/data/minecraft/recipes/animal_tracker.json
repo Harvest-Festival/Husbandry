@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:paper"
+    },
+    {
+      "item": "minecraft:ink_sac"
+    },
+    {
+      "tag": "husbandry:animal_product"
+    }
+  ],
+  "result": {
+    "item": "husbandry:animal_tracker"
+  }
+}

@@ -7,11 +7,11 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ShearsItem;
 import net.minecraft.util.Hand;
+import net.minecraftforge.common.Tags;
 import uk.joshiejack.husbandry.animals.stats.AnimalStats;
 import uk.joshiejack.husbandry.animals.traits.AnimalTrait;
 import uk.joshiejack.husbandry.animals.traits.types.IInteractiveTrait;
 import uk.joshiejack.penguinlib.util.PenguinLoader;
-import uk.joshiejack.penguinlib.util.PenguinTags;
 
 import java.util.Random;
 
@@ -25,7 +25,7 @@ public class ShearableTrait extends AnimalTrait implements IInteractiveTrait {
     public boolean onRightClick(AnimalStats<?> stats, PlayerEntity player, Hand hand) {
         AgeableEntity animal = stats.getEntity();
         ItemStack held = player.getItemInHand(hand);
-        if (held.getItem() instanceof ShearsItem || PenguinTags.SHEARS.contains(held.getItem()) && stats.canProduceProduct()) {
+        if (held.getItem() instanceof ShearsItem || Tags.Items.SHEARS.contains(held.getItem()) && stats.canProduceProduct()) {
             if (!player.level.isClientSide) {
                 Random rand = animal.getRandom();
                 for (ItemStack stack : stats.getProduct(player)) {

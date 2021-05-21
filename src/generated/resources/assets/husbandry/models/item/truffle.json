@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "husbandry:item/food/cheese"
+    "layer0": "husbandry:item/food/truffle"
   }
 }

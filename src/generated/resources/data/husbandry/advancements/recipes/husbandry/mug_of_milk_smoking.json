@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "husbandry:mug_of_milk_smoking"
+    ]
+  },
+  "criteria": {
+    "has_mug_of_milk": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "husbandry:mug_of_milk"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "husbandry:mug_of_milk_smoking"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_mug_of_milk",
+      "has_the_recipe"
+    ]
+  ]
+}

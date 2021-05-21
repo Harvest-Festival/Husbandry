@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "tag": "forge:bread"
+      "tag": "forge:breads"
     },
     {
       "tag": "forge:crops/melon"

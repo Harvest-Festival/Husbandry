@@ -3,7 +3,7 @@ package uk.joshiejack.husbandry.data;
 import net.minecraft.data.DataGenerator;
 import net.minecraftforge.common.data.LanguageProvider;
 import net.minecraftforge.registries.ForgeRegistries;
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.text.WordUtils;
 import uk.joshiejack.husbandry.Husbandry;
 
 public class HusbandryLanguage extends LanguageProvider {
@@ -13,10 +13,10 @@ public class HusbandryLanguage extends LanguageProvider {
 
     @Override
     protected void addTranslations() {
-        add("itemGroup.husbandry.creativetab", "Husbandry");
+        add("itemGroup.husbandry", "Husbandry");
         add("gui.husbandry.book", "Animal Stats");
         ForgeRegistries.ITEMS.getValues()
                 .stream().filter(i -> i.getRegistryName().getNamespace().equals(Husbandry.MODID))
-                .forEach(item -> add(item, StringUtils.capitalize(item.getRegistryName().getPath().replace("_", " "))));
+                .forEach(item -> add(item, WordUtils.capitalizeFully(item.getRegistryName().getPath().replace("_", " "))));
     }
 }

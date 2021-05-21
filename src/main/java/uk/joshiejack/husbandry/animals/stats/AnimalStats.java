@@ -20,7 +20,6 @@ import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.common.util.LazyOptional;
 import uk.joshiejack.husbandry.Husbandry;
-import uk.joshiejack.husbandry.HusbandryConfig;
 import uk.joshiejack.husbandry.animals.AnimalSpecies;
 import uk.joshiejack.husbandry.animals.traits.product.AnimalTraitProduct;
 import uk.joshiejack.husbandry.animals.traits.types.*;
@@ -37,16 +36,14 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Random;
 
 import static uk.joshiejack.husbandry.animals.stats.CapabilityStatsHandler.ANIMAL_STATS_CAPABILITY;
 
 public class AnimalStats<E extends AgeableEntity> implements ICapabilityProvider, INBTSerializable<CompoundNBT> {
     public static final ITag.INamedTag<Item> TREATS = ItemTags.createOptional(new ResourceLocation(Husbandry.MODID, "treat"));
     private static final int MAX_RELATIONSHIP = 30000;
-    private static final int MIN_MEDIUM = 2;
-    private static final int MIN_LARGE = 5;
     private static final DamageSource OLD_AGE = new DamageSource("oldage");
+    private static final int DEATH_CHANCE = 360;
     protected final E entity;
     protected final AnimalSpecies type;
     private int town;
@@ -82,10 +79,6 @@ public class AnimalStats<E extends AgeableEntity> implements ICapabilityProvider
 
         this.data.values().forEach(data -> data.initTrait(this));
         this.products = (AnimalTraitProduct) this.data.values().stream().filter(t -> t instanceof AnimalTraitProduct).findFirst().orElse(null);
-        if (entity != null) {
-            //TODO: TOWN? this.town = AnimalTownController.getTown(entity);
-        }
-
         this.capability = LazyOptional.of(() -> this);
     }
 
@@ -95,10 +88,6 @@ public class AnimalStats<E extends AgeableEntity> implements ICapabilityProvider
 
     public AnimalSpecies getType() {
         return type;
-    }
-
-    public int getTown() {
-        return town;
     }
 
     public void onBihourlyTick() {
@@ -124,7 +113,7 @@ public class AnimalStats<E extends AgeableEntity> implements ICapabilityProvider
     }
 
     public void onNewDay() {
-        int chance = MathsHelper.constrainToRangeInt(HusbandryConfig.deathChance, 1, Short.MAX_VALUE);
+        int chance = MathsHelper.constrainToRangeInt(DEATH_CHANCE, 1, Short.MAX_VALUE);
         if (age >= type.getMaxAge() || (age >= type.getMinAge() && entity.getRandom().nextInt(chance) == 0)) {
             entity.hurt(OLD_AGE, Integer.MAX_VALUE);
         }
@@ -229,8 +218,8 @@ public class AnimalStats<E extends AgeableEntity> implements ICapabilityProvider
         eaten = true;
     }
 
-    public boolean hasBeenLoved() {
-        return loved;
+    public boolean isUnloved() {
+        return !loved;
     }
 
     public boolean setLoved() {
@@ -248,8 +237,8 @@ public class AnimalStats<E extends AgeableEntity> implements ICapabilityProvider
         this.hasProduct = false;
     }
 
-    public boolean hasEaten() {
-        return eaten;
+    public boolean isHungry() {
+        return !eaten;
     }
 
     public List<ItemStack> getProduct(PlayerEntity player) {
@@ -262,26 +251,6 @@ public class AnimalStats<E extends AgeableEntity> implements ICapabilityProvider
 
     public int getMaxRelationship() {
         return MAX_RELATIONSHIP;
-    }
-
-    public int getMinMedium() {
-        return MIN_MEDIUM;
-    }
-
-    public int getMinLarge() {
-        return MIN_LARGE;
-    }
-
-    /**
-     * @return a value from 0 to 2
-     **/
-    public static int getProductSize(Random random, int happiness) {
-        int hearts = 1 + (int) ((((double) happiness) / MAX_RELATIONSHIP) * 9);
-        int largeChance = (100 / hearts) - 9;
-        int mediumChance = (50 / hearts) - 4;
-        if (hearts >= 5 && random.nextInt(largeChance) == 0) return 2;
-        else if (hearts >= 2 && random.nextInt(mediumChance) == 0) return 1;
-        else return 0;
     }
 
     @Nullable
@@ -299,7 +268,6 @@ public class AnimalStats<E extends AgeableEntity> implements ICapabilityProvider
         return (T) data.get(trait);
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     @Nonnull
     public <T> LazyOptional<T> getCapability(@Nonnull final Capability<T> cap, final @Nullable Direction side) {

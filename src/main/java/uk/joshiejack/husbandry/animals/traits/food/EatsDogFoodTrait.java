@@ -1,7 +1,6 @@
 package uk.joshiejack.husbandry.animals.traits.food;
 
-import net.minecraft.entity.AgeableEntity;
-import net.minecraft.entity.ai.goal.Goal;
+import net.minecraft.entity.ai.goal.GoalSelector;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -26,13 +25,8 @@ public class EatsDogFoodTrait extends AnimalTrait implements IGoalTrait, IIntera
     }
 
     @Override
-    public int getPriority() {
-        return 2;
-    }
-
-    @Override
-    public Goal getGoal(AgeableEntity ageable, AnimalStats<?> stats) {
-        return new EatFromBowlGoal(ageable, stats, DOG_FOOD);
+    public void modifyGoals(AnimalStats<?> stats, GoalSelector selector) {
+        selector.addGoal(2, new EatFromBowlGoal(stats.getEntity(), stats, DOG_FOOD));
     }
 
     @Override

@@ -24,7 +24,7 @@ public class AnimalAIOverride {
             if (stats != null) {
                 AgeableEntity ageable = ((AgeableEntity) entity);
                 List<IGoalTrait> traits = stats.getType().getTraits(AnimalTraits.Type.AI);
-                traits.forEach(trait -> ageable.goalSelector.addGoal(trait.getPriority(), trait.getGoal(ageable, stats)));
+                traits.forEach(trait -> trait.modifyGoals(stats, ageable.goalSelector));
             }
         }
     }

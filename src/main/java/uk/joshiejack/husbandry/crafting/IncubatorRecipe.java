@@ -27,7 +27,7 @@ public class IncubatorRecipe extends AbstractSimplePenguinRecipe<EntityType<?>> 
     private final RangedInteger amount;
 
     public IncubatorRecipe(ResourceLocation resource, Ingredient ingredient, EntityType<?> entity, RangedInteger amount) {
-        super(HusbandryRecipes.INCUBATOR, HusbandryRecipes.INCUBATOR_SERIALIZER.get(), resource, ingredient, entity);
+        super(HusbandryRegistries.INCUBATOR, HusbandryRegistries.INCUBATOR_SERIALIZER.get(), resource, ingredient, entity);
         this.amount = amount;
     }
 

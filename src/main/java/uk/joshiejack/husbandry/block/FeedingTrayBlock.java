@@ -21,16 +21,17 @@ import java.util.Locale;
 @SuppressWarnings("deprecation")
 public class FeedingTrayBlock extends AbstractPenguinBlock {
     public static final EnumProperty<Fill> FILL = EnumProperty.create("fill", Fill.class);
-    private static final VoxelShape FEEDER_AABB = VoxelShapes.box(0.0D, 0D, 0.0D, 1.0D, 0.075D, 1.0D);
+    private static final VoxelShape SHAPE = VoxelShapes.box(0.0D, 0D, 0.0D, 1.0D, 0.075D, 1.0D);
 
     public FeedingTrayBlock() {
         super(AbstractBlock.Properties.of(Material.WOOD).strength(0.4F).sound(SoundType.WOOD).noCollission());
+        hasInventory = true;
     }
 
     @Nonnull
     @Override
     public VoxelShape getShape(@Nonnull BlockState state, @Nonnull IBlockReader reader, @Nonnull BlockPos pos, @Nonnull ISelectionContext ctx) {
-        return FEEDER_AABB;
+        return SHAPE;
     }
 
     @Nonnull

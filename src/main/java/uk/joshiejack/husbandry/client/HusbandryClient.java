@@ -1,6 +1,8 @@
 package uk.joshiejack.husbandry.client;
 
 import net.minecraft.client.gui.ScreenManager;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
@@ -12,6 +14,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import uk.joshiejack.husbandry.Husbandry;
+import uk.joshiejack.husbandry.block.HusbandryBlocks;
 import uk.joshiejack.husbandry.client.gui.PageStats;
 import uk.joshiejack.penguinlib.client.gui.book.Book;
 import uk.joshiejack.penguinlib.client.gui.book.Tab;
@@ -39,5 +42,12 @@ public class HusbandryClient {
                     bs.withTab(new Tab(name)).withPage(new PageStats(name));
                 })
         ));
+
+        RenderType cutout = RenderType.cutout();
+        RenderTypeLookup.setRenderLayer(HusbandryBlocks.FEEDING_TRAY.get(), cutout);
+        RenderTypeLookup.setRenderLayer(HusbandryBlocks.NEST.get(), cutout);
+        RenderTypeLookup.setRenderLayer(HusbandryBlocks.BOWL.get(), cutout);
+        RenderTypeLookup.setRenderLayer(HusbandryBlocks.INCUBATOR.get(), cutout);
+        RenderTypeLookup.setRenderLayer(HusbandryBlocks.TRUFFLE_BLOCK.get(), cutout);
     }
 }

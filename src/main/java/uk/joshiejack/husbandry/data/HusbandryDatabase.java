@@ -42,8 +42,8 @@ public class HusbandryDatabase extends AbstractDatabaseProvider {
                 .assign(EntityType.COW).withTraits("eats_grass", "eats_hay", "cleanable", "pettable", "mammal", "milkable", "more_product").build(this);
         new AnimalType("chicken").withLifespan(3, 10).withTreat(HusbandryItems.CHICKEN_TREAT.get()).levelUpWith(5,26).withGestationPeriod(3).withMaturityAt(3).withProducts(1, "chicken_egg")
                 .assign(EntityType.CHICKEN).withTraits("eats_bird_feed", "carriable", "lays_egg", "more_product").build(this);
-        new AnimalType("pig").withLifespan(6, 10).withTreat(HusbandryItems.PIG_TREAT.get()).levelUpWith(20, 10).withGestationPeriod(4).withMaturityAt(4)
-                .assign(EntityType.PIG).withTraits("eats_slop", "cleanable", "pettable", "mammal").build(this);
+        new AnimalType("pig").withLifespan(6, 10).withTreat(HusbandryItems.PIG_TREAT.get()).levelUpWith(20, 10).withGestationPeriod(4).withMaturityAt(4).withProducts(1, "truffle")
+                .assign(EntityType.PIG).withTraits("eats_slop", "cleanable", "pettable", "finds_product", "mammal", "more_product_chance").build(this);
         new AnimalType("sheep").withLifespan(8,12).withTreat(HusbandryItems.SHEEP_TREAT.get()).levelUpWith(2,29).withGestationPeriod(5).withMaturityAt(4).withProducts(7, "wool")
                 .assign(EntityType.SHEEP).withTraits("eats_grass", "eats_hay", "cleanable", "pettable", "mammal", "shearable", "faster_product_reset").build(this);
         new AnimalType("horse").withLifespan(25,30).withTreat(HusbandryItems.HORSE_TREAT.get()).levelUpWith(22,10).withGestationPeriod(24).withMaturityAt(12).assign(EntityType.HORSE)
@@ -122,7 +122,7 @@ public class HusbandryDatabase extends AbstractDatabaseProvider {
             database.addEntry("animal_species", "Name,Min Age,Max Age,Treat Item,Generic Treats,Species Treats,Days to Birth,Days to Maturity,Product Frequency,Products Loot Table",
                     CSVUtils.join(name, lifespan.getMinInclusive(), lifespan.getMaxInclusive(), treat.getRegistryName(), generic, type, gestation, maturity, productsFrequency, productTable == NO_PRODUCTS ? "none" : productTable.toString()));
             entities.forEach(entity -> database.addEntry("animal_entities", "Entity,Species", CSVUtils.join(Objects.requireNonNull(entity.getRegistryName()).toString(), name)));
-            traits.forEach(trait -> database.addEntry("animal_traits", "Species,Trait", CSVUtils.join(name, trait)));;
+            traits.forEach(trait -> database.addEntry("animal_traits", "Species,Trait", CSVUtils.join(name, trait)));
         }
     }
 }

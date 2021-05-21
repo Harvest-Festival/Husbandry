@@ -17,7 +17,7 @@ public class CarriableTrait extends AbstractLoveableTrait implements IInteractiv
     @Override
     public boolean onRightClick(AnimalStats<?> stats, PlayerEntity player, Hand hand) {
         ItemStack held = player.getItemInHand(hand);
-        if (hand == Hand.MAIN_HAND && !player.isVehicle() && held.isEmpty() && !stats.hasBeenLoved()) {
+        if (hand == Hand.MAIN_HAND && !player.isVehicle() && held.isEmpty() && stats.isUnloved()) {
             AgeableEntity animal = stats.getEntity();
             animal.setInvulnerable(true);
             animal.startRiding(player, true);

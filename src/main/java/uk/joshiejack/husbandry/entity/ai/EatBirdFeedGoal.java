@@ -9,14 +9,14 @@ import uk.joshiejack.husbandry.tileentity.FeedingTrayTileEntity;
 
 import javax.annotation.Nonnull;
 
-public class EatBirdFeedGrass extends AbstractMoveToBlockGoal {
-    public EatBirdFeedGrass(CreatureEntity entity, AnimalStats<?> stats) {
+public class EatBirdFeedGoal extends AbstractMoveToBlockGoal {
+    public EatBirdFeedGoal(CreatureEntity entity, AnimalStats<?> stats) {
         super(entity, stats, Orientation.ABOVE, 8);
     }
 
     @Override
     public boolean canUse() {
-        return !stats.hasEaten() && entity.getRandom().nextInt(5) == 0 && super.canUse();
+        return stats.isHungry() && entity.getRandom().nextInt(5) == 0 && super.canUse();
     }
 
     @Override

@@ -10,18 +10,18 @@ license="MIT"
 [[dependencies.husbandry]]
     modId="forge"
     mandatory=true
-    versionRange="${forge_range}"
+    versionRange="[36,)"
     ordering="NONE"
     side="BOTH"
 [[dependencies.husbandry]]
     modId="minecraft"
     mandatory=true
-    versionRange="${minecraft_range}"
+    versionRange="[1.16.5,1.17)"
     ordering="NONE"
     side="BOTH"
 [[dependencies.husbandry]]
     modId="penguinlib"
     mandatory=true
-    versionRange="${penguinlib_range}"
+    versionRange="[0.1,)"
     ordering="NONE"
     side="BOTH"

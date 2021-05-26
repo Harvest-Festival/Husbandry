@@ -14,5 +14,5 @@ public class HusbandryTileEntities {
     public static final RegistryObject<TileEntityType<FeedingTrayTileEntity>> FEEDING_TRAY = TILE_ENTITIES.register("feeding_tray", () -> TileEntityType.Builder.of(FeedingTrayTileEntity::new, HusbandryBlocks.FEEDING_TRAY.get()).build(null));
     public static final RegistryObject<TileEntityType<IncubatorTileEntity>> INCUBATOR = TILE_ENTITIES.register("incubator", () -> TileEntityType.Builder.of(IncubatorTileEntity::new, HusbandryBlocks.INCUBATOR.get()).build(null));
     public static final RegistryObject<TileEntityType<NestTileEntity>> NEST = TILE_ENTITIES.register("nest", () -> TileEntityType.Builder.of(NestTileEntity::new, HusbandryBlocks.NEST.get()).build(null));
-    //TODO: public static final RegistryObject<TileEntityType<TroughTileEntity>> TROUGH = TILE_ENTITIES.register("trough", () -> TileEntityType.Builder.of(TroughTileEntity::new, HusbandryBlocks.TROUGH.get()).build(null));
+    public static final RegistryObject<TileEntityType<TroughTileEntity>> TROUGH = TILE_ENTITIES.register("trough", () -> TileEntityType.Builder.of(TroughTileEntity::new, HusbandryBlocks.TROUGH.get()).build(null));
 }

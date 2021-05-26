@@ -1,0 +1,20 @@
+{
+  "type": "penguinlib:add_drop",
+  "conditions": [
+    {
+      "condition": "minecraft:match_tool",
+      "predicate": {
+        "tag": "forge:tools/sickle"
+      }
+    },
+    {
+      "condition": "block_state_property",
+      "block":"minecraft:tall_grass"
+    }
+  ],
+  "clear_items": true,
+  "item_count": 2,
+  "items": [
+    "husbandry:fodder"
+  ]
+}

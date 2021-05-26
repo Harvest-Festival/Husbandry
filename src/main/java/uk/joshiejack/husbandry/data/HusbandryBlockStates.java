@@ -24,6 +24,7 @@ public class HusbandryBlockStates extends BlockStateProvider {
         model(HusbandryBlocks.BOWL.get());
         model(HusbandryBlocks.NEST.get());
         model(HusbandryBlocks.TRUFFLE_BLOCK.get());
+        model(HusbandryBlocks.TROUGH.get());
         ModelFile file = models().getExistingFile(HusbandryBlocks.INCUBATOR.get().getRegistryName());
         VariantBlockStateBuilder builder = getVariantBuilder(HusbandryBlocks.INCUBATOR.get());
         builder.partialState().with(IncubatorBlock.FACING, Direction.EAST).modelForState().modelFile(file).rotationY(90).addModel();

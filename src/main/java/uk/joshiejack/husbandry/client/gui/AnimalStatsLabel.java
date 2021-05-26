@@ -4,6 +4,7 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.inventory.InventoryScreen;
 import net.minecraft.client.gui.widget.Widget;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -16,6 +17,7 @@ import java.util.List;
 
 @OnlyIn(Dist.CLIENT)
 public class AnimalStatsLabel extends Widget {
+    private static final ResourceLocation ICONS = new ResourceLocation("minecraft", "textures/gui/icons.png");
     private final List<IDisplayTrait> traits;
     private final AnimalStats<?> stats;
 
@@ -27,8 +29,17 @@ public class AnimalStatsLabel extends Widget {
 
     @Override
     public void renderButton(@Nonnull MatrixStack matrix, int mouseX, int mouseY, float partialTicks) {
+        Minecraft mc = Minecraft.getInstance();
         InventoryScreen.renderEntityInInventory(x + 10, y + 16, 10, -180, 0, stats.getEntity());
-        Minecraft.getInstance().font.drawShadow(matrix, stats.getEntity().getName(), x + 4, y - 7, 0xFFFFFF);
+        mc.font.drawShadow(matrix, stats.getEntity().getName(), x + 4, y - 8, 0xFFFFFF);
         traits.forEach(trait -> trait.render(matrix, this, x, y, stats));
+        //Draw hearts
+        mc.getTextureManager().bind(ICONS);
+        for (int i = 0; i < 9; i++) {
+            blit(matrix, x + 24 + 10 * i, y + 6, 16, 0, 9, 9);
+            if (i < stats.getHearts()) {
+                blit(matrix, x + 24 + + 10 * i, y + 6, 52, 0, 9, 9);
+            }
+        }
     }
 }

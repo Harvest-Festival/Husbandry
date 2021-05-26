@@ -14,7 +14,7 @@ public class HusbandryBlocks {
     public static final RegistryObject<Block> FEEDING_TRAY = BLOCKS.register("feeding_tray", FeedingTrayBlock::new);
     public static final RegistryObject<Block> BOWL = BLOCKS.register("bowl", BowlBlock::new);
     public static final RegistryObject<Block> NEST = BLOCKS.register("nest", NestBlock::new);
-    //TODO public static final RegistryObject<Block> TROUGH = BLOCKS.register("trough", TroughBlock::new);
     public static final RegistryObject<Block> INCUBATOR = BLOCKS.register("incubator", IncubatorBlock::new);
     public static final RegistryObject<Block> TRUFFLE_BLOCK = BLOCKS.register("truffle_block", TruffleBlock::new);
+    public static final RegistryObject<Block> TROUGH = BLOCKS.register("trough", TroughBlock::new);
 }

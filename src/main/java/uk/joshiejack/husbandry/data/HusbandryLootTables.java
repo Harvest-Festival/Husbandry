@@ -129,6 +129,7 @@ public class HusbandryLootTables extends LootTableProvider {
             dropSelf(HusbandryBlocks.BOWL.get());
             dropSelf(HusbandryBlocks.NEST.get());
             dropSelf(HusbandryBlocks.INCUBATOR.get());
+            dropSelf(HusbandryBlocks.TROUGH.get());
             add(HusbandryBlocks.TRUFFLE_BLOCK.get(), (block) -> createSilkTouchDispatchTable(block, applyExplosionDecay(block, ItemLootEntry.lootTableItem(HusbandryItems.TRUFFLE.get())
                     .apply(SetCount.setCount(RandomValueRange.between(1.0F, 3.0F)))
                     .apply(ApplyBonus.addOreBonusCount(Enchantments.BLOCK_FORTUNE)))));

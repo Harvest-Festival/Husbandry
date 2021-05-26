@@ -49,5 +49,6 @@ public class HusbandryClient {
         RenderTypeLookup.setRenderLayer(HusbandryBlocks.BOWL.get(), cutout);
         RenderTypeLookup.setRenderLayer(HusbandryBlocks.INCUBATOR.get(), cutout);
         RenderTypeLookup.setRenderLayer(HusbandryBlocks.TRUFFLE_BLOCK.get(), cutout);
+        RenderTypeLookup.setRenderLayer(HusbandryBlocks.TROUGH.get(), cutout);
     }
 }

@@ -45,5 +45,6 @@ public class HusbandryItemTags extends ItemTagsProvider {
         tag(EatsRabbitFoodTrait.RABBIT_FOOD).add(HusbandryItems.RABBIT_FOOD.get(), Items.CARROT);
         tag(HusbandryItemTags.ANIMAL_PRODUCT).add(Items.FEATHER, Items.CHICKEN, Items.PORKCHOP, Items.BEEF, Items.LEATHER,
                 Items.RABBIT, Items.RABBIT_FOOT, Items.RABBIT_HIDE, Items.MUTTON).addTags(ItemTags.WOOL);
+        tag(PenguinTags.SICKLES).add(HusbandryItems.SICKLE.get());
     }
 }

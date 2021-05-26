@@ -3,10 +3,10 @@ loaderVersion="[36,)"
 license="MIT"
 [[mods]]
     modId="husbandry"
-    version="${mod_version}"
+    version="${file.jarVersion}"
     displayName="Husbandry"
     authors="joshiejack"
-    description='''Booya'''
+    description='''Take care of your animals for more rewards.'''
 [[dependencies.husbandry]]
     modId="forge"
     mandatory=true
@@ -22,6 +22,6 @@ license="MIT"
 [[dependencies.husbandry]]
     modId="penguinlib"
     mandatory=true
-    versionRange="[0.1,)"
+    versionRange="[0.2,)"
     ordering="NONE"
     side="BOTH"

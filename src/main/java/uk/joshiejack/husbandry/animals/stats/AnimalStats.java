@@ -21,7 +21,6 @@ import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.common.util.LazyOptional;
 import uk.joshiejack.husbandry.Husbandry;
 import uk.joshiejack.husbandry.animals.AnimalSpecies;
-import uk.joshiejack.husbandry.animals.traits.AnimalTrait;
 import uk.joshiejack.husbandry.animals.traits.product.AbstractAnimalTraitProduct;
 import uk.joshiejack.husbandry.animals.traits.types.*;
 import uk.joshiejack.husbandry.entity.ai.AbstractMoveToBlockGoal;

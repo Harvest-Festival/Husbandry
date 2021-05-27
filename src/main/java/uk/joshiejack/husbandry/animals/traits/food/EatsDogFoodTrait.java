@@ -13,7 +13,7 @@ import uk.joshiejack.husbandry.animals.stats.AnimalStats;
 import uk.joshiejack.husbandry.animals.traits.AnimalTrait;
 import uk.joshiejack.husbandry.animals.traits.types.IGoalTrait;
 import uk.joshiejack.husbandry.animals.traits.types.IInteractiveTrait;
-import uk.joshiejack.husbandry.entity.ai.EatFromBowlGoal;
+import uk.joshiejack.husbandry.entity.ai.EatFoodGoal;
 
 public class EatsDogFoodTrait extends AnimalTrait implements IGoalTrait, IInteractiveTrait {
     public static final ITag.INamedTag<Item> DOG_FOOD = ItemTags.createOptional(new ResourceLocation(Husbandry.MODID, "dog_food"));
@@ -24,7 +24,7 @@ public class EatsDogFoodTrait extends AnimalTrait implements IGoalTrait, IIntera
 
     @Override
     public void modifyGoals(AnimalStats<?> stats, GoalSelector selector) {
-        selector.addGoal(2, new EatFromBowlGoal(stats.getEntity(), stats, DOG_FOOD));
+        selector.addGoal(2, new EatFoodGoal(stats.getEntity(), stats, DOG_FOOD));
     }
 
     @Override

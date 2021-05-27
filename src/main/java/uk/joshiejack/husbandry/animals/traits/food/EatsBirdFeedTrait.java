@@ -13,17 +13,19 @@ import uk.joshiejack.husbandry.animals.stats.AnimalStats;
 import uk.joshiejack.husbandry.animals.traits.AnimalTrait;
 import uk.joshiejack.husbandry.animals.traits.types.IGoalTrait;
 import uk.joshiejack.husbandry.animals.traits.types.IInteractiveTrait;
-import uk.joshiejack.husbandry.entity.ai.EatBirdFeedGoal;
+import uk.joshiejack.husbandry.entity.ai.AbstractMoveToBlockGoal;
+import uk.joshiejack.husbandry.entity.ai.EatFoodGoal;
 
 public class EatsBirdFeedTrait extends AnimalTrait implements IGoalTrait, IInteractiveTrait {
     public static final ITag.INamedTag<Item> BIRD_FEED = ItemTags.createOptional(new ResourceLocation(Husbandry.MODID, "bird_feed"));
+
     public EatsBirdFeedTrait(String name) {
         super(name);
     }
 
     @Override
     public void modifyGoals(AnimalStats<?> stats, GoalSelector selector) {
-        selector.addGoal(2, new EatBirdFeedGoal(stats.getEntity(), stats));
+        selector.addGoal(2, new EatFoodGoal(stats.getEntity(), stats, BIRD_FEED, AbstractMoveToBlockGoal.Orientation.ABOVE, 8));
     }
 
     @Override

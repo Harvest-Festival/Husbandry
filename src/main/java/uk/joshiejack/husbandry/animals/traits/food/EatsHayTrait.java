@@ -11,9 +11,7 @@ import uk.joshiejack.husbandry.Husbandry;
 import uk.joshiejack.husbandry.animals.stats.AnimalStats;
 import uk.joshiejack.husbandry.animals.traits.AnimalTrait;
 import uk.joshiejack.husbandry.animals.traits.types.IInteractiveTrait;
-import uk.joshiejack.penguinlib.util.PenguinLoader;
 
-@PenguinLoader("eats_hay")
 public class EatsHayTrait extends AnimalTrait implements /*IGoalTrait, */IInteractiveTrait {
     public static final ITag.INamedTag<Item> HAY = ItemTags.createOptional(new ResourceLocation(Husbandry.MODID, "hay"));
 

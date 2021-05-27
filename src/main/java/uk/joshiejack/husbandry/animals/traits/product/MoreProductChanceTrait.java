@@ -1,10 +1,9 @@
 package uk.joshiejack.husbandry.animals.traits.product;
 
 import uk.joshiejack.husbandry.animals.stats.AnimalStats;
-import uk.joshiejack.penguinlib.util.PenguinLoader;
 import uk.joshiejack.penguinlib.util.helpers.generic.MathsHelper;
 
-@PenguinLoader("more_product_chance") //Animals with this, have their products reset quicker based on happiness
+//Animals with this, have their products reset quicker based on happiness
 public class MoreProductChanceTrait extends MoreProductTrait {
     public MoreProductChanceTrait(String name) {
         super(name);

@@ -24,8 +24,8 @@ import uk.joshiejack.penguinlib.inventory.AbstractBookContainer;
 @OnlyIn(Dist.CLIENT)
 @Mod.EventBusSubscriber(modid = Husbandry.MODID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class HusbandryClient {
-    public static final ResourceLocation FODDER = new ResourceLocation(Husbandry.MODID, "blocks/fodder");
-    public static final ResourceLocation SLOP = new ResourceLocation(Husbandry.MODID, "blocks/slop");
+    public static final ResourceLocation FODDER = new ResourceLocation(Husbandry.MODID, "block/fodder");
+    public static final ResourceLocation SLOP = new ResourceLocation(Husbandry.MODID, "block/slop");
 
     @SubscribeEvent
     public static void onMapping(TextureStitchEvent.Pre event) {

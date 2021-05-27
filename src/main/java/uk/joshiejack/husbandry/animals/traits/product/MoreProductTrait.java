@@ -3,11 +3,10 @@ package uk.joshiejack.husbandry.animals.traits.product;
 import uk.joshiejack.husbandry.animals.stats.AnimalStats;
 import uk.joshiejack.husbandry.animals.traits.types.IBiHourlyTrait;
 import uk.joshiejack.husbandry.animals.traits.types.INewDayTrait;
-import uk.joshiejack.penguinlib.util.PenguinLoader;
 import uk.joshiejack.penguinlib.util.helpers.generic.MathsHelper;
 
-@PenguinLoader("more_product") //Animals with this, have their products reset quicker based on happiness
-public class MoreProductTrait extends AnimalTraitProduct implements INewDayTrait, IBiHourlyTrait {
+//Animals with this, have their products reset quicker based on happiness
+public class MoreProductTrait extends AbstractAnimalTraitProduct implements INewDayTrait, IBiHourlyTrait {
     private int productsPerDay = 1; //How many products the animals give every 24 hours
 
     public MoreProductTrait(String name) {

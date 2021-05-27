@@ -72,39 +72,39 @@ public class HusbandryLootTables extends LootTableProvider {
             addProducts("truffle", LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantRange.exactly(1)).add(ItemLootEntry.lootTableItem(HusbandryBlocks.TRUFFLE_BLOCK.get()))));
             addProducts("chicken_egg", LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantRange.exactly(1)).add(ItemLootEntry.lootTableItem(Items.EGG))));
             addProducts("rabbit_foot", LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantRange.exactly(1)).add(ItemLootEntry.lootTableItem(Items.RABBIT_FOOT).when(RandomChance.randomChance(0.1F)))));
-            addProducts("wool", LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantRange.exactly(1))
-                    .add(ItemLootEntry.lootTableItem(Items.WHITE_WOOL).apply(SetCount.setCount(RandomValueRange.between(5F, 11F)))
-                            .when(EntityHasProperty.hasProperties(LootContext.EntityTarget.THIS, EntityPredicate.Builder.entity().nbt(new NBTPredicate(color(DyeColor.WHITE))))))
-                    .add(ItemLootEntry.lootTableItem(Items.ORANGE_WOOL).apply(SetCount.setCount(RandomValueRange.between(5F, 11F)))
-                            .when(EntityHasProperty.hasProperties(LootContext.EntityTarget.THIS, EntityPredicate.Builder.entity().nbt(new NBTPredicate(color(DyeColor.ORANGE))))))
-                    .add(ItemLootEntry.lootTableItem(Items.MAGENTA_WOOL).apply(SetCount.setCount(RandomValueRange.between(5F, 11F)))
-                            .when(EntityHasProperty.hasProperties(LootContext.EntityTarget.THIS, EntityPredicate.Builder.entity().nbt(new NBTPredicate(color(DyeColor.MAGENTA))))))
-                    .add(ItemLootEntry.lootTableItem(Items.LIGHT_BLUE_WOOL).apply(SetCount.setCount(RandomValueRange.between(5F, 11F)))
-                            .when(EntityHasProperty.hasProperties(LootContext.EntityTarget.THIS, EntityPredicate.Builder.entity().nbt(new NBTPredicate(color(DyeColor.LIGHT_BLUE))))))
-                    .add(ItemLootEntry.lootTableItem(Items.YELLOW_WOOL).apply(SetCount.setCount(RandomValueRange.between(5F, 11F)))
-                            .when(EntityHasProperty.hasProperties(LootContext.EntityTarget.THIS, EntityPredicate.Builder.entity().nbt(new NBTPredicate(color(DyeColor.YELLOW))))))
-                    .add(ItemLootEntry.lootTableItem(Items.LIME_WOOL).apply(SetCount.setCount(RandomValueRange.between(5F, 11F)))
-                            .when(EntityHasProperty.hasProperties(LootContext.EntityTarget.THIS, EntityPredicate.Builder.entity().nbt(new NBTPredicate(color(DyeColor.LIME))))))
-                    .add(ItemLootEntry.lootTableItem(Items.PINK_WOOL).apply(SetCount.setCount(RandomValueRange.between(5F, 11F)))
-                            .when(EntityHasProperty.hasProperties(LootContext.EntityTarget.THIS, EntityPredicate.Builder.entity().nbt(new NBTPredicate(color(DyeColor.PINK))))))
-                    .add(ItemLootEntry.lootTableItem(Items.GRAY_WOOL).apply(SetCount.setCount(RandomValueRange.between(5F, 11F)))
-                            .when(EntityHasProperty.hasProperties(LootContext.EntityTarget.THIS, EntityPredicate.Builder.entity().nbt(new NBTPredicate(color(DyeColor.GRAY))))))
-                    .add(ItemLootEntry.lootTableItem(Items.LIGHT_GRAY_WOOL).apply(SetCount.setCount(RandomValueRange.between(5F, 11F)))
-                            .when(EntityHasProperty.hasProperties(LootContext.EntityTarget.THIS, EntityPredicate.Builder.entity().nbt(new NBTPredicate(color(DyeColor.LIGHT_GRAY))))))
-                    .add(ItemLootEntry.lootTableItem(Items.CYAN_WOOL).apply(SetCount.setCount(RandomValueRange.between(5F, 11F)))
-                            .when(EntityHasProperty.hasProperties(LootContext.EntityTarget.THIS, EntityPredicate.Builder.entity().nbt(new NBTPredicate(color(DyeColor.CYAN))))))
-                    .add(ItemLootEntry.lootTableItem(Items.PURPLE_WOOL).apply(SetCount.setCount(RandomValueRange.between(5F, 11F)))
-                            .when(EntityHasProperty.hasProperties(LootContext.EntityTarget.THIS, EntityPredicate.Builder.entity().nbt(new NBTPredicate(color(DyeColor.PURPLE))))))
-                    .add(ItemLootEntry.lootTableItem(Items.BLUE_WOOL).apply(SetCount.setCount(RandomValueRange.between(5F, 11F)))
-                            .when(EntityHasProperty.hasProperties(LootContext.EntityTarget.THIS, EntityPredicate.Builder.entity().nbt(new NBTPredicate(color(DyeColor.BLUE))))))
-                    .add(ItemLootEntry.lootTableItem(Items.BROWN_WOOL).apply(SetCount.setCount(RandomValueRange.between(5F, 11F)))
-                            .when(EntityHasProperty.hasProperties(LootContext.EntityTarget.THIS, EntityPredicate.Builder.entity().nbt(new NBTPredicate(color(DyeColor.BROWN))))))
-                    .add(ItemLootEntry.lootTableItem(Items.GREEN_WOOL).apply(SetCount.setCount(RandomValueRange.between(5F, 11F)))
-                            .when(EntityHasProperty.hasProperties(LootContext.EntityTarget.THIS, EntityPredicate.Builder.entity().nbt(new NBTPredicate(color(DyeColor.GREEN))))))
-                    .add(ItemLootEntry.lootTableItem(Items.RED_WOOL).apply(SetCount.setCount(RandomValueRange.between(5F, 11F)))
-                            .when(EntityHasProperty.hasProperties(LootContext.EntityTarget.THIS, EntityPredicate.Builder.entity().nbt(new NBTPredicate(color(DyeColor.RED))))))
-                    .add(ItemLootEntry.lootTableItem(Items.BLACK_WOOL).apply(SetCount.setCount(RandomValueRange.between(5F, 11F)))
-                            .when(EntityHasProperty.hasProperties(LootContext.EntityTarget.THIS, EntityPredicate.Builder.entity().nbt(new NBTPredicate(color(DyeColor.BLACK))))))
+            addProducts("wool", LootTable.lootTable().withPool(LootPool.lootPool().setRolls(RandomValueRange.between(5, 11))
+                    .add(ItemLootEntry.lootTableItem(Items.WHITE_WOOL).when(EntityHasProperty.hasProperties(LootContext.EntityTarget.THIS,
+                            EntityPredicate.Builder.entity().nbt(new NBTPredicate(color(DyeColor.WHITE))))))
+                    .add(ItemLootEntry.lootTableItem(Items.ORANGE_WOOL).when(EntityHasProperty.hasProperties(LootContext.EntityTarget.THIS,
+                            EntityPredicate.Builder.entity().nbt(new NBTPredicate(color(DyeColor.ORANGE))))))
+                    .add(ItemLootEntry.lootTableItem(Items.MAGENTA_WOOL).when(EntityHasProperty.hasProperties(LootContext.EntityTarget.THIS,
+                            EntityPredicate.Builder.entity().nbt(new NBTPredicate(color(DyeColor.MAGENTA))))))
+                    .add(ItemLootEntry.lootTableItem(Items.LIGHT_BLUE_WOOL).when(EntityHasProperty.hasProperties(LootContext.EntityTarget.THIS,
+                            EntityPredicate.Builder.entity().nbt(new NBTPredicate(color(DyeColor.LIGHT_BLUE))))))
+                    .add(ItemLootEntry.lootTableItem(Items.YELLOW_WOOL).when(EntityHasProperty.hasProperties(LootContext.EntityTarget.THIS,
+                            EntityPredicate.Builder.entity().nbt(new NBTPredicate(color(DyeColor.YELLOW))))))
+                    .add(ItemLootEntry.lootTableItem(Items.LIME_WOOL).when(EntityHasProperty.hasProperties(LootContext.EntityTarget.THIS,
+                            EntityPredicate.Builder.entity().nbt(new NBTPredicate(color(DyeColor.LIME))))))
+                    .add(ItemLootEntry.lootTableItem(Items.PINK_WOOL).when(EntityHasProperty.hasProperties(LootContext.EntityTarget.THIS,
+                            EntityPredicate.Builder.entity().nbt(new NBTPredicate(color(DyeColor.PINK))))))
+                    .add(ItemLootEntry.lootTableItem(Items.GRAY_WOOL).when(EntityHasProperty.hasProperties(LootContext.EntityTarget.THIS,
+                            EntityPredicate.Builder.entity().nbt(new NBTPredicate(color(DyeColor.GRAY))))))
+                    .add(ItemLootEntry.lootTableItem(Items.LIGHT_GRAY_WOOL).when(EntityHasProperty.hasProperties(LootContext.EntityTarget.THIS,
+                            EntityPredicate.Builder.entity().nbt(new NBTPredicate(color(DyeColor.LIGHT_GRAY))))))
+                    .add(ItemLootEntry.lootTableItem(Items.CYAN_WOOL).when(EntityHasProperty.hasProperties(LootContext.EntityTarget.THIS,
+                            EntityPredicate.Builder.entity().nbt(new NBTPredicate(color(DyeColor.CYAN))))))
+                    .add(ItemLootEntry.lootTableItem(Items.PURPLE_WOOL).when(EntityHasProperty.hasProperties(LootContext.EntityTarget.THIS,
+                            EntityPredicate.Builder.entity().nbt(new NBTPredicate(color(DyeColor.PURPLE))))))
+                    .add(ItemLootEntry.lootTableItem(Items.BLUE_WOOL).when(EntityHasProperty.hasProperties(LootContext.EntityTarget.THIS,
+                            EntityPredicate.Builder.entity().nbt(new NBTPredicate(color(DyeColor.BLUE))))))
+                    .add(ItemLootEntry.lootTableItem(Items.BROWN_WOOL).when(EntityHasProperty.hasProperties(LootContext.EntityTarget.THIS,
+                            EntityPredicate.Builder.entity().nbt(new NBTPredicate(color(DyeColor.BROWN))))))
+                    .add(ItemLootEntry.lootTableItem(Items.GREEN_WOOL).when(EntityHasProperty.hasProperties(LootContext.EntityTarget.THIS,
+                            EntityPredicate.Builder.entity().nbt(new NBTPredicate(color(DyeColor.GREEN))))))
+                    .add(ItemLootEntry.lootTableItem(Items.RED_WOOL).when(EntityHasProperty.hasProperties(LootContext.EntityTarget.THIS,
+                            EntityPredicate.Builder.entity().nbt(new NBTPredicate(color(DyeColor.RED))))))
+                    .add(ItemLootEntry.lootTableItem(Items.BLACK_WOOL).when(EntityHasProperty.hasProperties(LootContext.EntityTarget.THIS,
+                            EntityPredicate.Builder.entity().nbt(new NBTPredicate(color(DyeColor.BLACK))))))
             ));
         }
 

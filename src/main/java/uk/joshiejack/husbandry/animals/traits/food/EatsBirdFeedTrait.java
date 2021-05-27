@@ -14,9 +14,7 @@ import uk.joshiejack.husbandry.animals.traits.AnimalTrait;
 import uk.joshiejack.husbandry.animals.traits.types.IGoalTrait;
 import uk.joshiejack.husbandry.animals.traits.types.IInteractiveTrait;
 import uk.joshiejack.husbandry.entity.ai.EatBirdFeedGoal;
-import uk.joshiejack.penguinlib.util.PenguinLoader;
 
-@PenguinLoader("eats_bird_feed")
 public class EatsBirdFeedTrait extends AnimalTrait implements IGoalTrait, IInteractiveTrait {
     public static final ITag.INamedTag<Item> BIRD_FEED = ItemTags.createOptional(new ResourceLocation(Husbandry.MODID, "bird_feed"));
     public EatsBirdFeedTrait(String name) {

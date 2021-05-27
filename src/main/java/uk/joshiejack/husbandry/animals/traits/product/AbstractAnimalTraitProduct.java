@@ -7,11 +7,11 @@ import uk.joshiejack.husbandry.animals.traits.types.IDataTrait;
 import uk.joshiejack.husbandry.network.SetProducedProductPacket;
 import uk.joshiejack.penguinlib.network.PenguinNetwork;
 
-public abstract class AnimalTraitProduct extends AnimalTrait implements IDataTrait {
+public abstract class AbstractAnimalTraitProduct extends AnimalTrait implements IDataTrait {
     protected int productReset; //The counter for the product reset
     protected int productsProduced; //How many produced
 
-    public AnimalTraitProduct(String name) {
+    public AbstractAnimalTraitProduct(String name) {
         super(name);
     }
 

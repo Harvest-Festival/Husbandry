@@ -21,7 +21,8 @@ import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.common.util.LazyOptional;
 import uk.joshiejack.husbandry.Husbandry;
 import uk.joshiejack.husbandry.animals.AnimalSpecies;
-import uk.joshiejack.husbandry.animals.traits.product.AnimalTraitProduct;
+import uk.joshiejack.husbandry.animals.traits.AnimalTrait;
+import uk.joshiejack.husbandry.animals.traits.product.AbstractAnimalTraitProduct;
 import uk.joshiejack.husbandry.animals.traits.types.*;
 import uk.joshiejack.husbandry.entity.ai.AbstractMoveToBlockGoal;
 import uk.joshiejack.husbandry.item.HusbandryItems;
@@ -62,7 +63,7 @@ public class AnimalStats<E extends AgeableEntity> implements ICapabilityProvider
     private boolean wasOutsideInSun; //If the animal was outside last time
     private boolean annoyed; //If the player has insulted the animal today
     private final Map<String, IDataTrait> data;
-    private final AnimalTraitProduct products;
+    private final AbstractAnimalTraitProduct products;
     private final LazyOptional<AnimalStats<?>> capability;
 
     public AnimalStats(E entity, @Nonnull AnimalSpecies type) {
@@ -78,7 +79,7 @@ public class AnimalStats<E extends AgeableEntity> implements ICapabilityProvider
         });
 
         this.data.values().forEach(data -> data.initTrait(this));
-        this.products = (AnimalTraitProduct) this.data.values().stream().filter(t -> t instanceof AnimalTraitProduct).findFirst().orElse(null);
+        this.products = (AbstractAnimalTraitProduct) this.data.values().stream().filter(t -> t instanceof AbstractAnimalTraitProduct).findFirst().orElse(null);
         this.capability = LazyOptional.of(() -> this);
     }
 
@@ -246,7 +247,7 @@ public class AnimalStats<E extends AgeableEntity> implements ICapabilityProvider
     }
 
     public int getHearts() {
-        return (int) ((((double) happiness) / MAX_RELATIONSHIP) * 9); //0 > 9
+        return (int) ((((double) happiness) / MAX_RELATIONSHIP) * 10); //0 > 9
     }
 
     public int getMaxRelationship() {

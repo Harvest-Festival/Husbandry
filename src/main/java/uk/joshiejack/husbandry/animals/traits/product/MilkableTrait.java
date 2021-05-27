@@ -8,11 +8,9 @@ import net.minecraftforge.items.ItemHandlerHelper;
 import uk.joshiejack.husbandry.animals.stats.AnimalStats;
 import uk.joshiejack.husbandry.animals.traits.AnimalTrait;
 import uk.joshiejack.husbandry.animals.traits.types.IInteractiveTrait;
-import uk.joshiejack.penguinlib.util.PenguinLoader;
 
 import java.util.List;
 
-@PenguinLoader("milkable")
 public class MilkableTrait extends AnimalTrait implements IInteractiveTrait {
     public MilkableTrait(String name) {
         super(name);

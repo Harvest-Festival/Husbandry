@@ -16,9 +16,7 @@ import uk.joshiejack.husbandry.animals.traits.AnimalTrait;
 import uk.joshiejack.husbandry.animals.traits.types.IDataTrait;
 import uk.joshiejack.husbandry.animals.traits.types.IInteractiveTrait;
 import uk.joshiejack.husbandry.animals.traits.types.INewDayTrait;
-import uk.joshiejack.penguinlib.util.PenguinLoader;
 
-@PenguinLoader("mammal")
 public class MammalTrait extends AnimalTrait implements IDataTrait, IInteractiveTrait, INewDayTrait {
     public static final ITag.INamedTag<Item> IMPREGNATES_MAMMALS = ItemTags.createOptional(new ResourceLocation(Husbandry.MODID, "impregnates_mammals"));
     private int gestation;//How many days this animal has been pregnant

@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 @OnlyIn(Dist.CLIENT)
 public class PageStats extends AbstractMultiPage.Both<AnimalStats<?>> {
     public PageStats(ITextComponent name) {
-        super(name, 12);
+        super(name, 10);
     }
 
     @Override

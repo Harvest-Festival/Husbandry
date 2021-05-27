@@ -20,7 +20,6 @@ import static uk.joshiejack.husbandry.Husbandry.MODID;
 public class AnimalInteraction {
     public static final ITag.INamedTag<Block> PREVENTS_PASSENGER_DROP = BlockTags.createOptional(new ResourceLocation(MODID, "prevents_passenger_drop"));
 
-    //TODO:
     @SubscribeEvent
     public static void onEntityInteract(PlayerInteractEvent.EntityInteract event) {
         if (event.getPlayer().getPassengers().size() > 0 && event.getHand() == Hand.MAIN_HAND) {

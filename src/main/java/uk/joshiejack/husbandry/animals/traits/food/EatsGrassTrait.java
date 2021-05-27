@@ -7,11 +7,9 @@ import uk.joshiejack.husbandry.animals.stats.AnimalStats;
 import uk.joshiejack.husbandry.animals.traits.AnimalTrait;
 import uk.joshiejack.husbandry.animals.traits.types.IGoalTrait;
 import uk.joshiejack.husbandry.entity.ai.EatTallGrassGoal;
-import uk.joshiejack.penguinlib.util.PenguinLoader;
 
 import java.util.Objects;
 
-@PenguinLoader("eats_grass")
 public class EatsGrassTrait extends AnimalTrait implements IGoalTrait {
     public EatsGrassTrait(String name) {
         super(name);

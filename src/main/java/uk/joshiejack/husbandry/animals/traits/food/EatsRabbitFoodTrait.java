@@ -14,9 +14,7 @@ import uk.joshiejack.husbandry.animals.traits.AnimalTrait;
 import uk.joshiejack.husbandry.animals.traits.types.IGoalTrait;
 import uk.joshiejack.husbandry.animals.traits.types.IInteractiveTrait;
 import uk.joshiejack.husbandry.entity.ai.EatFromBowlGoal;
-import uk.joshiejack.penguinlib.util.PenguinLoader;
 
-@PenguinLoader("eats_rabbit_food")
 public class EatsRabbitFoodTrait extends AnimalTrait implements IGoalTrait, IInteractiveTrait {
     public static final ITag.INamedTag<Item> RABBIT_FOOD = ItemTags.createOptional(new ResourceLocation(Husbandry.MODID, "rabbit_food"));
 

@@ -7,8 +7,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.server.ServerWorld;
+import net.minecraftforge.client.model.data.IModelData;
+import net.minecraftforge.client.model.data.ModelDataMap;
+import net.minecraftforge.client.model.data.ModelProperty;
 import uk.joshiejack.husbandry.crafting.HusbandryRegistries;
 import uk.joshiejack.husbandry.crafting.IncubatorRecipe;
+import uk.joshiejack.penguinlib.data.TimeUnitRegistry;
 import uk.joshiejack.penguinlib.network.PenguinNetwork;
 import uk.joshiejack.penguinlib.network.packet.SetInventorySlotPacket;
 import uk.joshiejack.penguinlib.tile.machine.AbstractIRecipeMachine;
@@ -21,21 +25,18 @@ import java.util.Set;
 
 @SuppressWarnings("ConstantConditions")
 public class IncubatorTileEntity extends AbstractIRecipeMachine<IncubatorRecipe> {
+    public static final ModelProperty<ItemStack> ITEM_STACK = new ModelProperty<>();
+
     public IncubatorTileEntity() {
         super(HusbandryTileEntities.INCUBATOR.get(), HusbandryRegistries.INCUBATOR);
     }
 
-//    @Override
-//    public void startMachine(PlayerEntity player) {
-//        ItemStack egg = handler.getStackInSlot(0);
-//        int days = 7;
-//        if (egg.hasTag() && Objects.requireNonNull(egg.getTagCompound()).hasKey("HatchTime")) {
-//            days = egg.getTag().getInt("HatchTime");
-//        }
-//
-//        operationTime = TimeHelper.TICKS_PER_DAY * days; //time_unit > day
-//        super.startMachine(player);
-//    }
+    @Override
+    public long getOperationalTime() {
+        ItemStack egg = items.get(0);
+        if (!egg.hasTag() || !egg.getTag().contains("HatchTime")) return super.getOperationalTime();
+        else return TimeUnitRegistry.get("day") * egg.getTag().getInt("HatchTime");
+    }
 
     @Nullable
     private EntityType<?> getEntity(ItemStack stack) {
@@ -46,6 +47,36 @@ public class IncubatorTileEntity extends AbstractIRecipeMachine<IncubatorRecipe>
     @Override
     public boolean canPlaceItem(int slot, @Nonnull ItemStack stack) {
         return this.items.get(slot).isEmpty() && getEntity(stack) != null;
+    }
+
+    @Override
+    public void setItem(int slot, @Nonnull ItemStack stack) {
+        super.setItem(slot, stack);
+        if (level.isClientSide) {
+            requestModelDataUpdate();
+            level.sendBlockUpdated(this.getBlockPos(), this.getBlockState(), this.getBlockState(), 3);
+        }
+    }
+
+    @Nonnull
+    public ItemStack removeItem(int slot, int amount) {
+        ItemStack ret = super.removeItem(slot, amount);
+        setChanged();
+        return ret;
+    }
+
+    @Override
+    public void setChanged() {
+        super.setChanged();
+        assert level != null;
+        if (!level.isClientSide)
+            PenguinNetwork.sendToNearby(new SetInventorySlotPacket(worldPosition, 0, items.get(0)), this);
+    }
+
+    @Override
+    @Nonnull
+    public IModelData getModelData() {
+        return new ModelDataMap.Builder().withInitial(ITEM_STACK, items.get(0)).build();
     }
 
     private boolean isValidSpawnLocation(BlockPos pos) {
@@ -79,7 +110,7 @@ public class IncubatorTileEntity extends AbstractIRecipeMachine<IncubatorRecipe>
     public void finishMachine() {
         List<BlockPos> spawns = spawnLocations();
         if (spawns.size() != 0) {
-            getRecipeResult(items.get(0)).hatch((ServerWorld) level, spawns.get(level.random.nextInt(spawns.size())));
+            getRecipeResult(items.get(0)).hatch((ServerWorld) level, spawns.get(level.random.nextInt(spawns.size())), items.get(0));
             this.items.set(0, ItemStack.EMPTY);
             PenguinNetwork.sendToNearby(new SetInventorySlotPacket(this.worldPosition, 0, ItemStack.EMPTY), this);
             this.setChanged();

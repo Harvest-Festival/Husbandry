@@ -1,6 +1,7 @@
 package uk.joshiejack.husbandry.crafting;
 
 import com.google.gson.JsonObject;
+import net.minecraft.entity.AgeableEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
@@ -17,6 +18,7 @@ import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.ForgeRegistryEntry;
+import uk.joshiejack.husbandry.animals.stats.AnimalStats;
 import uk.joshiejack.husbandry.block.HusbandryBlocks;
 import uk.joshiejack.penguinlib.item.crafting.AbstractSimplePenguinRecipe;
 
@@ -31,7 +33,7 @@ public class IncubatorRecipe extends AbstractSimplePenguinRecipe<EntityType<?>> 
         this.amount = amount;
     }
 
-    public void hatch(ServerWorld world, BlockPos pos) {
+    public void hatch(ServerWorld world, BlockPos pos, ItemStack stack) {
         for (int i = 0; i < amount.randomValue(world.random); i++) {
             Entity entity = output.create(world);
             if (entity == null) return;
@@ -43,8 +45,13 @@ public class IncubatorRecipe extends AbstractSimplePenguinRecipe<EntityType<?>> 
                 } catch (IllegalAccessException | InvocationTargetException ignored) {}
             }
 
-            //TODO: Grab parents happiness and increase this creatures by 3000 * hearts happiness
             entity.moveTo(pos.getX(), pos.getY(), pos.getZ(), 0.0F, 0.0F);
+            if (entity instanceof AgeableEntity && stack.hasTag() && stack.getTag().contains("HeartLevel")) {
+                AnimalStats<?> babyStats = AnimalStats.getStats(entity);
+                if (babyStats != null)
+                    babyStats.increaseHappiness(stack.getTag().getInt("HeartLevel") / 2);
+            }
+
             world.addFreshEntity(entity);
         }
     }

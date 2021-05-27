@@ -9,6 +9,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorldReader;
 import uk.joshiejack.husbandry.animals.stats.AnimalStats;
 import uk.joshiejack.husbandry.tileentity.NestTileEntity;
+import uk.joshiejack.penguinlib.network.PenguinNetwork;
+import uk.joshiejack.penguinlib.network.packet.SetInventorySlotPacket;
 
 import javax.annotation.Nonnull;
 
@@ -55,6 +57,7 @@ public class LayEggGoal extends AbstractMoveToBlockGoal {
                         stats.setProduced(1);
                         entity.playSound(SoundEvents.CHICKEN_EGG, 1.0F, (entity.getRandom().nextFloat() - entity.getRandom().nextFloat()) * 0.2F + 1.0F);
                         tryTicks = 9999;
+                        PenguinNetwork.sendToNearby(new SetInventorySlotPacket(blockPos, 0, product), tile);
                     }
                 }
 

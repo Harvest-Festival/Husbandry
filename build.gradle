@@ -122,6 +122,7 @@ jar.finalizedBy('reobfJar')
 publishing {
     publications {
         mavenJava(MavenPublication) {
+            artifactId 'Husbandry'
             artifact jar
         }
     }

@@ -68,6 +68,7 @@ public class HusbandryLootTables extends LootTableProvider {
 
         @Override
         protected void addTables() {
+            addProducts("mushroom_stew", LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantRange.exactly(1)).add(ItemLootEntry.lootTableItem(Items.MUSHROOM_STEW))));
             addProducts("milk", LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantRange.exactly(1)).add(ItemLootEntry.lootTableItem(Items.MILK_BUCKET))));
             addProducts("truffle", LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantRange.exactly(1)).add(ItemLootEntry.lootTableItem(HusbandryBlocks.TRUFFLE_BLOCK.get()))));
             addProducts("chicken_egg", LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantRange.exactly(1)).add(ItemLootEntry.lootTableItem(Items.EGG))));

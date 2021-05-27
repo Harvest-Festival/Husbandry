@@ -60,6 +60,8 @@ public class HusbandryDatabase extends AbstractDatabaseProvider {
                 .assign(EntityType.DONKEY).assign(EntityType.MULE).withTraits("eats_grass", "eats_hay", "cleanable", "pettable", "mammal", "pet").build(this);
         new AnimalType("parrot").withLifespan(25,50).withTreat(HusbandryItems.PARROT_TREAT.get()).levelUpWith(3,24).withGestationPeriod(4).withMaturityAt(36)
                 .assign(EntityType.PARROT).withTraits("eats_bird_feed", "carriable", "pet").build(this);
+        new AnimalType("mooshroom").withLifespan(13, 21).withTreat(HusbandryItems.COW_TREAT.get()).levelUpWith(24, 7).withGestationPeriod(11).withMaturityAt(21).withProducts(1, "mushroom_stew")
+                .assign(EntityType.COW).withTraits("eats_grass", "eats_hay", "cleanable", "pettable", "mammal", "bowlable", "more_product").build(this);
     }
 
     private static class AnimalType {

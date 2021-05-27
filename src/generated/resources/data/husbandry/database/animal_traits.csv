@@ -38,6 +38,13 @@ llama,eats_hay
 llama,mammal
 llama,pet
 llama,pettable
+mooshroom,bowlable
+mooshroom,cleanable
+mooshroom,eats_grass
+mooshroom,eats_hay
+mooshroom,mammal
+mooshroom,more_product
+mooshroom,pettable
 parrot,carriable
 parrot,eats_bird_feed
 parrot,pet

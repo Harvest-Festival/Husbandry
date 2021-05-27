@@ -241,7 +241,7 @@ public class AnimalStats<E extends AgeableEntity> implements ICapabilityProvider
         return !eaten;
     }
 
-    public List<ItemStack> getProduct(PlayerEntity player) {
+    public List<ItemStack> getProduct(@Nullable PlayerEntity player) {
         return type.getProducts().getProduct(entity, player);
     }
 

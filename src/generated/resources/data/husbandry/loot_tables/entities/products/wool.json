@@ -2,7 +2,11 @@
   "type": "minecraft:entity",
   "pools": [
     {
-      "rolls": 1,
+      "rolls": {
+        "min": 5.0,
+        "max": 11.0,
+        "type": "minecraft:uniform"
+      },
       "entries": [
         {
           "type": "minecraft:item",
@@ -13,16 +17,6 @@
                 "nbt": "{Color:0b}"
               },
               "entity": "this"
-            }
-          ],
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "min": 5.0,
-                "max": 11.0,
-                "type": "minecraft:uniform"
-              }
             }
           ],
           "name": "minecraft:white_wool"
@@ -38,16 +32,6 @@
               "entity": "this"
             }
           ],
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "min": 5.0,
-                "max": 11.0,
-                "type": "minecraft:uniform"
-              }
-            }
-          ],
           "name": "minecraft:orange_wool"
         },
         {
@@ -59,16 +43,6 @@
                 "nbt": "{Color:2b}"
               },
               "entity": "this"
-            }
-          ],
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "min": 5.0,
-                "max": 11.0,
-                "type": "minecraft:uniform"
-              }
             }
           ],
           "name": "minecraft:magenta_wool"
@@ -84,16 +58,6 @@
               "entity": "this"
             }
           ],
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "min": 5.0,
-                "max": 11.0,
-                "type": "minecraft:uniform"
-              }
-            }
-          ],
           "name": "minecraft:light_blue_wool"
         },
         {
@@ -105,16 +69,6 @@
                 "nbt": "{Color:4b}"
               },
               "entity": "this"
-            }
-          ],
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "min": 5.0,
-                "max": 11.0,
-                "type": "minecraft:uniform"
-              }
             }
           ],
           "name": "minecraft:yellow_wool"
@@ -130,16 +84,6 @@
               "entity": "this"
             }
           ],
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "min": 5.0,
-                "max": 11.0,
-                "type": "minecraft:uniform"
-              }
-            }
-          ],
           "name": "minecraft:lime_wool"
         },
         {
@@ -151,16 +95,6 @@
                 "nbt": "{Color:6b}"
               },
               "entity": "this"
-            }
-          ],
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "min": 5.0,
-                "max": 11.0,
-                "type": "minecraft:uniform"
-              }
             }
           ],
           "name": "minecraft:pink_wool"
@@ -176,16 +110,6 @@
               "entity": "this"
             }
           ],
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "min": 5.0,
-                "max": 11.0,
-                "type": "minecraft:uniform"
-              }
-            }
-          ],
           "name": "minecraft:gray_wool"
         },
         {
@@ -197,16 +121,6 @@
                 "nbt": "{Color:8b}"
               },
               "entity": "this"
-            }
-          ],
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "min": 5.0,
-                "max": 11.0,
-                "type": "minecraft:uniform"
-              }
             }
           ],
           "name": "minecraft:light_gray_wool"
@@ -222,16 +136,6 @@
               "entity": "this"
             }
           ],
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "min": 5.0,
-                "max": 11.0,
-                "type": "minecraft:uniform"
-              }
-            }
-          ],
           "name": "minecraft:cyan_wool"
         },
         {
@@ -243,16 +147,6 @@
                 "nbt": "{Color:10b}"
               },
               "entity": "this"
-            }
-          ],
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "min": 5.0,
-                "max": 11.0,
-                "type": "minecraft:uniform"
-              }
             }
           ],
           "name": "minecraft:purple_wool"
@@ -268,16 +162,6 @@
               "entity": "this"
             }
           ],
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "min": 5.0,
-                "max": 11.0,
-                "type": "minecraft:uniform"
-              }
-            }
-          ],
           "name": "minecraft:blue_wool"
         },
         {
@@ -289,16 +173,6 @@
                 "nbt": "{Color:12b}"
               },
               "entity": "this"
-            }
-          ],
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "min": 5.0,
-                "max": 11.0,
-                "type": "minecraft:uniform"
-              }
             }
           ],
           "name": "minecraft:brown_wool"
@@ -314,16 +188,6 @@
               "entity": "this"
             }
           ],
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "min": 5.0,
-                "max": 11.0,
-                "type": "minecraft:uniform"
-              }
-            }
-          ],
           "name": "minecraft:green_wool"
         },
         {
@@ -337,16 +201,6 @@
               "entity": "this"
             }
           ],
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "min": 5.0,
-                "max": 11.0,
-                "type": "minecraft:uniform"
-              }
-            }
-          ],
           "name": "minecraft:red_wool"
         },
         {
@@ -358,16 +212,6 @@
                 "nbt": "{Color:15b}"
               },
               "entity": "this"
-            }
-          ],
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "min": 5.0,
-                "max": 11.0,
-                "type": "minecraft:uniform"
-              }
             }
           ],
           "name": "minecraft:black_wool"

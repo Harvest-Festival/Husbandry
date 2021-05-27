@@ -79,6 +79,7 @@ public class Husbandry {
         AnimalTrait.registerTrait("pettable",               PettableTrait.class);
         AnimalTrait.registerTrait("mammal",                 MammalTrait.class);
         AnimalTrait.registerTrait("pet",                    PetTrait.class);
+        AnimalTrait.registerTrait("bowlable",               BowlableTrait.class);
         AnimalTrait.registerTrait("drops_product",          DropsProductTrait.class);
         AnimalTrait.registerTrait("faster_product_reset",   FasterProductResetTrait.class);
         AnimalTrait.registerTrait("finds_product",          FindsProductTrait.class);

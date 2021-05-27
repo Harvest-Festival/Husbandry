@@ -10,6 +10,7 @@ import net.minecraft.loot.LootParameters;
 import net.minecraft.loot.LootTable;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.server.ServerWorld;
+import uk.joshiejack.penguinlib.util.helpers.minecraft.FakePlayerHelper;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -37,8 +38,9 @@ public class AnimalProducts {
         LootContext.Builder lootcontext$builder = (new LootContext.Builder((ServerWorld)entity.level))
                 .withParameter(LootParameters.ORIGIN, entity.position())
                 .withParameter(LootParameters.THIS_ENTITY, entity)
-                .withParameter(LootParameters.KILLER_ENTITY, player)
                 .withRandom(entity.getRandom());
+        if (player != null) lootcontext$builder.withParameter(LootParameters.KILLER_ENTITY, player);
+        else lootcontext$builder.withParameter(LootParameters.KILLER_ENTITY, FakePlayerHelper.getFakePlayerWithPosition((ServerWorld) entity.level, entity.blockPosition()));
         LootTable loottable = Objects.requireNonNull(entity.level.getServer()).getLootTables().get(lootTable);
         return loottable.getRandomItems(lootcontext$builder.create(LootParameterSets.CHEST));
     }

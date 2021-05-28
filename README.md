@@ -1,6 +1,6 @@
 ![](src/main/resources/assets/harvestfestival/logo.png)
 
-Husbandry is the fishing element of the Harvest Festival Collection. It adds a bunch of new fish to catch in different biomes as well as entity versions for them all! Also included are the hatchery where you can duplicate your fish and the fish trap which will catch fish for you, although it must be seeded with bait!
+Husbandry is the animal care element of Harvest Festival. It adds the requirement to look after your animals to make them happy. It gives animals a limited lifespan and has mammals be pregnant for several minecraft days. Also adds nests for chickens to lay their eggs and an incubator for you to hatch them. Pigs will "find" truffles randomly throughout their day. Treats will help level up animals so that they produce more products for you.
 
 More information about Husbandry and downloads can be found on //TODO
 
@@ -12,15 +12,15 @@ Add to your build.gradle:
 ```gradle
 repositories {
   maven {
-    // url of the maven that hosts husbandry files
-    url //TODO
+    url 'https://maven.joshiejack.uk/'
   }
 }
 
 dependencies {
-  // compile against Husbandry
-  deobfCompile "uk.joshiejack.husbandry:Husbandry:${minecraft_version}-${husbandry_version}"
+    compile fg.deobf("uk.joshiejack.penguinlib:Penguin-Lib:${minecraft_version}-${penguinlib_version}")
+    compile fg.deobf("uk.joshiejack.husbandry:Husbandry:${minecraft_version}-${husbandry_version}")
 }
 ```
 
-`${minecraft_version}` & `${husbandry_version}` can be found //TODO, check the file name of the version you want.
+`${$penguinlib_version}` can be found [here](https://maven.joshiejack.uk/uk/joshiejack/penguinlib/Penguin-Lib/)
+`${husbandry_version}` can be found [here](https://maven.joshiejack.uk/uk/joshiejack/husbandry/Husbandry/)

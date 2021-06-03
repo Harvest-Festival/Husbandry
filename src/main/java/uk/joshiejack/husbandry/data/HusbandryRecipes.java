@@ -5,6 +5,7 @@ import net.minecraft.advancements.criterion.ItemPredicate;
 import net.minecraft.advancements.criterion.PlayerEntityInteractionTrigger;
 import net.minecraft.block.Blocks;
 import net.minecraft.data.*;
+import net.minecraft.entity.EntityType;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.item.crafting.IRecipeSerializer;
@@ -14,6 +15,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.Tags;
 import uk.joshiejack.husbandry.Husbandry;
 import uk.joshiejack.husbandry.block.HusbandryBlocks;
+import uk.joshiejack.husbandry.data.builders.IncubatorRecipeBuilder;
 import uk.joshiejack.husbandry.item.HusbandryItems;
 import uk.joshiejack.penguinlib.item.PenguinItems;
 import uk.joshiejack.penguinlib.util.PenguinTags;
@@ -59,9 +61,8 @@ public class HusbandryRecipes extends RecipeProvider {
         ShapedRecipeBuilder.shaped(HusbandryBlocks.INCUBATOR.get()).define('I', Tags.Items.INGOTS_IRON).define('P', ItemTags.PLANKS).define('H', Blocks.HAY_BLOCK).pattern("IHI").pattern("PPP").unlockedBy("has_iron", has(Tags.Items.INGOTS_IRON)).save(consumer, rl("incubator"));
         ShapedRecipeBuilder.shaped(HusbandryBlocks.FEEDING_TRAY.get()).define('P', ItemTags.PLANKS).define('S', ItemTags.WOODEN_SLABS).pattern("PSP").unlockedBy("has_wood", has(ItemTags.PLANKS)).save(consumer, rl("feeding_tray"));
         ShapedRecipeBuilder.shaped(HusbandryBlocks.BOWL.get()).define('S', ItemTags.WOODEN_SLABS).pattern(" S ").pattern("S S").pattern(" S ").unlockedBy("has_wood", has(ItemTags.PLANKS)).save(consumer, rl("bowl"));
+        ShapedRecipeBuilder.shaped(HusbandryBlocks.TROUGH.get()).define('P', ItemTags.PLANKS).define('L', ItemTags.LOGS).pattern("P P").pattern("PPP").pattern("L L").unlockedBy("has_wood", has(ItemTags.LOGS)).save(consumer, rl("trough"));
         ShapelessRecipeBuilder.shapeless(HusbandryItems.ANIMAL_TRACKER.get()).requires(Items.PAPER).requires(Items.INK_SAC).requires(HusbandryItemTags.ANIMAL_PRODUCT).unlockedBy("has_paper", has(Items.PAPER)).save(consumer, "animal_tracker");
-//        if (HusbandryConfig.enableFeederRecipes) {
-//            helper.shapedRecipe("feeder_trough", TROUGH.getStackFromEnum(BlockTrough.Section.SINGLE), "P P", "PPP", "L L", 'P', "plankWood", 'L', "logWood");
-//        }
+        IncubatorRecipeBuilder.incubate(Ingredient.of(Items.EGG), EntityType.CHICKEN, 1, 1).save(consumer, rl("chicken"));
     }
 }

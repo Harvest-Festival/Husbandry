@@ -14,7 +14,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.model.BakedModelWrapper;
 import net.minecraftforge.client.model.data.IModelData;
-import uk.joshiejack.husbandry.tileentity.NestTileEntity;
+import net.minecraftforge.client.model.data.ModelProperty;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -27,10 +27,12 @@ import java.util.Random;
 public class EggSupplierBakedModel extends BakedModelWrapper<IBakedModel> {
     private static final Map<Item, Map<Direction, List<BakedQuad>>> QUADS = new HashMap<>();
     private final Map<Item, ResourceLocation> overrides;
+    private final ModelProperty<ItemStack> property;
 
-    public EggSupplierBakedModel(IBakedModel originalModel, Map<Item, ResourceLocation> overrides) {
+    public EggSupplierBakedModel(IBakedModel originalModel, Map<Item, ResourceLocation> overrides, ModelProperty<ItemStack> property) {
         super(originalModel);
         this.overrides = overrides;
+        this.property = property;
     }
 
     private Item defaultItem(Item item) {
@@ -46,8 +48,8 @@ public class EggSupplierBakedModel extends BakedModelWrapper<IBakedModel> {
     @Nonnull
     @Override
     public List<BakedQuad> getQuads(@Nullable BlockState state, @Nullable Direction side, @Nonnull Random random, @Nonnull IModelData data) {
-        if (state != null && data.hasProperty(NestTileEntity.ITEM_STACK)) {
-            ItemStack stack = data.getData(NestTileEntity.ITEM_STACK);
+        if (state != null && data.hasProperty(property)) {
+            ItemStack stack = data.getData(property);
             if (!stack.isEmpty()) {
                 Map<Direction, List<BakedQuad>> map = getQuads(defaultItem(stack.getItem()));
                 if (map.containsKey(side)) return map.get(side);

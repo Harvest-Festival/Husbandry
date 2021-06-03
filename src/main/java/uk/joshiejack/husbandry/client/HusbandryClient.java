@@ -7,6 +7,7 @@ import net.minecraft.client.renderer.model.IBakedModel;
 import net.minecraft.client.renderer.model.ModelResourceLocation;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
@@ -17,6 +18,7 @@ import net.minecraftforge.client.event.ModelBakeEvent;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.client.model.data.ModelProperty;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -24,6 +26,8 @@ import uk.joshiejack.husbandry.Husbandry;
 import uk.joshiejack.husbandry.block.HusbandryBlocks;
 import uk.joshiejack.husbandry.client.gui.PageStats;
 import uk.joshiejack.husbandry.client.renderer.EggSupplierBakedModel;
+import uk.joshiejack.husbandry.tileentity.IncubatorTileEntity;
+import uk.joshiejack.husbandry.tileentity.NestTileEntity;
 import uk.joshiejack.penguinlib.client.gui.book.Book;
 import uk.joshiejack.penguinlib.client.gui.book.Tab;
 import uk.joshiejack.penguinlib.inventory.AbstractBookContainer;
@@ -72,11 +76,11 @@ public class HusbandryClient {
         ModelLoader.addSpecialModel(DEFAULT_INCUBATOR_EGG);
     }
 
-    private static void replaceWithEggSupplier(String model, ModelBakeEvent event, Map<Item, ResourceLocation> overrides) {
+    private static void replaceWithEggSupplier(String model, ModelBakeEvent event, Map<Item, ResourceLocation> overrides, ModelProperty<ItemStack> property) {
         ResourceLocation key = new ModelResourceLocation(model);
         IBakedModel nest = event.getModelManager().getModel(key);
         if (!(event.getModelRegistry().get(key) instanceof EggSupplierBakedModel))
-            event.getModelRegistry().put(key, new EggSupplierBakedModel(nest, overrides));
+            event.getModelRegistry().put(key, new EggSupplierBakedModel(nest, overrides, property));
     }
 
     @SubscribeEvent
@@ -86,10 +90,10 @@ public class HusbandryClient {
         nest.put(Items.EGG, DEFAULT_NEST_EGG);
         Map<Item, ResourceLocation> incubator = new HashMap<>();
         incubator.put(Items.EGG, DEFAULT_INCUBATOR_EGG);
-        replaceWithEggSupplier("husbandry:nest#", event, nest);
-        replaceWithEggSupplier("husbandry:incubator#facing=north", event, incubator);
-        replaceWithEggSupplier("husbandry:incubator#facing=east", event, incubator);
-        replaceWithEggSupplier("husbandry:incubator#facing=west", event, incubator);
-        replaceWithEggSupplier("husbandry:incubator#facing=south", event, incubator);
+        replaceWithEggSupplier("husbandry:nest#", event, nest, NestTileEntity.ITEM_STACK);
+        replaceWithEggSupplier("husbandry:incubator#facing=north", event, incubator, IncubatorTileEntity.ITEM_STACK);
+        replaceWithEggSupplier("husbandry:incubator#facing=east", event, incubator, IncubatorTileEntity.ITEM_STACK);
+        replaceWithEggSupplier("husbandry:incubator#facing=west", event, incubator, IncubatorTileEntity.ITEM_STACK);
+        replaceWithEggSupplier("husbandry:incubator#facing=south", event, incubator, IncubatorTileEntity.ITEM_STACK);
     }
 }

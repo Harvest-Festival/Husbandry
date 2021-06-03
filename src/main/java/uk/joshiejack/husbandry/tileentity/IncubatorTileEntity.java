@@ -60,9 +60,7 @@ public class IncubatorTileEntity extends AbstractIRecipeMachine<IncubatorRecipe>
 
     @Nonnull
     public ItemStack removeItem(int slot, int amount) {
-        ItemStack ret = super.removeItem(slot, amount);
-        setChanged();
-        return ret;
+        return ItemStack.EMPTY;
     }
 
     @Override

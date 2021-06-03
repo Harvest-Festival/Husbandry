@@ -1,0 +1,8 @@
+{
+  "type": "husbandry:incubator",
+  "ingredient": {
+    "item": "minecraft:egg"
+  },
+  "entity": "minecraft:chicken",
+  "amount": 1
+}

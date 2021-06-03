@@ -5,8 +5,8 @@ minecraft:shepherd,2,minecraft:emerald,2,husbandry:chicken_treat,3,32,16,2.0
 minecraft:shepherd,2,minecraft:emerald,2,husbandry:cow_treat,3,32,16,2.0
 minecraft:shepherd,2,minecraft:emerald,2,husbandry:dog_treat,3,32,16,2.0
 minecraft:shepherd,2,minecraft:emerald,2,husbandry:horse_treat,3,32,16,2.0
-minecraft:shepherd,2,minecraft:emerald,2,husbandry:llama_treat,3,32,16,2.0
-minecraft:shepherd,2,minecraft:emerald,2,husbandry:parrot_treat,3,32,16,2.0
 minecraft:shepherd,2,minecraft:emerald,2,husbandry:pig_treat,3,32,16,2.0
 minecraft:shepherd,2,minecraft:emerald,2,husbandry:rabbit_treat,3,32,16,2.0
 minecraft:shepherd,2,minecraft:emerald,2,husbandry:sheep_treat,3,32,16,2.0
+minecraft:shepherd,2,minecraft:emerald,2,husbandry:parrot_treat,3,32,16,2.0
+minecraft:shepherd,2,minecraft:emerald,2,husbandry:llama_treat,3,32,16,2.0

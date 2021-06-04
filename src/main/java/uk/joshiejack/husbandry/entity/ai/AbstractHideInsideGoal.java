@@ -1,6 +1,5 @@
 package uk.joshiejack.husbandry.entity.ai;
 
-import net.minecraft.block.Blocks;
 import net.minecraft.entity.CreatureEntity;
 import net.minecraft.entity.ai.RandomPositionGenerator;
 import net.minecraft.util.math.BlockPos;
@@ -41,7 +40,6 @@ public abstract class AbstractHideInsideGoal extends AbstractMoveToBlockGoal {
     @Override
     public void tick() {
         super.tick();
-        entity.level.setBlock(blockPos, Blocks.OBSIDIAN.defaultBlockState(), 3);
         if (isNearDestination()) {
             if (canStopHiding()) tryTicks = 2000;
         }

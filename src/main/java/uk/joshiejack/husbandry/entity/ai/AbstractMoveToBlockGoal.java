@@ -29,7 +29,7 @@ public abstract class AbstractMoveToBlockGoal extends MoveToBlockGoal {
     private boolean isNearDestination(BlockPos pos) {
         switch (orientation) {
             case ABOVE:
-             return entity.blockPosition().closerThan(pos, 0.9);
+             return entity.blockPosition().closerThan(pos, 1);
             case IN:
                 entity.blockPosition().closerThan(pos, 1);
             case BESIDE:
@@ -47,7 +47,7 @@ public abstract class AbstractMoveToBlockGoal extends MoveToBlockGoal {
 
             if (this.tryTicks % 40 == 0) {
                 entity.getNavigation().moveTo((double) ((float) blockPos.getX()) + 0.5D,
-                        blockPos.getY(), (double) ((float) blockPos.getZ()) + 0.5D, speedModifier);
+                        blockPos.getY() + 1, (double) ((float) blockPos.getZ()) + 0.5D, 1D);
             }
         } else {
             this.reachedTarget = true;

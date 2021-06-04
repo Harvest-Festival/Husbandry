@@ -22,7 +22,7 @@ public class EatTallGrassGoal extends AbstractMoveToBlockGoal {
     private static final Predicate<BlockState> IS_DOUBLE_TALL_GRASS = BlockStateMatcher.forBlock(Blocks.TALL_GRASS).where(DoublePlantBlock.HALF, half -> Objects.equals(half, DoubleBlockHalf.LOWER));
 
     public EatTallGrassGoal(CreatureEntity entity, AnimalStats<?> stats) {
-        super(entity, stats, IN, 16);
+        super(entity, stats, IN, 8);
     }
 
     @Override
@@ -39,9 +39,8 @@ public class EatTallGrassGoal extends AbstractMoveToBlockGoal {
     @Override
     public void tick() {
         super.tick();
-        entity.getLookControl().setLookAt((double) blockPos.getX() + 0.5D, blockPos.getY() + 1,
+        entity.getLookControl().setLookAt((double) blockPos.getX() + 0.5D, blockPos.getY(),
                 (double) blockPos.getZ() + 0.5D, 10.0F, (float) entity.getMaxHeadXRot());
-
         if (isNearDestination()) {
             BlockState state = entity.level.getBlockState(blockPos);
             if (IS_TALL_GRASS.test(state)) {

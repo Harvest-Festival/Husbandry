@@ -24,7 +24,7 @@ public class EatsCatFoodTrait extends AnimalTrait implements IGoalTrait, IIntera
 
     @Override
     public void modifyGoals(AnimalStats<?> stats, GoalSelector selector) {
-        selector.addGoal(2, new EatFoodGoal(stats.getEntity(), stats, CAT_FOOD));
+        selector.addGoal(3, new EatFoodGoal(stats.getEntity(), stats, CAT_FOOD));
     }
 
     @Override

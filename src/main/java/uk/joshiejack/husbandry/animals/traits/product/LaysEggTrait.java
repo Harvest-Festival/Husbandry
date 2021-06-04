@@ -6,6 +6,7 @@ import uk.joshiejack.husbandry.animals.stats.AnimalStats;
 import uk.joshiejack.husbandry.animals.traits.AnimalTrait;
 import uk.joshiejack.husbandry.animals.traits.types.IGoalTrait;
 import uk.joshiejack.husbandry.entity.ai.LayEggGoal;
+import uk.joshiejack.husbandry.entity.ai.RoostGoal;
 
 public class LaysEggTrait extends AnimalTrait implements IGoalTrait {
     public LaysEggTrait(String name) {
@@ -18,6 +19,7 @@ public class LaysEggTrait extends AnimalTrait implements IGoalTrait {
             ((ChickenEntity) stats.getEntity()).eggTime = Integer.MAX_VALUE;
         }
 
+        selector.addGoal(3, new RoostGoal(stats.getEntity(), stats));
         selector.addGoal(4, new LayEggGoal(stats.getEntity(), stats));
     }
 }

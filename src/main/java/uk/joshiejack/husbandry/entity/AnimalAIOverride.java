@@ -1,4 +1,4 @@
-package uk.joshiejack.husbandry.entity.ai;
+package uk.joshiejack.husbandry.entity;
 
 import net.minecraft.entity.AgeableEntity;
 import net.minecraft.entity.Entity;
@@ -8,6 +8,7 @@ import net.minecraftforge.fml.common.Mod;
 import uk.joshiejack.husbandry.animals.stats.AnimalStats;
 import uk.joshiejack.husbandry.animals.traits.types.AnimalTraits;
 import uk.joshiejack.husbandry.animals.traits.types.IGoalTrait;
+import uk.joshiejack.husbandry.entity.ai.HideFromStormGoal;
 
 import java.util.List;
 
@@ -23,6 +24,8 @@ public class AnimalAIOverride {
             AnimalStats<?> stats = AnimalStats.getStats(entity);
             if (stats != null) {
                 AgeableEntity ageable = ((AgeableEntity) entity);
+                //All animals will hide from storms
+                ageable.goalSelector.addGoal(4, new HideFromStormGoal(ageable, stats));
                 List<IGoalTrait> traits = stats.getType().getTraits(AnimalTraits.Type.AI);
                 traits.forEach(trait -> trait.modifyGoals(stats, ageable.goalSelector));
             }

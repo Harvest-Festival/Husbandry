@@ -46,8 +46,8 @@ public abstract class AbstractMoveToBlockGoal extends MoveToBlockGoal {
             ++this.tryTicks;
 
             if (this.tryTicks % 40 == 0) {
-                entity.getMoveControl().setWantedPosition((double) ((float) blockPos.getX()) + 0.5D,
-                        blockPos.getY() + 1D, (double) ((float) blockPos.getZ()) + 0.5D, 0.8D);
+                entity.getNavigation().moveTo((double) ((float) blockPos.getX()) + 0.5D,
+                        blockPos.getY(), (double) ((float) blockPos.getZ()) + 0.5D, speedModifier);
             }
         } else {
             this.reachedTarget = true;

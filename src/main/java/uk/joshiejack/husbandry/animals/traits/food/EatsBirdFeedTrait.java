@@ -25,7 +25,7 @@ public class EatsBirdFeedTrait extends AnimalTrait implements IGoalTrait, IInter
 
     @Override
     public void modifyGoals(AnimalStats<?> stats, GoalSelector selector) {
-        selector.addGoal(2, new EatFoodGoal(stats.getEntity(), stats, BIRD_FEED, AbstractMoveToBlockGoal.Orientation.ABOVE, 8));
+        selector.addGoal(3, new EatFoodGoal(stats.getEntity(), stats, BIRD_FEED, AbstractMoveToBlockGoal.Orientation.ABOVE, 8));
     }
 
     @Override

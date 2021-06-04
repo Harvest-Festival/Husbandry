@@ -25,7 +25,7 @@ public class EatsSlopTrait extends AnimalTrait implements IGoalTrait, IInteracti
 
     @Override
     public void modifyGoals(AnimalStats<?> stats, GoalSelector selector) {
-        selector.addGoal(2, new EatFoodGoal(stats.getEntity(), stats, SLOP, AbstractMoveToBlockGoal.Orientation.BESIDE, 16));
+        selector.addGoal(3, new EatFoodGoal(stats.getEntity(), stats, SLOP, AbstractMoveToBlockGoal.Orientation.BESIDE, 16));
     }
 
     @Override

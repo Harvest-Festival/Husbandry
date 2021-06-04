@@ -24,7 +24,7 @@ public class EatsRabbitFoodTrait extends AnimalTrait implements IGoalTrait, IInt
 
     @Override
     public void modifyGoals(AnimalStats<?> stats, GoalSelector selector) {
-        selector.addGoal(2, new EatFoodGoal(stats.getEntity(), stats, RABBIT_FOOD));
+        selector.addGoal(3, new EatFoodGoal(stats.getEntity(), stats, RABBIT_FOOD));
     }
 
     @Override

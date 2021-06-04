@@ -25,7 +25,7 @@ import java.util.Random;
 
 @OnlyIn(Dist.CLIENT)
 public class EggSupplierBakedModel extends BakedModelWrapper<IBakedModel> {
-    private static final Map<Item, Map<Direction, List<BakedQuad>>> QUADS = new HashMap<>();
+    private final Map<Item, Map<Direction, List<BakedQuad>>> QUADS = new HashMap<>();
     private final Map<Item, ResourceLocation> overrides;
     private final ModelProperty<ItemStack> property;
 

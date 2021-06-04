@@ -43,6 +43,7 @@ public class LayEggGoal extends AbstractMoveToBlockGoal {
         if (isNearDestination()) {
             eggTimer++;
 
+            entity.setPos(blockPos.getX() + 0.5D, blockPos.getY(), blockPos.getZ() + 0.5D);
             if (eggTimer > 60) {
                 TileEntity tile = entity.level.getBlockEntity(blockPos);
                 if (tile instanceof NestTileEntity) {

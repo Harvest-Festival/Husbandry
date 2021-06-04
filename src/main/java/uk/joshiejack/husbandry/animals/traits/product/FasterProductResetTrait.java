@@ -14,7 +14,7 @@ public class FasterProductResetTrait extends AbstractAnimalTraitProduct implemen
     @Override
     public void onNewDay(AnimalStats<?> stats) {
         productReset++;
-        int resetTarget = (1 - MathsHelper.convertRange(0, stats.getMaxRelationship(), 0, 0.4, stats.getHappiness())) * stats.getType().getProducts().getDaysBetweenProducts();
+        int resetTarget = (1 - MathsHelper.convertRange(0, stats.getMaxRelationship(), 0, 0.4, stats.getHappiness())) * stats.getSpecies().getProducts().getDaysBetweenProducts();
         if (productReset >= resetTarget) {
             stats.resetProduct();
             productReset = 0;

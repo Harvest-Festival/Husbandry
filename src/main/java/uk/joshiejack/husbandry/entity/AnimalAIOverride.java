@@ -26,7 +26,7 @@ public class AnimalAIOverride {
                 AgeableEntity ageable = ((AgeableEntity) entity);
                 //All animals will hide from storms
                 ageable.goalSelector.addGoal(4, new HideFromStormGoal(ageable, stats));
-                List<IGoalTrait> traits = stats.getType().getTraits(AnimalTraits.Type.AI);
+                List<IGoalTrait> traits = stats.getSpecies().getTraits(AnimalTraits.Type.AI);
                 traits.forEach(trait -> trait.modifyGoals(stats, ageable.goalSelector));
             }
         }

@@ -51,7 +51,7 @@ public class LayEggGoal extends AbstractMoveToBlockGoal {
                     if (nest.getItem(0).isEmpty()) {
                         ItemStack product = stats.getProduct(null).get(0);
                         CompoundNBT data = new CompoundNBT();
-                        data.putInt("HatchTime", stats.getType().getDaysToBirth());
+                        data.putInt("HatchTime", stats.getSpecies().getDaysToBirth());
                         data.putInt("HeartLevel", stats.getHearts());
                         product.setTag(data);
                         nest.setItem(0, product);

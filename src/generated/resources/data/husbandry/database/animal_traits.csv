@@ -1,7 +1,6 @@
 Species,Trait
 cow,diurnal
 cow,eats_grass
-cow,eats_hay
 cow,cleanable
 cow,pettable
 cow,mammal
@@ -23,7 +22,6 @@ pig,mammal
 pig,more_product_chance
 sheep,diurnal
 sheep,eats_grass
-sheep,eats_hay
 sheep,cleanable
 sheep,pettable
 sheep,mammal
@@ -32,14 +30,12 @@ sheep,faster_product_reset
 horse,aquaphobic
 horse,diurnal
 horse,eats_grass
-horse,eats_hay
 horse,cleanable
 horse,pettable
 horse,mammal
 horse,pet
 llama,diurnal
 llama,eats_grass
-llama,eats_hay
 llama,cleanable
 llama,pettable
 llama,mammal
@@ -63,7 +59,6 @@ dog,pet
 donkey,aquaphobic
 donkey,diurnal
 donkey,eats_grass
-donkey,eats_hay
 donkey,cleanable
 donkey,pettable
 donkey,mammal
@@ -75,7 +70,6 @@ parrot,carriable
 parrot,pet
 mooshroom,diurnal
 mooshroom,eats_grass
-mooshroom,eats_hay
 mooshroom,cleanable
 mooshroom,pettable
 mooshroom,mammal

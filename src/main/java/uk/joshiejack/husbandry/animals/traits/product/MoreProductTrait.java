@@ -32,7 +32,7 @@ public class MoreProductTrait extends AbstractAnimalTraitProduct implements INew
     @Override
     public void onNewDay(AnimalStats<?> stats) {
         productReset++;
-        if (productReset >= stats.getType().getProducts().getDaysBetweenProducts()) {
+        if (productReset >= stats.getSpecies().getProducts().getDaysBetweenProducts()) {
             stats.resetProduct();
             productReset = 0;
         }

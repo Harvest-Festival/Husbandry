@@ -24,7 +24,7 @@ public class AnimalStatsLabel extends Widget {
 
     public AnimalStatsLabel(AnimalStats<?> stats, int x, int y, ITextComponent name) {
         super(x, y, 120, 16, name);
-        this.traits = stats.getType().getTraits(AnimalTraits.Type.DISPLAY);
+        this.traits = stats.getSpecies().getTraits(AnimalTraits.Type.DISPLAY);
         this.stats = stats;
     }
 

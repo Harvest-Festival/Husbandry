@@ -38,7 +38,7 @@ public class HusbandryItemTags extends ItemTagsProvider {
         tag(EatsBirdFeedTrait.BIRD_FEED).add(Items.WHEAT_SEEDS, HusbandryItems.BIRD_FEED.get());
         tag(EatsSlopTrait.SLOP).add(Items.CARROT, HusbandryItems.SLOP.get());
         tag(MammalTrait.IMPREGNATES_MAMMALS).add(HusbandryItems.MIRACLE_POTION.get());
-        tag(EatsHayTrait.HAY).add(Items.WHEAT, Items.SEAGRASS, HusbandryItems.FODDER.get());
+        tag(EatsGrassTrait.HAY).add(Items.WHEAT, Items.SEAGRASS, HusbandryItems.FODDER.get());
         tag(PenguinTags.RAW_FISHES).add(Items.COD); //Only because the tag below complains else
         tag(EatsCatFoodTrait.CAT_FOOD).add(HusbandryItems.CAT_FOOD.get()).addTag(PenguinTags.RAW_FISHES);
         tag(EatsDogFoodTrait.DOG_FOOD).add(HusbandryItems.DOG_FOOD.get(), Items.RABBIT, Items.BEEF, Items.PORKCHOP, Items.MUTTON, Items.CHICKEN);

@@ -45,7 +45,7 @@ public class AnimalStats<E extends AgeableEntity> implements ICapabilityProvider
     private static final DamageSource OLD_AGE = new DamageSource("oldage");
     private static final int DEATH_CHANCE = 360;
     protected final E entity;
-    protected final AnimalSpecies type;
+    protected final AnimalSpecies species;
     private int town;
     private int age; //Current animal age
     private int happiness; //Current animal happiness
@@ -65,11 +65,11 @@ public class AnimalStats<E extends AgeableEntity> implements ICapabilityProvider
     private final AbstractAnimalTraitProduct products;
     private final LazyOptional<AnimalStats<?>> capability;
 
-    public AnimalStats(E entity, @Nonnull AnimalSpecies type) {
+    public AnimalStats(E entity, @Nonnull AnimalSpecies species) {
         this.entity = entity;
-        this.type = type;
+        this.species = species;
         this.data = Maps.newHashMap();
-        List<IDataTrait> traits = type.getTraits(AnimalTraits.Type.DATA);
+        List<IDataTrait> traits = species.getTraits(AnimalTraits.Type.DATA);
         traits.forEach(trait -> {
             try {
                 data.put(trait.getSerializedName(), trait.getClass().getConstructor(String.class).newInstance(trait.getSerializedName()));
@@ -86,8 +86,8 @@ public class AnimalStats<E extends AgeableEntity> implements ICapabilityProvider
         return entity;
     }
 
-    public AnimalSpecies getType() {
-        return type;
+    public AnimalSpecies getSpecies() {
+        return species;
     }
 
     public void onBihourlyTick() {
@@ -103,7 +103,7 @@ public class AnimalStats<E extends AgeableEntity> implements ICapabilityProvider
 
         //Mark the past value
         wasOutsideInSun = isOutsideInSun;
-        List<IBiHourlyTrait> traits = type.getTraits(AnimalTraits.Type.BI_HOURLY);
+        List<IBiHourlyTrait> traits = species.getTraits(AnimalTraits.Type.BI_HOURLY);
         traits.forEach(trait -> trait.onBihourlyTick(this));
     }
 
@@ -114,11 +114,11 @@ public class AnimalStats<E extends AgeableEntity> implements ICapabilityProvider
 
     public void onNewDay() {
         int chance = MathsHelper.constrainToRangeInt(DEATH_CHANCE, 1, Short.MAX_VALUE);
-        if (age >= type.getMaxAge() || (age >= type.getMinAge() && entity.getRandom().nextInt(chance) == 0)) {
+        if (age >= species.getMaxAge() || (age >= species.getMinAge() && entity.getRandom().nextInt(chance) == 0)) {
             entity.hurt(OLD_AGE, Integer.MAX_VALUE);
         }
 
-        List<INewDayTrait> traits = type.getTraits(AnimalTraits.Type.NEW_DAY);
+        List<INewDayTrait> traits = species.getTraits(AnimalTraits.Type.NEW_DAY);
         traits.forEach(trait -> trait.onNewDay(this));
 
         if (!eaten) {
@@ -126,9 +126,9 @@ public class AnimalStats<E extends AgeableEntity> implements ICapabilityProvider
             decreaseHappiness(1);
         }
 
-        if (happinessDivisor > 1 && genericTreatsGiven >= type.getGenericTreats() && speciesTreatsGiven >= type.getSpeciesTreats()) {
-            genericTreatsGiven -= type.getGenericTreats();
-            speciesTreatsGiven -= type.getSpeciesTreats();
+        if (happinessDivisor > 1 && genericTreatsGiven >= species.getGenericTreats() && speciesTreatsGiven >= species.getSpeciesTreats()) {
+            genericTreatsGiven -= species.getGenericTreats();
+            speciesTreatsGiven -= species.getSpeciesTreats();
             adjustHappinessDivisor(-1);
         }
 
@@ -140,7 +140,7 @@ public class AnimalStats<E extends AgeableEntity> implements ICapabilityProvider
         if (entity.isBaby()) {
             childhood++;
 
-            if (childhood >= type.getDaysToMaturity()) {
+            if (childhood >= species.getDaysToMaturity()) {
                 entity.setAge(0); //Grow up!
             }
         }
@@ -179,7 +179,7 @@ public class AnimalStats<E extends AgeableEntity> implements ICapabilityProvider
      * @return true if the event should be canceled
      */
     public boolean onRightClick(PlayerEntity player, Hand hand) {
-        List<IInteractiveTrait> traits = type.getTraits(AnimalTraits.Type.ACTION);
+        List<IInteractiveTrait> traits = species.getTraits(AnimalTraits.Type.ACTION);
         return canTreat(player, hand) || traits.stream().anyMatch(trait ->
                 trait.onRightClick(this, player, hand));
     }
@@ -189,7 +189,7 @@ public class AnimalStats<E extends AgeableEntity> implements ICapabilityProvider
         if (!TREATS.contains(held.getItem())) return false;
         boolean generic = held.getItem() == HusbandryItems.GENERIC_TREAT.get();
         if (!generic) { //Feeding the wrong treat will upset them!
-            if (type.getTreat() != held.getItem() && !annoyed) {
+            if (species.getTreat() != held.getItem() && !annoyed) {
                 annoyed = true;
                 decreaseHappiness(500);
                 held.shrink(1);
@@ -242,7 +242,7 @@ public class AnimalStats<E extends AgeableEntity> implements ICapabilityProvider
     }
 
     public List<ItemStack> getProduct(@Nullable PlayerEntity player) {
-        return type.getProducts().getProduct(entity, player);
+        return species.getProducts().getProduct(entity, player);
     }
 
     public int getHearts() {
@@ -260,7 +260,7 @@ public class AnimalStats<E extends AgeableEntity> implements ICapabilityProvider
     }
 
     public boolean hasTrait(String trait) {
-        return data.containsKey(trait) || type.hasTrait(trait);
+        return data.containsKey(trait) || species.hasTrait(trait);
     }
 
     @SuppressWarnings("unchecked")

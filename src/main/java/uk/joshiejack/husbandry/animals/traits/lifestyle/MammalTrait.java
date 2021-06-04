@@ -41,9 +41,9 @@ public class MammalTrait extends AnimalTrait implements IDataTrait, IInteractive
     public boolean onRightClick(AnimalStats<?> stats, PlayerEntity player, Hand hand) {
         ItemStack held = player.getItemInHand(hand);
         if (IMPREGNATES_MAMMALS.contains(held.getItem())
-                && !pregnant && stats.getType().getDaysToBirth() != 0) {
+                && !pregnant && stats.getSpecies().getDaysToBirth() != 0) {
             pregnant = true;
-            gestation = stats.getType().getDaysToBirth();
+            gestation = stats.getSpecies().getDaysToBirth();
             held.shrink(1);
             return true;
         }

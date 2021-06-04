@@ -70,7 +70,6 @@ public class Husbandry {
         AnimalTrait.registerTrait("eats_cat_food",          EatsCatFoodTrait.class);
         AnimalTrait.registerTrait("eats_dog_food",          EatsDogFoodTrait.class);
         AnimalTrait.registerTrait("eats_grass",             EatsGrassTrait.class);
-        AnimalTrait.registerTrait("eats_hay",               EatsHayTrait.class);
         AnimalTrait.registerTrait("eats_rabbit_food",       EatsRabbitFoodTrait.class);
         AnimalTrait.registerTrait("eats_slop",              EatsSlopTrait.class);
         AnimalTrait.registerTrait("carriable",              CarriableTrait.class);

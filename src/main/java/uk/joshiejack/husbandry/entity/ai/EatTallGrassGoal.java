@@ -9,7 +9,7 @@ import net.minecraft.state.properties.DoubleBlockHalf;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorldReader;
 import net.minecraftforge.event.ForgeEventFactory;
-import uk.joshiejack.husbandry.animals.stats.AnimalStats;
+import uk.joshiejack.husbandry.entity.stats.MobStats;
 
 import javax.annotation.Nonnull;
 import java.util.Objects;
@@ -21,7 +21,7 @@ public class EatTallGrassGoal extends AbstractMoveToBlockGoal {
     private static final Predicate<BlockState> IS_TALL_GRASS = BlockStateMatcher.forBlock(Blocks.GRASS);
     private static final Predicate<BlockState> IS_DOUBLE_TALL_GRASS = BlockStateMatcher.forBlock(Blocks.TALL_GRASS).where(DoublePlantBlock.HALF, half -> Objects.equals(half, DoubleBlockHalf.LOWER));
 
-    public EatTallGrassGoal(MobEntity entity, AnimalStats<?> stats) {
+    public EatTallGrassGoal(MobEntity entity, MobStats<?> stats) {
         super(entity, stats, IN, 8);
     }
 

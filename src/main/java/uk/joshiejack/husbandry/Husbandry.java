@@ -21,17 +21,17 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import uk.joshiejack.husbandry.animals.traits.AbstractAnimalTrait;
-import uk.joshiejack.husbandry.animals.traits.food.*;
-import uk.joshiejack.husbandry.animals.traits.happiness.CarriableTrait;
-import uk.joshiejack.husbandry.animals.traits.happiness.CleanableTrait;
-import uk.joshiejack.husbandry.animals.traits.happiness.PettableTrait;
-import uk.joshiejack.husbandry.animals.traits.lifestyle.*;
-import uk.joshiejack.husbandry.animals.traits.product.*;
 import uk.joshiejack.husbandry.block.HusbandryBlocks;
 import uk.joshiejack.husbandry.crafting.HusbandryRegistries;
 import uk.joshiejack.husbandry.data.*;
-import uk.joshiejack.husbandry.inventory.AnimalTrackerContainer;
+import uk.joshiejack.husbandry.entity.traits.AbstractMobTrait;
+import uk.joshiejack.husbandry.entity.traits.food.*;
+import uk.joshiejack.husbandry.entity.traits.happiness.CarriableTrait;
+import uk.joshiejack.husbandry.entity.traits.happiness.CleanableTrait;
+import uk.joshiejack.husbandry.entity.traits.happiness.PettableTrait;
+import uk.joshiejack.husbandry.entity.traits.lifestyle.*;
+import uk.joshiejack.husbandry.entity.traits.product.*;
+import uk.joshiejack.husbandry.inventory.MobTrackerContainer;
 import uk.joshiejack.husbandry.item.HusbandryItems;
 import uk.joshiejack.husbandry.tileentity.HusbandryTileEntities;
 import uk.joshiejack.penguinlib.inventory.AbstractBookContainer;
@@ -43,7 +43,7 @@ import javax.annotation.Nonnull;
 @Mod(Husbandry.MODID)
 public class Husbandry {
     public static final DeferredRegister<ContainerType<?>> CONTAINERS = DeferredRegister.create(ForgeRegistries.CONTAINERS, Husbandry.MODID);
-    public static final RegistryObject<ContainerType<AbstractBookContainer>> BOOK = CONTAINERS.register("animal_tracker", () -> IForgeContainerType.create((id, inv, data) -> new AnimalTrackerContainer(id)));
+    public static final RegistryObject<ContainerType<AbstractBookContainer>> BOOK = CONTAINERS.register("mob_tracker", () -> IForgeContainerType.create((id, inv, data) -> new MobTrackerContainer(id)));
     public static final String MODID = "husbandry";
     public static final Logger LOGGER = LogManager.getLogger();
     public static final ItemGroup TAB = new ItemGroup(MODID) {
@@ -66,33 +66,33 @@ public class Husbandry {
     }
 
     private void registerTraits(FMLCommonSetupEvent event) {
-        AbstractAnimalTrait.registerTrait("eats_bird_feed",         EatsBirdFeedTrait.class);
-        AbstractAnimalTrait.registerTrait("eats_cat_food",          EatsCatFoodTrait.class);
-        AbstractAnimalTrait.registerTrait("eats_dog_food",          EatsDogFoodTrait.class);
-        AbstractAnimalTrait.registerTrait("eats_grass",             EatsGrassTrait.class);
-        AbstractAnimalTrait.registerTrait("eats_rabbit_food",       EatsRabbitFoodTrait.class);
-        AbstractAnimalTrait.registerTrait("eats_slop",              EatsSlopTrait.class);
-        AbstractAnimalTrait.registerTrait("carriable",              CarriableTrait.class);
-        AbstractAnimalTrait.registerTrait("cleanable",              CleanableTrait.class);
-        AbstractAnimalTrait.registerTrait("pettable",               PettableTrait.class);
-        AbstractAnimalTrait.registerTrait("aquaphobic",             AquaphobicTrait.class);
-        AbstractAnimalTrait.registerTrait("diurnal",                DiurnalTrait.class);
-        AbstractAnimalTrait.registerTrait("mammal",                 MammalTrait.class);
-        AbstractAnimalTrait.registerTrait("mortal",                 MortalTrait.class);
-        AbstractAnimalTrait.registerTrait("pet",                    PetTrait.class);
-        AbstractAnimalTrait.registerTrait("bowlable",               BowlableTrait.class);
-        AbstractAnimalTrait.registerTrait("drops_product",          DropsProductTrait.class);
-        AbstractAnimalTrait.registerTrait("faster_product_reset",   FasterProductResetTrait.class);
-        AbstractAnimalTrait.registerTrait("finds_product",          FindsProductTrait.class);
-        AbstractAnimalTrait.registerTrait("lays_egg",               LaysEggTrait.class);
-        AbstractAnimalTrait.registerTrait("milkable",               MilkableTrait.class);
-        AbstractAnimalTrait.registerTrait("more_product_chance",    MoreProductChanceTrait.class);
-        AbstractAnimalTrait.registerTrait("more_product",           MoreProductTrait.class);
-        AbstractAnimalTrait.registerTrait("shearable",              ShearableTrait.class);
+        AbstractMobTrait.registerTrait("eats_bird_feed",         EatsBirdFeedTrait.class);
+        AbstractMobTrait.registerTrait("eats_cat_food",          EatsCatFoodTrait.class);
+        AbstractMobTrait.registerTrait("eats_dog_food",          EatsDogFoodTrait.class);
+        AbstractMobTrait.registerTrait("eats_grass",             EatsGrassTrait.class);
+        AbstractMobTrait.registerTrait("eats_rabbit_food",       EatsRabbitFoodTrait.class);
+        AbstractMobTrait.registerTrait("eats_slop",              EatsSlopTrait.class);
+        AbstractMobTrait.registerTrait("carriable",              CarriableTrait.class);
+        AbstractMobTrait.registerTrait("cleanable",              CleanableTrait.class);
+        AbstractMobTrait.registerTrait("pettable",               PettableTrait.class);
+        AbstractMobTrait.registerTrait("aquaphobic",             AquaphobicTrait.class);
+        AbstractMobTrait.registerTrait("diurnal",                DiurnalTrait.class);
+        AbstractMobTrait.registerTrait("mammal",                 MammalTrait.class);
+        AbstractMobTrait.registerTrait("mortal",                 MortalTrait.class);
+        AbstractMobTrait.registerTrait("pet",                    PetTrait.class);
+        AbstractMobTrait.registerTrait("bowlable",               BowlableTrait.class);
+        AbstractMobTrait.registerTrait("drops_product",          DropsProductTrait.class);
+        AbstractMobTrait.registerTrait("faster_product_reset",   FasterProductResetTrait.class);
+        AbstractMobTrait.registerTrait("finds_product",          FindsProductTrait.class);
+        AbstractMobTrait.registerTrait("lays_egg",               LaysEggTrait.class);
+        AbstractMobTrait.registerTrait("milkable",               MilkableTrait.class);
+        AbstractMobTrait.registerTrait("more_product_chance",    MoreProductChanceTrait.class);
+        AbstractMobTrait.registerTrait("more_product",           MoreProductTrait.class);
+        AbstractMobTrait.registerTrait("shearable",              ShearableTrait.class);
         //Unused traits
-        AbstractAnimalTrait.registerTrait("nocturnal",              NocturnalTrait.class);
-        AbstractAnimalTrait.registerTrait("requires_food",          RequiresFoodTrait.class);
-        AbstractAnimalTrait.registerTrait("lameable",               LameableTrait.class);
+        AbstractMobTrait.registerTrait("nocturnal",              NocturnalTrait.class);
+        AbstractMobTrait.registerTrait("requires_food",          RequiresFoodTrait.class);
+        AbstractMobTrait.registerTrait("lameable",               LameableTrait.class);
     }
 
     @SubscribeEvent

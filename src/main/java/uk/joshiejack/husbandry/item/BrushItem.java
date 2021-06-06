@@ -10,9 +10,9 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
 import uk.joshiejack.husbandry.Husbandry;
-import uk.joshiejack.husbandry.animals.stats.AnimalStats;
-import uk.joshiejack.husbandry.animals.traits.happiness.CleanableTrait;
-import uk.joshiejack.husbandry.animals.traits.lifestyle.LameableTrait;
+import uk.joshiejack.husbandry.entity.stats.MobStats;
+import uk.joshiejack.husbandry.entity.traits.happiness.CleanableTrait;
+import uk.joshiejack.husbandry.entity.traits.lifestyle.LameableTrait;
 
 import javax.annotation.Nonnull;
 
@@ -24,7 +24,7 @@ public class BrushItem extends Item {
     @Nonnull
     @Override
     public ActionResultType interactLivingEntity(@Nonnull ItemStack stack, PlayerEntity player, @Nonnull LivingEntity target, @Nonnull Hand hand) {
-        AnimalStats<?> stats = AnimalStats.getStats(target);
+        MobStats<?> stats = MobStats.getStats(target);
         World world = player.level;
         if (stats != null) {
             LameableTrait t = stats.getTrait("lameable");

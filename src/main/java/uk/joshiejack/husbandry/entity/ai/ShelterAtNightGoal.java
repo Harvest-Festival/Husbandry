@@ -1,10 +1,10 @@
 package uk.joshiejack.husbandry.entity.ai;
 
 import net.minecraft.entity.MobEntity;
-import uk.joshiejack.husbandry.animals.stats.AnimalStats;
+import uk.joshiejack.husbandry.entity.stats.MobStats;
 
 public class ShelterAtNightGoal extends AbstractHideInsideGoal {
-    public ShelterAtNightGoal(MobEntity entity, AnimalStats<?> stats) {
+    public ShelterAtNightGoal(MobEntity entity, MobStats<?> stats) {
         super(entity, stats);
     }
 

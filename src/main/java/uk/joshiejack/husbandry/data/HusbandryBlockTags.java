@@ -7,7 +7,7 @@ import net.minecraft.tags.BlockTags;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import uk.joshiejack.husbandry.Husbandry;
-import uk.joshiejack.husbandry.animals.AnimalInteraction;
+import uk.joshiejack.husbandry.entity.MobEventsHandler;
 
 import javax.annotation.Nullable;
 
@@ -18,6 +18,6 @@ public class HusbandryBlockTags extends BlockTagsProvider {
 
     @Override
     protected void addTags() {
-        tag(AnimalInteraction.PREVENTS_PASSENGER_DROP).addTags(BlockTags.BUTTONS, BlockTags.DOORS, BlockTags.FENCE_GATES, Tags.Blocks.CHESTS).add(Blocks.LEVER);
+        tag(MobEventsHandler.PREVENTS_PASSENGER_DROP).addTags(BlockTags.BUTTONS, BlockTags.DOORS, BlockTags.FENCE_GATES, Tags.Blocks.CHESTS).add(Blocks.LEVER);
     }
 }

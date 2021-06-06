@@ -4,8 +4,8 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fml.network.NetworkDirection;
-import uk.joshiejack.husbandry.animals.stats.AnimalStats;
-import uk.joshiejack.husbandry.animals.traits.happiness.CleanableTrait;
+import uk.joshiejack.husbandry.entity.stats.MobStats;
+import uk.joshiejack.husbandry.entity.traits.happiness.CleanableTrait;
 import uk.joshiejack.penguinlib.network.PenguinPacket;
 import uk.joshiejack.penguinlib.util.PenguinLoader;
 
@@ -36,7 +36,7 @@ public class SetCleanedStatusPacket extends PenguinPacket {
     public void handle(PlayerEntity player) {
         Entity entity = player.level.getEntity(entityID);
         if (entity != null) {
-            AnimalStats<?> stats = AnimalStats.getStats(entity);
+            MobStats<?> stats = MobStats.getStats(entity);
             if (stats != null) {
                 ((CleanableTrait)stats.getTrait("cleanable")).setCleaned(stats, cleaned);
             }

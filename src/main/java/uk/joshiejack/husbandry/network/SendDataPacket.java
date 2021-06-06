@@ -4,7 +4,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fml.network.NetworkDirection;
-import uk.joshiejack.husbandry.animals.stats.AnimalStats;
+import uk.joshiejack.husbandry.entity.stats.MobStats;
 import uk.joshiejack.penguinlib.network.packet.AbstractSyncCompoundNBTPacket;
 import uk.joshiejack.penguinlib.util.PenguinLoader;
 
@@ -13,7 +13,7 @@ public class SendDataPacket extends AbstractSyncCompoundNBTPacket {
     private int entityID;
 
     public SendDataPacket(){}
-    public SendDataPacket(int entityID, AnimalStats<?> stats) {
+    public SendDataPacket(int entityID, MobStats<?> stats) {
         super(stats.serializeNBT());
         this.entityID = entityID;
     }
@@ -34,7 +34,7 @@ public class SendDataPacket extends AbstractSyncCompoundNBTPacket {
     public void handle(PlayerEntity player) {
         Entity entity = player.level.getEntity(entityID);
         if (entity != null) {
-            AnimalStats<?> stats = AnimalStats.getStats(entity);
+            MobStats<?> stats = MobStats.getStats(entity);
             if (stats != null) {
                 stats.deserializeNBT(tag);
             }

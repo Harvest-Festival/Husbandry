@@ -39,33 +39,33 @@ public class HusbandryDatabase extends AbstractDatabaseProvider {
         new Trade(VillagerProfession.SHEPHERD, 2, HusbandryItems.SHEEP_TREAT.get()).setOutputAmount(3).setInputAmount(2).build(this);
         new Trade(VillagerProfession.SHEPHERD, 2, HusbandryItems.PARROT_TREAT.get()).setOutputAmount(3).setInputAmount(2).build(this);
         new Trade(VillagerProfession.SHEPHERD, 2, HusbandryItems.LLAMA_TREAT.get()).setOutputAmount(3).setInputAmount(2).build(this);
-        AnimalType.createMammal("cow").withLifespan(12, 20).withTreat(HusbandryItems.COW_TREAT.get()).levelUpWith(7, 24).withGestationPeriod(9).withMaturityAt(14).withProducts(1, "milk")
+        MobType.createMammal("cow").withLifespan(12, 20).withTreat(HusbandryItems.COW_TREAT.get()).levelUpWith(7, 24).withGestationPeriod(9).withMaturityAt(14).withProducts(1, "milk")
                 .assign(EntityType.COW).withTraits("diurnal", "eats_grass", "cleanable", "milkable", "more_product").build(this);
-        AnimalType.createBird("chicken").withLifespan(3, 10).withTreat(HusbandryItems.CHICKEN_TREAT.get()).levelUpWith(5,26).withGestationPeriod(3).withMaturityAt(3).withProducts(1, "chicken_egg")
+        MobType.createBird("chicken").withLifespan(3, 10).withTreat(HusbandryItems.CHICKEN_TREAT.get()).levelUpWith(5,26).withGestationPeriod(3).withMaturityAt(3).withProducts(1, "chicken_egg")
                 .assign(EntityType.CHICKEN).withTraits("aquaphobic", "diurnal", "lays_egg", "more_product").build(this);
-        AnimalType.createMammal("pig").withLifespan(6, 10).withTreat(HusbandryItems.PIG_TREAT.get()).levelUpWith(20, 10).withGestationPeriod(4).withMaturityAt(4).withProducts(1, "truffle")
+        MobType.createMammal("pig").withLifespan(6, 10).withTreat(HusbandryItems.PIG_TREAT.get()).levelUpWith(20, 10).withGestationPeriod(4).withMaturityAt(4).withProducts(1, "truffle")
                 .assign(EntityType.PIG).withTraits("aquaphobic", "diurnal", "eats_slop", "cleanable", "pettable", "finds_product", "more_product_chance").build(this);
-        AnimalType.createMammal("sheep").withLifespan(8,12).withTreat(HusbandryItems.SHEEP_TREAT.get()).levelUpWith(2,29).withGestationPeriod(5).withMaturityAt(4).withProducts(7, "wool")
+        MobType.createMammal("sheep").withLifespan(8,12).withTreat(HusbandryItems.SHEEP_TREAT.get()).levelUpWith(2,29).withGestationPeriod(5).withMaturityAt(4).withProducts(7, "wool")
                 .assign(EntityType.SHEEP).withTraits("diurnal", "eats_grass", "cleanable", "shearable", "faster_product_reset").build(this);
-        AnimalType.createMammal("horse").withLifespan(25,30).withTreat(HusbandryItems.HORSE_TREAT.get()).levelUpWith(22,10).withGestationPeriod(24).withMaturityAt(12).assign(EntityType.HORSE)
+        MobType.createMammal("horse").withLifespan(25,30).withTreat(HusbandryItems.HORSE_TREAT.get()).levelUpWith(22,10).withGestationPeriod(24).withMaturityAt(12).assign(EntityType.HORSE)
                 .withTraits("aquaphobic", "diurnal", "eats_grass", "cleanable", "pet").build(this);
-        AnimalType.createMammal("llama").withLifespan(15,25).withTreat(HusbandryItems.SHEEP_TREAT.get()).levelUpWith(7,24).withGestationPeriod(11).withMaturityAt(10).assign(EntityType.LLAMA)
+        MobType.createMammal("llama").withLifespan(15,25).withTreat(HusbandryItems.SHEEP_TREAT.get()).levelUpWith(7,24).withGestationPeriod(11).withMaturityAt(10).assign(EntityType.LLAMA)
                 .withTraits("diurnal", "eats_grass", "cleanable", "pet").build(this);
-        AnimalType.createMammal("rabbit").withLifespan(8,12).withTreat(HusbandryItems.RABBIT_TREAT.get()).levelUpWith(14,14).withGestationPeriod(4).withMaturityAt(3).withProducts(4, "rabbit_foot")
+        MobType.createMammal("rabbit").withLifespan(8,12).withTreat(HusbandryItems.RABBIT_TREAT.get()).levelUpWith(14,14).withGestationPeriod(4).withMaturityAt(3).withProducts(4, "rabbit_foot")
                 .withTraits("eats_rabbit_food", "carriable", "drops_product").assign(EntityType.RABBIT).build(this);
-        AnimalType.createMammal("cat").withLifespan(10,20).withTreat(HusbandryItems.CAT_TREAT.get()).levelUpWith(3,24).withGestationPeriod(5).withMaturityAt(7)
+        MobType.createMammal("cat").withLifespan(10,20).withTreat(HusbandryItems.CAT_TREAT.get()).levelUpWith(3,24).withGestationPeriod(5).withMaturityAt(7)
                 .assign(EntityType.CAT).withTraits("aquaphobic", "eats_cat_food", "carriable", "pet").build(this);
-        AnimalType.createMammal("dog").withLifespan(10,13).withTreat(HusbandryItems.DOG_TREAT.get()).levelUpWith(24,3).withGestationPeriod(5).withMaturityAt(7)
+        MobType.createMammal("dog").withLifespan(10,13).withTreat(HusbandryItems.DOG_TREAT.get()).levelUpWith(24,3).withGestationPeriod(5).withMaturityAt(7)
                 .assign(EntityType.WOLF).withTraits("diurnal", "eats_dog_food", "cleanable", "pet").build(this);
-        AnimalType.createMammal("donkey").withLifespan(25,30).withTreat(HusbandryItems.HORSE_TREAT.get()).levelUpWith(22,11).withGestationPeriod(24).withMaturityAt(12)
+        MobType.createMammal("donkey").withLifespan(25,30).withTreat(HusbandryItems.HORSE_TREAT.get()).levelUpWith(22,11).withGestationPeriod(24).withMaturityAt(12)
                 .assign(EntityType.DONKEY).assign(EntityType.MULE).withTraits("aquaphobic", "diurnal", "eats_grass", "cleanable", "pet").build(this);
-        AnimalType.createBird("parrot").withLifespan(25,50).withTreat(HusbandryItems.PARROT_TREAT.get()).levelUpWith(3,24).withGestationPeriod(4).withMaturityAt(36)
+        MobType.createBird("parrot").withLifespan(25,50).withTreat(HusbandryItems.PARROT_TREAT.get()).levelUpWith(3,24).withGestationPeriod(4).withMaturityAt(36)
                 .assign(EntityType.PARROT).withTraits("aquaphobic", "diurnal", "pet").build(this);
-        AnimalType.createMammal("mooshroom").withLifespan(13, 21).withTreat(HusbandryItems.COW_TREAT.get()).levelUpWith(24, 7).withGestationPeriod(11).withMaturityAt(21).withProducts(1, "mushroom_stew")
+        MobType.createMammal("mooshroom").withLifespan(13, 21).withTreat(HusbandryItems.COW_TREAT.get()).levelUpWith(24, 7).withGestationPeriod(11).withMaturityAt(21).withProducts(1, "mushroom_stew")
                 .assign(EntityType.COW).withTraits("diurnal", "eats_grass", "cleanable", "bowlable", "more_product").build(this);
     }
 
-    private static class AnimalType {
+    private static class MobType {
         public static final ResourceLocation NO_PRODUCTS = new ResourceLocation(Husbandry.MODID, "none");
         private String name;
         private RangedInteger lifespan = new RangedInteger(5, 12);
@@ -75,65 +75,65 @@ public class HusbandryDatabase extends AbstractDatabaseProvider {
         private List<EntityType<?>> entities = new ArrayList<>();
         private List<String> traits = new ArrayList<>();
 
-        private AnimalType(String name) {
+        private MobType(String name) {
             this.name = name;
         }
 
-        public static AnimalType createBird(String name) {
-            return new AnimalType(name).withTraits("mortal", "eats_bird_feed", "carriable");
+        public static MobType createBird(String name) {
+            return new MobType(name).withTraits("mortal", "eats_bird_feed", "carriable", "astraphobic");
         }
 
-        public static AnimalType createMammal(String name) {
-            return new AnimalType(name).withTraits("mortal", "mammal", "pettable");
+        public static MobType createMammal(String name) {
+            return new MobType(name).withTraits("mortal", "mammal", "pettable", "astraphobic");
         }
 
-        public AnimalType withTraits(String... traits) {
+        public MobType withTraits(String... traits) {
             this.traits.addAll(Arrays.asList(traits));
             return this;
         }
 
-        public AnimalType assign(EntityType<?> entity) {
+        public MobType assign(EntityType<?> entity) {
             this.entities.add(entity);
             return this;
         }
 
-        public AnimalType withLifespan(int min, int max) {
+        public MobType withLifespan(int min, int max) {
             this.lifespan = new RangedInteger(min, max);
             return this;
         }
 
-        public AnimalType withTreat(Item item) {
+        public MobType withTreat(Item item) {
             this.treat = item;
             return this;
         }
 
-        public AnimalType levelUpWith(int generic, int type) {
+        public MobType levelUpWith(int generic, int type) {
             this.generic = generic;
             this.type = type;
             return this;
         }
 
-        public AnimalType withGestationPeriod(int gestation) {
+        public MobType withGestationPeriod(int gestation) {
             this.gestation = gestation;
             return this;
         }
 
-        public AnimalType withMaturityAt(int maturity) {
+        public MobType withMaturityAt(int maturity) {
             this.maturity = maturity;
             return this;
         }
 
-        public AnimalType withProducts(int productFrequency, String table) {
+        public MobType withProducts(int productFrequency, String table) {
             this.productsFrequency = productFrequency;
             this.productTable = new ResourceLocation(Husbandry.MODID, "entities/products/" + table);
             return this;
         }
 
         public void build(HusbandryDatabase database) {
-            database.addEntry("animal_species", "Name,Min Age,Max Age,Treat Item,Generic Treats,Species Treats,Days to Birth,Days to Maturity,Product Frequency,Products Loot Table",
+            database.addEntry("mob_species", "Name,Min Age,Max Age,Treat Item,Generic Treats,Species Treats,Days to Birth,Days to Maturity,Product Frequency,Products Loot Table",
                     CSVUtils.join(name, lifespan.getMinInclusive(), lifespan.getMaxInclusive(), treat.getRegistryName(), generic, type, gestation, maturity, productsFrequency, productTable == NO_PRODUCTS ? "none" : productTable.toString()));
-            entities.forEach(entity -> database.addEntry("animal_entities", "Entity,Species", CSVUtils.join(Objects.requireNonNull(entity.getRegistryName()).toString(), name)));
-            traits.forEach(trait -> database.addEntry("animal_traits", "Species,Trait", CSVUtils.join(name, trait)));
+            entities.forEach(entity -> database.addEntry("mob_entities", "Entity,Species", CSVUtils.join(Objects.requireNonNull(entity.getRegistryName()).toString(), name)));
+            traits.forEach(trait -> database.addEntry("mob_traits", "Species,Trait", CSVUtils.join(name, trait)));
         }
     }
 }

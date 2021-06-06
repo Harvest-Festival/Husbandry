@@ -4,7 +4,7 @@ import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorldReader;
-import uk.joshiejack.husbandry.animals.stats.AnimalStats;
+import uk.joshiejack.husbandry.entity.stats.MobStats;
 
 import javax.annotation.Nonnull;
 import java.util.EnumSet;
@@ -20,10 +20,10 @@ public abstract class AbstractMoveToBlockGoal extends Goal {
     private final int searchRange;
     private final int verticalSearchRange;
     protected int verticalSearchStart;
-    protected final AnimalStats<?> stats;
+    protected final MobStats<?> stats;
     protected final Orientation orientation;
 
-    public AbstractMoveToBlockGoal(MobEntity entity, AnimalStats<?> stats, Orientation orientation, int searchLength) {
+    public AbstractMoveToBlockGoal(MobEntity entity, MobStats<?> stats, Orientation orientation, int searchLength) {
         this.entity = entity;
         this.orientation = orientation;
         this.stats = stats;

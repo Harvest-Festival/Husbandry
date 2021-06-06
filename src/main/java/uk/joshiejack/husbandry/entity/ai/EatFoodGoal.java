@@ -1,6 +1,5 @@
 package uk.joshiejack.husbandry.entity.ai;
 
-import net.minecraft.entity.CreatureEntity;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -8,7 +7,7 @@ import net.minecraft.tags.ITag;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorldReader;
-import uk.joshiejack.husbandry.animals.stats.AnimalStats;
+import uk.joshiejack.husbandry.entity.stats.MobStats;
 import uk.joshiejack.husbandry.tileentity.AbstractFoodSupplyTileEntity;
 
 import javax.annotation.Nonnull;
@@ -16,11 +15,11 @@ import javax.annotation.Nonnull;
 public class EatFoodGoal extends AbstractMoveToBlockGoal {
     private final ITag.INamedTag<Item> food;
 
-    public EatFoodGoal(MobEntity entity, AnimalStats<?> stats, ITag.INamedTag<Item> food) {
+    public EatFoodGoal(MobEntity entity, MobStats<?> stats, ITag.INamedTag<Item> food) {
         this(entity, stats, food, Orientation.BESIDE, 8);
 
     }
-    public EatFoodGoal(MobEntity entity, AnimalStats<?> stats, ITag.INamedTag<Item> food, Orientation orientation, int distance) {
+    public EatFoodGoal(MobEntity entity, MobStats<?> stats, ITag.INamedTag<Item> food, Orientation orientation, int distance) {
         super(entity, stats, orientation, distance);
         this.food = food;
     }

@@ -7,7 +7,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorldReader;
-import uk.joshiejack.husbandry.animals.stats.AnimalStats;
+import uk.joshiejack.husbandry.entity.stats.MobStats;
 import uk.joshiejack.husbandry.tileentity.NestTileEntity;
 import uk.joshiejack.penguinlib.network.PenguinNetwork;
 import uk.joshiejack.penguinlib.network.packet.SetInventorySlotPacket;
@@ -19,7 +19,7 @@ import static uk.joshiejack.husbandry.entity.ai.AbstractMoveToBlockGoal.Orientat
 public class LayEggGoal extends AbstractMoveToBlockGoal {
     private int eggTimer;
 
-    public LayEggGoal(MobEntity entity, AnimalStats<?> stats) {
+    public LayEggGoal(MobEntity entity, MobStats<?> stats) {
         super(entity, stats, ABOVE, 8);
     }
 

@@ -1,11 +1,11 @@
 package uk.joshiejack.husbandry.tileentity;
 
 import net.minecraft.item.ItemStack;
-import uk.joshiejack.husbandry.animals.traits.food.EatsCatFoodTrait;
-import uk.joshiejack.husbandry.animals.traits.food.EatsDogFoodTrait;
-import uk.joshiejack.husbandry.animals.traits.food.EatsRabbitFoodTrait;
 import uk.joshiejack.husbandry.block.BowlBlock;
 import uk.joshiejack.husbandry.block.HusbandryBlocks;
+import uk.joshiejack.husbandry.entity.traits.food.EatsCatFoodTrait;
+import uk.joshiejack.husbandry.entity.traits.food.EatsDogFoodTrait;
+import uk.joshiejack.husbandry.entity.traits.food.EatsRabbitFoodTrait;
 
 import javax.annotation.Nonnull;
 

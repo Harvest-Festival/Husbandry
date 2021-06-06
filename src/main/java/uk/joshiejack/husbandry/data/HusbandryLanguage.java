@@ -14,7 +14,7 @@ public class HusbandryLanguage extends LanguageProvider {
     @Override
     protected void addTranslations() {
         add("itemGroup.husbandry", "Husbandry");
-        add("gui.husbandry.book", "Animal Stats");
+        add("gui.husbandry.book", "Mob Stats");
         ForgeRegistries.ITEMS.getValues()
                 .stream().filter(i -> i.getRegistryName().getNamespace().equals(Husbandry.MODID))
                 .forEach(item -> add(item, WordUtils.capitalizeFully(item.getRegistryName().getPath().replace("_", " "))));

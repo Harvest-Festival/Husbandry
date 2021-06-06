@@ -18,8 +18,8 @@ import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.ForgeRegistryEntry;
-import uk.joshiejack.husbandry.animals.stats.AnimalStats;
 import uk.joshiejack.husbandry.block.HusbandryBlocks;
+import uk.joshiejack.husbandry.entity.stats.MobStats;
 import uk.joshiejack.penguinlib.item.crafting.AbstractSimplePenguinRecipe;
 
 import javax.annotation.Nonnull;
@@ -47,7 +47,7 @@ public class IncubatorRecipe extends AbstractSimplePenguinRecipe<EntityType<?>> 
 
             entity.moveTo(pos.getX(), pos.getY(), pos.getZ(), 0.0F, 0.0F);
             if (entity instanceof AgeableEntity && stack.hasTag() && stack.getTag().contains("HeartLevel")) {
-                AnimalStats<?> babyStats = AnimalStats.getStats(entity);
+                MobStats<?> babyStats = MobStats.getStats(entity);
                 if (babyStats != null)
                     babyStats.increaseHappiness(stack.getTag().getInt("HeartLevel") / 2);
             }

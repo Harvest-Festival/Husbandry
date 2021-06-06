@@ -1,8 +1,8 @@
 package uk.joshiejack.husbandry.tileentity;
 
 import net.minecraft.item.ItemStack;
-import uk.joshiejack.husbandry.animals.traits.food.EatsGrassTrait;
-import uk.joshiejack.husbandry.animals.traits.food.EatsSlopTrait;
+import uk.joshiejack.husbandry.entity.traits.food.EatsGrassTrait;
+import uk.joshiejack.husbandry.entity.traits.food.EatsSlopTrait;
 
 import javax.annotation.Nonnull;
 

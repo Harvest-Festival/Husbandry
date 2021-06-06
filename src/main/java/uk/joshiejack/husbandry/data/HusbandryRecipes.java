@@ -62,7 +62,7 @@ public class HusbandryRecipes extends RecipeProvider {
         ShapedRecipeBuilder.shaped(HusbandryBlocks.FEEDING_TRAY.get()).define('P', ItemTags.PLANKS).define('S', ItemTags.WOODEN_SLABS).pattern("PSP").unlockedBy("has_wood", has(ItemTags.PLANKS)).save(consumer, rl("feeding_tray"));
         ShapedRecipeBuilder.shaped(HusbandryBlocks.BOWL.get()).define('S', ItemTags.WOODEN_SLABS).pattern(" S ").pattern("S S").pattern(" S ").unlockedBy("has_wood", has(ItemTags.PLANKS)).save(consumer, rl("bowl"));
         ShapedRecipeBuilder.shaped(HusbandryBlocks.TROUGH.get()).define('P', ItemTags.PLANKS).define('L', ItemTags.LOGS).pattern("P P").pattern("PPP").pattern("L L").unlockedBy("has_wood", has(ItemTags.LOGS)).save(consumer, rl("trough"));
-        ShapelessRecipeBuilder.shapeless(HusbandryItems.ANIMAL_TRACKER.get()).requires(Items.PAPER).requires(Items.INK_SAC).requires(HusbandryItemTags.ANIMAL_PRODUCT).unlockedBy("has_paper", has(Items.PAPER)).save(consumer, "animal_tracker");
+        ShapelessRecipeBuilder.shapeless(HusbandryItems.MOB_TRACKER.get()).requires(Items.PAPER).requires(Items.INK_SAC).requires(HusbandryItemTags.MOB_PRODUCT).unlockedBy("has_paper", has(Items.PAPER)).save(consumer, "mob_tracker");
         IncubatorRecipeBuilder.incubate(Ingredient.of(Items.EGG), EntityType.CHICKEN, 1, 1).save(consumer, rl("chicken"));
     }
 }

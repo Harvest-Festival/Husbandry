@@ -5,7 +5,7 @@ import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ai.RandomPositionGenerator;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorldReader;
-import uk.joshiejack.husbandry.animals.stats.AnimalStats;
+import uk.joshiejack.husbandry.entity.stats.MobStats;
 
 import javax.annotation.Nonnull;
 import java.util.Objects;
@@ -13,7 +13,7 @@ import java.util.Objects;
 import static uk.joshiejack.husbandry.entity.ai.AbstractMoveToBlockGoal.Orientation.ABOVE;
 
 public abstract class AbstractHideInsideGoal extends AbstractMoveToBlockGoal {
-    public AbstractHideInsideGoal(MobEntity entity, AnimalStats<?> stats) {
+    public AbstractHideInsideGoal(MobEntity entity, MobStats<?> stats) {
         super(entity, stats, ABOVE, 8);
     }
 

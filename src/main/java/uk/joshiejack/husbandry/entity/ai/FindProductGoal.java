@@ -9,12 +9,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorldReader;
-import uk.joshiejack.husbandry.entity.stats.MobStats;
+import uk.joshiejack.husbandry.api.IMobStats;
 
 import javax.annotation.Nonnull;
 
 public class FindProductGoal extends AbstractMoveToBlockGoal {
-    public FindProductGoal(MobEntity entity, MobStats<?> stats) {
+    public FindProductGoal(MobEntity entity, IMobStats<?> stats) {
         super(entity, stats, Orientation.BESIDE, 16);
     }
 

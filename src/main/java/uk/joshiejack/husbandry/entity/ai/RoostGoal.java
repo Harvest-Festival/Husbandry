@@ -3,7 +3,7 @@ package uk.joshiejack.husbandry.entity.ai;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorldReader;
-import uk.joshiejack.husbandry.entity.stats.MobStats;
+import uk.joshiejack.husbandry.api.IMobStats;
 import uk.joshiejack.husbandry.tileentity.NestTileEntity;
 
 import javax.annotation.Nonnull;
@@ -11,7 +11,7 @@ import javax.annotation.Nonnull;
 import static uk.joshiejack.husbandry.entity.ai.AbstractMoveToBlockGoal.Orientation.ABOVE;
 
 public class RoostGoal extends AbstractMoveToBlockGoal {
-    public RoostGoal(MobEntity entity, MobStats<?> stats) {
+    public RoostGoal(MobEntity entity, IMobStats<?> stats) {
         super(entity, stats, ABOVE, 16);
     }
 

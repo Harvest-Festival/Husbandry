@@ -1,6 +1,7 @@
 package uk.joshiejack.husbandry.item;
 
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -10,9 +11,9 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
 import uk.joshiejack.husbandry.Husbandry;
-import uk.joshiejack.husbandry.entity.stats.MobStats;
+import uk.joshiejack.husbandry.api.HusbandryAPI;
+import uk.joshiejack.husbandry.api.IMobStats;
 import uk.joshiejack.husbandry.entity.traits.happiness.CleanableTrait;
-import uk.joshiejack.husbandry.entity.traits.lifestyle.LameableTrait;
 
 import javax.annotation.Nonnull;
 
@@ -24,11 +25,11 @@ public class BrushItem extends Item {
     @Nonnull
     @Override
     public ActionResultType interactLivingEntity(@Nonnull ItemStack stack, PlayerEntity player, @Nonnull LivingEntity target, @Nonnull Hand hand) {
-        MobStats<?> stats = MobStats.getStats(target);
+        if (!(target instanceof MobEntity)) return ActionResultType.PASS;
+        IMobStats<?> stats = HusbandryAPI.instance.getStatsForEntity((MobEntity)target);
         World world = player.level;
         if (stats != null) {
-            LameableTrait t = stats.getTrait("lameable");
-            CleanableTrait trait = stats.getTrait("cleanable");
+            CleanableTrait trait = stats.getTraitByName("cleanable");
             if (trait != null && trait.clean(stats)) {
                 if (world.isClientSide) {
                     for (int j = 0; j < 30D; j++) {

@@ -1,7 +1,9 @@
 package uk.joshiejack.husbandry;
 
+import com.google.common.base.CaseFormat;
 import net.minecraft.data.BlockTagsProvider;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.entity.MobEntity;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
@@ -21,10 +23,14 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import uk.joshiejack.husbandry.api.HusbandryAPI;
+import uk.joshiejack.husbandry.api.IMobStats;
+import uk.joshiejack.husbandry.api.trait.AbstractMobTrait;
 import uk.joshiejack.husbandry.block.HusbandryBlocks;
 import uk.joshiejack.husbandry.crafting.HusbandryRegistries;
 import uk.joshiejack.husbandry.data.*;
-import uk.joshiejack.husbandry.entity.traits.AbstractMobTrait;
+import uk.joshiejack.husbandry.entity.MobDataLoader;
+import uk.joshiejack.husbandry.entity.stats.MobStats;
 import uk.joshiejack.husbandry.entity.traits.food.*;
 import uk.joshiejack.husbandry.entity.traits.happiness.CarriableTrait;
 import uk.joshiejack.husbandry.entity.traits.happiness.CleanableTrait;
@@ -35,8 +41,10 @@ import uk.joshiejack.husbandry.inventory.MobTrackerContainer;
 import uk.joshiejack.husbandry.item.HusbandryItems;
 import uk.joshiejack.husbandry.tileentity.HusbandryTileEntities;
 import uk.joshiejack.penguinlib.inventory.AbstractBookContainer;
+import uk.joshiejack.penguinlib.util.helpers.generic.ReflectionHelper;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 @SuppressWarnings("unused")
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
@@ -63,36 +71,42 @@ public class Husbandry {
         HusbandryRegistries.SERIALIZERS.register(eventBus);
         HusbandrySounds.SOUNDS.register(eventBus);
         HusbandryTileEntities.TILE_ENTITIES.register(eventBus);
+        HusbandryAPI.instance = new HusbandryAPIImpl();
+    }
+
+    private void registerTrait(Class<? extends AbstractMobTrait> data) {
+        HusbandryAPI.instance.registerMobTrait(CaseFormat.UPPER_CAMEL.to(CaseFormat.LOWER_UNDERSCORE, data.getSimpleName().replace("Trait", "")), data);
     }
 
     private void registerTraits(FMLCommonSetupEvent event) {
-        AbstractMobTrait.registerTrait("eats_bird_feed",         EatsBirdFeedTrait.class);
-        AbstractMobTrait.registerTrait("eats_cat_food",          EatsCatFoodTrait.class);
-        AbstractMobTrait.registerTrait("eats_dog_food",          EatsDogFoodTrait.class);
-        AbstractMobTrait.registerTrait("eats_grass",             EatsGrassTrait.class);
-        AbstractMobTrait.registerTrait("eats_rabbit_food",       EatsRabbitFoodTrait.class);
-        AbstractMobTrait.registerTrait("eats_slop",              EatsSlopTrait.class);
-        AbstractMobTrait.registerTrait("carriable",              CarriableTrait.class);
-        AbstractMobTrait.registerTrait("cleanable",              CleanableTrait.class);
-        AbstractMobTrait.registerTrait("pettable",               PettableTrait.class);
-        AbstractMobTrait.registerTrait("aquaphobic",             AquaphobicTrait.class);
-        AbstractMobTrait.registerTrait("diurnal",                DiurnalTrait.class);
-        AbstractMobTrait.registerTrait("mammal",                 MammalTrait.class);
-        AbstractMobTrait.registerTrait("mortal",                 MortalTrait.class);
-        AbstractMobTrait.registerTrait("pet",                    PetTrait.class);
-        AbstractMobTrait.registerTrait("bowlable",               BowlableTrait.class);
-        AbstractMobTrait.registerTrait("drops_product",          DropsProductTrait.class);
-        AbstractMobTrait.registerTrait("faster_product_reset",   FasterProductResetTrait.class);
-        AbstractMobTrait.registerTrait("finds_product",          FindsProductTrait.class);
-        AbstractMobTrait.registerTrait("lays_egg",               LaysEggTrait.class);
-        AbstractMobTrait.registerTrait("milkable",               MilkableTrait.class);
-        AbstractMobTrait.registerTrait("more_product_chance",    MoreProductChanceTrait.class);
-        AbstractMobTrait.registerTrait("more_product",           MoreProductTrait.class);
-        AbstractMobTrait.registerTrait("shearable",              ShearableTrait.class);
+        registerTrait(EatsBirdFeedTrait.class);
+        registerTrait(EatsCatFoodTrait.class);
+        registerTrait(EatsDogFoodTrait.class);
+        registerTrait(EatsGrassTrait.class);
+        registerTrait(EatsRabbitFoodTrait.class);
+        registerTrait(EatsSlopTrait.class);
+        registerTrait(CarriableTrait.class);
+        registerTrait(CleanableTrait.class);
+        registerTrait(PettableTrait.class);
+        registerTrait(AstraphobicTrait.class);
+        registerTrait(AquaphobicTrait.class);
+        registerTrait(DiurnalTrait.class);
+        registerTrait(MammalTrait.class);
+        registerTrait(MortalTrait.class);
+        registerTrait(PetTrait.class);
+        registerTrait(BowlableTrait.class);
+        registerTrait(DropsProductTrait.class);
+        registerTrait(FasterProductResetTrait.class);
+        registerTrait(FindsProductTrait.class);
+        registerTrait(LaysEggTrait.class);
+        registerTrait(MilkableTrait.class);
+        registerTrait(MoreProductChanceTrait.class);
+        registerTrait(MoreProductTrait.class);
+        registerTrait(ShearableTrait.class);
         //Unused traits
-        AbstractMobTrait.registerTrait("nocturnal",              NocturnalTrait.class);
-        AbstractMobTrait.registerTrait("requires_food",          RequiresFoodTrait.class);
-        AbstractMobTrait.registerTrait("lameable",               LameableTrait.class);
+        registerTrait(NocturnalTrait.class);
+        registerTrait(RequiresFoodTrait.class);
+        registerTrait(LameableTrait.class);
     }
 
     @SubscribeEvent
@@ -120,6 +134,21 @@ public class Husbandry {
 
         private static RegistryObject<SoundEvent> createSoundEvent(@Nonnull String name) {
             return SOUNDS.register(name, () -> new SoundEvent(new ResourceLocation(MODID, name)));
+        }
+    }
+
+    /** API **/
+    public static class HusbandryAPIImpl implements HusbandryAPI.IHusbandryAPI {
+        @Override
+        public void registerMobTrait(String name, Class<? extends AbstractMobTrait> trait) {
+            MobDataLoader.TRAITS.put(name, ReflectionHelper.newInstance(ReflectionHelper.getConstructor(trait, String.class), name));
+        }
+
+        @Nullable
+        @SuppressWarnings("unchecked")
+        @Override
+        public <E extends MobEntity> IMobStats<E> getStatsForEntity(E entity) {
+            return (IMobStats<E>) MobStats.getStats(entity);
         }
     }
 }

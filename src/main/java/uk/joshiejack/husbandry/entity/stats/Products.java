@@ -10,13 +10,14 @@ import net.minecraft.loot.LootParameters;
 import net.minecraft.loot.LootTable;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.server.ServerWorld;
+import uk.joshiejack.husbandry.api.IProducts;
 import uk.joshiejack.penguinlib.util.helpers.minecraft.FakePlayerHelper;
 
 import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Objects;
 
-public class Products {
+public class Products implements IProducts {
     public static final Products NONE = new Products(Integer.MAX_VALUE, null);
     private static final List<ItemStack> EMPTY = Lists.newArrayList(ItemStack.EMPTY);
     private final ResourceLocation lootTable;
@@ -27,11 +28,13 @@ public class Products {
         this.lootTable = lootTable;
     }
 
+    @Override
     public int getDaysBetweenProducts() {
         return dayBetween;
     }
 
     /** Size will be 0, 1 or 2 **/
+    @Override
     public List<ItemStack> getProduct(LivingEntity entity, @Nullable PlayerEntity player) {
         if (lootTable == null)
             return EMPTY;

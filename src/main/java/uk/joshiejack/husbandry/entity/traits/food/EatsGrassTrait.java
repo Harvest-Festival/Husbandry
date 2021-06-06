@@ -8,6 +8,7 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import uk.joshiejack.husbandry.Husbandry;
+import uk.joshiejack.husbandry.api.IMobStats;
 import uk.joshiejack.husbandry.entity.ai.AbstractMoveToBlockGoal;
 import uk.joshiejack.husbandry.entity.ai.EatFoodGoal;
 import uk.joshiejack.husbandry.entity.ai.EatGrassBlockGoal;
@@ -29,7 +30,7 @@ public class EatsGrassTrait extends AbstractFoodTrait {
     }
 
     @Override
-    public void onJoinWorld(MobStats<?> stats) {
+    public void onJoinWorld(IMobStats<?> stats) {
         GoalSelector selector = stats.getEntity().goalSelector;
         if (stats.getEntity() instanceof SheepEntity) {
             selector.removeGoal(Objects.requireNonNull(ObfuscationReflectionHelper.getPrivateValue(SheepEntity.class, (SheepEntity) stats.getEntity(), "field_146087_bs")));

@@ -1,10 +1,10 @@
 package uk.joshiejack.husbandry.entity.ai;
 
 import net.minecraft.entity.MobEntity;
-import uk.joshiejack.husbandry.entity.stats.MobStats;
+import uk.joshiejack.husbandry.api.IMobStats;
 
 public class HideFromStormGoal extends AbstractHideInsideGoal {
-    public HideFromStormGoal(MobEntity entity, MobStats<?> stats) {
+    public HideFromStormGoal(MobEntity entity, IMobStats<?> stats) {
         super(entity, stats);
     }
 

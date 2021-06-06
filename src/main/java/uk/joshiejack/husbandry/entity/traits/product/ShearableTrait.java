@@ -8,9 +8,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ShearsItem;
 import net.minecraft.util.Hand;
 import net.minecraftforge.common.Tags;
-import uk.joshiejack.husbandry.entity.stats.MobStats;
-import uk.joshiejack.husbandry.entity.traits.AbstractMobTrait;
-import uk.joshiejack.husbandry.entity.traits.types.IInteractiveTrait;
+import uk.joshiejack.husbandry.api.IMobStats;
+import uk.joshiejack.husbandry.api.trait.AbstractMobTrait;
+import uk.joshiejack.husbandry.api.trait.IInteractiveTrait;
 
 import java.util.Random;
 
@@ -20,7 +20,7 @@ public class ShearableTrait extends AbstractMobTrait implements IInteractiveTrai
     }
 
     @Override
-    public boolean onRightClick(MobStats<?> stats, PlayerEntity player, Hand hand) {
+    public boolean onRightClick(IMobStats<?> stats, PlayerEntity player, Hand hand) {
         MobEntity mob = stats.getEntity();
         ItemStack held = player.getItemInHand(hand);
         if (held.getItem() instanceof ShearsItem || Tags.Items.SHEARS.contains(held.getItem()) && stats.canProduceProduct()) {

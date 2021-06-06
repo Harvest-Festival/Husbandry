@@ -4,12 +4,12 @@ import net.minecraft.entity.MobEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import uk.joshiejack.husbandry.api.IMobStats;
+import uk.joshiejack.husbandry.api.trait.AbstractMobTrait;
+import uk.joshiejack.husbandry.api.trait.IBiHourlyTrait;
+import uk.joshiejack.husbandry.api.trait.IDataTrait;
+import uk.joshiejack.husbandry.api.trait.IJoinWorldTrait;
 import uk.joshiejack.husbandry.entity.ai.ShelterAtNightGoal;
-import uk.joshiejack.husbandry.entity.stats.MobStats;
-import uk.joshiejack.husbandry.entity.traits.AbstractMobTrait;
-import uk.joshiejack.husbandry.entity.traits.types.IBiHourlyTrait;
-import uk.joshiejack.husbandry.entity.traits.types.IDataTrait;
-import uk.joshiejack.husbandry.entity.traits.types.IJoinWorldTrait;
 
 public class DiurnalTrait extends AbstractMobTrait implements IBiHourlyTrait, IDataTrait, IJoinWorldTrait {
     private boolean wasOutsideInSun; //If the mob was outside last time
@@ -19,7 +19,7 @@ public class DiurnalTrait extends AbstractMobTrait implements IBiHourlyTrait, ID
     }
 
     @Override
-    public void onBihourlyTick(MobStats<?> stats) {
+    public void onBihourlyTick(IMobStats<?> stats) {
         MobEntity entity = stats.getEntity();
         World world = entity.level;
         BlockPos pos = entity.blockPosition();
@@ -36,7 +36,7 @@ public class DiurnalTrait extends AbstractMobTrait implements IBiHourlyTrait, ID
     }
 
     @Override
-    public void onJoinWorld(MobStats<?> stats) {
+    public void onJoinWorld(IMobStats<?> stats) {
         stats.getEntity().goalSelector.addGoal(4, new ShelterAtNightGoal(stats.getEntity(), stats));
     }
 

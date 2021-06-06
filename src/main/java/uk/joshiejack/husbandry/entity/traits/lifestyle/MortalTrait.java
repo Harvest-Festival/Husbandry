@@ -3,11 +3,11 @@ package uk.joshiejack.husbandry.entity.traits.lifestyle;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.DamageSource;
-import uk.joshiejack.husbandry.entity.stats.MobStats;
-import uk.joshiejack.husbandry.entity.stats.Species;
-import uk.joshiejack.husbandry.entity.traits.AbstractMobTrait;
-import uk.joshiejack.husbandry.entity.traits.types.IDataTrait;
-import uk.joshiejack.husbandry.entity.traits.types.INewDayTrait;
+import uk.joshiejack.husbandry.api.IMobStats;
+import uk.joshiejack.husbandry.api.ISpecies;
+import uk.joshiejack.husbandry.api.trait.AbstractMobTrait;
+import uk.joshiejack.husbandry.api.trait.IDataTrait;
+import uk.joshiejack.husbandry.api.trait.INewDayTrait;
 import uk.joshiejack.penguinlib.util.helpers.generic.MathsHelper;
 
 public class MortalTrait extends AbstractMobTrait implements INewDayTrait, IDataTrait {
@@ -20,9 +20,9 @@ public class MortalTrait extends AbstractMobTrait implements INewDayTrait, IData
     }
 
     @Override
-    public void onNewDay(MobStats<?> stats) {
+    public void onNewDay(IMobStats<?> stats) {
         int chance = MathsHelper.constrainToRangeInt(DEATH_CHANCE, 1, Short.MAX_VALUE);
-        Species species = stats.getSpecies();
+        ISpecies species = stats.getSpecies();
         MobEntity entity = stats.getEntity();
         if (age >= species.getMaxAge() || (age >= species.getMinAge() && entity.getRandom().nextInt(chance) == 0)) {
             entity.hurt(OLD_AGE, Integer.MAX_VALUE);

@@ -1,9 +1,9 @@
 package uk.joshiejack.husbandry.entity.traits.product;
 
 import net.minecraft.nbt.CompoundNBT;
+import uk.joshiejack.husbandry.api.trait.AbstractMobTrait;
+import uk.joshiejack.husbandry.api.trait.IDataTrait;
 import uk.joshiejack.husbandry.entity.stats.MobStats;
-import uk.joshiejack.husbandry.entity.traits.AbstractMobTrait;
-import uk.joshiejack.husbandry.entity.traits.types.IDataTrait;
 import uk.joshiejack.husbandry.network.SetProducedProductPacket;
 import uk.joshiejack.penguinlib.network.PenguinNetwork;
 

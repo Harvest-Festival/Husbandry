@@ -20,9 +20,10 @@ import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import uk.joshiejack.husbandry.Husbandry;
+import uk.joshiejack.husbandry.api.IMobStats;
+import uk.joshiejack.husbandry.api.trait.*;
 import uk.joshiejack.husbandry.entity.ai.AbstractMoveToBlockGoal;
 import uk.joshiejack.husbandry.entity.traits.product.AbstractMobProductTrait;
-import uk.joshiejack.husbandry.entity.traits.types.*;
 import uk.joshiejack.husbandry.item.HusbandryItems;
 import uk.joshiejack.husbandry.network.SendDataPacket;
 import uk.joshiejack.husbandry.network.SpawnHeartsPacket;
@@ -39,10 +40,10 @@ import java.util.stream.Stream;
 
 import static uk.joshiejack.husbandry.entity.stats.CapabilityStatsHandler.MOB_STATS_CAPABILITY;
 
-public class MobStats<E extends MobEntity> implements ICapabilityProvider, INBTSerializable<CompoundNBT> {
+public class MobStats<E extends MobEntity> implements ICapabilityProvider, INBTSerializable<CompoundNBT>, IMobStats<E> {
     public static final ITag.INamedTag<Item> TREATS = ItemTags.createOptional(new ResourceLocation(Husbandry.MODID, "treat"));
     private static final int MAX_RELATIONSHIP = 30000;
-    private final Multimap<IMobTrait.Type, IMobTrait> traits;
+    private final Multimap<TraitType, AbstractMobTrait> traits;
     protected final E entity;
     protected final Species species;
     private int town;
@@ -66,45 +67,45 @@ public class MobStats<E extends MobEntity> implements ICapabilityProvider, INBTS
         this.species = species;
         this.traits = HashMultimap.create();
         this.species.getTraits().forEach(trait -> {
-            IMobTrait copy = trait instanceof IDataTrait ? ReflectionHelper.newInstance(ReflectionHelper.getConstructor(trait.getClass(), String.class), trait.getSerializedName()) : trait;
-            if (copy instanceof IJoinWorldTrait) this.traits.get(IMobTrait.Type.ON_JOIN).add(copy);
-            if (copy instanceof IInteractiveTrait) this.traits.get(IMobTrait.Type.ACTION).add(copy);
-            if (copy instanceof IBiHourlyTrait) this.traits.get(IMobTrait.Type.BI_HOURLY).add(copy);
-            if (copy instanceof IDataTrait) this.traits.get(IMobTrait.Type.DATA).add(copy);
-            if (copy instanceof INewDayTrait) this.traits.get(IMobTrait.Type.NEW_DAY).add(copy);
-            if (copy instanceof IDisplayTrait) this.traits.get(IMobTrait.Type.DISPLAY).add(copy);
+            AbstractMobTrait copy = trait instanceof IDataTrait ? ReflectionHelper.newInstance(ReflectionHelper.getConstructor(trait.getClass(), String.class), trait.getSerializedName()) : trait;
+            if (copy instanceof IJoinWorldTrait) this.traits.get(TraitType.ON_JOIN).add(copy);
+            if (copy instanceof IInteractiveTrait) this.traits.get(TraitType.ACTION).add(copy);
+            if (copy instanceof IBiHourlyTrait) this.traits.get(TraitType.BI_HOURLY).add(copy);
+            if (copy instanceof IDataTrait) this.traits.get(TraitType.DATA).add(copy);
+            if (copy instanceof INewDayTrait) this.traits.get(TraitType.NEW_DAY).add(copy);
+            if (copy instanceof IDisplayTrait) this.traits.get(TraitType.DISPLAY).add(copy);
+            if (copy instanceof IInitTrait) this.traits.get(TraitType.INIT).add(copy);
         });
 
-        this.traits.get(IMobTrait.Type.DATA).forEach(trait -> trait.initTrait(this));
-        this.products = (AbstractMobProductTrait) this.traits.get(IMobTrait.Type.DATA).stream().filter(t -> t instanceof AbstractMobProductTrait).findFirst().orElse(null);
+        this.traits.get(TraitType.INIT).forEach(trait -> ((IInitTrait)trait).initTrait(this));
+        this.products = (AbstractMobProductTrait) this.traits.get(TraitType.DATA).stream().filter(t -> t instanceof AbstractMobProductTrait).findFirst().orElse(null);
         this.capability = LazyOptional.of(() -> this);
     }
 
+    @Override
     public E getEntity() {
         return entity;
     }
 
+    @Override
     public Species getSpecies() {
         return species;
     }
 
+    @Override
     @SuppressWarnings("unchecked")
-    public <T extends IMobTrait> Stream<T> getTraits(IMobTrait.Type type) {
+    public <T> Stream<T> getTraits(TraitType type) {
         return (Stream<T>) traits.get(type).stream();
     }
 
-    public void onBihourlyTick() {
-        Stream<IBiHourlyTrait> traits = getTraits(IMobTrait.Type.BI_HOURLY);
-        traits.forEach(trait -> trait.onBihourlyTick(this));
-    }
-
+    @Override
     public void resetProduct() {
         entity.ate();
         hasProduct = true;
     }
 
     public void onNewDay() {
-        Stream<INewDayTrait> traits = getTraits(IMobTrait.Type.NEW_DAY);
+        Stream<INewDayTrait> traits = getTraits(TraitType.NEW_DAY);
         traits.forEach(trait -> trait.onNewDay(this));
 
         if (!eaten) {
@@ -115,7 +116,7 @@ public class MobStats<E extends MobEntity> implements ICapabilityProvider, INBTS
         if (happinessDivisor > 1 && genericTreatsGiven >= species.getGenericTreats() && speciesTreatsGiven >= species.getSpeciesTreats()) {
             genericTreatsGiven -= species.getGenericTreats();
             speciesTreatsGiven -= species.getSpeciesTreats();
-            adjustHappinessDivisor(-1);
+            happinessDivisor += -1;
         }
 
         treated = false;
@@ -143,14 +144,12 @@ public class MobStats<E extends MobEntity> implements ICapabilityProvider, INBTS
         PenguinNetwork.sendToNearby(new SendDataPacket(entity.getId(), this), entity);
     }
 
-    public void adjustHappinessDivisor(int amount) {
-        happinessDivisor += amount;
-    }
-
+    @Override
     public int getHappiness() {
         return happiness;
     }
 
+    @Override
     public void decreaseHappiness(int happiness) {
         this.happiness = MathsHelper.constrainToRangeInt(this.happiness - happiness, 0, MAX_RELATIONSHIP / happinessDivisor);
         if (!entity.level.isClientSide) {
@@ -158,6 +157,7 @@ public class MobStats<E extends MobEntity> implements ICapabilityProvider, INBTS
         }
     }
 
+    @Override
     public void increaseHappiness(int happiness) {
         this.happiness = MathsHelper.constrainToRangeInt(this.happiness + happiness, 0, MAX_RELATIONSHIP / happinessDivisor);
         if (!entity.level.isClientSide) {
@@ -169,7 +169,7 @@ public class MobStats<E extends MobEntity> implements ICapabilityProvider, INBTS
      * @return true if the event should be canceled
      */
     public boolean onRightClick(PlayerEntity player, Hand hand) {
-        Stream<IInteractiveTrait> traits = getTraits(IMobTrait.Type.ACTION);
+        Stream<IInteractiveTrait> traits = getTraits(TraitType.ACTION);
         return canTreat(player, hand) || traits.anyMatch(trait ->
                 trait.onRightClick(this, player, hand));
     }
@@ -203,46 +203,56 @@ public class MobStats<E extends MobEntity> implements ICapabilityProvider, INBTS
         return false;
     }
 
+    @Override
     public void feed() {
         hunger = 0;
         eaten = true;
     }
 
+    @Override
     public int getHunger() {
         return hunger;
     }
 
+    @Override
     public boolean isUnloved() {
         return !loved;
     }
 
+    @Override
     public boolean setLoved() {
         this.loved = true;
         increaseHappiness(100);
         return this.loved;
     }
 
+    @Override
     public boolean canProduceProduct() {
         return hasProduct && !entity.isBaby();
     }
 
+    @Override
     public void setProduced(int amount) {
         this.products.setProduced(this, amount);
         this.hasProduct = false;
     }
 
+    @Override
     public boolean isHungry() {
         return !eaten;
     }
 
+    @Override
     public List<ItemStack> getProduct(@Nullable PlayerEntity player) {
         return species.getProducts().getProduct(entity, player);
     }
 
+    @Override
     public int getHearts() {
         return (int) ((((double) happiness) / MAX_RELATIONSHIP) * 10); //0 > 9
     }
 
+    @Override
     public int getMaxRelationship() {
         return MAX_RELATIONSHIP;
     }
@@ -253,9 +263,10 @@ public class MobStats<E extends MobEntity> implements ICapabilityProvider, INBTS
         return stats.isPresent() && stats.resolve().isPresent() ? stats.resolve().get() : null;
     }
 
+    @Override
     @SuppressWarnings("unchecked")
-    public <T extends IDataTrait> T getTrait(String trait) {
-        return (T) traits.get(IMobTrait.Type.DATA).stream().filter(entry -> entry.getSerializedName().equals(trait)).findFirst().get();
+    public <T> T getTraitByName(String trait) {
+        return (T) traits.entries().stream().filter(entry -> entry.getValue().getSerializedName().equals(trait)).findFirst().get().getValue();
     }
 
     @Override
@@ -280,7 +291,7 @@ public class MobStats<E extends MobEntity> implements ICapabilityProvider, INBTS
         tag.putBoolean("Annoyed", annoyed);
         tag.putInt("GenericTreats", genericTreatsGiven);
         tag.putInt("TypeTreats", speciesTreatsGiven);
-        Stream<IDataTrait> data = getTraits(IMobTrait.Type.DATA);
+        Stream<IDataTrait> data = getTraits(TraitType.DATA);
         data.forEach(d -> d.save(tag));
         return tag;
     }
@@ -301,7 +312,7 @@ public class MobStats<E extends MobEntity> implements ICapabilityProvider, INBTS
         genericTreatsGiven = nbt.getInt("GenericTreats");
         speciesTreatsGiven = nbt.getInt("TypeTreats");
         annoyed = nbt.getBoolean("Annoyed");
-        Stream<IDataTrait> data = getTraits(IMobTrait.Type.DATA);
+        Stream<IDataTrait> data = getTraits(TraitType.DATA);
         data.forEach(d -> d.load(nbt));
     }
 

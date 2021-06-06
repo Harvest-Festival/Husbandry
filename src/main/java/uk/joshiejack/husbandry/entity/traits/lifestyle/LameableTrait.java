@@ -6,11 +6,12 @@ import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.Hand;
+import uk.joshiejack.husbandry.api.IMobStats;
+import uk.joshiejack.husbandry.api.trait.AbstractMobTrait;
+import uk.joshiejack.husbandry.api.trait.IDataTrait;
+import uk.joshiejack.husbandry.api.trait.IInteractiveTrait;
+import uk.joshiejack.husbandry.api.trait.IJoinWorldTrait;
 import uk.joshiejack.husbandry.entity.stats.MobStats;
-import uk.joshiejack.husbandry.entity.traits.AbstractMobTrait;
-import uk.joshiejack.husbandry.entity.traits.types.IDataTrait;
-import uk.joshiejack.husbandry.entity.traits.types.IInteractiveTrait;
-import uk.joshiejack.husbandry.entity.traits.types.IJoinWorldTrait;
 
 import java.util.Objects;
 
@@ -22,13 +23,13 @@ public class LameableTrait extends AbstractMobTrait implements IJoinWorldTrait, 
     }
 
     @Override
-    public void onJoinWorld(MobStats<?> stats) {
+    public void onJoinWorld(IMobStats<?> stats) {
         if (lamed)
            lame(stats.getEntity());
     }
 
     @Override
-    public boolean onRightClick(MobStats<?> stats, PlayerEntity player, Hand hand) {
+    public boolean onRightClick(IMobStats<?> stats, PlayerEntity player, Hand hand) {
         lame(stats.getEntity());
         return lamed = true;
     }

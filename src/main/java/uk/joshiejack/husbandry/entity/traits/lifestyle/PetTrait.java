@@ -1,8 +1,8 @@
 package uk.joshiejack.husbandry.entity.traits.lifestyle;
 
 import net.minecraft.nbt.CompoundNBT;
-import uk.joshiejack.husbandry.entity.traits.AbstractMobTrait;
-import uk.joshiejack.husbandry.entity.traits.types.IDataTrait;
+import uk.joshiejack.husbandry.api.trait.AbstractMobTrait;
+import uk.joshiejack.husbandry.api.trait.IDataTrait;
 
 public class PetTrait extends AbstractMobTrait implements IDataTrait {
     private int skill;

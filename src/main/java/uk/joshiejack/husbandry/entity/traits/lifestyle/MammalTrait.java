@@ -13,11 +13,12 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.server.ServerWorld;
 import uk.joshiejack.husbandry.Husbandry;
-import uk.joshiejack.husbandry.entity.stats.MobStats;
-import uk.joshiejack.husbandry.entity.traits.AbstractMobTrait;
-import uk.joshiejack.husbandry.entity.traits.types.IDataTrait;
-import uk.joshiejack.husbandry.entity.traits.types.IInteractiveTrait;
-import uk.joshiejack.husbandry.entity.traits.types.INewDayTrait;
+import uk.joshiejack.husbandry.api.HusbandryAPI;
+import uk.joshiejack.husbandry.api.IMobStats;
+import uk.joshiejack.husbandry.api.trait.AbstractMobTrait;
+import uk.joshiejack.husbandry.api.trait.IDataTrait;
+import uk.joshiejack.husbandry.api.trait.IInteractiveTrait;
+import uk.joshiejack.husbandry.api.trait.INewDayTrait;
 
 public class MammalTrait extends AbstractMobTrait implements IDataTrait, IInteractiveTrait, INewDayTrait {
     public static final ITag.INamedTag<Item> IMPREGNATES_MAMMALS = ItemTags.createOptional(new ResourceLocation(Husbandry.MODID, "impregnates_mammals"));
@@ -29,7 +30,7 @@ public class MammalTrait extends AbstractMobTrait implements IDataTrait, IIntera
     }
 
     @Override
-    public void onNewDay(MobStats<?> stats) {
+    public void onNewDay(IMobStats<?> stats) {
         if (pregnant) {
             gestation--;
             if (gestation <= 0) {
@@ -40,7 +41,7 @@ public class MammalTrait extends AbstractMobTrait implements IDataTrait, IIntera
     }
 
     @Override
-    public boolean onRightClick(MobStats<?> stats, PlayerEntity player, Hand hand) {
+    public boolean onRightClick(IMobStats<?> stats, PlayerEntity player, Hand hand) {
         ItemStack held = player.getItemInHand(hand);
         if (IMPREGNATES_MAMMALS.contains(held.getItem())
                 && !pregnant && stats.getSpecies().getDaysToBirth() != 0) {
@@ -57,7 +58,7 @@ public class MammalTrait extends AbstractMobTrait implements IDataTrait, IIntera
         return pregnant;
     }
 
-    private void giveBirth(MobStats<?> stats) {
+    private void giveBirth(IMobStats<?> stats) {
         MobEntity entity = stats.getEntity();
         stats.increaseHappiness(100); //Happy to have a child
         int chance = entity.level.random.nextInt(100);
@@ -68,7 +69,7 @@ public class MammalTrait extends AbstractMobTrait implements IDataTrait, IIntera
                 if (ageable != null) {
                     ageable.setAge(-Integer.MAX_VALUE);
                     ageable.setPos(entity.xo, entity.yo, entity.zo);
-                    MobStats<?> babyStats = MobStats.getStats(ageable);
+                    IMobStats<?> babyStats = HusbandryAPI.instance.getStatsForEntity(ageable);
                     if (babyStats != null)
                         babyStats.increaseHappiness(stats.getHappiness() / 2);
                     entity.level.addFreshEntity(ageable);

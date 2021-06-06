@@ -9,9 +9,9 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import uk.joshiejack.husbandry.entity.stats.MobStats;
-import uk.joshiejack.husbandry.entity.traits.types.IDisplayTrait;
-import uk.joshiejack.husbandry.entity.traits.types.IMobTrait;
+import uk.joshiejack.husbandry.api.IMobStats;
+import uk.joshiejack.husbandry.api.trait.IDisplayTrait;
+import uk.joshiejack.husbandry.api.trait.TraitType;
 
 import javax.annotation.Nonnull;
 import java.util.stream.Stream;
@@ -20,11 +20,11 @@ import java.util.stream.Stream;
 public class MobStatsLabel extends Widget {
     private static final ResourceLocation ICONS = new ResourceLocation("minecraft", "textures/gui/icons.png");
     private final Stream<IDisplayTrait> traits;
-    private final MobStats<?> stats;
+    private final IMobStats<?> stats;
 
-    public MobStatsLabel(MobStats<?> stats, int x, int y, ITextComponent name) {
+    public MobStatsLabel(IMobStats<?> stats, int x, int y, ITextComponent name) {
         super(x, y, 120, 16, name);
-        this.traits = stats.getTraits(IMobTrait.Type.DISPLAY);
+        this.traits = stats.getTraits(TraitType.DISPLAY);
         this.stats = stats;
     }
 

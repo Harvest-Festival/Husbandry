@@ -6,9 +6,9 @@ import net.minecraft.client.gui.widget.Widget;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import uk.joshiejack.husbandry.entity.stats.MobStats;
-import uk.joshiejack.husbandry.entity.traits.AbstractMobTrait;
-import uk.joshiejack.husbandry.entity.traits.types.IDisplayTrait;
+import uk.joshiejack.husbandry.api.IMobStats;
+import uk.joshiejack.husbandry.api.trait.AbstractMobTrait;
+import uk.joshiejack.husbandry.api.trait.IDisplayTrait;
 
 public class AbstractLoveableTrait extends AbstractMobTrait implements IDisplayTrait {
     private static final ResourceLocation ICONS = new ResourceLocation("minecraft", "textures/gui/icons.png");
@@ -19,7 +19,7 @@ public class AbstractLoveableTrait extends AbstractMobTrait implements IDisplayT
 
     @OnlyIn(Dist.CLIENT)
     @Override
-    public void render(MatrixStack matrix, Widget widget, int x, int y, MobStats<?> stats) {
+    public void render(MatrixStack matrix, Widget widget, int x, int y, IMobStats<?> stats) {
         Minecraft.getInstance().getTextureManager().bind(ICONS);
         for (int i = 0; i < 9; i++) {
             widget.blit(matrix, x + 24 + 10 * i, y + 6, 16, 0, 9, 9);

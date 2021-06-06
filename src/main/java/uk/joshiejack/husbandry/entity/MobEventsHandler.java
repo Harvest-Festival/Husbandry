@@ -14,9 +14,9 @@ import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import uk.joshiejack.husbandry.api.trait.IJoinWorldTrait;
+import uk.joshiejack.husbandry.api.trait.TraitType;
 import uk.joshiejack.husbandry.entity.stats.MobStats;
-import uk.joshiejack.husbandry.entity.traits.types.IJoinWorldTrait;
-import uk.joshiejack.husbandry.entity.traits.types.IMobTrait;
 
 import java.util.stream.Stream;
 
@@ -34,7 +34,7 @@ public class MobEventsHandler {
             MobStats<?> stats = MobStats.getStats(entity);
             if (stats != null) {
                 MobEntity mob = ((MobEntity) entity);
-                Stream<IJoinWorldTrait> traits = stats.getTraits(IMobTrait.Type.ON_JOIN);
+                Stream<IJoinWorldTrait> traits = stats.getTraits(TraitType.ON_JOIN);
                 traits.forEach(trait -> trait.onJoinWorld(stats));
             }
         }

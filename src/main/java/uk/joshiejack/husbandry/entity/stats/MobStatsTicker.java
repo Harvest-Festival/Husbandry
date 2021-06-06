@@ -8,10 +8,13 @@ import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.EntityLeaveWorldEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import uk.joshiejack.husbandry.api.trait.IBiHourlyTrait;
+import uk.joshiejack.husbandry.api.trait.TraitType;
 import uk.joshiejack.penguinlib.events.NewDayEvent;
 
 import java.util.Set;
 import java.util.function.Consumer;
+import java.util.stream.Stream;
 
 import static uk.joshiejack.husbandry.Husbandry.MODID;
 import static uk.joshiejack.husbandry.entity.stats.CapabilityStatsHandler.MOB_STATS_CAPABILITY;
@@ -29,7 +32,10 @@ public class MobStatsTicker {
     @SubscribeEvent
     public static void onWorldTick(TickEvent.WorldTickEvent event) {
         if (event.world.getGameTime() %2000 == 0) //Every 2 hours
-            stats.stream().filter(s -> s.entity.isAlive()).forEach(MobStats::onBihourlyTick);
+            stats.stream().filter(s -> s.entity.isAlive()).forEach(stats -> {
+                Stream<IBiHourlyTrait> traits = stats.getTraits(TraitType.BI_HOURLY);
+                traits.forEach(trait -> trait.onBihourlyTick(stats));
+            });
     }
 
     private static void run(Entity entity, Consumer<MobStats<?>> consumer) {

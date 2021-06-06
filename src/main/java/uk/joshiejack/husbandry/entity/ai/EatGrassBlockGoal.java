@@ -7,7 +7,7 @@ import net.minecraft.entity.MobEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorldReader;
 import net.minecraftforge.event.ForgeEventFactory;
-import uk.joshiejack.husbandry.entity.stats.MobStats;
+import uk.joshiejack.husbandry.api.IMobStats;
 
 import javax.annotation.Nonnull;
 import java.util.function.Predicate;
@@ -17,7 +17,7 @@ import static uk.joshiejack.husbandry.entity.ai.AbstractMoveToBlockGoal.Orientat
 public class EatGrassBlockGoal extends AbstractMoveToBlockGoal {
     private static final Predicate<BlockState> IS_GRASS = BlockStateMatcher.forBlock(Blocks.GRASS_BLOCK);
 
-    public EatGrassBlockGoal(MobEntity entity, MobStats<?> stats) {
+    public EatGrassBlockGoal(MobEntity entity, IMobStats<?> stats) {
         super(entity, stats, ABOVE, 8);
     }
 

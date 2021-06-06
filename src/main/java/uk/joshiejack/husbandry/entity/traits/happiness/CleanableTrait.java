@@ -4,11 +4,11 @@ import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.Hand;
-import uk.joshiejack.husbandry.entity.stats.MobStats;
-import uk.joshiejack.husbandry.entity.traits.AbstractMobTrait;
-import uk.joshiejack.husbandry.entity.traits.types.IDataTrait;
-import uk.joshiejack.husbandry.entity.traits.types.IInteractiveTrait;
-import uk.joshiejack.husbandry.entity.traits.types.INewDayTrait;
+import uk.joshiejack.husbandry.api.IMobStats;
+import uk.joshiejack.husbandry.api.trait.AbstractMobTrait;
+import uk.joshiejack.husbandry.api.trait.IDataTrait;
+import uk.joshiejack.husbandry.api.trait.IInteractiveTrait;
+import uk.joshiejack.husbandry.api.trait.INewDayTrait;
 import uk.joshiejack.husbandry.network.SetCleanedStatusPacket;
 import uk.joshiejack.penguinlib.network.PenguinNetwork;
 import uk.joshiejack.penguinlib.util.helpers.generic.MathsHelper;
@@ -22,7 +22,7 @@ public class CleanableTrait extends AbstractMobTrait implements IDataTrait, IInt
     }
 
     @Override
-    public void onNewDay(MobStats<?> stats) {
+    public void onNewDay(IMobStats<?> stats) {
         setCleaned(stats, false);
         cleanliness = MathsHelper.constrainToRangeInt(cleanliness - 10, -100, 100);
         if (cleanliness <= 0) {
@@ -31,7 +31,7 @@ public class CleanableTrait extends AbstractMobTrait implements IDataTrait, IInt
     }
 
     @Override
-    public boolean onRightClick(MobStats<?> stats, PlayerEntity player, Hand hand) {
+    public boolean onRightClick(IMobStats<?> stats, PlayerEntity player, Hand hand) {
         return false;
     }
 
@@ -40,7 +40,7 @@ public class CleanableTrait extends AbstractMobTrait implements IDataTrait, IInt
         return cleaned;
     }
 
-    public boolean clean(MobStats<?> stats) {
+    public boolean clean(IMobStats<?> stats) {
         if (!cleaned) {
             cleanliness++;
             if (cleanliness == 100) {
@@ -51,7 +51,7 @@ public class CleanableTrait extends AbstractMobTrait implements IDataTrait, IInt
         return cleaned;
     }
 
-    public void setCleaned(MobStats<?> stats, boolean cleaned) {
+    public void setCleaned(IMobStats<?> stats, boolean cleaned) {
         MobEntity entity = stats.getEntity();
         if (entity.level.isClientSide) this.cleaned = cleaned;
         else {

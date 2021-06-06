@@ -29,7 +29,7 @@ public class HusbandryItems {
     public static final RegistryObject<Item> HOT_MILK = ITEMS.register("hot_milk", () -> new PenguinItem(new PenguinItem.Properties().useAction(UseAction.DRINK).finishUsing(removePotionEffects).food(HusbandryFoods.HOT_MILK).tab(Husbandry.TAB)));
     public static final RegistryObject<Item> TRUFFLE = ITEMS.register("truffle", () -> new Item(new Item.Properties().food(HusbandryFoods.TRUFFLE).tab(Husbandry.TAB)));
     public static final RegistryObject<Item> MOB_TRACKER = ITEMS.register("mob_tracker", () -> new BookItem(new Item.Properties().stacksTo(1).tab(Husbandry.TAB), Husbandry.BOOK::get));
-    public static final RegistryObject<Item> BRUSH = ITEMS.register("brush", BrushItem::new);
+    public static final RegistryObject<Item> BRUSH = ITEMS.register("brush", () -> new Item(new Item.Properties().stacksTo(1).durability(64).tab(Husbandry.TAB)));
     public static final RegistryObject<Item> MIRACLE_POTION = ITEMS.register("miracle_potion", () -> new Item(new Item.Properties().stacksTo(16).tab(Husbandry.TAB)));
     public static final RegistryObject<Item> SICKLE = ITEMS.register("sickle", () -> new SickleItem(ItemTier.STONE));
 

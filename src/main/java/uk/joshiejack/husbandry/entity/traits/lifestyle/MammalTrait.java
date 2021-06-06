@@ -15,19 +15,14 @@ import net.minecraft.world.server.ServerWorld;
 import uk.joshiejack.husbandry.Husbandry;
 import uk.joshiejack.husbandry.api.HusbandryAPI;
 import uk.joshiejack.husbandry.api.IMobStats;
-import uk.joshiejack.husbandry.api.trait.AbstractMobTrait;
 import uk.joshiejack.husbandry.api.trait.IDataTrait;
 import uk.joshiejack.husbandry.api.trait.IInteractiveTrait;
 import uk.joshiejack.husbandry.api.trait.INewDayTrait;
 
-public class MammalTrait extends AbstractMobTrait implements IDataTrait, IInteractiveTrait, INewDayTrait {
+public class MammalTrait implements IDataTrait, IInteractiveTrait, INewDayTrait {
     public static final ITag.INamedTag<Item> IMPREGNATES_MAMMALS = ItemTags.createOptional(new ResourceLocation(Husbandry.MODID, "impregnates_mammals"));
     private int gestation;//How many days this mob has been pregnant
     private boolean pregnant; //If the mob is pregnant
-
-    public MammalTrait(String name) {
-        super(name);
-    }
 
     @Override
     public void onNewDay(IMobStats<?> stats) {

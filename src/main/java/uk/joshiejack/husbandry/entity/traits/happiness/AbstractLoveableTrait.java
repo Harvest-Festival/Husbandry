@@ -7,15 +7,10 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import uk.joshiejack.husbandry.api.IMobStats;
-import uk.joshiejack.husbandry.api.trait.AbstractMobTrait;
 import uk.joshiejack.husbandry.api.trait.IDisplayTrait;
 
-public class AbstractLoveableTrait extends AbstractMobTrait implements IDisplayTrait {
+public class AbstractLoveableTrait implements IDisplayTrait {
     private static final ResourceLocation ICONS = new ResourceLocation("minecraft", "textures/gui/icons.png");
-
-    public AbstractLoveableTrait(String name) {
-        super(name);
-    }
 
     @OnlyIn(Dist.CLIENT)
     @Override

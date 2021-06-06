@@ -6,22 +6,17 @@ import net.minecraft.item.Items;
 import net.minecraft.util.Hand;
 import net.minecraftforge.items.ItemHandlerHelper;
 import uk.joshiejack.husbandry.api.IMobStats;
-import uk.joshiejack.husbandry.api.trait.AbstractMobTrait;
 import uk.joshiejack.husbandry.api.trait.IInteractiveTrait;
 
 import java.util.List;
 
-public class MilkableTrait extends AbstractMobTrait implements IInteractiveTrait {
-    public MilkableTrait(String name) {
-        super(name);
-    }
-
+public class MilkableTrait implements IInteractiveTrait {
     @Override
     public boolean onRightClick(IMobStats<?> stats, PlayerEntity player, Hand hand) {
         if (stats.canProduceProduct() && player.getItemInHand(hand).getItem() == Items.BUCKET) {
-            List<ItemStack> ret = stats.getProduct(player);
+            List<ItemStack> ret = stats.getSpecies().getProducts().getProduct(stats.getEntity(), player);
             boolean replaced = false;
-            for (ItemStack stack: stats.getProduct(player)) {
+            for (ItemStack stack: ret) {
                 if (stack.getItem() == Items.MILK_BUCKET && !replaced) {
                     player.setItemInHand(hand, new ItemStack(Items.MILK_BUCKET));
                     replaced = true;

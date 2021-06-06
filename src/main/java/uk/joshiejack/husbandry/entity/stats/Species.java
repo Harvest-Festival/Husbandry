@@ -3,13 +3,17 @@ package uk.joshiejack.husbandry.entity.stats;
 import com.google.common.collect.Maps;
 import joptsimple.internal.Strings;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.MobEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.util.ResourceLocation;
 import uk.joshiejack.husbandry.api.ISpecies;
-import uk.joshiejack.husbandry.api.trait.AbstractMobTrait;
+import uk.joshiejack.husbandry.api.trait.IMobTrait;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -26,10 +30,10 @@ public class Species implements ISpecies {
     private final int daysToBirth; //Months (weeks if < month) IRL
     private final int daysToMaturity; //Years * 7 IRL
     private final Products products;
-    private final List<AbstractMobTrait> traits;
+    private final List<IMobTrait> traits;
     private final Item treat;
 
-    public Species(int minimumLifespan, int maximumLifespan, Item treat, int genericTreats, int speciesTreats, int daysToBirth, int daysToMaturity, @Nonnull Products products, List<AbstractMobTrait> traits) {
+    public Species(int minimumLifespan, int maximumLifespan, Item treat, int genericTreats, int speciesTreats, int daysToBirth, int daysToMaturity, @Nonnull Products products, List<IMobTrait> traits) {
         this.minimumLifespan = minimumLifespan * DAYS_PER_YEAR;
         this.maximumLifespan = maximumLifespan * DAYS_PER_YEAR;
         this.treat = treat;
@@ -39,6 +43,14 @@ public class Species implements ISpecies {
         this.daysToMaturity = daysToMaturity;
         this.products = products;
         this.traits = traits;
+    }
+
+    public int getDaysBetweenProduct() {
+        return products.getDaysBetweenProducts();
+    }
+
+    public List<ItemStack> getProduct(@Nonnull MobEntity entity, @Nullable PlayerEntity player) {
+        return products.getProduct(entity, player);
     }
 
     @Override
@@ -80,7 +92,7 @@ public class Species implements ISpecies {
     }
 
     @Override
-    public List<AbstractMobTrait> getTraits() {
+    public List<IMobTrait> getTraits() {
         return traits;
     }
 }

@@ -7,20 +7,14 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.Hand;
 import uk.joshiejack.husbandry.api.IMobStats;
-import uk.joshiejack.husbandry.api.trait.AbstractMobTrait;
 import uk.joshiejack.husbandry.api.trait.IDataTrait;
 import uk.joshiejack.husbandry.api.trait.IInteractiveTrait;
 import uk.joshiejack.husbandry.api.trait.IJoinWorldTrait;
-import uk.joshiejack.husbandry.entity.stats.MobStats;
 
 import java.util.Objects;
 
-public class LameableTrait extends AbstractMobTrait implements IJoinWorldTrait, IInteractiveTrait, IDataTrait {
+public class LameableTrait implements IJoinWorldTrait, IInteractiveTrait, IDataTrait {
     private boolean lamed;
-
-    public LameableTrait(String name) {
-        super(name);
-    }
 
     @Override
     public void onJoinWorld(IMobStats<?> stats) {

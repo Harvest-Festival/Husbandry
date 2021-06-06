@@ -4,6 +4,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fml.network.NetworkDirection;
+import uk.joshiejack.husbandry.api.trait.TraitType;
 import uk.joshiejack.husbandry.entity.stats.MobStats;
 import uk.joshiejack.husbandry.entity.traits.happiness.CleanableTrait;
 import uk.joshiejack.penguinlib.network.PenguinPacket;
@@ -14,7 +15,7 @@ public class SetCleanedStatusPacket extends PenguinPacket {
     private int entityID;
     private boolean cleaned;
 
-    public SetCleanedStatusPacket(){}
+    public SetCleanedStatusPacket() {}
     public SetCleanedStatusPacket(int entityID, boolean cleaned) {
         this.entityID = entityID;
         this.cleaned = cleaned;
@@ -37,9 +38,11 @@ public class SetCleanedStatusPacket extends PenguinPacket {
         Entity entity = player.level.getEntity(entityID);
         if (entity != null) {
             MobStats<?> stats = MobStats.getStats(entity);
-            if (stats != null) {
-                ((CleanableTrait)stats.getTraitByName("cleanable")).setCleaned(stats, cleaned);
-            }
+            if (stats != null)
+                stats.getTraits(TraitType.DATA)
+                        .filter(s -> s instanceof CleanableTrait)
+                        .findFirst()
+                        .ifPresent(t -> ((CleanableTrait) t).setCleaned(stats, cleaned));
         }
     }
 }

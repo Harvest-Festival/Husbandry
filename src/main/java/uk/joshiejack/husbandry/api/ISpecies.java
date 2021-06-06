@@ -1,7 +1,7 @@
 package uk.joshiejack.husbandry.api;
 
 import net.minecraft.item.Item;
-import uk.joshiejack.husbandry.api.trait.AbstractMobTrait;
+import uk.joshiejack.husbandry.api.trait.IMobTrait;
 
 import java.util.List;
 
@@ -22,5 +22,5 @@ public interface ISpecies {
 
     Item getTreat();
 
-    List<AbstractMobTrait> getTraits();
+    List<IMobTrait> getTraits();
 }

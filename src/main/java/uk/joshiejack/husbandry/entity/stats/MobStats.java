@@ -34,7 +34,6 @@ import uk.joshiejack.penguinlib.util.helpers.generic.ReflectionHelper;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.lang.reflect.InvocationTargetException;
-import java.util.List;
 import java.util.Objects;
 import java.util.stream.Stream;
 
@@ -43,7 +42,7 @@ import static uk.joshiejack.husbandry.entity.stats.CapabilityStatsHandler.MOB_ST
 public class MobStats<E extends MobEntity> implements ICapabilityProvider, INBTSerializable<CompoundNBT>, IMobStats<E> {
     public static final ITag.INamedTag<Item> TREATS = ItemTags.createOptional(new ResourceLocation(Husbandry.MODID, "treat"));
     private static final int MAX_RELATIONSHIP = 30000;
-    private final Multimap<TraitType, AbstractMobTrait> traits;
+    private final Multimap<TraitType, IMobTrait> traits;
     protected final E entity;
     protected final Species species;
     private int town;
@@ -67,7 +66,7 @@ public class MobStats<E extends MobEntity> implements ICapabilityProvider, INBTS
         this.species = species;
         this.traits = HashMultimap.create();
         this.species.getTraits().forEach(trait -> {
-            AbstractMobTrait copy = trait instanceof IDataTrait ? ReflectionHelper.newInstance(ReflectionHelper.getConstructor(trait.getClass(), String.class), trait.getSerializedName()) : trait;
+            IMobTrait copy = trait instanceof IDataTrait ? ReflectionHelper.newInstance(trait.getClass()) : trait;
             if (copy instanceof IJoinWorldTrait) this.traits.get(TraitType.ON_JOIN).add(copy);
             if (copy instanceof IInteractiveTrait) this.traits.get(TraitType.ACTION).add(copy);
             if (copy instanceof IBiHourlyTrait) this.traits.get(TraitType.BI_HOURLY).add(copy);
@@ -92,7 +91,6 @@ public class MobStats<E extends MobEntity> implements ICapabilityProvider, INBTS
         return species;
     }
 
-    @Override
     @SuppressWarnings("unchecked")
     public <T> Stream<T> getTraits(TraitType type) {
         return (Stream<T>) traits.get(type).stream();
@@ -168,7 +166,7 @@ public class MobStats<E extends MobEntity> implements ICapabilityProvider, INBTS
     /**
      * @return true if the event should be canceled
      */
-    public boolean onRightClick(PlayerEntity player, Hand hand) {
+    public boolean onEntityInteract(PlayerEntity player, Hand hand) {
         Stream<IInteractiveTrait> traits = getTraits(TraitType.ACTION);
         return canTreat(player, hand) || traits.anyMatch(trait ->
                 trait.onRightClick(this, player, hand));
@@ -243,11 +241,6 @@ public class MobStats<E extends MobEntity> implements ICapabilityProvider, INBTS
     }
 
     @Override
-    public List<ItemStack> getProduct(@Nullable PlayerEntity player) {
-        return species.getProducts().getProduct(entity, player);
-    }
-
-    @Override
     public int getHearts() {
         return (int) ((((double) happiness) / MAX_RELATIONSHIP) * 10); //0 > 9
     }
@@ -261,12 +254,6 @@ public class MobStats<E extends MobEntity> implements ICapabilityProvider, INBTS
     public static MobStats<?> getStats(Entity entity) {
         LazyOptional<MobStats<?>> stats = entity.getCapability(MOB_STATS_CAPABILITY);
         return stats.isPresent() && stats.resolve().isPresent() ? stats.resolve().get() : null;
-    }
-
-    @Override
-    @SuppressWarnings("unchecked")
-    public <T> T getTraitByName(String trait) {
-        return (T) traits.entries().stream().filter(entry -> entry.getValue().getSerializedName().equals(trait)).findFirst().get().getValue();
     }
 
     @Override

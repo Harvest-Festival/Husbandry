@@ -7,10 +7,6 @@ import uk.joshiejack.husbandry.api.IMobStats;
 import uk.joshiejack.husbandry.api.trait.IInteractiveTrait;
 
 public class PettableTrait extends AbstractLoveableTrait implements IInteractiveTrait {
-    public PettableTrait(String name) {
-        super(name);
-    }
-
     @Override
     public boolean onRightClick(IMobStats<?> stats, PlayerEntity player, Hand hand) {
         ItemStack held = player.getItemInHand(hand);

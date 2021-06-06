@@ -5,18 +5,13 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import uk.joshiejack.husbandry.api.IMobStats;
-import uk.joshiejack.husbandry.api.trait.AbstractMobTrait;
 import uk.joshiejack.husbandry.api.trait.IBiHourlyTrait;
 import uk.joshiejack.husbandry.api.trait.IDataTrait;
 import uk.joshiejack.husbandry.api.trait.IJoinWorldTrait;
 import uk.joshiejack.husbandry.entity.ai.ShelterAtNightGoal;
 
-public class DiurnalTrait extends AbstractMobTrait implements IBiHourlyTrait, IDataTrait, IJoinWorldTrait {
+public class DiurnalTrait implements IBiHourlyTrait, IDataTrait, IJoinWorldTrait {
     private boolean wasOutsideInSun; //If the mob was outside last time
-
-    public DiurnalTrait(String name) {
-        super(name);
-    }
 
     @Override
     public void onBihourlyTick(IMobStats<?> stats) {

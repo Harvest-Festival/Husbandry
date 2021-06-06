@@ -20,9 +20,6 @@ import java.util.Objects;
 public class EatsGrassTrait extends AbstractFoodTrait {
     public static final ITag.INamedTag<Item> HAY = ItemTags.createOptional(new ResourceLocation(Husbandry.MODID, "hay"));
 
-    public EatsGrassTrait(String name) {
-        super(name);
-    }
 
     @Override
     protected ITag.INamedTag<Item> getFoodTag() {

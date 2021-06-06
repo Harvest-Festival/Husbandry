@@ -6,10 +6,7 @@ import uk.joshiejack.husbandry.api.trait.AbstractMobTrait;
 import uk.joshiejack.husbandry.api.trait.INewDayTrait;
 import uk.joshiejack.penguinlib.data.TimeUnitRegistry;
 
-public class RequiresFoodTrait extends AbstractMobTrait implements INewDayTrait {
-    public RequiresFoodTrait(String name) {
-        super(name);
-    }
+public class RequiresFoodTrait implements INewDayTrait {
 
     @Override
     public void onNewDay(IMobStats<?> stats) {

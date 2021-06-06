@@ -5,19 +5,14 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.DamageSource;
 import uk.joshiejack.husbandry.api.IMobStats;
 import uk.joshiejack.husbandry.api.ISpecies;
-import uk.joshiejack.husbandry.api.trait.AbstractMobTrait;
 import uk.joshiejack.husbandry.api.trait.IDataTrait;
 import uk.joshiejack.husbandry.api.trait.INewDayTrait;
 import uk.joshiejack.penguinlib.util.helpers.generic.MathsHelper;
 
-public class MortalTrait extends AbstractMobTrait implements INewDayTrait, IDataTrait {
+public class MortalTrait implements INewDayTrait, IDataTrait {
     private static final DamageSource OLD_AGE = new DamageSource("oldage");
     private static final int DEATH_CHANCE = 360;
     private int age;
-
-    public MortalTrait(String name) {
-        super(name);
-    }
 
     @Override
     public void onNewDay(IMobStats<?> stats) {

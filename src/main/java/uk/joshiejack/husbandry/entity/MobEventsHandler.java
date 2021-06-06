@@ -10,8 +10,10 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
+import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import uk.joshiejack.husbandry.api.trait.IJoinWorldTrait;
@@ -40,6 +42,13 @@ public class MobEventsHandler {
         }
     }
 
+    @SubscribeEvent(priority = EventPriority.LOWEST)
+    public static void onLivingHurt(LivingHurtEvent event) {
+        MobStats<?> stats = MobStats.getStats(event.getEntity());
+        if (stats != null)
+            stats.decreaseHappiness((int) (5 * event.getAmount()));
+    }
+
     @SubscribeEvent
     public static void onEntityInteract(PlayerInteractEvent.EntityInteract event) {
         if (event.getPlayer().getPassengers().size() > 0 && event.getHand() == Hand.MAIN_HAND) {
@@ -48,7 +57,7 @@ public class MobEventsHandler {
             MobStats<?> stats = MobStats.getStats(event.getTarget());
             if (stats != null) {
                 int happiness = stats.getHappiness();
-                boolean canceled = stats.onRightClick(event.getPlayer(), event.getHand());
+                boolean canceled = stats.onEntityInteract(event.getPlayer(), event.getHand());
                 if (canceled) {
                     int newHappiness = stats.getHappiness();
                     if (newHappiness != happiness)

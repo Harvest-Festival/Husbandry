@@ -1,6 +1,6 @@
 package uk.joshiejack.husbandry.api;
 
-import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 
@@ -10,5 +10,5 @@ import java.util.List;
 public interface IProducts {
     int getDaysBetweenProducts();
 
-    List<ItemStack> getProduct(LivingEntity entity, @Nullable PlayerEntity player);
+    List<ItemStack> getProduct(MobEntity entity, @Nullable PlayerEntity player);
 }

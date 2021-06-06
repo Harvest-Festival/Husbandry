@@ -8,10 +8,6 @@ import uk.joshiejack.husbandry.api.IMobStats;
 import uk.joshiejack.husbandry.api.trait.IInteractiveTrait;
 
 public class CarriableTrait extends AbstractLoveableTrait implements IInteractiveTrait {
-    public CarriableTrait(String name) {
-        super(name);
-    }
-
     @Override
     public boolean onRightClick(IMobStats<?> stats, PlayerEntity player, Hand hand) {
         ItemStack held = player.getItemInHand(hand);

@@ -11,10 +11,7 @@ import uk.joshiejack.husbandry.api.trait.IInteractiveTrait;
 import uk.joshiejack.husbandry.api.trait.IJoinWorldTrait;
 import uk.joshiejack.husbandry.entity.ai.EatFoodGoal;
 
-public abstract class AbstractFoodTrait extends AbstractMobTrait implements IJoinWorldTrait, IInteractiveTrait {
-    public AbstractFoodTrait(String name) {
-        super(name);
-    }
+public abstract class AbstractFoodTrait implements IJoinWorldTrait, IInteractiveTrait {
 
     protected abstract ITag.INamedTag<Item> getFoodTag();
 

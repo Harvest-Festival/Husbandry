@@ -33,7 +33,7 @@ public class DropsProductGoal extends AbstractMoveToBlockGoal {
                 (double) blockPos.getZ() + 0.5D, 10.0F, (float) entity.getMaxHeadXRot());
 
         if (isNearDestination()) {
-            for (ItemStack stack: stats.getProduct(null))
+            for (ItemStack stack: stats.getSpecies().getProducts().getProduct(entity, null))
                 entity.spawnAtLocation(stack);
             stats.setProduced(1);
             tryTicks = 9999;

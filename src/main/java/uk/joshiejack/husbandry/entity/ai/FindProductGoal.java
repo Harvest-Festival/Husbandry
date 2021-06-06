@@ -36,7 +36,7 @@ public class FindProductGoal extends AbstractMoveToBlockGoal {
                 (double) blockPos.getZ() + 0.5D, 10.0F, (float) entity.getMaxHeadXRot());
 
         if (isNearDestination()) {
-            ItemStack stack = stats.getProduct(null).get(0);
+            ItemStack stack = stats.getSpecies().getProducts().getProduct(entity, null).get(0);
             if (!stack.isEmpty()) {
                 BlockState state = ((BlockItem) stack.getItem()).getBlock().defaultBlockState();
                 entity.level.setBlock(blockPos, state, 2);

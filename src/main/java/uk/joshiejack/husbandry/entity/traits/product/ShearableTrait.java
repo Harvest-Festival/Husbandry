@@ -9,16 +9,11 @@ import net.minecraft.item.ShearsItem;
 import net.minecraft.util.Hand;
 import net.minecraftforge.common.Tags;
 import uk.joshiejack.husbandry.api.IMobStats;
-import uk.joshiejack.husbandry.api.trait.AbstractMobTrait;
 import uk.joshiejack.husbandry.api.trait.IInteractiveTrait;
 
 import java.util.Random;
 
-public class ShearableTrait extends AbstractMobTrait implements IInteractiveTrait {
-    public ShearableTrait(String name) {
-        super(name);
-    }
-
+public class ShearableTrait implements IInteractiveTrait {
     @Override
     public boolean onRightClick(IMobStats<?> stats, PlayerEntity player, Hand hand) {
         MobEntity mob = stats.getEntity();
@@ -26,7 +21,7 @@ public class ShearableTrait extends AbstractMobTrait implements IInteractiveTrai
         if (held.getItem() instanceof ShearsItem || Tags.Items.SHEARS.contains(held.getItem()) && stats.canProduceProduct()) {
             if (!player.level.isClientSide) {
                 Random rand = mob.getRandom();
-                for (ItemStack stack : stats.getProduct(player)) {
+                for (ItemStack stack : stats.getSpecies().getProducts().getProduct(mob, player)) {
                     ItemEntity ent = mob.spawnAtLocation(stack, 1.0F);
                     assert ent != null;
                     ent.setDeltaMovement(ent.getDeltaMovement().add((rand.nextFloat() -

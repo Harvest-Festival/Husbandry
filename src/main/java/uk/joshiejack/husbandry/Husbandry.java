@@ -25,7 +25,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import uk.joshiejack.husbandry.api.HusbandryAPI;
 import uk.joshiejack.husbandry.api.IMobStats;
-import uk.joshiejack.husbandry.api.trait.AbstractMobTrait;
+import uk.joshiejack.husbandry.api.trait.IMobTrait;
 import uk.joshiejack.husbandry.block.HusbandryBlocks;
 import uk.joshiejack.husbandry.crafting.HusbandryRegistries;
 import uk.joshiejack.husbandry.data.*;
@@ -74,7 +74,7 @@ public class Husbandry {
         HusbandryAPI.instance = new HusbandryAPIImpl();
     }
 
-    private void registerTrait(Class<? extends AbstractMobTrait> data) {
+    private void registerTrait(Class<? extends IMobTrait> data) {
         HusbandryAPI.instance.registerMobTrait(CaseFormat.UPPER_CAMEL.to(CaseFormat.LOWER_UNDERSCORE, data.getSimpleName().replace("Trait", "")), data);
     }
 
@@ -140,8 +140,8 @@ public class Husbandry {
     /** API **/
     public static class HusbandryAPIImpl implements HusbandryAPI.IHusbandryAPI {
         @Override
-        public void registerMobTrait(String name, Class<? extends AbstractMobTrait> trait) {
-            MobDataLoader.TRAITS.put(name, ReflectionHelper.newInstance(ReflectionHelper.getConstructor(trait, String.class), name));
+        public void registerMobTrait(String name, Class<? extends IMobTrait> trait) {
+            MobDataLoader.TRAITS.put(name, ReflectionHelper.newInstance(trait));
         }
 
         @Nullable

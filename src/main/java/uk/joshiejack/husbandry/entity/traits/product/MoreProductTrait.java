@@ -10,10 +10,6 @@ import uk.joshiejack.penguinlib.util.helpers.generic.MathsHelper;
 public class MoreProductTrait extends AbstractMobProductTrait implements IInitTrait, INewDayTrait, IBiHourlyTrait {
     private int productsPerDay = 1; //How many products the mobs give every 24 hours
 
-    public MoreProductTrait(String name) {
-        super(name);
-    }
-
     protected int recalculateProductsPerDay(IMobStats<?> stats) {
         return MathsHelper.convertRange(0, stats.getMaxRelationship(), 1, 5, stats.getHappiness());
     }

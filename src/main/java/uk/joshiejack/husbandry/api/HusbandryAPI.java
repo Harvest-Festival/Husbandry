@@ -1,7 +1,7 @@
 package uk.joshiejack.husbandry.api;
 
 import net.minecraft.entity.MobEntity;
-import uk.joshiejack.husbandry.api.trait.AbstractMobTrait;
+import uk.joshiejack.husbandry.api.trait.IMobTrait;
 
 import javax.annotation.Nullable;
 
@@ -14,7 +14,7 @@ public class HusbandryAPI {
          * @param name      the name to register it as, used in the database
          * @param trait     the class to register as the trait
          */
-        void registerMobTrait(String name, Class<? extends AbstractMobTrait> trait);
+        void registerMobTrait(String name, Class<? extends IMobTrait> trait);
 
         /**
          * Get the stats for this entity if they have one

@@ -1,15 +1,10 @@
 package uk.joshiejack.husbandry.entity.traits.lifestyle;
 
 import net.minecraft.nbt.CompoundNBT;
-import uk.joshiejack.husbandry.api.trait.AbstractMobTrait;
 import uk.joshiejack.husbandry.api.trait.IDataTrait;
 
-public class PetTrait extends AbstractMobTrait implements IDataTrait {
+public class PetTrait implements IDataTrait {
     private int skill;
-
-    public PetTrait(String name) {
-        super(name);
-    }
 
     @Override
     public void save(CompoundNBT tag) {

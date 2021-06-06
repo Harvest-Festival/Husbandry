@@ -6,11 +6,6 @@ import uk.joshiejack.penguinlib.util.helpers.generic.MathsHelper;
 
 //Mobs with this, have their products reset quicker based on happiness
 public class FasterProductResetTrait extends AbstractMobProductTrait implements INewDayTrait {
-
-    public FasterProductResetTrait(String name) {
-        super(name);
-    }
-
     @Override
     public void onNewDay(IMobStats<?> stats) {
         productReset++;

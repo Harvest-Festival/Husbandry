@@ -1,7 +1,6 @@
 package uk.joshiejack.husbandry.client.renderer;
 
 //@SideOnly(Dist.CLIENT)
-//@PenguinLoader(value = "trough", side = Dist.CLIENT)
 //public class TroughTileEntityRenderer extends AbstractItemTileEntityRenderer<TroughTileEntity> {
 //    @Override
 //    public void render(@Nonnull TroughTileEntity tile, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {

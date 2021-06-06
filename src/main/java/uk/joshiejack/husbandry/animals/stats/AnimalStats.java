@@ -9,7 +9,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tags.ITag;
 import net.minecraft.tags.ItemTags;
-import net.minecraft.util.DamageSource;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
 import net.minecraft.util.ResourceLocation;
@@ -42,12 +41,10 @@ import static uk.joshiejack.husbandry.animals.stats.CapabilityStatsHandler.ANIMA
 public class AnimalStats<E extends AgeableEntity> implements ICapabilityProvider, INBTSerializable<CompoundNBT> {
     public static final ITag.INamedTag<Item> TREATS = ItemTags.createOptional(new ResourceLocation(Husbandry.MODID, "treat"));
     private static final int MAX_RELATIONSHIP = 30000;
-    private static final DamageSource OLD_AGE = new DamageSource("oldage");
-    private static final int DEATH_CHANCE = 360;
+
     protected final E entity;
     protected final AnimalSpecies species;
     private int town;
-    private int age; //Current animal age
     private int happiness; //Current animal happiness
     private int happinessDivisor = 5; //Maximum happiness for this animal currently, increased by treats
     private int hunger; //How many days the animal has been without food
@@ -69,7 +66,7 @@ public class AnimalStats<E extends AgeableEntity> implements ICapabilityProvider
         this.entity = entity;
         this.species = species;
         this.data = Maps.newHashMap();
-        List<IDataTrait> traits = species.getTraits(AnimalTraits.Type.DATA);
+        List<IDataTrait> traits = species.getTraits(IAnimalTrait.Type.DATA);
         traits.forEach(trait -> {
             try {
                 data.put(trait.getSerializedName(), trait.getClass().getConstructor(String.class).newInstance(trait.getSerializedName()));
@@ -103,7 +100,7 @@ public class AnimalStats<E extends AgeableEntity> implements ICapabilityProvider
 
         //Mark the past value
         wasOutsideInSun = isOutsideInSun;
-        List<IBiHourlyTrait> traits = species.getTraits(AnimalTraits.Type.BI_HOURLY);
+        List<IBiHourlyTrait> traits = species.getTraits(IAnimalTrait.Type.BI_HOURLY);
         traits.forEach(trait -> trait.onBihourlyTick(this));
     }
 
@@ -113,12 +110,7 @@ public class AnimalStats<E extends AgeableEntity> implements ICapabilityProvider
     }
 
     public void onNewDay() {
-        int chance = MathsHelper.constrainToRangeInt(DEATH_CHANCE, 1, Short.MAX_VALUE);
-        if (age >= species.getMaxAge() || (age >= species.getMinAge() && entity.getRandom().nextInt(chance) == 0)) {
-            entity.hurt(OLD_AGE, Integer.MAX_VALUE);
-        }
-
-        List<INewDayTrait> traits = species.getTraits(AnimalTraits.Type.NEW_DAY);
+        List<INewDayTrait> traits = species.getTraits(IAnimalTrait.Type.NEW_DAY);
         traits.forEach(trait -> trait.onNewDay(this));
 
         if (!eaten) {
@@ -149,7 +141,6 @@ public class AnimalStats<E extends AgeableEntity> implements ICapabilityProvider
         entity.goalSelector.getRunningGoals()
                 .filter(ai -> ai.getGoal() instanceof AbstractMoveToBlockGoal)
                 .forEach(ai -> ((AbstractMoveToBlockGoal) ai.getGoal()).resetRunTimer());
-
         PenguinNetwork.sendToNearby(new SendDataPacket(entity.getId(), this), entity);
     }
 
@@ -179,7 +170,7 @@ public class AnimalStats<E extends AgeableEntity> implements ICapabilityProvider
      * @return true if the event should be canceled
      */
     public boolean onRightClick(PlayerEntity player, Hand hand) {
-        List<IInteractiveTrait> traits = species.getTraits(AnimalTraits.Type.ACTION);
+        List<IInteractiveTrait> traits = species.getTraits(IAnimalTrait.Type.ACTION);
         return canTreat(player, hand) || traits.stream().anyMatch(trait ->
                 trait.onRightClick(this, player, hand));
     }
@@ -216,6 +207,10 @@ public class AnimalStats<E extends AgeableEntity> implements ICapabilityProvider
     public void feed() {
         hunger = 0;
         eaten = true;
+    }
+
+    public int getHunger() {
+        return hunger;
     }
 
     public boolean isUnloved() {
@@ -278,7 +273,6 @@ public class AnimalStats<E extends AgeableEntity> implements ICapabilityProvider
     public CompoundNBT serializeNBT() {
         CompoundNBT tag = new CompoundNBT();
         tag.putInt("Town", town);
-        tag.putInt("Age", age);
         tag.putInt("Happiness", happiness);
         tag.putInt("HappinessDivisor", happinessDivisor);
         tag.putInt("Hunger", hunger);
@@ -292,19 +286,13 @@ public class AnimalStats<E extends AgeableEntity> implements ICapabilityProvider
         tag.putBoolean("Annoyed", annoyed);
         tag.putInt("GenericTreats", genericTreatsGiven);
         tag.putInt("TypeTreats", speciesTreatsGiven);
-        CompoundNBT traits = new CompoundNBT();
-        for (Map.Entry<String, IDataTrait> entry : this.data.entrySet()) {
-            traits.put(entry.getKey(), entry.getValue().serializeNBT());
-        }
-
-        tag.put("Traits", traits);
+        data.values().forEach(d -> d.save(tag));
         return tag;
     }
 
     @Override
     public void deserializeNBT(CompoundNBT nbt) {
         town = nbt.getInt("Town");
-        age = nbt.getInt("Age");
         happiness = nbt.getInt("Happiness");
         happinessDivisor = nbt.getInt("HappinessDivisor");
         if (happinessDivisor == 0) happinessDivisor = 5; //Fix the divisor
@@ -319,10 +307,7 @@ public class AnimalStats<E extends AgeableEntity> implements ICapabilityProvider
         genericTreatsGiven = nbt.getInt("GenericTreats");
         speciesTreatsGiven = nbt.getInt("TypeTreats");
         annoyed = nbt.getBoolean("Annoyed");
-        CompoundNBT traits = nbt.getCompound("Traits");
-        for (Map.Entry<String, IDataTrait> entry : this.data.entrySet()) {
-            entry.getValue().deserializeNBT(traits.getCompound(entry.getKey()));
-        }
+        data.values().forEach(d -> d.load(nbt));
     }
 
     @Override

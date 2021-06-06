@@ -10,7 +10,7 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import uk.joshiejack.husbandry.animals.stats.AnimalStats;
-import uk.joshiejack.husbandry.animals.traits.types.AnimalTraits;
+import uk.joshiejack.husbandry.animals.traits.types.IAnimalTrait;
 import uk.joshiejack.husbandry.animals.traits.types.IDisplayTrait;
 
 import javax.annotation.Nonnull;
@@ -24,7 +24,7 @@ public class AnimalStatsLabel extends Widget {
 
     public AnimalStatsLabel(AnimalStats<?> stats, int x, int y, ITextComponent name) {
         super(x, y, 120, 16, name);
-        this.traits = stats.getSpecies().getTraits(AnimalTraits.Type.DISPLAY);
+        this.traits = stats.getSpecies().getTraits(IAnimalTrait.Type.DISPLAY);
         this.stats = stats;
     }
 

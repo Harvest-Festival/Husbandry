@@ -9,14 +9,13 @@ import net.minecraft.item.ShearsItem;
 import net.minecraft.util.Hand;
 import net.minecraftforge.common.Tags;
 import uk.joshiejack.husbandry.animals.stats.AnimalStats;
-import uk.joshiejack.husbandry.animals.traits.AnimalTrait;
+import uk.joshiejack.husbandry.animals.traits.AbstractAnimalTrait;
 import uk.joshiejack.husbandry.animals.traits.types.IInteractiveTrait;
 import uk.joshiejack.penguinlib.util.PenguinLoader;
 
 import java.util.Random;
 
-@PenguinLoader("shearable")
-public class ShearableTrait extends AnimalTrait implements IInteractiveTrait {
+public class ShearableTrait extends AbstractAnimalTrait implements IInteractiveTrait {
     public ShearableTrait(String name) {
         super(name);
     }

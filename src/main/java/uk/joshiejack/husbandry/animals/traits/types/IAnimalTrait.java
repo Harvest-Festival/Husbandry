@@ -3,7 +3,7 @@ package uk.joshiejack.husbandry.animals.traits.types;
 import net.minecraft.util.IStringSerializable;
 import uk.joshiejack.husbandry.animals.stats.AnimalStats;
 
-public interface AnimalTraits extends IStringSerializable {
+public interface IAnimalTrait extends IStringSerializable {
     default void initTrait(AnimalStats<?> stats) {}
 
     enum Type {

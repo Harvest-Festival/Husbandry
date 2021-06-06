@@ -8,7 +8,7 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.util.ResourceLocation;
-import uk.joshiejack.husbandry.animals.traits.AnimalTrait;
+import uk.joshiejack.husbandry.animals.traits.AbstractAnimalTrait;
 import uk.joshiejack.husbandry.animals.traits.types.*;
 
 import javax.annotation.Nonnull;
@@ -30,11 +30,11 @@ public class AnimalSpecies {
     private final int daysToBirth; //Months (weeks if < month) IRL
     private final int daysToMaturity; //Years * 7 IRL
     private final AnimalProducts products;
-    private final EnumMap<AnimalTraits.Type, List<? extends AnimalTraits>> traits;
+    private final EnumMap<IAnimalTrait.Type, List<? extends IAnimalTrait>> traits;
     private final Object2BooleanMap<String> hasTraitCache = new Object2BooleanArrayMap<>();
     private final Item treat;
 
-    public AnimalSpecies(int minimumLifespan, int maximumLifespan, Item treat, int genericTreats, int speciesTreats, int daysToBirth, int daysToMaturity, @Nonnull AnimalProducts products, List<AnimalTrait> traits) {
+    public AnimalSpecies(int minimumLifespan, int maximumLifespan, Item treat, int genericTreats, int speciesTreats, int daysToBirth, int daysToMaturity, @Nonnull AnimalProducts products, List<AbstractAnimalTrait> traits) {
         this.minimumLifespan = minimumLifespan * DAYS_PER_YEAR;
         this.maximumLifespan = maximumLifespan * DAYS_PER_YEAR;
         this.treat = treat;
@@ -43,17 +43,17 @@ public class AnimalSpecies {
         this.daysToBirth = daysToBirth;
         this.daysToMaturity = daysToMaturity;
         this.products = products;
-        this.traits = new EnumMap<>(AnimalTraits.Type.class);
-        this.traits.put(AnimalTraits.Type.AI, traits.stream().filter(t-> t instanceof IGoalTrait).collect(Collectors.toList()));
-        this.traits.put(AnimalTraits.Type.ACTION, traits.stream().filter(t-> t instanceof IInteractiveTrait).collect(Collectors.toList()));
-        this.traits.put(AnimalTraits.Type.BI_HOURLY, traits.stream().filter(t-> t instanceof IBiHourlyTrait).collect(Collectors.toList()));
-        this.traits.put(AnimalTraits.Type.DATA, traits.stream().filter(t-> t instanceof IDataTrait).collect(Collectors.toList()));
-        this.traits.put(AnimalTraits.Type.NEW_DAY, traits.stream().filter(t-> t instanceof INewDayTrait).collect(Collectors.toList()));
-        this.traits.put(AnimalTraits.Type.DISPLAY, traits.stream().filter(t-> t instanceof IDisplayTrait).collect(Collectors.toList()));
+        this.traits = new EnumMap<>(IAnimalTrait.Type.class);
+        this.traits.put(IAnimalTrait.Type.AI, traits.stream().filter(t-> t instanceof IGoalTrait).collect(Collectors.toList()));
+        this.traits.put(IAnimalTrait.Type.ACTION, traits.stream().filter(t-> t instanceof IInteractiveTrait).collect(Collectors.toList()));
+        this.traits.put(IAnimalTrait.Type.BI_HOURLY, traits.stream().filter(t-> t instanceof IBiHourlyTrait).collect(Collectors.toList()));
+        this.traits.put(IAnimalTrait.Type.DATA, traits.stream().filter(t-> t instanceof IDataTrait).collect(Collectors.toList()));
+        this.traits.put(IAnimalTrait.Type.NEW_DAY, traits.stream().filter(t-> t instanceof INewDayTrait).collect(Collectors.toList()));
+        this.traits.put(IAnimalTrait.Type.DISPLAY, traits.stream().filter(t-> t instanceof IDisplayTrait).collect(Collectors.toList()));
     }
 
     @SuppressWarnings("unchecked")
-    public <T extends AnimalTraits> List<T> getTraits(AnimalTraits.Type type) {
+    public <T extends IAnimalTrait> List<T> getTraits(IAnimalTrait.Type type) {
         return (List<T>) traits.get(type);
     }
 

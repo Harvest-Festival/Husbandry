@@ -12,12 +12,12 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.server.ServerWorld;
 import uk.joshiejack.husbandry.Husbandry;
 import uk.joshiejack.husbandry.animals.stats.AnimalStats;
-import uk.joshiejack.husbandry.animals.traits.AnimalTrait;
+import uk.joshiejack.husbandry.animals.traits.AbstractAnimalTrait;
 import uk.joshiejack.husbandry.animals.traits.types.IDataTrait;
 import uk.joshiejack.husbandry.animals.traits.types.IInteractiveTrait;
 import uk.joshiejack.husbandry.animals.traits.types.INewDayTrait;
 
-public class MammalTrait extends AnimalTrait implements IDataTrait, IInteractiveTrait, INewDayTrait {
+public class MammalTrait extends AbstractAnimalTrait implements IDataTrait, IInteractiveTrait, INewDayTrait {
     public static final ITag.INamedTag<Item> IMPREGNATES_MAMMALS = ItemTags.createOptional(new ResourceLocation(Husbandry.MODID, "impregnates_mammals"));
     private int gestation;//How many days this animal has been pregnant
     private boolean pregnant; //If the animal is pregnant
@@ -74,15 +74,13 @@ public class MammalTrait extends AnimalTrait implements IDataTrait, IInteractive
     }
 
     @Override
-    public CompoundNBT serializeNBT() {
-        CompoundNBT tag = new CompoundNBT();
+    public void save(CompoundNBT tag) {
         tag.putInt("Gestation", gestation);
         tag.putBoolean("Pregnant", pregnant);
-        return tag;
     }
 
     @Override
-    public void deserializeNBT(CompoundNBT nbt) {
+    public void load(CompoundNBT nbt) {
         gestation = nbt.getInt("Gestation");
         pregnant = nbt.getBoolean("Pregnant");
     }

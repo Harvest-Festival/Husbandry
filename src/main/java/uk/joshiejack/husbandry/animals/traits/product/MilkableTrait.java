@@ -6,12 +6,12 @@ import net.minecraft.item.Items;
 import net.minecraft.util.Hand;
 import net.minecraftforge.items.ItemHandlerHelper;
 import uk.joshiejack.husbandry.animals.stats.AnimalStats;
-import uk.joshiejack.husbandry.animals.traits.AnimalTrait;
+import uk.joshiejack.husbandry.animals.traits.AbstractAnimalTrait;
 import uk.joshiejack.husbandry.animals.traits.types.IInteractiveTrait;
 
 import java.util.List;
 
-public class MilkableTrait extends AnimalTrait implements IInteractiveTrait {
+public class MilkableTrait extends AbstractAnimalTrait implements IInteractiveTrait {
     public MilkableTrait(String name) {
         super(name);
     }

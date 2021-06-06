@@ -6,7 +6,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import uk.joshiejack.husbandry.animals.stats.AnimalStats;
 
-public interface IDisplayTrait extends AnimalTraits {
+public interface IDisplayTrait extends IAnimalTrait {
     @OnlyIn(Dist.CLIENT)
     void render(MatrixStack matrix, Widget widget, int x, int y, AnimalStats<?> stats);
 }

@@ -1,12 +1,10 @@
 package uk.joshiejack.husbandry.animals.traits.lifestyle;
 
 import net.minecraft.nbt.CompoundNBT;
-import uk.joshiejack.husbandry.animals.traits.AnimalTrait;
+import uk.joshiejack.husbandry.animals.traits.AbstractAnimalTrait;
 import uk.joshiejack.husbandry.animals.traits.types.IDataTrait;
-import uk.joshiejack.penguinlib.util.PenguinLoader;
 
-@PenguinLoader("pet")
-public class PetTrait extends AnimalTrait implements IDataTrait {
+public class PetTrait extends AbstractAnimalTrait implements IDataTrait {
     private int skill;
 
     public PetTrait(String name) {
@@ -14,14 +12,12 @@ public class PetTrait extends AnimalTrait implements IDataTrait {
     }
 
     @Override
-    public CompoundNBT serializeNBT() {
-        CompoundNBT tag = new CompoundNBT();
+    public void save(CompoundNBT tag) {
         tag.putInt("Skill", skill);
-        return tag;
     }
 
     @Override
-    public void deserializeNBT(CompoundNBT nbt) {
+    public void load(CompoundNBT nbt) {
         skill = nbt.getInt("Skill");
     }
 }

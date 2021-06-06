@@ -2,12 +2,12 @@ package uk.joshiejack.husbandry.animals.traits.product;
 
 import net.minecraft.nbt.CompoundNBT;
 import uk.joshiejack.husbandry.animals.stats.AnimalStats;
-import uk.joshiejack.husbandry.animals.traits.AnimalTrait;
+import uk.joshiejack.husbandry.animals.traits.AbstractAnimalTrait;
 import uk.joshiejack.husbandry.animals.traits.types.IDataTrait;
 import uk.joshiejack.husbandry.network.SetProducedProductPacket;
 import uk.joshiejack.penguinlib.network.PenguinNetwork;
 
-public abstract class AbstractAnimalTraitProduct extends AnimalTrait implements IDataTrait {
+public abstract class AbstractAnimalTraitProduct extends AbstractAnimalTrait implements IDataTrait {
     protected int productReset; //The counter for the product reset
     protected int productsProduced; //How many produced
 
@@ -25,15 +25,13 @@ public abstract class AbstractAnimalTraitProduct extends AnimalTrait implements 
     }
 
     @Override
-    public CompoundNBT serializeNBT() {
-        CompoundNBT tag = new CompoundNBT();
+    public void save(CompoundNBT tag) {
         tag.putInt("ProductReset", productReset);
         tag.putInt("ProductsProduced", productsProduced);
-        return tag;
     }
 
     @Override
-    public void deserializeNBT(CompoundNBT nbt) {
+    public void load(CompoundNBT nbt) {
         productReset = nbt.getInt("ProductReset");
         productsProduced = nbt.getInt("ProductsProduced");
     }

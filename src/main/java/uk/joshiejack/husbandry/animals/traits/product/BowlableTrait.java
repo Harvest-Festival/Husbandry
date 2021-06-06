@@ -6,12 +6,12 @@ import net.minecraft.item.Items;
 import net.minecraft.util.Hand;
 import net.minecraftforge.items.ItemHandlerHelper;
 import uk.joshiejack.husbandry.animals.stats.AnimalStats;
-import uk.joshiejack.husbandry.animals.traits.AnimalTrait;
+import uk.joshiejack.husbandry.animals.traits.AbstractAnimalTrait;
 import uk.joshiejack.husbandry.animals.traits.types.IInteractiveTrait;
 
 import java.util.List;
 
-public class BowlableTrait extends AnimalTrait implements IInteractiveTrait {
+public class BowlableTrait extends AbstractAnimalTrait implements IInteractiveTrait {
     public BowlableTrait(String name) {
         super(name);
     }

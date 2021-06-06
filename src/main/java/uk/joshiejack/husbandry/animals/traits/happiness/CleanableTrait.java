@@ -5,7 +5,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.Hand;
 import uk.joshiejack.husbandry.animals.stats.AnimalStats;
-import uk.joshiejack.husbandry.animals.traits.AnimalTrait;
+import uk.joshiejack.husbandry.animals.traits.AbstractAnimalTrait;
 import uk.joshiejack.husbandry.animals.traits.types.IDataTrait;
 import uk.joshiejack.husbandry.animals.traits.types.IInteractiveTrait;
 import uk.joshiejack.husbandry.animals.traits.types.INewDayTrait;
@@ -13,7 +13,7 @@ import uk.joshiejack.husbandry.network.SetCleanedStatusPacket;
 import uk.joshiejack.penguinlib.network.PenguinNetwork;
 import uk.joshiejack.penguinlib.util.helpers.generic.MathsHelper;
 
-public class CleanableTrait extends AnimalTrait implements IDataTrait, IInteractiveTrait, INewDayTrait {
+public class CleanableTrait extends AbstractAnimalTrait implements IDataTrait, IInteractiveTrait, INewDayTrait {
     private int cleanliness;
     private boolean cleaned;
 
@@ -65,16 +65,14 @@ public class CleanableTrait extends AnimalTrait implements IDataTrait, IInteract
     }
 
     @Override
-    public CompoundNBT serializeNBT() {
-        CompoundNBT tag = new CompoundNBT();
-        tag.putInt("Cleanliness", cleanliness);
-        tag.putBoolean("Cleaned", cleaned);
-        return tag;
+    public void load(CompoundNBT nbt) {
+        cleanliness = nbt.getInt("Cleanliness");
+        cleaned = nbt.getBoolean("Cleaned");
     }
 
     @Override
-    public void deserializeNBT(CompoundNBT nbt) {
-        cleanliness = nbt.getInt("Cleanliness");
-        cleaned = nbt.getBoolean("Cleaned");
+    public void save(CompoundNBT tag) {
+        tag.putInt("Cleanliness", cleanliness);
+        tag.putBoolean("Cleaned", cleaned);
     }
 }

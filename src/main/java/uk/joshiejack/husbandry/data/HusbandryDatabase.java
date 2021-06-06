@@ -26,6 +26,7 @@ public class HusbandryDatabase extends AbstractDatabaseProvider {
 
     @Override
     protected void addDatabaseEntries() {
+        addTimeUnit("require_food_max_days", 3);
         addTimeUnitForMachine(HusbandryTileEntities.INCUBATOR.get(), TimeUnitRegistry.Defaults.WEEK.getValue());
         new Trade(VillagerProfession.SHEPHERD, 1, HusbandryItems.GENERIC_TREAT.get()).setOutputAmount(5).build(this);
         new Trade(VillagerProfession.SHEPHERD, 2, HusbandryItems.CAT_TREAT.get()).setOutputAmount(3).setInputAmount(2).build(this);
@@ -38,30 +39,30 @@ public class HusbandryDatabase extends AbstractDatabaseProvider {
         new Trade(VillagerProfession.SHEPHERD, 2, HusbandryItems.SHEEP_TREAT.get()).setOutputAmount(3).setInputAmount(2).build(this);
         new Trade(VillagerProfession.SHEPHERD, 2, HusbandryItems.PARROT_TREAT.get()).setOutputAmount(3).setInputAmount(2).build(this);
         new Trade(VillagerProfession.SHEPHERD, 2, HusbandryItems.LLAMA_TREAT.get()).setOutputAmount(3).setInputAmount(2).build(this);
-        new AnimalType("cow").withLifespan(12, 20).withTreat(HusbandryItems.COW_TREAT.get()).levelUpWith(7, 24).withGestationPeriod(9).withMaturityAt(14).withProducts(1, "milk")
-                .assign(EntityType.COW).withTraits("diurnal", "eats_grass", "cleanable", "pettable", "mammal", "milkable", "more_product").build(this);
-        new AnimalType("chicken").withLifespan(3, 10).withTreat(HusbandryItems.CHICKEN_TREAT.get()).levelUpWith(5,26).withGestationPeriod(3).withMaturityAt(3).withProducts(1, "chicken_egg")
-                .assign(EntityType.CHICKEN).withTraits("aquaphobic", "diurnal", "eats_bird_feed", "carriable", "lays_egg", "more_product").build(this);
-        new AnimalType("pig").withLifespan(6, 10).withTreat(HusbandryItems.PIG_TREAT.get()).levelUpWith(20, 10).withGestationPeriod(4).withMaturityAt(4).withProducts(1, "truffle")
-                .assign(EntityType.PIG).withTraits("aquaphobic", "diurnal", "eats_slop", "cleanable", "pettable", "finds_product", "mammal", "more_product_chance").build(this);
-        new AnimalType("sheep").withLifespan(8,12).withTreat(HusbandryItems.SHEEP_TREAT.get()).levelUpWith(2,29).withGestationPeriod(5).withMaturityAt(4).withProducts(7, "wool")
-                .assign(EntityType.SHEEP).withTraits("diurnal", "eats_grass", "cleanable", "pettable", "mammal", "shearable", "faster_product_reset").build(this);
-        new AnimalType("horse").withLifespan(25,30).withTreat(HusbandryItems.HORSE_TREAT.get()).levelUpWith(22,10).withGestationPeriod(24).withMaturityAt(12).assign(EntityType.HORSE)
-                .withTraits("aquaphobic", "diurnal", "eats_grass", "cleanable", "pettable", "mammal", "pet").build(this);
-        new AnimalType("llama").withLifespan(15,25).withTreat(HusbandryItems.SHEEP_TREAT.get()).levelUpWith(7,24).withGestationPeriod(11).withMaturityAt(10).assign(EntityType.LLAMA)
-                .withTraits("diurnal", "eats_grass", "cleanable", "pettable", "mammal", "pet").build(this);
-        new AnimalType("rabbit").withLifespan(8,12).withTreat(HusbandryItems.RABBIT_TREAT.get()).levelUpWith(14,14).withGestationPeriod(4).withMaturityAt(3).withProducts(4, "rabbit_foot")
-                .withTraits("eats_rabbit_food", "carriable", "drops_product", "mammal").assign(EntityType.RABBIT).build(this);
-        new AnimalType("cat").withLifespan(10,20).withTreat(HusbandryItems.CAT_TREAT.get()).levelUpWith(3,24).withGestationPeriod(5).withMaturityAt(7)
-                .assign(EntityType.CAT).withTraits("aquaphobic", "eats_cat_food", "carriable", "pettable", "mammal", "pet").build(this);
-        new AnimalType("dog").withLifespan(10,13).withTreat(HusbandryItems.DOG_TREAT.get()).levelUpWith(24,3).withGestationPeriod(5).withMaturityAt(7)
-                .assign(EntityType.WOLF).withTraits("diurnal", "eats_dog_food", "cleanable", "pettable", "mammal", "pet").build(this);
-        new AnimalType("donkey").withLifespan(25,30).withTreat(HusbandryItems.HORSE_TREAT.get()).levelUpWith(22,11).withGestationPeriod(24).withMaturityAt(12)
-                .assign(EntityType.DONKEY).assign(EntityType.MULE).withTraits("aquaphobic", "diurnal", "eats_grass", "cleanable", "pettable", "mammal", "pet").build(this);
-        new AnimalType("parrot").withLifespan(25,50).withTreat(HusbandryItems.PARROT_TREAT.get()).levelUpWith(3,24).withGestationPeriod(4).withMaturityAt(36)
-                .assign(EntityType.PARROT).withTraits("aquaphobic", "diurnal", "eats_bird_feed", "carriable", "pet").build(this);
-        new AnimalType("mooshroom").withLifespan(13, 21).withTreat(HusbandryItems.COW_TREAT.get()).levelUpWith(24, 7).withGestationPeriod(11).withMaturityAt(21).withProducts(1, "mushroom_stew")
-                .assign(EntityType.COW).withTraits("diurnal", "eats_grass", "cleanable", "pettable", "mammal", "bowlable", "more_product").build(this);
+        AnimalType.createMammal("cow").withLifespan(12, 20).withTreat(HusbandryItems.COW_TREAT.get()).levelUpWith(7, 24).withGestationPeriod(9).withMaturityAt(14).withProducts(1, "milk")
+                .assign(EntityType.COW).withTraits("diurnal", "eats_grass", "cleanable", "milkable", "more_product").build(this);
+        AnimalType.createBird("chicken").withLifespan(3, 10).withTreat(HusbandryItems.CHICKEN_TREAT.get()).levelUpWith(5,26).withGestationPeriod(3).withMaturityAt(3).withProducts(1, "chicken_egg")
+                .assign(EntityType.CHICKEN).withTraits("aquaphobic", "diurnal", "lays_egg", "more_product").build(this);
+        AnimalType.createMammal("pig").withLifespan(6, 10).withTreat(HusbandryItems.PIG_TREAT.get()).levelUpWith(20, 10).withGestationPeriod(4).withMaturityAt(4).withProducts(1, "truffle")
+                .assign(EntityType.PIG).withTraits("aquaphobic", "diurnal", "eats_slop", "cleanable", "pettable", "finds_product", "more_product_chance").build(this);
+        AnimalType.createMammal("sheep").withLifespan(8,12).withTreat(HusbandryItems.SHEEP_TREAT.get()).levelUpWith(2,29).withGestationPeriod(5).withMaturityAt(4).withProducts(7, "wool")
+                .assign(EntityType.SHEEP).withTraits("diurnal", "eats_grass", "cleanable", "shearable", "faster_product_reset").build(this);
+        AnimalType.createMammal("horse").withLifespan(25,30).withTreat(HusbandryItems.HORSE_TREAT.get()).levelUpWith(22,10).withGestationPeriod(24).withMaturityAt(12).assign(EntityType.HORSE)
+                .withTraits("aquaphobic", "diurnal", "eats_grass", "cleanable", "pet").build(this);
+        AnimalType.createMammal("llama").withLifespan(15,25).withTreat(HusbandryItems.SHEEP_TREAT.get()).levelUpWith(7,24).withGestationPeriod(11).withMaturityAt(10).assign(EntityType.LLAMA)
+                .withTraits("diurnal", "eats_grass", "cleanable", "pet").build(this);
+        AnimalType.createMammal("rabbit").withLifespan(8,12).withTreat(HusbandryItems.RABBIT_TREAT.get()).levelUpWith(14,14).withGestationPeriod(4).withMaturityAt(3).withProducts(4, "rabbit_foot")
+                .withTraits("eats_rabbit_food", "carriable", "drops_product").assign(EntityType.RABBIT).build(this);
+        AnimalType.createMammal("cat").withLifespan(10,20).withTreat(HusbandryItems.CAT_TREAT.get()).levelUpWith(3,24).withGestationPeriod(5).withMaturityAt(7)
+                .assign(EntityType.CAT).withTraits("aquaphobic", "eats_cat_food", "carriable", "pet").build(this);
+        AnimalType.createMammal("dog").withLifespan(10,13).withTreat(HusbandryItems.DOG_TREAT.get()).levelUpWith(24,3).withGestationPeriod(5).withMaturityAt(7)
+                .assign(EntityType.WOLF).withTraits("diurnal", "eats_dog_food", "cleanable", "pet").build(this);
+        AnimalType.createMammal("donkey").withLifespan(25,30).withTreat(HusbandryItems.HORSE_TREAT.get()).levelUpWith(22,11).withGestationPeriod(24).withMaturityAt(12)
+                .assign(EntityType.DONKEY).assign(EntityType.MULE).withTraits("aquaphobic", "diurnal", "eats_grass", "cleanable", "pet").build(this);
+        AnimalType.createBird("parrot").withLifespan(25,50).withTreat(HusbandryItems.PARROT_TREAT.get()).levelUpWith(3,24).withGestationPeriod(4).withMaturityAt(36)
+                .assign(EntityType.PARROT).withTraits("aquaphobic", "diurnal", "pet").build(this);
+        AnimalType.createMammal("mooshroom").withLifespan(13, 21).withTreat(HusbandryItems.COW_TREAT.get()).levelUpWith(24, 7).withGestationPeriod(11).withMaturityAt(21).withProducts(1, "mushroom_stew")
+                .assign(EntityType.COW).withTraits("diurnal", "eats_grass", "cleanable", "bowlable", "more_product").build(this);
     }
 
     private static class AnimalType {
@@ -74,8 +75,16 @@ public class HusbandryDatabase extends AbstractDatabaseProvider {
         private List<EntityType<?>> entities = new ArrayList<>();
         private List<String> traits = new ArrayList<>();
 
-        public AnimalType(String name) {
+        private AnimalType(String name) {
             this.name = name;
+        }
+
+        public static AnimalType createBird(String name) {
+            return new AnimalType(name).withTraits("mortal", "eats_bird_feed", "carriable");
+        }
+
+        public static AnimalType createMammal(String name) {
+            return new AnimalType(name).withTraits("mortal", "mammal", "pettable");
         }
 
         public AnimalType withTraits(String... traits) {

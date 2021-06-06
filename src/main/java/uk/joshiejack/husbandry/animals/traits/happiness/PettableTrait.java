@@ -5,9 +5,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.Hand;
 import uk.joshiejack.husbandry.animals.stats.AnimalStats;
 import uk.joshiejack.husbandry.animals.traits.types.IInteractiveTrait;
-import uk.joshiejack.penguinlib.util.PenguinLoader;
 
-@PenguinLoader("pettable")
 public class PettableTrait extends AbstractLoveableTrait implements IInteractiveTrait {
     public PettableTrait(String name) {
         super(name);

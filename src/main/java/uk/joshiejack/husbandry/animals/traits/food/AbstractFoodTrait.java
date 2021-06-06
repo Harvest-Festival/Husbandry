@@ -7,12 +7,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tags.ITag;
 import net.minecraft.util.Hand;
 import uk.joshiejack.husbandry.animals.stats.AnimalStats;
-import uk.joshiejack.husbandry.animals.traits.AnimalTrait;
+import uk.joshiejack.husbandry.animals.traits.AbstractAnimalTrait;
 import uk.joshiejack.husbandry.animals.traits.types.IGoalTrait;
 import uk.joshiejack.husbandry.animals.traits.types.IInteractiveTrait;
 import uk.joshiejack.husbandry.entity.ai.EatFoodGoal;
 
-public abstract class AbstractFoodTrait extends AnimalTrait implements IGoalTrait, IInteractiveTrait {
+public abstract class AbstractFoodTrait extends AbstractAnimalTrait implements IGoalTrait, IInteractiveTrait {
     public AbstractFoodTrait(String name) {
         super(name);
     }

@@ -7,10 +7,10 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import uk.joshiejack.husbandry.animals.stats.AnimalStats;
-import uk.joshiejack.husbandry.animals.traits.AnimalTrait;
+import uk.joshiejack.husbandry.animals.traits.AbstractAnimalTrait;
 import uk.joshiejack.husbandry.animals.traits.types.IDisplayTrait;
 
-public class AbstractLoveableTrait extends AnimalTrait implements IDisplayTrait {
+public class AbstractLoveableTrait extends AbstractAnimalTrait implements IDisplayTrait {
     private static final ResourceLocation ICONS = new ResourceLocation("minecraft", "textures/gui/icons.png");
 
     public AbstractLoveableTrait(String name) {

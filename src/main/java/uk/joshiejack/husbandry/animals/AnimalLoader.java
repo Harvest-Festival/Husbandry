@@ -13,7 +13,7 @@ import net.minecraftforge.fml.common.Mod;
 import org.apache.logging.log4j.Level;
 import uk.joshiejack.husbandry.Husbandry;
 import uk.joshiejack.husbandry.animals.stats.AnimalStats;
-import uk.joshiejack.husbandry.animals.traits.AnimalTrait;
+import uk.joshiejack.husbandry.animals.traits.AbstractAnimalTrait;
 import uk.joshiejack.husbandry.network.RequestDataPacket;
 import uk.joshiejack.penguinlib.events.DatabaseLoadedEvent;
 import uk.joshiejack.penguinlib.network.PenguinNetwork;
@@ -29,9 +29,9 @@ public class AnimalLoader {
         Map<String, AnimalSpecies> types = Maps.newHashMap();
         event.table("animal_species").rows().forEach(row -> {
             String name = row.get("name");
-            List<AnimalTrait> traits = Lists.newArrayList();
+            List<AbstractAnimalTrait> traits = Lists.newArrayList();
             event.table("animal_traits").where("species=" + name)
-                    .forEach(trait -> traits.add(AnimalTrait.TRAITS.get(trait.get("trait").toString())));
+                    .forEach(trait -> traits.add(AbstractAnimalTrait.TRAITS.get(trait.get("trait").toString())));
             AnimalProducts products = row.get("products loot table").equals("none") ? AnimalProducts.NONE :
                     new AnimalProducts(row.get("product frequency"), row.getRL("products loot table"));
             AnimalSpecies type = new AnimalSpecies(row.get("min age"), row.get("max age"),

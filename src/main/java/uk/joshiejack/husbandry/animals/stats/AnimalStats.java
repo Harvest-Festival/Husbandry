@@ -1,6 +1,7 @@
 package uk.joshiejack.husbandry.animals.stats;
 
-import com.google.common.collect.Maps;
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Multimap;
 import net.minecraft.entity.AgeableEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -12,8 +13,6 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.common.util.INBTSerializable;
@@ -28,20 +27,20 @@ import uk.joshiejack.husbandry.network.SendDataPacket;
 import uk.joshiejack.husbandry.network.SpawnHeartsPacket;
 import uk.joshiejack.penguinlib.network.PenguinNetwork;
 import uk.joshiejack.penguinlib.util.helpers.generic.MathsHelper;
+import uk.joshiejack.penguinlib.util.helpers.generic.ReflectionHelper;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.lang.reflect.InvocationTargetException;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Stream;
 
 import static uk.joshiejack.husbandry.animals.stats.CapabilityStatsHandler.ANIMAL_STATS_CAPABILITY;
 
 public class AnimalStats<E extends AgeableEntity> implements ICapabilityProvider, INBTSerializable<CompoundNBT> {
     public static final ITag.INamedTag<Item> TREATS = ItemTags.createOptional(new ResourceLocation(Husbandry.MODID, "treat"));
     private static final int MAX_RELATIONSHIP = 30000;
-
+    private final Multimap<IAnimalTrait.Type, IAnimalTrait> traits;
     protected final E entity;
     protected final AnimalSpecies species;
     private int town;
@@ -56,26 +55,26 @@ public class AnimalStats<E extends AgeableEntity> implements ICapabilityProvider
     protected boolean loved; //If the animal has been loved today
     private boolean eaten; //If the animal has eaten today
     private boolean special; //If the animal is special
-    private boolean wasOutsideInSun; //If the animal was outside last time
     private boolean annoyed; //If the player has insulted the animal today
-    private final Map<String, IDataTrait> data;
     private final AbstractAnimalTraitProduct products;
     private final LazyOptional<AnimalStats<?>> capability;
 
     public AnimalStats(E entity, @Nonnull AnimalSpecies species) {
         this.entity = entity;
         this.species = species;
-        this.data = Maps.newHashMap();
-        List<IDataTrait> traits = species.getTraits(IAnimalTrait.Type.DATA);
-        traits.forEach(trait -> {
-            try {
-                data.put(trait.getSerializedName(), trait.getClass().getConstructor(String.class).newInstance(trait.getSerializedName()));
-            } catch (InstantiationException | NoSuchMethodException | IllegalAccessException | InvocationTargetException ignored) {
-            }
+        this.traits = HashMultimap.create();
+        this.species.getTraits().forEach(trait -> {
+            IAnimalTrait copy = trait instanceof IDataTrait ? ReflectionHelper.newInstance(ReflectionHelper.getConstructor(trait.getClass(), String.class), trait.getSerializedName()) : trait;
+            if (copy instanceof IGoalTrait) this.traits.get(IAnimalTrait.Type.AI).add(copy);
+            if (copy instanceof IInteractiveTrait) this.traits.get(IAnimalTrait.Type.ACTION).add(copy);
+            if (copy instanceof IBiHourlyTrait) this.traits.get(IAnimalTrait.Type.BI_HOURLY).add(copy);
+            if (copy instanceof IDataTrait) this.traits.get(IAnimalTrait.Type.DATA).add(copy);
+            if (copy instanceof INewDayTrait) this.traits.get(IAnimalTrait.Type.NEW_DAY).add(copy);
+            if (copy instanceof IDisplayTrait) this.traits.get(IAnimalTrait.Type.DISPLAY).add(copy);
         });
 
-        this.data.values().forEach(data -> data.initTrait(this));
-        this.products = (AbstractAnimalTraitProduct) this.data.values().stream().filter(t -> t instanceof AbstractAnimalTraitProduct).findFirst().orElse(null);
+        //this.data.values().forEach(data -> data.initTrait(this));
+        this.products = (AbstractAnimalTraitProduct) this.traits.get(IAnimalTrait.Type.DATA).stream().filter(t -> t instanceof AbstractAnimalTraitProduct).findFirst().orElse(null);
         this.capability = LazyOptional.of(() -> this);
     }
 
@@ -87,20 +86,13 @@ public class AnimalStats<E extends AgeableEntity> implements ICapabilityProvider
         return species;
     }
 
-    public void onBihourlyTick() {
-        World world = entity.level;
-        BlockPos pos = entity.blockPosition();
-        boolean dayTime = world.isDay();
-        boolean isRaining = world.isRaining();
-        boolean isOutside = world.canSeeSky(pos);
-        boolean isOutsideInSun = !isRaining && isOutside && dayTime && !world.getBiome(pos).shouldSnow(world, pos);
-        if (isOutsideInSun && wasOutsideInSun) {
-            increaseHappiness(2);
-        }
+    @SuppressWarnings("unchecked")
+    public <T extends IAnimalTrait> Stream<T> getTraits(IAnimalTrait.Type type) {
+        return (Stream<T>) traits.get(type).stream();
+    }
 
-        //Mark the past value
-        wasOutsideInSun = isOutsideInSun;
-        List<IBiHourlyTrait> traits = species.getTraits(IAnimalTrait.Type.BI_HOURLY);
+    public void onBihourlyTick() {
+        Stream<IBiHourlyTrait> traits = getTraits(IAnimalTrait.Type.BI_HOURLY);
         traits.forEach(trait -> trait.onBihourlyTick(this));
     }
 
@@ -110,7 +102,7 @@ public class AnimalStats<E extends AgeableEntity> implements ICapabilityProvider
     }
 
     public void onNewDay() {
-        List<INewDayTrait> traits = species.getTraits(IAnimalTrait.Type.NEW_DAY);
+        Stream<INewDayTrait> traits = getTraits(IAnimalTrait.Type.NEW_DAY);
         traits.forEach(trait -> trait.onNewDay(this));
 
         if (!eaten) {
@@ -170,8 +162,8 @@ public class AnimalStats<E extends AgeableEntity> implements ICapabilityProvider
      * @return true if the event should be canceled
      */
     public boolean onRightClick(PlayerEntity player, Hand hand) {
-        List<IInteractiveTrait> traits = species.getTraits(IAnimalTrait.Type.ACTION);
-        return canTreat(player, hand) || traits.stream().anyMatch(trait ->
+        Stream<IInteractiveTrait> traits = getTraits(IAnimalTrait.Type.ACTION);
+        return canTreat(player, hand) || traits.anyMatch(trait ->
                 trait.onRightClick(this, player, hand));
     }
 
@@ -254,13 +246,9 @@ public class AnimalStats<E extends AgeableEntity> implements ICapabilityProvider
         return stats.isPresent() && stats.resolve().isPresent() ? stats.resolve().get() : null;
     }
 
-    public boolean hasTrait(String trait) {
-        return data.containsKey(trait) || species.hasTrait(trait);
-    }
-
     @SuppressWarnings("unchecked")
     public <T extends IDataTrait> T getTrait(String trait) {
-        return (T) data.get(trait);
+        return (T) traits.get(IAnimalTrait.Type.DATA).stream().filter(entry -> entry.getSerializedName().equals(trait)).findFirst().get();
     }
 
     @Override
@@ -281,12 +269,12 @@ public class AnimalStats<E extends AgeableEntity> implements ICapabilityProvider
         tag.putBoolean("Loved", loved);
         tag.putBoolean("Eaten", eaten);
         tag.putBoolean("Special", special);
-        tag.putBoolean("InSun", wasOutsideInSun);
         tag.putBoolean("Treated", treated);
         tag.putBoolean("Annoyed", annoyed);
         tag.putInt("GenericTreats", genericTreatsGiven);
         tag.putInt("TypeTreats", speciesTreatsGiven);
-        data.values().forEach(d -> d.save(tag));
+        Stream<IDataTrait> data = getTraits(IAnimalTrait.Type.DATA);
+        data.forEach(d -> d.save(tag));
         return tag;
     }
 
@@ -302,12 +290,12 @@ public class AnimalStats<E extends AgeableEntity> implements ICapabilityProvider
         loved = nbt.getBoolean("Loved");
         eaten = nbt.getBoolean("Eaten");
         special = nbt.getBoolean("Special");
-        wasOutsideInSun = nbt.getBoolean("InSun");
         treated = nbt.getBoolean("Treated");
         genericTreatsGiven = nbt.getInt("GenericTreats");
         speciesTreatsGiven = nbt.getInt("TypeTreats");
         annoyed = nbt.getBoolean("Annoyed");
-        data.values().forEach(d -> d.load(nbt));
+        Stream<IDataTrait> data = getTraits(IAnimalTrait.Type.DATA);
+        data.forEach(d -> d.load(nbt));
     }
 
     @Override

@@ -1,22 +1,17 @@
 package uk.joshiejack.husbandry.animals;
 
 import com.google.common.collect.Maps;
-import it.unimi.dsi.fastutil.objects.Object2BooleanArrayMap;
-import it.unimi.dsi.fastutil.objects.Object2BooleanMap;
 import joptsimple.internal.Strings;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.util.ResourceLocation;
-import uk.joshiejack.husbandry.animals.traits.AbstractAnimalTrait;
-import uk.joshiejack.husbandry.animals.traits.types.*;
+import uk.joshiejack.husbandry.animals.traits.types.IAnimalTrait;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
-import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class AnimalSpecies {
     public static final Map<EntityType<?>, AnimalSpecies> TYPES = Maps.newHashMap();
@@ -30,11 +25,10 @@ public class AnimalSpecies {
     private final int daysToBirth; //Months (weeks if < month) IRL
     private final int daysToMaturity; //Years * 7 IRL
     private final AnimalProducts products;
-    private final EnumMap<IAnimalTrait.Type, List<? extends IAnimalTrait>> traits;
-    private final Object2BooleanMap<String> hasTraitCache = new Object2BooleanArrayMap<>();
+    private final List<IAnimalTrait> traits;
     private final Item treat;
 
-    public AnimalSpecies(int minimumLifespan, int maximumLifespan, Item treat, int genericTreats, int speciesTreats, int daysToBirth, int daysToMaturity, @Nonnull AnimalProducts products, List<AbstractAnimalTrait> traits) {
+    public AnimalSpecies(int minimumLifespan, int maximumLifespan, Item treat, int genericTreats, int speciesTreats, int daysToBirth, int daysToMaturity, @Nonnull AnimalProducts products, List<IAnimalTrait> traits) {
         this.minimumLifespan = minimumLifespan * DAYS_PER_YEAR;
         this.maximumLifespan = maximumLifespan * DAYS_PER_YEAR;
         this.treat = treat;
@@ -43,25 +37,10 @@ public class AnimalSpecies {
         this.daysToBirth = daysToBirth;
         this.daysToMaturity = daysToMaturity;
         this.products = products;
-        this.traits = new EnumMap<>(IAnimalTrait.Type.class);
-        this.traits.put(IAnimalTrait.Type.AI, traits.stream().filter(t-> t instanceof IGoalTrait).collect(Collectors.toList()));
-        this.traits.put(IAnimalTrait.Type.ACTION, traits.stream().filter(t-> t instanceof IInteractiveTrait).collect(Collectors.toList()));
-        this.traits.put(IAnimalTrait.Type.BI_HOURLY, traits.stream().filter(t-> t instanceof IBiHourlyTrait).collect(Collectors.toList()));
-        this.traits.put(IAnimalTrait.Type.DATA, traits.stream().filter(t-> t instanceof IDataTrait).collect(Collectors.toList()));
-        this.traits.put(IAnimalTrait.Type.NEW_DAY, traits.stream().filter(t-> t instanceof INewDayTrait).collect(Collectors.toList()));
-        this.traits.put(IAnimalTrait.Type.DISPLAY, traits.stream().filter(t-> t instanceof IDisplayTrait).collect(Collectors.toList()));
+        this.traits = traits;
     }
 
     @SuppressWarnings("unchecked")
-    public <T extends IAnimalTrait> List<T> getTraits(IAnimalTrait.Type type) {
-        return (List<T>) traits.get(type);
-    }
-
-    public boolean hasTrait(String trait) {
-        if (!hasTraitCache.containsKey(trait))
-            hasTraitCache.put(trait, traits.values().stream().anyMatch(list -> list.stream().anyMatch(t -> t.getSerializedName().equals(trait))));
-        return hasTraitCache.getBoolean(trait);
-    }
 
     public AnimalProducts getProducts() { return products; }
 
@@ -91,5 +70,9 @@ public class AnimalSpecies {
 
     public Item getTreat() {
         return treat;
+    }
+
+    public List<IAnimalTrait> getTraits() {
+        return traits;
     }
 }

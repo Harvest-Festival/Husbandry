@@ -14,17 +14,17 @@ import uk.joshiejack.husbandry.animals.traits.types.IAnimalTrait;
 import uk.joshiejack.husbandry.animals.traits.types.IDisplayTrait;
 
 import javax.annotation.Nonnull;
-import java.util.List;
+import java.util.stream.Stream;
 
 @OnlyIn(Dist.CLIENT)
 public class AnimalStatsLabel extends Widget {
     private static final ResourceLocation ICONS = new ResourceLocation("minecraft", "textures/gui/icons.png");
-    private final List<IDisplayTrait> traits;
+    private final Stream<IDisplayTrait> traits;
     private final AnimalStats<?> stats;
 
     public AnimalStatsLabel(AnimalStats<?> stats, int x, int y, ITextComponent name) {
         super(x, y, 120, 16, name);
-        this.traits = stats.getSpecies().getTraits(IAnimalTrait.Type.DISPLAY);
+        this.traits = stats.getTraits(IAnimalTrait.Type.DISPLAY);
         this.stats = stats;
     }
 

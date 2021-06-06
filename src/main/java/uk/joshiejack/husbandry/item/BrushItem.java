@@ -26,7 +26,8 @@ public class BrushItem extends Item {
         AnimalStats<?> stats = AnimalStats.getStats(target);
         World world = player.level;
         if (stats != null) {
-            if (stats.hasTrait("cleanable") && ((CleanableTrait)stats.getTrait("cleanable")).clean(stats)) {
+            CleanableTrait trait = stats.getTrait("cleanable");
+            if (trait != null && trait.clean(stats)) {
                 if (world.isClientSide) {
                     for (int j = 0; j < 30D; j++) {
                         double d7 = (target.xo - 0.5D) + world.random.nextFloat();

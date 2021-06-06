@@ -10,7 +10,7 @@ import uk.joshiejack.husbandry.animals.traits.types.IAnimalTrait;
 import uk.joshiejack.husbandry.animals.traits.types.IGoalTrait;
 import uk.joshiejack.husbandry.entity.ai.HideFromStormGoal;
 
-import java.util.List;
+import java.util.stream.Stream;
 
 import static uk.joshiejack.husbandry.Husbandry.MODID;
 
@@ -26,7 +26,7 @@ public class AnimalAIOverride {
                 AgeableEntity ageable = ((AgeableEntity) entity);
                 //All animals will hide from storms
                 ageable.goalSelector.addGoal(4, new HideFromStormGoal(ageable, stats));
-                List<IGoalTrait> traits = stats.getSpecies().getTraits(IAnimalTrait.Type.AI);
+                Stream<IGoalTrait> traits = stats.getTraits(IAnimalTrait.Type.AI);
                 traits.forEach(trait -> trait.modifyGoals(stats, ageable.goalSelector));
             }
         }

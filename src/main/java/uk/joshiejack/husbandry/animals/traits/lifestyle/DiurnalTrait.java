@@ -1,7 +1,6 @@
 package uk.joshiejack.husbandry.animals.traits.lifestyle;
 
-import net.minecraft.entity.AgeableEntity;
-import net.minecraft.entity.ai.goal.GoalSelector;
+import net.minecraft.entity.MobEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -9,10 +8,10 @@ import uk.joshiejack.husbandry.animals.stats.AnimalStats;
 import uk.joshiejack.husbandry.animals.traits.AbstractAnimalTrait;
 import uk.joshiejack.husbandry.animals.traits.types.IBiHourlyTrait;
 import uk.joshiejack.husbandry.animals.traits.types.IDataTrait;
-import uk.joshiejack.husbandry.animals.traits.types.IGoalTrait;
+import uk.joshiejack.husbandry.animals.traits.types.IJoinWorldTrait;
 import uk.joshiejack.husbandry.entity.ai.ShelterAtNightGoal;
 
-public class DiurnalTrait extends AbstractAnimalTrait implements IBiHourlyTrait, IDataTrait, IGoalTrait {
+public class DiurnalTrait extends AbstractAnimalTrait implements IBiHourlyTrait, IDataTrait, IJoinWorldTrait {
     private boolean wasOutsideInSun; //If the animal was outside last time
 
     public DiurnalTrait(String name) {
@@ -21,7 +20,7 @@ public class DiurnalTrait extends AbstractAnimalTrait implements IBiHourlyTrait,
 
     @Override
     public void onBihourlyTick(AnimalStats<?> stats) {
-        AgeableEntity entity = stats.getEntity();
+        MobEntity entity = stats.getEntity();
         World world = entity.level;
         BlockPos pos = entity.blockPosition();
         boolean dayTime = world.isDay();
@@ -37,8 +36,8 @@ public class DiurnalTrait extends AbstractAnimalTrait implements IBiHourlyTrait,
     }
 
     @Override
-    public void modifyGoals(AnimalStats<?> stats, GoalSelector selector) {
-        selector.addGoal(4, new ShelterAtNightGoal(stats.getEntity(), stats));
+    public void onJoinWorld(AnimalStats<?> stats) {
+        stats.getEntity().goalSelector.addGoal(4, new ShelterAtNightGoal(stats.getEntity(), stats));
     }
 
     @Override

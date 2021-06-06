@@ -1,7 +1,7 @@
 package uk.joshiejack.husbandry.client.gui;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.AgeableEntity;
+import net.minecraft.entity.MobEntity;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraftforge.api.distmarker.Dist;
@@ -27,7 +27,7 @@ public class PageStats extends AbstractMultiPage.Both<AnimalStats<?>> {
     @SuppressWarnings("ConstantConditions")
     @Override
     protected List<AnimalStats<?>> getEntries() {
-        return Minecraft.getInstance().level.getLoadedEntitiesOfClass(AgeableEntity.class,
+        return Minecraft.getInstance().level.getLoadedEntitiesOfClass(MobEntity.class,
                 new AxisAlignedBB(Minecraft.getInstance().player.blockPosition()).inflate(64D)).stream()
                 .filter(e -> AnimalStats.getStats(e) != null)
                 .map(AnimalStats::getStats)

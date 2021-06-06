@@ -4,17 +4,18 @@ import net.minecraft.entity.ai.goal.GoalSelector;
 import net.minecraft.entity.passive.ChickenEntity;
 import uk.joshiejack.husbandry.animals.stats.AnimalStats;
 import uk.joshiejack.husbandry.animals.traits.AbstractAnimalTrait;
-import uk.joshiejack.husbandry.animals.traits.types.IGoalTrait;
+import uk.joshiejack.husbandry.animals.traits.types.IJoinWorldTrait;
 import uk.joshiejack.husbandry.entity.ai.LayEggGoal;
 import uk.joshiejack.husbandry.entity.ai.RoostGoal;
 
-public class LaysEggTrait extends AbstractAnimalTrait implements IGoalTrait {
+public class LaysEggTrait extends AbstractAnimalTrait implements IJoinWorldTrait {
     public LaysEggTrait(String name) {
         super(name);
     }
 
     @Override
-    public void modifyGoals(AnimalStats<?> stats, GoalSelector selector) {
+    public void onJoinWorld(AnimalStats<?> stats) {
+        GoalSelector selector = stats.getEntity().goalSelector;
         if (stats.getEntity() instanceof ChickenEntity) {
             ((ChickenEntity) stats.getEntity()).eggTime = Integer.MAX_VALUE;
         }

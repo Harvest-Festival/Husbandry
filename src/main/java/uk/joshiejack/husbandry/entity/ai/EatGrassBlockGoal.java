@@ -3,7 +3,7 @@ package uk.joshiejack.husbandry.entity.ai;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.pattern.BlockStateMatcher;
-import net.minecraft.entity.CreatureEntity;
+import net.minecraft.entity.MobEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorldReader;
 import net.minecraftforge.event.ForgeEventFactory;
@@ -17,7 +17,7 @@ import static uk.joshiejack.husbandry.entity.ai.AbstractMoveToBlockGoal.Orientat
 public class EatGrassBlockGoal extends AbstractMoveToBlockGoal {
     private static final Predicate<BlockState> IS_GRASS = BlockStateMatcher.forBlock(Blocks.GRASS_BLOCK);
 
-    public EatGrassBlockGoal(CreatureEntity entity, AnimalStats<?> stats) {
+    public EatGrassBlockGoal(MobEntity entity, AnimalStats<?> stats) {
         super(entity, stats, ABOVE, 8);
     }
 

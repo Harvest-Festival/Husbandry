@@ -12,6 +12,7 @@ import net.minecraft.world.World;
 import uk.joshiejack.husbandry.Husbandry;
 import uk.joshiejack.husbandry.animals.stats.AnimalStats;
 import uk.joshiejack.husbandry.animals.traits.happiness.CleanableTrait;
+import uk.joshiejack.husbandry.animals.traits.lifestyle.LameableTrait;
 
 import javax.annotation.Nonnull;
 
@@ -26,6 +27,7 @@ public class BrushItem extends Item {
         AnimalStats<?> stats = AnimalStats.getStats(target);
         World world = player.level;
         if (stats != null) {
+            LameableTrait t = stats.getTrait("lameable");
             CleanableTrait trait = stats.getTrait("cleanable");
             if (trait != null && trait.clean(stats)) {
                 if (world.isClientSide) {

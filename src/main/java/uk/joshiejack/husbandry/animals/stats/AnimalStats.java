@@ -2,8 +2,9 @@ package uk.joshiejack.husbandry.animals.stats;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
-import net.minecraft.entity.AgeableEntity;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.MobEntity;
+import net.minecraft.entity.monster.SlimeEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -17,6 +18,7 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import uk.joshiejack.husbandry.Husbandry;
 import uk.joshiejack.husbandry.animals.AnimalSpecies;
 import uk.joshiejack.husbandry.animals.traits.product.AbstractAnimalTraitProduct;
@@ -31,13 +33,14 @@ import uk.joshiejack.penguinlib.util.helpers.generic.ReflectionHelper;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Stream;
 
 import static uk.joshiejack.husbandry.animals.stats.CapabilityStatsHandler.ANIMAL_STATS_CAPABILITY;
 
-public class AnimalStats<E extends AgeableEntity> implements ICapabilityProvider, INBTSerializable<CompoundNBT> {
+public class AnimalStats<E extends MobEntity> implements ICapabilityProvider, INBTSerializable<CompoundNBT> {
     public static final ITag.INamedTag<Item> TREATS = ItemTags.createOptional(new ResourceLocation(Husbandry.MODID, "treat"));
     private static final int MAX_RELATIONSHIP = 30000;
     private final Multimap<IAnimalTrait.Type, IAnimalTrait> traits;
@@ -65,7 +68,7 @@ public class AnimalStats<E extends AgeableEntity> implements ICapabilityProvider
         this.traits = HashMultimap.create();
         this.species.getTraits().forEach(trait -> {
             IAnimalTrait copy = trait instanceof IDataTrait ? ReflectionHelper.newInstance(ReflectionHelper.getConstructor(trait.getClass(), String.class), trait.getSerializedName()) : trait;
-            if (copy instanceof IGoalTrait) this.traits.get(IAnimalTrait.Type.AI).add(copy);
+            if (copy instanceof IJoinWorldTrait) this.traits.get(IAnimalTrait.Type.ON_JOIN).add(copy);
             if (copy instanceof IInteractiveTrait) this.traits.get(IAnimalTrait.Type.ACTION).add(copy);
             if (copy instanceof IBiHourlyTrait) this.traits.get(IAnimalTrait.Type.BI_HOURLY).add(copy);
             if (copy instanceof IDataTrait) this.traits.get(IAnimalTrait.Type.DATA).add(copy);
@@ -125,7 +128,12 @@ public class AnimalStats<E extends AgeableEntity> implements ICapabilityProvider
             childhood++;
 
             if (childhood >= species.getDaysToMaturity()) {
-                entity.setAge(0); //Grow up!
+                entity.setBaby(false);
+                if (entity instanceof SlimeEntity) {
+                    try {
+                        ObfuscationReflectionHelper.findMethod(SlimeEntity.class, "func_70799_a", int.class, boolean.class).invoke(2, true);
+                    } catch (IllegalAccessException | InvocationTargetException ignored) {}
+                }
             }
         }
 

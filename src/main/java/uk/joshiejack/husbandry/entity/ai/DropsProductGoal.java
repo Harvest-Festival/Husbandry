@@ -1,7 +1,7 @@
 package uk.joshiejack.husbandry.entity.ai;
 
 import net.minecraft.block.BlockState;
-import net.minecraft.entity.CreatureEntity;
+import net.minecraft.entity.MobEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
@@ -11,7 +11,7 @@ import uk.joshiejack.husbandry.animals.stats.AnimalStats;
 import javax.annotation.Nonnull;
 
 public class DropsProductGoal extends AbstractMoveToBlockGoal {
-    public DropsProductGoal(CreatureEntity entity, AnimalStats<?> stats) {
+    public DropsProductGoal(MobEntity entity, AnimalStats<?> stats) {
         super(entity, stats, Orientation.BESIDE, 16);
     }
 

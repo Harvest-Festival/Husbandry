@@ -1,7 +1,7 @@
 package uk.joshiejack.husbandry.animals;
 
 import com.google.common.collect.Lists;
-import net.minecraft.entity.AgeableEntity;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.loot.LootContext;
@@ -32,7 +32,7 @@ public class AnimalProducts {
     }
 
     /** Size will be 0, 1 or 2 **/
-    public List<ItemStack> getProduct(AgeableEntity entity, @Nullable PlayerEntity player) {
+    public List<ItemStack> getProduct(LivingEntity entity, @Nullable PlayerEntity player) {
         if (lootTable == null)
             return EMPTY;
         LootContext.Builder lootcontext$builder = (new LootContext.Builder((ServerWorld)entity.level))

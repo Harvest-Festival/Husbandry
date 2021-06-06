@@ -1,6 +1,7 @@
 package uk.joshiejack.husbandry.entity.ai;
 
 import net.minecraft.entity.CreatureEntity;
+import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ai.RandomPositionGenerator;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorldReader;
@@ -12,7 +13,7 @@ import java.util.Objects;
 import static uk.joshiejack.husbandry.entity.ai.AbstractMoveToBlockGoal.Orientation.ABOVE;
 
 public abstract class AbstractHideInsideGoal extends AbstractMoveToBlockGoal {
-    public AbstractHideInsideGoal(CreatureEntity entity, AnimalStats<?> stats) {
+    public AbstractHideInsideGoal(MobEntity entity, AnimalStats<?> stats) {
         super(entity, stats, ABOVE, 8);
     }
 
@@ -24,7 +25,7 @@ public abstract class AbstractHideInsideGoal extends AbstractMoveToBlockGoal {
     @Override
     protected boolean findNearestBlock() {
         if (shouldHide()) return super.findNearestBlock();
-        blockPos = new BlockPos(Objects.requireNonNull(RandomPositionGenerator.getLandPos(entity, 10, 7)));
+        blockPos = entity instanceof CreatureEntity ? new BlockPos(Objects.requireNonNull(RandomPositionGenerator.getLandPos((CreatureEntity) entity, 10, 7))) : blockPos;
         return isValidTarget(entity.level, blockPos);
     }
 

@@ -2,9 +2,9 @@ package uk.joshiejack.husbandry.animals;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import net.minecraft.entity.AgeableEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.MobEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
@@ -57,9 +57,9 @@ public class AnimalLoader {
     @SubscribeEvent
     public static void onCapabilityLoading(AttachCapabilitiesEvent<Entity> event) {
         Entity entity = event.getObject();
-        if (entity instanceof AgeableEntity && AnimalSpecies.TYPES.containsKey(entity.getType()))
+        if (entity instanceof MobEntity && AnimalSpecies.TYPES.containsKey(entity.getType()))
             event.addCapability(new ResourceLocation(Husbandry.MODID, "stats"),
-                    new AnimalStats<>((AgeableEntity) entity, AnimalSpecies.TYPES.get(entity.getType())));
+                    new AnimalStats<>((MobEntity) entity, AnimalSpecies.TYPES.get(entity.getType())));
     }
 
     @SubscribeEvent

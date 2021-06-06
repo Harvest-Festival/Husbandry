@@ -3,7 +3,7 @@ package uk.joshiejack.husbandry.entity.ai;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.BushBlock;
-import net.minecraft.entity.CreatureEntity;
+import net.minecraft.entity.MobEntity;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Direction;
@@ -14,7 +14,7 @@ import uk.joshiejack.husbandry.animals.stats.AnimalStats;
 import javax.annotation.Nonnull;
 
 public class FindProductGoal extends AbstractMoveToBlockGoal {
-    public FindProductGoal(CreatureEntity entity, AnimalStats<?> stats) {
+    public FindProductGoal(MobEntity entity, AnimalStats<?> stats) {
         super(entity, stats, Orientation.BESIDE, 16);
     }
 

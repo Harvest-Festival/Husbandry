@@ -1,6 +1,8 @@
 package uk.joshiejack.husbandry.animals.traits.lifestyle;
 
 import net.minecraft.entity.AgeableEntity;
+import net.minecraft.entity.MobEntity;
+import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -56,20 +58,23 @@ public class MammalTrait extends AbstractAnimalTrait implements IDataTrait, IInt
     }
 
     private void giveBirth(AnimalStats<?> stats) {
-        AgeableEntity entity = stats.getEntity();
+        MobEntity entity = stats.getEntity();
         stats.increaseHappiness(100); //Happy to have a child
         int chance = entity.level.random.nextInt(100);
         int offspring = chance >= 99 ? 3 : chance >= 90 ? 2 : 1;
         for (int i = 0; i < offspring; i++) {
-            AgeableEntity ageable = entity.getBreedOffspring((ServerWorld) entity.level, entity);
-            if (ageable != null) {
-                ageable.setAge(-Integer.MAX_VALUE);
-                ageable.setPos(entity.xo, entity.yo, entity.zo);
-                AnimalStats<?> babyStats = AnimalStats.getStats(ageable);
-                if (babyStats != null)
-                    babyStats.increaseHappiness(stats.getHappiness() / 2);
-                entity.level.addFreshEntity(ageable);
-            }
+            if (entity instanceof AgeableEntity) {
+                AgeableEntity ageable = ((AgeableEntity) entity).getBreedOffspring((ServerWorld) entity.level, (AgeableEntity) entity);
+                if (ageable != null) {
+                    ageable.setAge(-Integer.MAX_VALUE);
+                    ageable.setPos(entity.xo, entity.yo, entity.zo);
+                    AnimalStats<?> babyStats = AnimalStats.getStats(ageable);
+                    if (babyStats != null)
+                        babyStats.increaseHappiness(stats.getHappiness() / 2);
+                    entity.level.addFreshEntity(ageable);
+                }
+            } else
+                entity.getType().spawn((ServerWorld) entity.level, null, null, null, entity.blockPosition(), SpawnReason.BREEDING, true, true);
         }
     }
 

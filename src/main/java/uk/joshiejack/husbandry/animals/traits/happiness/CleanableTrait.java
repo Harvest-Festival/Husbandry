@@ -1,6 +1,6 @@
 package uk.joshiejack.husbandry.animals.traits.happiness;
 
-import net.minecraft.entity.AgeableEntity;
+import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.Hand;
@@ -52,7 +52,7 @@ public class CleanableTrait extends AbstractAnimalTrait implements IDataTrait, I
     }
 
     public void setCleaned(AnimalStats<?> stats, boolean cleaned) {
-        AgeableEntity entity = stats.getEntity();
+        MobEntity entity = stats.getEntity();
         if (entity.level.isClientSide) this.cleaned = cleaned;
         else {
             this.cleaned = cleaned;

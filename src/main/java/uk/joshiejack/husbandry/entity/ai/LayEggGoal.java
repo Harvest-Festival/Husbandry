@@ -1,6 +1,6 @@
 package uk.joshiejack.husbandry.entity.ai;
 
-import net.minecraft.entity.CreatureEntity;
+import net.minecraft.entity.MobEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.TileEntity;
@@ -19,7 +19,7 @@ import static uk.joshiejack.husbandry.entity.ai.AbstractMoveToBlockGoal.Orientat
 public class LayEggGoal extends AbstractMoveToBlockGoal {
     private int eggTimer;
 
-    public LayEggGoal(CreatureEntity entity, AnimalStats<?> stats) {
+    public LayEggGoal(MobEntity entity, AnimalStats<?> stats) {
         super(entity, stats, ABOVE, 8);
     }
 

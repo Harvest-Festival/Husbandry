@@ -7,6 +7,6 @@ public interface IAnimalTrait extends IStringSerializable {
     default void initTrait(AnimalStats<?> stats) {}
 
     enum Type {
-        NEW_DAY, BI_HOURLY, DATA, AI, ACTION, DISPLAY
+        NEW_DAY, BI_HOURLY, DATA, ON_JOIN, ACTION, DISPLAY
     }
 }

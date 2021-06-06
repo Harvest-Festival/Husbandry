@@ -1,6 +1,5 @@
 package uk.joshiejack.husbandry.animals.traits.food;
 
-import net.minecraft.entity.ai.goal.GoalSelector;
 import net.minecraft.item.Item;
 import net.minecraft.tags.ITag;
 import net.minecraft.tags.ItemTags;
@@ -23,7 +22,7 @@ public class EatsBirdFeedTrait extends AbstractFoodTrait {
     }
 
     @Override
-    public void modifyGoals(AnimalStats<?> stats, GoalSelector selector) {
-        selector.addGoal(3, new EatFoodGoal(stats.getEntity(), stats, getFoodTag(), AbstractMoveToBlockGoal.Orientation.ABOVE, 8));
+    public void onJoinWorld(AnimalStats<?> stats) {
+        stats.getEntity().goalSelector.addGoal(3, new EatFoodGoal(stats.getEntity(), stats, getFoodTag(), AbstractMoveToBlockGoal.Orientation.ABOVE, 8));
     }
 }

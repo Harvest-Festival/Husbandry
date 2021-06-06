@@ -29,7 +29,8 @@ public class EatsGrassTrait extends AbstractFoodTrait {
     }
 
     @Override
-    public void modifyGoals(AnimalStats<?> stats, GoalSelector selector) {
+    public void onJoinWorld(AnimalStats<?> stats) {
+        GoalSelector selector = stats.getEntity().goalSelector;
         if (stats.getEntity() instanceof SheepEntity) {
             selector.removeGoal(Objects.requireNonNull(ObfuscationReflectionHelper.getPrivateValue(SheepEntity.class, (SheepEntity) stats.getEntity(), "field_146087_bs")));
         }

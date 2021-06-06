@@ -1,6 +1,6 @@
 package uk.joshiejack.husbandry.animals.traits.lifestyle;
 
-import net.minecraft.entity.AgeableEntity;
+import net.minecraft.entity.MobEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.DamageSource;
 import uk.joshiejack.husbandry.animals.AnimalSpecies;
@@ -23,7 +23,7 @@ public class MortalTrait extends AbstractAnimalTrait implements INewDayTrait, ID
     public void onNewDay(AnimalStats<?> stats) {
         int chance = MathsHelper.constrainToRangeInt(DEATH_CHANCE, 1, Short.MAX_VALUE);
         AnimalSpecies species = stats.getSpecies();
-        AgeableEntity entity = stats.getEntity();
+        MobEntity entity = stats.getEntity();
         if (age >= species.getMaxAge() || (age >= species.getMinAge() && entity.getRandom().nextInt(chance) == 0)) {
             entity.hurt(OLD_AGE, Integer.MAX_VALUE);
         }

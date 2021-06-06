@@ -92,6 +92,7 @@ public class Husbandry {
         //Unused traits
         AbstractAnimalTrait.registerTrait("nocturnal",              NocturnalTrait.class);
         AbstractAnimalTrait.registerTrait("requires_food",          RequiresFoodTrait.class);
+        AbstractAnimalTrait.registerTrait("lameable",               LameableTrait.class);
     }
 
     @SubscribeEvent

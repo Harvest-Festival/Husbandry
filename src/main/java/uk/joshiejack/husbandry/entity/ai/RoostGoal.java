@@ -1,6 +1,6 @@
 package uk.joshiejack.husbandry.entity.ai;
 
-import net.minecraft.entity.CreatureEntity;
+import net.minecraft.entity.MobEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorldReader;
 import uk.joshiejack.husbandry.animals.stats.AnimalStats;
@@ -11,7 +11,7 @@ import javax.annotation.Nonnull;
 import static uk.joshiejack.husbandry.entity.ai.AbstractMoveToBlockGoal.Orientation.ABOVE;
 
 public class RoostGoal extends AbstractMoveToBlockGoal {
-    public RoostGoal(CreatureEntity entity, AnimalStats<?> stats) {
+    public RoostGoal(MobEntity entity, AnimalStats<?> stats) {
         super(entity, stats, ABOVE, 16);
     }
 

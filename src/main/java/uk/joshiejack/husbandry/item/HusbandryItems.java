@@ -32,6 +32,7 @@ public class HusbandryItems {
     public static final RegistryObject<Item> BRUSH = ITEMS.register("brush", BrushItem::new);
     public static final RegistryObject<Item> MIRACLE_POTION = ITEMS.register("miracle_potion", () -> new Item(new Item.Properties().stacksTo(16).tab(Husbandry.TAB)));
     public static final RegistryObject<Item> SICKLE = ITEMS.register("sickle", () -> new SickleItem(ItemTier.STONE));
+
     // Animal Food
     public static final RegistryObject<Item> FODDER = ITEMS.register("fodder", () -> new Item(new Item.Properties().tab(Husbandry.TAB)));
     public static final RegistryObject<Item> BIRD_FEED = ITEMS.register("bird_feed", () -> new Item(new Item.Properties().tab(Husbandry.TAB)));

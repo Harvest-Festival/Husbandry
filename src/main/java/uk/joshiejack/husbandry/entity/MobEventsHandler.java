@@ -17,8 +17,8 @@ import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import uk.joshiejack.husbandry.api.trait.IJoinWorldTrait;
-import uk.joshiejack.husbandry.api.trait.TraitType;
 import uk.joshiejack.husbandry.entity.stats.MobStats;
+import uk.joshiejack.husbandry.entity.traits.TraitType;
 
 import java.util.stream.Stream;
 

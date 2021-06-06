@@ -11,8 +11,8 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import uk.joshiejack.husbandry.api.IMobStats;
 import uk.joshiejack.husbandry.api.trait.IDisplayTrait;
-import uk.joshiejack.husbandry.api.trait.TraitType;
 import uk.joshiejack.husbandry.entity.stats.MobStats;
+import uk.joshiejack.husbandry.entity.traits.TraitType;
 
 import javax.annotation.Nonnull;
 import java.util.stream.Stream;

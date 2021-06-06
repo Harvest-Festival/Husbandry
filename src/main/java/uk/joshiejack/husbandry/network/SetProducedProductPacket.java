@@ -36,9 +36,8 @@ public class SetProducedProductPacket extends PenguinPacket {
         Entity entity = player.level.getEntity(entityID);
         if (entity != null) {
             MobStats<?> stats = MobStats.getStats(entity);
-            if (stats != null) {
+            if (stats != null)
                 stats.setProduced(value);
-            }
         }
     }
 }

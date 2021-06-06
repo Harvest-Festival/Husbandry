@@ -23,6 +23,7 @@ import uk.joshiejack.husbandry.Husbandry;
 import uk.joshiejack.husbandry.api.IMobStats;
 import uk.joshiejack.husbandry.api.trait.*;
 import uk.joshiejack.husbandry.entity.ai.AbstractMoveToBlockGoal;
+import uk.joshiejack.husbandry.entity.traits.TraitType;
 import uk.joshiejack.husbandry.entity.traits.product.AbstractMobProductTrait;
 import uk.joshiejack.husbandry.item.HusbandryItems;
 import uk.joshiejack.husbandry.network.SendDataPacket;

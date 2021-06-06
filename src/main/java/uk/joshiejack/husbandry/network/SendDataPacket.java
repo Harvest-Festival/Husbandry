@@ -35,9 +35,8 @@ public class SendDataPacket extends AbstractSyncCompoundNBTPacket {
         Entity entity = player.level.getEntity(entityID);
         if (entity != null) {
             MobStats<?> stats = MobStats.getStats(entity);
-            if (stats != null) {
+            if (stats != null)
                 stats.deserializeNBT(tag);
-            }
         }
     }
 }

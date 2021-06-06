@@ -2,7 +2,6 @@ package uk.joshiejack.husbandry.entity.traits.food;
 
 import net.minecraft.util.DamageSource;
 import uk.joshiejack.husbandry.api.IMobStats;
-import uk.joshiejack.husbandry.api.trait.AbstractMobTrait;
 import uk.joshiejack.husbandry.api.trait.INewDayTrait;
 import uk.joshiejack.penguinlib.data.TimeUnitRegistry;
 

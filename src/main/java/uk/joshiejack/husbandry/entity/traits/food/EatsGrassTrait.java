@@ -13,7 +13,6 @@ import uk.joshiejack.husbandry.entity.ai.AbstractMoveToBlockGoal;
 import uk.joshiejack.husbandry.entity.ai.EatFoodGoal;
 import uk.joshiejack.husbandry.entity.ai.EatGrassBlockGoal;
 import uk.joshiejack.husbandry.entity.ai.EatTallGrassGoal;
-import uk.joshiejack.husbandry.entity.stats.MobStats;
 
 import java.util.Objects;
 

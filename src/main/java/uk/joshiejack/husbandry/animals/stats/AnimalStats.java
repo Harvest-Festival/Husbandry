@@ -73,7 +73,7 @@ public class AnimalStats<E extends AgeableEntity> implements ICapabilityProvider
             if (copy instanceof IDisplayTrait) this.traits.get(IAnimalTrait.Type.DISPLAY).add(copy);
         });
 
-        //this.data.values().forEach(data -> data.initTrait(this));
+        this.traits.get(IAnimalTrait.Type.DATA).forEach(trait -> trait.initTrait(this));
         this.products = (AbstractAnimalTraitProduct) this.traits.get(IAnimalTrait.Type.DATA).stream().filter(t -> t instanceof AbstractAnimalTraitProduct).findFirst().orElse(null);
         this.capability = LazyOptional.of(() -> this);
     }

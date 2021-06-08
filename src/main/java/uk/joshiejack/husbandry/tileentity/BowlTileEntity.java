@@ -20,16 +20,18 @@ public class BowlTileEntity extends AbstractFoodSupplyTileEntity {
         return EatsRabbitFoodTrait.RABBIT_FOOD.contains(stack.getItem()) || EatsDogFoodTrait.DOG_FOOD.contains(stack.getItem()) || EatsCatFoodTrait.CAT_FOOD.contains(stack.getItem());
     }
 
+    private BowlBlock.FoodType getFoodTypeFromStack(ItemStack stack) {
+        return EatsRabbitFoodTrait.RABBIT_FOOD.contains(stack.getItem()) ? BowlBlock.FoodType.RABBIT_FOOD
+                : EatsCatFoodTrait.CAT_FOOD.contains(stack.getItem()) ? BowlBlock.FoodType.CAT_FOOD : BowlBlock.FoodType.DOG_FOOD;
+    }
+
     @Override
     public void setItem(int slot, @Nonnull ItemStack stack) {
         super.setItem(slot, stack);
-        if (EatsRabbitFoodTrait.RABBIT_FOOD.contains(stack.getItem()))
-            level.setBlock(worldPosition, HusbandryBlocks.BOWL.get().defaultBlockState().setValue(BowlBlock.FILL, BowlBlock.Fill.RABBIT_FOOD), 2);
-        else if (EatsCatFoodTrait.CAT_FOOD.contains(stack.getItem()))
-            level.setBlock(worldPosition, HusbandryBlocks.BOWL.get().defaultBlockState().setValue(BowlBlock.FILL, BowlBlock.Fill.CAT_FOOD), 2);
-        else if (EatsDogFoodTrait.DOG_FOOD.contains(stack.getItem()))
-            level.setBlock(worldPosition, HusbandryBlocks.BOWL.get().defaultBlockState().setValue(BowlBlock.FILL, BowlBlock.Fill.CAT_FOOD), 2);
-        else if (stack.isEmpty())
-            level.setBlock(worldPosition, HusbandryBlocks.BOWL.get().defaultBlockState().setValue(BowlBlock.FILL, BowlBlock.Fill.EMPTY), 2);
+        if (stack.isEmpty())
+            level.setBlock(worldPosition, HusbandryBlocks.BOWL.get().defaultBlockState().setValue(BowlBlock.FILL, 0), 2);
+        else level.setBlock(worldPosition, HusbandryBlocks.BOWL.get().defaultBlockState()
+                .setValue(BowlBlock.TYPE, getFoodTypeFromStack(stack))
+                .setValue(BowlBlock.FILL, stack.getCount()), 2);
     }
 }

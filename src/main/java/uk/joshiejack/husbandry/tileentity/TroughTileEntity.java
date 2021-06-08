@@ -14,6 +14,11 @@ public class TroughTileEntity extends AbstractFoodSupplyTileEntity {
     }
 
     @Override
+    public int getMaxStackSize() {
+        return 4;
+    }
+
+    @Override
     public boolean canPlaceItem(int slot, @Nonnull ItemStack stack) {
         return EatsGrassTrait.HAY.contains(stack.getItem()) || EatsSlopTrait.SLOP.contains(stack.getItem());
     }

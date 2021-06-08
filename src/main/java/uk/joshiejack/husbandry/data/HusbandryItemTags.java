@@ -40,9 +40,9 @@ public class HusbandryItemTags extends ItemTagsProvider {
         tag(MammalTrait.IMPREGNATES_MAMMALS).add(HusbandryItems.MIRACLE_POTION.get());
         tag(EatsGrassTrait.HAY).add(Items.WHEAT, Items.SEAGRASS, HusbandryItems.FODDER.get());
         tag(PenguinTags.RAW_FISHES).add(Items.COD); //Only because the tag below complains else
-        tag(EatsCatFoodTrait.CAT_FOOD).add(HusbandryItems.CAT_FOOD.get()).addTag(PenguinTags.RAW_FISHES);
-        tag(EatsDogFoodTrait.DOG_FOOD).add(HusbandryItems.DOG_FOOD.get(), Items.RABBIT, Items.BEEF, Items.PORKCHOP, Items.MUTTON, Items.CHICKEN);
-        tag(EatsRabbitFoodTrait.RABBIT_FOOD).add(HusbandryItems.RABBIT_FOOD.get(), Items.CARROT);
+        tag(EatsCatFoodTrait.CAT_FOOD).addTag(PenguinTags.RAW_FISHES);
+        tag(EatsDogFoodTrait.DOG_FOOD).add(Items.RABBIT, Items.BEEF, Items.PORKCHOP, Items.MUTTON, Items.CHICKEN);
+        tag(EatsRabbitFoodTrait.RABBIT_FOOD).add(Items.CARROT);
         tag(HusbandryItemTags.MOB_PRODUCT).add(Items.FEATHER, Items.CHICKEN, Items.PORKCHOP, Items.BEEF, Items.LEATHER,
                 Items.RABBIT, Items.RABBIT_FOOT, Items.RABBIT_HIDE, Items.MUTTON).addTags(ItemTags.WOOL);
         tag(PenguinTags.SICKLES).add(HusbandryItems.SICKLE.get());

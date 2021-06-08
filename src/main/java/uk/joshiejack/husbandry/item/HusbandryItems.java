@@ -36,9 +36,6 @@ public class HusbandryItems {
     // Animal Food
     public static final RegistryObject<Item> FODDER = ITEMS.register("fodder", () -> new Item(new Item.Properties().tab(Husbandry.TAB)));
     public static final RegistryObject<Item> BIRD_FEED = ITEMS.register("bird_feed", () -> new Item(new Item.Properties().tab(Husbandry.TAB)));
-    public static final RegistryObject<Item> CAT_FOOD = ITEMS.register("cat_food", () -> new Item(new Item.Properties().tab(Husbandry.TAB)));
-    public static final RegistryObject<Item> DOG_FOOD = ITEMS.register("dog_food", () -> new Item(new Item.Properties().tab(Husbandry.TAB)));
-    public static final RegistryObject<Item> RABBIT_FOOD = ITEMS.register("rabbit_food", () -> new Item(new Item.Properties().tab(Husbandry.TAB)));
     public static final RegistryObject<Item> SLOP = ITEMS.register("slop", () -> new Item(new Item.Properties().tab(Husbandry.TAB)));
     // Animal Treats
     public static final RegistryObject<Item> GENERIC_TREAT = ITEMS.register("generic_treat", () -> new Item(new Item.Properties().tab(Husbandry.TAB)));

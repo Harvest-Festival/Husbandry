@@ -1,7 +1,6 @@
 {
   "replace": false,
   "values": [
-    "husbandry:cat_food",
     "#forge:raw_fishes"
   ]
 }

@@ -14,11 +14,6 @@ public class FeedingTrayTileEntity extends AbstractFoodSupplyTileEntity {
     }
 
     @Override
-    public int getMaxStackSize() {
-        return 2;
-    }
-
-    @Override
     public boolean canPlaceItem(int slot, @Nonnull ItemStack stack) {
         return EatsBirdFeedTrait.BIRD_FEED.contains(stack.getItem());
     }

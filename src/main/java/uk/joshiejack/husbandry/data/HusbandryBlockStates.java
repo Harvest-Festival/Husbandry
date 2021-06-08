@@ -10,10 +10,7 @@ import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.client.model.generators.VariantBlockStateBuilder;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import uk.joshiejack.husbandry.Husbandry;
-import uk.joshiejack.husbandry.block.FeedingTrayBlock;
-import uk.joshiejack.husbandry.block.HusbandryBlocks;
-import uk.joshiejack.husbandry.block.IncubatorBlock;
-import uk.joshiejack.husbandry.block.TroughBlock;
+import uk.joshiejack.husbandry.block.*;
 
 @SuppressWarnings("ConstantConditions")
 public class HusbandryBlockStates extends BlockStateProvider {
@@ -23,7 +20,6 @@ public class HusbandryBlockStates extends BlockStateProvider {
 
     @Override
     protected void registerStatesAndModels() {
-        model(HusbandryBlocks.BOWL.get());
         model(HusbandryBlocks.NEST.get());
         model(HusbandryBlocks.TRUFFLE_BLOCK.get());
         ModelFile file = models().getExistingFile(HusbandryBlocks.INCUBATOR.get().getRegistryName());
@@ -32,6 +28,7 @@ public class HusbandryBlockStates extends BlockStateProvider {
         builder.partialState().with(IncubatorBlock.FACING, Direction.WEST).modelForState().modelFile(file).rotationY(270).addModel();
         builder.partialState().with(IncubatorBlock.FACING, Direction.NORTH).modelForState().modelFile(file).rotationY(0).addModel();
         builder.partialState().with(IncubatorBlock.FACING, Direction.SOUTH).modelForState().modelFile(file).rotationY(180).addModel();
+        bowl(HusbandryBlocks.BOWL.get());
         trough(HusbandryBlocks.TROUGH.get());
         feedingtray(HusbandryBlocks.FEEDING_TRAY.get());
     }
@@ -64,6 +61,23 @@ public class HusbandryBlockStates extends BlockStateProvider {
                 .addModel().condition(TroughBlock.TYPE, TroughBlock.FoodType.SLOP).condition(TroughBlock.FILL, 3).end()
                 .part().modelFile(models().getExistingFile(new ResourceLocation(Husbandry.MODID, "slop_four_quarters")))
                 .addModel().condition(TroughBlock.TYPE, TroughBlock.FoodType.SLOP).condition(TroughBlock.FILL, 4).end();
+    }
+
+    private void bowl(Block block) {
+        getMultipartBuilder(block)
+                .part().modelFile(models().getExistingFile(new ResourceLocation(Husbandry.MODID, "bowl"))).addModel().end()
+                .part().modelFile(models().getExistingFile(new ResourceLocation(Husbandry.MODID, "cat_food_semi")))
+                .addModel().condition(BowlBlock.TYPE, BowlBlock.FoodType.CAT_FOOD).condition(TroughBlock.FILL, 1).end()
+                .part().modelFile(models().getExistingFile(new ResourceLocation(Husbandry.MODID, "cat_food_full")))
+                .addModel().condition(BowlBlock.TYPE, BowlBlock.FoodType.CAT_FOOD).condition(TroughBlock.FILL, 2).end()
+                .part().modelFile(models().getExistingFile(new ResourceLocation(Husbandry.MODID, "dog_food_semi")))
+                .addModel().condition(BowlBlock.TYPE, BowlBlock.FoodType.DOG_FOOD).condition(TroughBlock.FILL, 1).end()
+                .part().modelFile(models().getExistingFile(new ResourceLocation(Husbandry.MODID, "dog_food_full")))
+                .addModel().condition(BowlBlock.TYPE, BowlBlock.FoodType.DOG_FOOD).condition(TroughBlock.FILL, 2).end()
+                .part().modelFile(models().getExistingFile(new ResourceLocation(Husbandry.MODID, "rabbit_food_semi")))
+                .addModel().condition(BowlBlock.TYPE, BowlBlock.FoodType.RABBIT_FOOD).condition(TroughBlock.FILL, 1).end()
+                .part().modelFile(models().getExistingFile(new ResourceLocation(Husbandry.MODID, "rabbit_food_full")))
+                .addModel().condition(BowlBlock.TYPE, BowlBlock.FoodType.RABBIT_FOOD).condition(TroughBlock.FILL, 2).end();
     }
 
     protected void model(Block block) {

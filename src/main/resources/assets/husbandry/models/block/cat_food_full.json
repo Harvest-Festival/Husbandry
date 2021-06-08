@@ -1,0 +1,15 @@
+{
+	"parent": "block/block",
+	"textures": {
+		"tex": "husbandry:block/cat_food"
+	},
+	"elements": [
+		{
+			"from": [4, 0.7, 4],
+			"to": [12, 0.7, 12],
+			"faces": {
+				"up": {"uv": [4, 4, 12, 12], "texture": "#tex"}
+			}
+		}
+	]
+}

@@ -1,0 +1,16 @@
+{
+	"parent": "block/block",
+	"textures": {
+		"particle": "husbandry:block/trough",
+		"texture": "husbandry:block/trough"
+	},
+	"elements": [
+		{
+			"from": [2, 11, 2],
+			"to": [14, 11, 14],
+			"faces": {
+				"up": {"uv": [0, 9, 6, 15], "texture": "#texture"}
+			}
+		}
+	]
+}

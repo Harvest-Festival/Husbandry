@@ -17,8 +17,8 @@ repositories {
 }
 
 dependencies {
-    compile fg.deobf("uk.joshiejack.penguinlib:Penguin-Lib:${minecraft_version}-${penguinlib_version}")
-    compile fg.deobf("uk.joshiejack.husbandry:Husbandry:${minecraft_version}-${husbandry_version}")
+    compileOnly fg.deobf("uk.joshiejack.penguinlib:Penguin-Lib:${minecraft_version}-${penguinlib_version}")
+    compileOnly fg.deobf("uk.joshiejack.husbandry:Husbandry:${minecraft_version}-${husbandry_version}")
 }
 ```
 

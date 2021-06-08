@@ -22,7 +22,7 @@ public class NestBlock extends AbstractPenguinBlock {
 
     public NestBlock() {
         super(AbstractBlock.Properties.of(Material.WOOD).strength(0.5F).sound(SoundType.WOOD));
-        hasInventory = true;
+        setHasInventory();
     }
 
     @Nonnull

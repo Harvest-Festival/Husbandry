@@ -21,18 +21,18 @@ import java.util.Locale;
 @SuppressWarnings("deprecation")
 public class BowlBlock extends AbstractPenguinBlock {
     public static final EnumProperty<Fill> FILL = EnumProperty.create("fill", Fill.class);
-    private static final VoxelShape BOWL_COLLISSION = VoxelShapes.box(0.15D, 0D, 0.15D, 0.85D, 0.2D, 0.85D);
+    private static final VoxelShape BOWL_COLLISION = VoxelShapes.box(0.15D, 0D, 0.15D, 0.85D, 0.2D, 0.85D);
     private static final VoxelShape BOWL_SHAPE = VoxelShapes.box(0.15D, 0D, 0.15D, 0.85D, 0.35D, 0.85D);
 
     public BowlBlock() {
         super(AbstractBlock.Properties.of(Material.WOOD).strength(0.3F).sound(SoundType.WOOD));
-        hasInventory = true;
+        setHasInventory();
     }
 
     @Nonnull
     @Override
     public VoxelShape getCollisionShape(@Nonnull BlockState state, @Nonnull IBlockReader reader, @Nonnull BlockPos pos, @Nonnull ISelectionContext ctx) {
-        return BOWL_COLLISSION;
+        return BOWL_COLLISION;
     }
 
     @Nonnull

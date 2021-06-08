@@ -1,0 +1,23 @@
+{
+	"parent": "block/block",
+	"textures": {
+		"particle": "husbandry:block/feeding_tray_filled",
+		"texture": "husbandry:block/feeding_tray_filled"
+	},
+	"elements": [
+		{
+			"from": [2, 0.5, 2],
+			"to": [14, 0.5, 14],
+			"faces": {
+				"up": {"uv": [10, 4, 16, 10], "texture": "#texture"}
+			}
+		}
+	],
+	"display": {
+		"gui": {
+			"rotation": [30, 225, 0],
+			"translation": [0, 2, 0],
+			"scale": [0.7, 0.7, 0.7]
+		}
+	}
+}

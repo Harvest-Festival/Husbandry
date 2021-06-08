@@ -15,7 +15,7 @@ public abstract class AbstractFoodSupplyTileEntity extends AbstractInventoryTile
 
     @Override
     public int getMaxStackSize() {
-        return 16;
+        return 4;
     }
 
     @Nonnull

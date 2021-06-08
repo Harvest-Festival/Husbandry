@@ -14,6 +14,11 @@ public class FeedingTrayTileEntity extends AbstractFoodSupplyTileEntity {
     }
 
     @Override
+    public int getMaxStackSize() {
+        return 2;
+    }
+
+    @Override
     public boolean canPlaceItem(int slot, @Nonnull ItemStack stack) {
         return EatsBirdFeedTrait.BIRD_FEED.contains(stack.getItem());
     }
@@ -21,11 +26,7 @@ public class FeedingTrayTileEntity extends AbstractFoodSupplyTileEntity {
     @Override
     public void setItem(int slot, @Nonnull ItemStack stack) {
         super.setItem(slot, stack);
-        if (items.get(0).getCount() >= getMaxStackSize() * 3/4)
-            level.setBlock(worldPosition, HusbandryBlocks.FEEDING_TRAY.get().defaultBlockState().setValue(FeedingTrayBlock.FILL, FeedingTrayBlock.Fill.FULL), 2);
-        else if (!items.get(0).isEmpty())
-            level.setBlock(worldPosition, HusbandryBlocks.FEEDING_TRAY.get().defaultBlockState().setValue(FeedingTrayBlock.FILL, FeedingTrayBlock.Fill.SEMI), 2);
-        else
-            level.setBlock(worldPosition, HusbandryBlocks.FEEDING_TRAY.get().defaultBlockState().setValue(FeedingTrayBlock.FILL, FeedingTrayBlock.Fill.EMPTY), 2);
+        if (stack.isEmpty()) level.setBlock(worldPosition, HusbandryBlocks.FEEDING_TRAY.get().defaultBlockState().setValue(FeedingTrayBlock.FILL, 0), 2);
+        else level.setBlock(worldPosition, HusbandryBlocks.FEEDING_TRAY.get().defaultBlockState().setValue(FeedingTrayBlock.FILL, stack.getCount()), 2);
     }
 }

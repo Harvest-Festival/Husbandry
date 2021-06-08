@@ -1,7 +1,25 @@
 {
-  "variants": {
-    "": {
-      "model": "husbandry:block/feeding_tray"
+  "multipart": [
+    {
+      "apply": {
+        "model": "husbandry:block/feeding_tray"
+      }
+    },
+    {
+      "when": {
+        "fill": "1"
+      },
+      "apply": {
+        "model": "husbandry:block/bird_feed_semi"
+      }
+    },
+    {
+      "when": {
+        "fill": "2"
+      },
+      "apply": {
+        "model": "husbandry:block/bird_feed_full"
+      }
     }
-  }
+  ]
 }

@@ -2,6 +2,7 @@ Species,Trait
 cow,mortal
 cow,mammal
 cow,pettable
+cow,treatable
 cow,astraphobic
 cow,diurnal
 cow,eats_grass
@@ -11,6 +12,7 @@ cow,more_product
 chicken,mortal
 chicken,eats_bird_feed
 chicken,carriable
+chicken,treatable
 chicken,astraphobic
 chicken,aquaphobic
 chicken,diurnal
@@ -19,6 +21,7 @@ chicken,more_product
 pig,mortal
 pig,mammal
 pig,pettable
+pig,treatable
 pig,astraphobic
 pig,aquaphobic
 pig,diurnal
@@ -29,6 +32,7 @@ pig,more_product_chance
 sheep,mortal
 sheep,mammal
 sheep,pettable
+sheep,treatable
 sheep,astraphobic
 sheep,diurnal
 sheep,eats_grass
@@ -38,6 +42,7 @@ sheep,faster_product_reset
 horse,mortal
 horse,mammal
 horse,pettable
+horse,treatable
 horse,astraphobic
 horse,aquaphobic
 horse,diurnal
@@ -47,6 +52,7 @@ horse,pet
 llama,mortal
 llama,mammal
 llama,pettable
+llama,treatable
 llama,astraphobic
 llama,diurnal
 llama,eats_grass
@@ -55,6 +61,7 @@ llama,pet
 rabbit,mortal
 rabbit,mammal
 rabbit,pettable
+rabbit,treatable
 rabbit,astraphobic
 rabbit,eats_rabbit_food
 rabbit,carriable
@@ -62,6 +69,7 @@ rabbit,drops_product
 cat,mortal
 cat,mammal
 cat,pettable
+cat,treatable
 cat,astraphobic
 cat,aquaphobic
 cat,eats_cat_food
@@ -70,6 +78,7 @@ cat,pet
 dog,mortal
 dog,mammal
 dog,pettable
+dog,treatable
 dog,astraphobic
 dog,diurnal
 dog,eats_dog_food
@@ -78,6 +87,7 @@ dog,pet
 donkey,mortal
 donkey,mammal
 donkey,pettable
+donkey,treatable
 donkey,astraphobic
 donkey,aquaphobic
 donkey,diurnal
@@ -87,6 +97,7 @@ donkey,pet
 parrot,mortal
 parrot,eats_bird_feed
 parrot,carriable
+parrot,treatable
 parrot,astraphobic
 parrot,aquaphobic
 parrot,diurnal
@@ -94,6 +105,7 @@ parrot,pet
 mooshroom,mortal
 mooshroom,mammal
 mooshroom,pettable
+mooshroom,treatable
 mooshroom,astraphobic
 mooshroom,diurnal
 mooshroom,eats_grass

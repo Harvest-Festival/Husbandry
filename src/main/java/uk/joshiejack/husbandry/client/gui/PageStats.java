@@ -10,14 +10,15 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import uk.joshiejack.husbandry.entity.stats.MobStats;
 import uk.joshiejack.penguinlib.client.gui.book.Book;
 import uk.joshiejack.penguinlib.client.gui.book.page.AbstractMultiPage;
-import uk.joshiejack.penguinlib.util.Icon;
+import uk.joshiejack.penguinlib.util.icon.EntityIcon;
+import uk.joshiejack.penguinlib.util.icon.Icon;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @OnlyIn(Dist.CLIENT)
 public class PageStats extends AbstractMultiPage.Both<MobStats<?>> {
-    public static final Icon ICON = new Icon.EntityIcon(EntityType.COW);
+    public static final Icon ICON = new EntityIcon(EntityType.HORSE, 6);
     public PageStats(ITextComponent name) {
         super(name, 10);
     }
@@ -29,7 +30,7 @@ public class PageStats extends AbstractMultiPage.Both<MobStats<?>> {
 
     @Override
     protected void initEntry(Book book, int x, int y, int id, MobStats<?> stats) {
-        book.addButton(new MobStatsLabel(stats, x + 20, y + 10 + id * 25, stats.getEntity().getName()));
+        book.addButton(new MobStatsLabel(stats, x + 20, y + 10 + id * 30, stats.getEntity().getName()));
     }
 
     @SuppressWarnings("ConstantConditions")

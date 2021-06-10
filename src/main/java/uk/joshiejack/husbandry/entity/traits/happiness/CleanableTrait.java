@@ -2,22 +2,28 @@ package uk.joshiejack.husbandry.entity.traits.happiness;
 
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.Hand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.Lazy;
 import uk.joshiejack.husbandry.Husbandry;
 import uk.joshiejack.husbandry.api.IMobStats;
 import uk.joshiejack.husbandry.api.trait.IDataTrait;
+import uk.joshiejack.husbandry.api.trait.IIconTrait;
 import uk.joshiejack.husbandry.api.trait.IInteractiveTrait;
 import uk.joshiejack.husbandry.api.trait.INewDayTrait;
 import uk.joshiejack.husbandry.item.HusbandryItems;
 import uk.joshiejack.husbandry.network.SetCleanedStatusPacket;
 import uk.joshiejack.penguinlib.network.PenguinNetwork;
 import uk.joshiejack.penguinlib.util.helpers.generic.MathsHelper;
+import uk.joshiejack.penguinlib.util.icon.Icon;
+import uk.joshiejack.penguinlib.util.icon.ItemIcon;
 
-public class CleanableTrait implements IDataTrait, IInteractiveTrait, INewDayTrait {
+public class CleanableTrait implements IDataTrait, IInteractiveTrait, INewDayTrait, IIconTrait {
+    private static final Lazy<Icon> ICON = Lazy.of(() -> new ItemIcon(new ItemStack(HusbandryItems.BRUSH.get())));
     private int cleanliness;
     private boolean cleaned;
 
@@ -28,6 +34,11 @@ public class CleanableTrait implements IDataTrait, IInteractiveTrait, INewDayTra
         if (cleanliness <= 0) {
             stats.decreaseHappiness(1); //We dirty, so we no happy
         }
+    }
+
+    @Override
+    public Icon getIcon(IMobStats<?> stats) {
+        return cleaned ? ICON.get() : ICON.get().shadowed();
     }
 
     @Override

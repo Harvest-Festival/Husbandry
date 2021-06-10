@@ -20,7 +20,7 @@ import uk.joshiejack.husbandry.api.trait.IJoinWorldTrait;
 import uk.joshiejack.husbandry.entity.stats.MobStats;
 import uk.joshiejack.husbandry.entity.traits.TraitType;
 
-import java.util.stream.Stream;
+import java.util.List;
 
 import static uk.joshiejack.husbandry.Husbandry.MODID;
 
@@ -36,7 +36,7 @@ public class MobEventsHandler {
             MobStats<?> stats = MobStats.getStats(entity);
             if (stats != null) {
                 MobEntity mob = ((MobEntity) entity);
-                Stream<IJoinWorldTrait> traits = stats.getTraits(TraitType.ON_JOIN);
+                List<IJoinWorldTrait> traits = stats.getTraits(TraitType.ON_JOIN);
                 traits.forEach(trait -> trait.onJoinWorld(stats));
             }
         }

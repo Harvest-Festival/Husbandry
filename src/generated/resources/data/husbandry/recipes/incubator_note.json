@@ -1,6 +1,6 @@
 {
   "type": "penguinlib:note",
-  "category": "husbandry:utils_category",
+  "category": "husbandry:care_category",
   "icon": {
     "item": "husbandry:incubator"
   }

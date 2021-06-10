@@ -10,8 +10,8 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import uk.joshiejack.husbandry.Husbandry;
-import uk.joshiejack.husbandry.entity.stats.MobStats;
 import uk.joshiejack.husbandry.entity.traits.food.*;
+import uk.joshiejack.husbandry.entity.traits.happiness.TreatableTrait;
 import uk.joshiejack.husbandry.entity.traits.lifestyle.MammalTrait;
 import uk.joshiejack.husbandry.item.HusbandryItems;
 import uk.joshiejack.penguinlib.util.PenguinTags;
@@ -30,7 +30,7 @@ public class HusbandryItemTags extends ItemTagsProvider {
     @Override
     public void addTags() {
         tag(BUTTER).add(HusbandryItems.BUTTER.get());
-        tag(MobStats.TREATS)
+        tag(TreatableTrait.TREATS)
                 .add(HusbandryItems.GENERIC_TREAT.get(), HusbandryItems.CAT_TREAT.get(), HusbandryItems.CHICKEN_TREAT.get()
                         , HusbandryItems.COW_TREAT.get(), HusbandryItems.DOG_TREAT.get(), HusbandryItems.HORSE_TREAT.get()
                         , HusbandryItems.PIG_TREAT.get(), HusbandryItems.RABBIT_TREAT.get(), HusbandryItems.SHEEP_TREAT.get()

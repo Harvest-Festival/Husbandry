@@ -80,11 +80,11 @@ public class HusbandryDatabase extends AbstractDatabaseProvider {
         }
 
         public static MobType createBird(String name) {
-            return new MobType(name).withTraits("mortal", "eats_bird_feed", "carriable", "astraphobic");
+            return new MobType(name).withTraits("mortal", "eats_bird_feed", "carriable", "treatable", "astraphobic");
         }
 
         public static MobType createMammal(String name) {
-            return new MobType(name).withTraits("mortal", "mammal", "pettable", "astraphobic");
+            return new MobType(name).withTraits("mortal", "mammal", "pettable", "treatable", "astraphobic");
         }
 
         public MobType withTraits(String... traits) {

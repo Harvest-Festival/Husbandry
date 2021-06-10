@@ -39,7 +39,7 @@ public class SetCleanedStatusPacket extends PenguinPacket {
         if (entity != null) {
             MobStats<?> stats = MobStats.getStats(entity);
             if (stats != null)
-                stats.getTraits(TraitType.DATA)
+                stats.getTraits(TraitType.DATA).stream()
                         .filter(s -> s instanceof CleanableTrait)
                         .findFirst()
                         .ifPresent(t -> ((CleanableTrait) t).setCleaned(stats, cleaned));

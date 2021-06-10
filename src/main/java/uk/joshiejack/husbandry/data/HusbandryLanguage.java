@@ -20,7 +20,6 @@ public class HusbandryLanguage extends LanguageProvider {
                 .stream().filter(i -> i.getRegistryName().getNamespace().equals(Husbandry.MODID))
                 .forEach(item -> add(item, WordUtils.capitalizeFully(item.getRegistryName().getPath().replace("_", " "))));
         add("note.category.husbandry.care_category", "Animal Care");
-        add("note.category.husbandry.utils_category", "Husbandry Utilities");
         //TITLES
         addNoteTitle("lifespan_note", "Lifespans");
         addNoteTitle("lifestyle_note", "Habits");

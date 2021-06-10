@@ -35,6 +35,7 @@ import uk.joshiejack.husbandry.entity.traits.food.*;
 import uk.joshiejack.husbandry.entity.traits.happiness.CarriableTrait;
 import uk.joshiejack.husbandry.entity.traits.happiness.CleanableTrait;
 import uk.joshiejack.husbandry.entity.traits.happiness.PettableTrait;
+import uk.joshiejack.husbandry.entity.traits.happiness.TreatableTrait;
 import uk.joshiejack.husbandry.entity.traits.lifestyle.*;
 import uk.joshiejack.husbandry.entity.traits.product.*;
 import uk.joshiejack.husbandry.inventory.MobTrackerContainer;
@@ -86,6 +87,7 @@ public class Husbandry {
         registerTrait(CarriableTrait.class);
         registerTrait(CleanableTrait.class);
         registerTrait(PettableTrait.class);
+        registerTrait(TreatableTrait.class);
         registerTrait(AstraphobicTrait.class);
         registerTrait(AquaphobicTrait.class);
         registerTrait(DiurnalTrait.class);

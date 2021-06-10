@@ -9,6 +9,10 @@ public interface IMobStats<E extends MobEntity> {
 
     int getHappiness();
 
+    int getHappinessModifier();
+
+    void setHappinessModifier(int value);
+
     void decreaseHappiness(int happiness);
 
     void increaseHappiness(int happiness);
@@ -27,9 +31,12 @@ public interface IMobStats<E extends MobEntity> {
 
     boolean isHungry();
 
+    int getMaxHearts();
+
     int getHearts();
 
     int getMaxRelationship();
 
     void resetProduct();
+
 }

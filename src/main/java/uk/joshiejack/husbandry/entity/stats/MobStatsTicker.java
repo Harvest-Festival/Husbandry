@@ -12,9 +12,9 @@ import uk.joshiejack.husbandry.api.trait.IBiHourlyTrait;
 import uk.joshiejack.husbandry.entity.traits.TraitType;
 import uk.joshiejack.penguinlib.events.NewDayEvent;
 
+import java.util.List;
 import java.util.Set;
 import java.util.function.Consumer;
-import java.util.stream.Stream;
 
 import static uk.joshiejack.husbandry.Husbandry.MODID;
 import static uk.joshiejack.husbandry.entity.stats.CapabilityStatsHandler.MOB_STATS_CAPABILITY;
@@ -33,7 +33,7 @@ public class MobStatsTicker {
     public static void onWorldTick(TickEvent.WorldTickEvent event) {
         if (event.world.getGameTime() %2000 == 0) //Every 2 hours
             stats.stream().filter(s -> s.entity.isAlive()).forEach(stats -> {
-                Stream<IBiHourlyTrait> traits = stats.getTraits(TraitType.BI_HOURLY);
+                List<IBiHourlyTrait> traits = stats.getTraits(TraitType.BI_HOURLY);
                 traits.forEach(trait -> trait.onBihourlyTick(stats));
             });
     }

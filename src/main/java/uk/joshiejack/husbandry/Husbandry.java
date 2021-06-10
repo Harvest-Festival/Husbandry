@@ -50,8 +50,6 @@ import javax.annotation.Nullable;
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
 @Mod(Husbandry.MODID)
 public class Husbandry {
-    public static final DeferredRegister<ContainerType<?>> CONTAINERS = DeferredRegister.create(ForgeRegistries.CONTAINERS, Husbandry.MODID);
-    public static final RegistryObject<ContainerType<AbstractBookContainer>> BOOK = CONTAINERS.register("mob_tracker", () -> IForgeContainerType.create((id, inv, data) -> new MobTrackerContainer(id)));
     public static final String MODID = "husbandry";
     public static final Logger LOGGER = LogManager.getLogger();
     public static final ItemGroup TAB = new ItemGroup(MODID) {
@@ -65,7 +63,7 @@ public class Husbandry {
     public Husbandry() {
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
         eventBus.addListener(this::registerTraits);
-        Husbandry.CONTAINERS.register(eventBus);
+        HusbandryContainers.CONTAINERS.register(eventBus);
         HusbandryBlocks.BLOCKS.register(eventBus);
         HusbandryItems.ITEMS.register(eventBus);
         HusbandryRegistries.SERIALIZERS.register(eventBus);
@@ -126,6 +124,11 @@ public class Husbandry {
             generator.addProvider(new HusbandryLanguage(generator));
             generator.addProvider(new HusbandryItemModels(generator, event.getExistingFileHelper()));
         }
+    }
+
+    public static class HusbandryContainers {
+        public static final DeferredRegister<ContainerType<?>> CONTAINERS = DeferredRegister.create(ForgeRegistries.CONTAINERS, Husbandry.MODID);
+        public static final RegistryObject<ContainerType<AbstractBookContainer>> BOOK = CONTAINERS.register("mob_tracker", () -> IForgeContainerType.create((id, inv, data) -> new MobTrackerContainer(id)));
     }
 
     public static class HusbandrySounds {

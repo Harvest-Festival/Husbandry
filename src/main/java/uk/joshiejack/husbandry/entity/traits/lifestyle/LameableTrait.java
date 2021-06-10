@@ -31,6 +31,7 @@ public class LameableTrait implements IJoinWorldTrait, IInteractiveTrait, IDataT
     private void lame(MobEntity entity) {
         Objects.requireNonNull(entity.getAttribute(Attributes.ATTACK_DAMAGE)).setBaseValue(0D);
         entity.targetSelector.disableControlFlag(Goal.Flag.TARGET);
+        entity.setPersistenceRequired();
     }
 
     @Override

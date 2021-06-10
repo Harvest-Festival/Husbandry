@@ -5,6 +5,6 @@ import uk.joshiejack.penguinlib.inventory.AbstractBookContainer;
 
 public class MobTrackerContainer extends AbstractBookContainer {
     public MobTrackerContainer(int windowID) {
-        super(Husbandry.BOOK.get(), windowID);
+        super(Husbandry.HusbandryContainers.BOOK.get(), windowID);
     }
 }

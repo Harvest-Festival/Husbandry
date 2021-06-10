@@ -51,7 +51,7 @@ public class HusbandryClient {
     @SuppressWarnings("unchecked")
     @SubscribeEvent
     public static void setup(FMLClientSetupEvent event) {
-        ScreenManager.register(Husbandry.BOOK.get(), ((AbstractBookContainer container, PlayerInventory inv, ITextComponent text) ->
+        ScreenManager.register(Husbandry.HusbandryContainers.BOOK.get(), ((AbstractBookContainer container, PlayerInventory inv, ITextComponent text) ->
                 Book.getInstance(Husbandry.MODID, container, inv, text, (Book bs) -> {
                     ITextComponent name = new TranslationTextComponent("gui." + Husbandry.MODID + ".book");
                     bs.withTab(new Tab(name)).withPage(new PageStats(name));

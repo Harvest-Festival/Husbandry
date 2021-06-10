@@ -51,10 +51,10 @@ public class HusbandryDatabase extends AbstractDatabaseProvider {
                 .withTraits("aquaphobic", "diurnal", "eats_grass", "cleanable", "pet").build(this);
         MobType.createMammal("llama").withLifespan(15,25).withTreat(HusbandryItems.SHEEP_TREAT.get()).levelUpWith(7,24).withGestationPeriod(11).withMaturityAt(10).assign(EntityType.LLAMA)
                 .withTraits("diurnal", "eats_grass", "cleanable", "pet").build(this);
-        MobType.createMammal("rabbit").withLifespan(8,12).withTreat(HusbandryItems.RABBIT_TREAT.get()).levelUpWith(14,14).withGestationPeriod(4).withMaturityAt(3).withProducts(4, "rabbit_foot")
-                .withTraits("eats_rabbit_food", "carriable", "drops_product").assign(EntityType.RABBIT).build(this);
-        MobType.createMammal("cat").withLifespan(10,20).withTreat(HusbandryItems.CAT_TREAT.get()).levelUpWith(3,24).withGestationPeriod(5).withMaturityAt(7)
-                .assign(EntityType.CAT).withTraits("aquaphobic", "eats_cat_food", "carriable", "pet").build(this);
+        MobType.createSmallMammal("rabbit").withLifespan(8,12).withTreat(HusbandryItems.RABBIT_TREAT.get()).levelUpWith(14,14).withGestationPeriod(4).withMaturityAt(3).withProducts(4, "rabbit_foot")
+                .withTraits("eats_rabbit_food", "drops_product").assign(EntityType.RABBIT).build(this);
+        MobType.createSmallMammal("cat").withLifespan(10,20).withTreat(HusbandryItems.CAT_TREAT.get()).levelUpWith(3,24).withGestationPeriod(5).withMaturityAt(7)
+                .assign(EntityType.CAT).withTraits("aquaphobic", "eats_cat_food", "pet").build(this);
         MobType.createMammal("dog").withLifespan(10,13).withTreat(HusbandryItems.DOG_TREAT.get()).levelUpWith(24,3).withGestationPeriod(5).withMaturityAt(7)
                 .assign(EntityType.WOLF).withTraits("diurnal", "eats_dog_food", "cleanable", "pet").build(this);
         MobType.createMammal("donkey").withLifespan(25,30).withTreat(HusbandryItems.HORSE_TREAT.get()).levelUpWith(22,11).withGestationPeriod(24).withMaturityAt(12)
@@ -81,6 +81,10 @@ public class HusbandryDatabase extends AbstractDatabaseProvider {
 
         public static MobType createBird(String name) {
             return new MobType(name).withTraits("mortal", "eats_bird_feed", "carriable", "treatable", "astraphobic");
+        }
+
+        public static MobType createSmallMammal(String name) {
+            return new MobType(name).withTraits("mortal", "mammal", "carriable", "treatable", "astraphobic");
         }
 
         public static MobType createMammal(String name) {

@@ -17,6 +17,7 @@ import uk.joshiejack.husbandry.Husbandry;
 import uk.joshiejack.husbandry.block.HusbandryBlocks;
 import uk.joshiejack.husbandry.data.builders.IncubatorRecipeBuilder;
 import uk.joshiejack.husbandry.item.HusbandryItems;
+import uk.joshiejack.penguinlib.data.generators.builders.CategoryBuilder;
 import uk.joshiejack.penguinlib.item.PenguinItems;
 import uk.joshiejack.penguinlib.util.PenguinTags;
 
@@ -61,5 +62,25 @@ public class HusbandryRecipes extends RecipeProvider {
         ShapedRecipeBuilder.shaped(HusbandryBlocks.TROUGH.get()).define('P', ItemTags.PLANKS).define('L', ItemTags.LOGS).pattern("P P").pattern("PPP").pattern("L L").unlockedBy("has_wood", has(ItemTags.LOGS)).save(consumer, rl("trough"));
         ShapelessRecipeBuilder.shapeless(HusbandryItems.MOB_TRACKER.get()).requires(Items.PAPER).requires(Items.INK_SAC).requires(HusbandryItemTags.MOB_PRODUCT).unlockedBy("has_paper", has(Items.PAPER)).save(consumer, "mob_tracker");
         IncubatorRecipeBuilder.incubate(Ingredient.of(Items.EGG), EntityType.CHICKEN, 1, 1).save(consumer, rl("chicken"));
+
+        //Guide book
+        CategoryBuilder.category().withItemIcon(HusbandryItems.GENERIC_TREAT.get())
+                .withNote("lifespan_note").withPenguinIcon(0, 0).end()
+                .withNote("lifestyle_note").withPenguinIcon(0, 0).end()
+                .withNote("happiness_note").withPenguinIcon(0, 0).end()
+                .withNote("cleanliness_note").withItemIcon(HusbandryItems.BRUSH.get()).end()
+                .withNote("hunger_note").withItemIcon(HusbandryItems.BIRD_FEED.get()).end()
+                .withNote("pregnancy_note").withPenguinIcon(0, 0).end()
+                .withNote("products_note").withItemIcon(Items.EGG).end()
+                .withNote("treats_note").withItemIcon(HusbandryItems.GENERIC_TREAT.get()).end()
+                .save(consumer, rl("care_category"));
+        CategoryBuilder.category().withItemIcon(HusbandryItems.SICKLE.get())
+                .withNote("sickle_note").withItemIcon(HusbandryItems.SICKLE.get()).end()
+                .withNote("bowl_note").withItemIcon(HusbandryItems.BOWL.get()).end()
+                .withNote("trough_note").withItemIcon(HusbandryItems.TROUGH.get()).end()
+                .withNote("feeding_tray_note").withItemIcon(HusbandryItems.FEEDING_TRAY.get()).end()
+                .withNote("nest_note").withItemIcon(HusbandryItems.NEST.get()).end()
+                .withNote("incubator_note").withItemIcon(HusbandryItems.INCUBATOR.get()).end()
+                .save(consumer, rl("utils_category"));
     }
 }

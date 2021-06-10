@@ -67,13 +67,13 @@ public class HusbandryDatabase extends AbstractDatabaseProvider {
 
     private static class MobType {
         public static final ResourceLocation NO_PRODUCTS = new ResourceLocation(Husbandry.MODID, "none");
-        private String name;
+        private final String name;
         private RangedInteger lifespan = new RangedInteger(5, 12);
         private Item treat = HusbandryItems.GENERIC_TREAT.get();
         private int generic = 10, type = 10, gestation = 9, maturity = 10, productsFrequency = 0;
         private ResourceLocation productTable = NO_PRODUCTS;
-        private List<EntityType<?>> entities = new ArrayList<>();
-        private List<String> traits = new ArrayList<>();
+        private final List<EntityType<?>> entities = new ArrayList<>();
+        private final List<String> traits = new ArrayList<>();
 
         private MobType(String name) {
             this.name = name;

@@ -29,8 +29,10 @@ import uk.joshiejack.husbandry.client.renderer.EggSupplierBakedModel;
 import uk.joshiejack.husbandry.tileentity.IncubatorTileEntity;
 import uk.joshiejack.husbandry.tileentity.NestTileEntity;
 import uk.joshiejack.penguinlib.client.gui.book.Book;
-import uk.joshiejack.penguinlib.client.gui.book.Tab;
+import uk.joshiejack.penguinlib.client.gui.book.tab.NotesTab;
+import uk.joshiejack.penguinlib.client.gui.book.tab.Tab;
 import uk.joshiejack.penguinlib.inventory.AbstractBookContainer;
+import uk.joshiejack.penguinlib.util.Icon;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -53,8 +55,12 @@ public class HusbandryClient {
     public static void setup(FMLClientSetupEvent event) {
         ScreenManager.register(Husbandry.HusbandryContainers.BOOK.get(), ((AbstractBookContainer container, PlayerInventory inv, ITextComponent text) ->
                 Book.getInstance(Husbandry.MODID, container, inv, text, (Book bs) -> {
-                    ITextComponent name = new TranslationTextComponent("gui." + Husbandry.MODID + ".book");
-                    bs.withTab(new Tab(name)).withPage(new PageStats(name));
+                    ITextComponent stats = new TranslationTextComponent("gui." + Husbandry.MODID + ".stats");
+                    ITextComponent notes = new TranslationTextComponent("gui." + Husbandry.MODID + ".notes");
+                    bs.withTab(new Tab(stats, PageStats.ICON)).withPage(new PageStats(stats));
+                    bs.withTab(new NotesTab(notes, new Icon.TextureIcon(Icon.DEFAULT_LOCATION, 0, 0))
+                            .withCategory(new ResourceLocation(Husbandry.MODID, "care_category"))
+                            .withCategory(new ResourceLocation(Husbandry.MODID, "utils_category")));
                 })
         ));
 

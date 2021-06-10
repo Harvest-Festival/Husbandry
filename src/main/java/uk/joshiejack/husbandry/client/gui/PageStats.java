@@ -1,6 +1,7 @@
 package uk.joshiejack.husbandry.client.gui;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.text.ITextComponent;
@@ -9,14 +10,21 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import uk.joshiejack.husbandry.entity.stats.MobStats;
 import uk.joshiejack.penguinlib.client.gui.book.Book;
 import uk.joshiejack.penguinlib.client.gui.book.page.AbstractMultiPage;
+import uk.joshiejack.penguinlib.util.Icon;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @OnlyIn(Dist.CLIENT)
 public class PageStats extends AbstractMultiPage.Both<MobStats<?>> {
+    public static final Icon ICON = new Icon.EntityIcon(EntityType.COW);
     public PageStats(ITextComponent name) {
         super(name, 10);
+    }
+
+    @Override
+    protected Icon getIcon() {
+        return ICON;
     }
 
     @Override

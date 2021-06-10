@@ -16,7 +16,8 @@ public class AbstractLoveableTrait implements IDisplayTrait {
     @Override
     public void render(MatrixStack matrix, Widget widget, int x, int y, IMobStats<?> stats) {
         Minecraft.getInstance().getTextureManager().bind(ICONS);
-        for (int i = 0; i < 9; i++) {
+        matrix.pushPose();
+        for (int i = 0; i < 10; i++) {
             widget.blit(matrix, x + 24 + 10 * i, y + 6, 16, 0, 9, 9);
             if (i < stats.getHearts())
                 widget.blit(matrix, x + 24 + 10 * i, y + 6, 52, 0, 9, 9);

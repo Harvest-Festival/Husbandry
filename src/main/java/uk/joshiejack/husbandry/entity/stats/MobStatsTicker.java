@@ -12,6 +12,7 @@ import uk.joshiejack.husbandry.api.trait.IBiHourlyTrait;
 import uk.joshiejack.husbandry.entity.traits.TraitType;
 import uk.joshiejack.penguinlib.events.NewDayEvent;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Consumer;
@@ -23,10 +24,15 @@ import static uk.joshiejack.husbandry.entity.stats.CapabilityStatsHandler.MOB_ST
 @Mod.EventBusSubscriber(modid = MODID)
 public class MobStatsTicker {
     private static final Set<MobStats<?>> stats = Sets.newHashSet();
+    private static List<Runnable> futures = new ArrayList<>();
+    private static boolean iterating;
 
     @SubscribeEvent
     public static void onNewDay(NewDayEvent event) {
+        iterating = true;
+        futures.forEach(Runnable::run);
         stats.stream().filter(s -> s.entity.isAlive()).forEach(MobStats::onNewDay);
+        iterating = false;
     }
 
     @SubscribeEvent
@@ -48,11 +54,13 @@ public class MobStatsTicker {
 
     @SubscribeEvent
     public static void onEntityJoinWorld(EntityJoinWorldEvent event) {
-        run(event.getEntity(), MobStatsTicker.stats::add);
+        if (iterating) futures.add(() -> run(event.getEntity(), MobStatsTicker.stats::add));
+        else run(event.getEntity(), MobStatsTicker.stats::add);
     }
 
     @SubscribeEvent
     public static void onEntityLeaveWorld(EntityLeaveWorldEvent event) {
-        run(event.getEntity(), MobStatsTicker.stats::remove);
+        if (iterating) futures.add(() -> run(event.getEntity(), MobStatsTicker.stats::add));
+        else run(event.getEntity(), MobStatsTicker.stats::remove);
     }
 }

@@ -65,12 +65,12 @@ public class HusbandryRecipes extends RecipeProvider {
 
         //Guide book
         CategoryBuilder.category().withItemIcon(HusbandryItems.BRUSH.get())
-                .withNote("lifespan_note").withNoteIcon().end()
+                .withNote("lifespan_note").withNoteIcon().setNoteType("lifespan").end()
                 .withNote("lifestyle_note").withNoteIcon().end()
                 .withNote("happiness_note").withNoteIcon().end()
                 .withNote("cleanliness_note").withItemIcon(HusbandryItems.BRUSH.get()).end()
                 .withNote("hunger_note").withItemIcon(HusbandryItems.BIRD_FEED.get()).end()
-                .withNote("pregnancy_note").withNoteIcon().end()
+                .withNote("pregnancy_note").withNoteIcon().setNoteType("pregnancy").end()
                 .withNote("products_note").withItemIcon(Items.EGG).end()
                 .withNote("treats_note").withItemIcon(HusbandryItems.GENERIC_TREAT.get()).end()
                 .withNote("sickle_note").withItemIcon(HusbandryItems.SICKLE.get()).end()

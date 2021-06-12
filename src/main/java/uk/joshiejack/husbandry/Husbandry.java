@@ -40,8 +40,11 @@ import uk.joshiejack.husbandry.entity.traits.lifestyle.*;
 import uk.joshiejack.husbandry.entity.traits.product.*;
 import uk.joshiejack.husbandry.inventory.MobTrackerContainer;
 import uk.joshiejack.husbandry.item.HusbandryItems;
+import uk.joshiejack.husbandry.note.LifespanNoteType;
+import uk.joshiejack.husbandry.note.PregnancyNoteType;
 import uk.joshiejack.husbandry.tileentity.HusbandryTileEntities;
 import uk.joshiejack.penguinlib.inventory.AbstractBookContainer;
+import uk.joshiejack.penguinlib.note.type.NoteType;
 import uk.joshiejack.penguinlib.util.helpers.generic.ReflectionHelper;
 
 import javax.annotation.Nonnull;
@@ -63,7 +66,7 @@ public class Husbandry {
 
     public Husbandry() {
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
-        eventBus.addListener(this::registerTraits);
+        eventBus.addListener(this::setup);
         HusbandryContainers.CONTAINERS.register(eventBus);
         HusbandryBlocks.BLOCKS.register(eventBus);
         HusbandryItems.ITEMS.register(eventBus);
@@ -77,7 +80,16 @@ public class Husbandry {
         HusbandryAPI.instance.registerMobTrait(CaseFormat.UPPER_CAMEL.to(CaseFormat.LOWER_UNDERSCORE, data.getSimpleName().replace("Trait", "")), data);
     }
 
-    private void registerTraits(FMLCommonSetupEvent event) {
+    private void registerNoteType(Class<? extends NoteType> type) {
+        ReflectionHelper.newInstance(type);
+    }
+
+    private void setup(FMLCommonSetupEvent event) {
+        //Register Note Types
+        registerNoteType(LifespanNoteType.class);
+        registerNoteType(PregnancyNoteType.class);
+
+        //Register Traits
         registerTrait(EatsBirdFeedTrait.class);
         registerTrait(EatsCatFoodTrait.class);
         registerTrait(EatsDogFoodTrait.class);

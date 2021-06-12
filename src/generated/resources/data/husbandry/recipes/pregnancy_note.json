@@ -1,5 +1,6 @@
 {
   "type": "penguinlib:note",
+  "note type": "pregnancy",
   "category": "husbandry:care_category",
   "icon": {}
 }

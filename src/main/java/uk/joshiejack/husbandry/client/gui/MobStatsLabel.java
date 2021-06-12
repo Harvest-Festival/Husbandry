@@ -12,17 +12,24 @@ import uk.joshiejack.husbandry.api.trait.IIconTrait;
 import uk.joshiejack.husbandry.api.trait.IRenderTrait;
 import uk.joshiejack.husbandry.entity.stats.MobStats;
 import uk.joshiejack.husbandry.entity.traits.TraitType;
+import uk.joshiejack.penguinlib.util.icon.ItemIcon;
 
 import javax.annotation.Nonnull;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @OnlyIn(Dist.CLIENT)
 public class MobStatsLabel extends Widget {
     private final MobStats<?> stats;
+    private final List<IIconTrait> iconTraits;
 
     public MobStatsLabel(MobStats<?> stats, int x, int y, ITextComponent name) {
         super(x, y, 120, 24, name);
         this.stats = stats;
+        List<IIconTrait> unfiltered = stats.getTraits(TraitType.ICON);
+        iconTraits = unfiltered.stream()
+                .filter(icon -> icon.getIcon(stats) != ItemIcon.EMPTY)
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -34,7 +41,7 @@ public class MobStatsLabel extends Widget {
         RenderSystem.popMatrix();
         List<IRenderTrait> traits = stats.getTraits(TraitType.RENDER);
         traits.forEach(trait -> trait.render(matrix, this, x, y, stats));
-        List<IIconTrait> iconTraits = stats.getTraits(TraitType.ICON);
+
         for (int i = 0; i < iconTraits.size(); i++) {
             RenderSystem.pushMatrix();
             RenderSystem.scalef(0.5F, 0.5F, 0.5F);

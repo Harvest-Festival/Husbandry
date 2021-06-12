@@ -13,20 +13,23 @@ import java.util.List;
 public class MilkableTrait implements IInteractiveTrait {
     @Override
     public boolean onRightClick(IMobStats<?> stats, PlayerEntity player, Hand hand) {
-        if (stats.canProduceProduct() && player.getItemInHand(hand).getItem() == Items.BUCKET) {
-            List<ItemStack> ret = stats.getSpecies().getProducts().getProduct(stats.getEntity(), player);
-            boolean replaced = false;
-            for (ItemStack stack: ret) {
-                if (stack.getItem() == Items.MILK_BUCKET && !replaced) {
-                    player.setItemInHand(hand, new ItemStack(Items.MILK_BUCKET));
-                    replaced = true;
+        if (player.getItemInHand(hand).getItem() == Items.BUCKET) {
+            if (stats.canProduceProduct()) {
+                List<ItemStack> ret = stats.getSpecies().getProducts().getProduct(stats.getEntity(), player);
+                boolean replaced = false;
+                for (ItemStack stack : ret) {
+                    if (stack.getItem() == Items.MILK_BUCKET && !replaced) {
+                        player.getItemInHand(hand).shrink(1);
+                        replaced = true;
+                    }
+
+                    ItemHandlerHelper.giveItemToPlayer(player, stack);
                 }
 
-                ItemHandlerHelper.giveItemToPlayer(player, stack);
+                stats.setProduced(ret.size());
             }
 
-            stats.setProduced(ret.size());
-            return ret.size() > 0;
+            return true;
         }
 
         return false;

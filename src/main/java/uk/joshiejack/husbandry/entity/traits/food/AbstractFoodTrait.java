@@ -35,6 +35,7 @@ public abstract class AbstractFoodTrait implements IJoinWorldTrait, IInteractive
         if (!getFoodTag().contains(held.getItem()))
             return false;
         stats.feed();
+        stats.increaseHappiness(100);
         held.shrink(1);
         return true;
     }

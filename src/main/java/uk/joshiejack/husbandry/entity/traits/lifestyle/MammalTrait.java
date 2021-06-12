@@ -12,17 +12,31 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.util.Hand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.server.ServerWorld;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.common.util.Lazy;
 import uk.joshiejack.husbandry.Husbandry;
 import uk.joshiejack.husbandry.api.HusbandryAPI;
 import uk.joshiejack.husbandry.api.IMobStats;
 import uk.joshiejack.husbandry.api.trait.IDataTrait;
+import uk.joshiejack.husbandry.api.trait.IIconTrait;
 import uk.joshiejack.husbandry.api.trait.IInteractiveTrait;
 import uk.joshiejack.husbandry.api.trait.INewDayTrait;
+import uk.joshiejack.husbandry.item.HusbandryItems;
+import uk.joshiejack.penguinlib.util.icon.Icon;
+import uk.joshiejack.penguinlib.util.icon.ItemIcon;
 
-public class MammalTrait implements IDataTrait, IInteractiveTrait, INewDayTrait {
+public class MammalTrait implements IDataTrait, IInteractiveTrait, INewDayTrait, IIconTrait {
+    public static final Lazy<Icon> ICON = Lazy.of(() -> new ItemIcon(HusbandryItems.MIRACLE_POTION.get()));
     public static final ITag.INamedTag<Item> IMPREGNATES_MAMMALS = ItemTags.createOptional(new ResourceLocation(Husbandry.MODID, "impregnates_mammals"));
     private int gestation;//How many days this mob has been pregnant
     private boolean pregnant; //If the mob is pregnant
+
+    @OnlyIn(Dist.CLIENT)
+    @Override
+    public Icon getIcon(IMobStats<?> stats) {
+        return pregnant ? ICON.get() : ItemIcon.EMPTY;
+    }
 
     @Override
     public void onNewDay(IMobStats<?> stats) {

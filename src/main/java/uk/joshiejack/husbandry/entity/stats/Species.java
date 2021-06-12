@@ -11,6 +11,7 @@ import net.minecraft.item.Items;
 import net.minecraft.util.ResourceLocation;
 import uk.joshiejack.husbandry.api.ISpecies;
 import uk.joshiejack.husbandry.api.trait.IMobTrait;
+import uk.joshiejack.penguinlib.util.icon.ItemIcon;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -20,7 +21,7 @@ import java.util.Map;
 
 public class Species implements ISpecies {
     public static final Map<EntityType<?>, Species> TYPES = Maps.newHashMap();
-    public static final Species NONE = new Species(0, 0, Items.AIR, 0, 0, 0, 0, new Products(0, new ResourceLocation(Strings.EMPTY)), new ArrayList<>());
+    public static final Species NONE = new Species(0, 0, Items.AIR, 0, 0, 0, 0, new Products(0, new ResourceLocation(Strings.EMPTY), ItemIcon.EMPTY), new ArrayList<>());
     public static int DAYS_PER_YEAR = 120;
     //Min and max length of time this mob will live
     private final int minimumLifespan; //Years IRL

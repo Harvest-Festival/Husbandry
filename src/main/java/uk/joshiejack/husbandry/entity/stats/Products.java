@@ -12,20 +12,29 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.server.ServerWorld;
 import uk.joshiejack.husbandry.api.IProducts;
 import uk.joshiejack.penguinlib.util.helpers.minecraft.FakePlayerHelper;
+import uk.joshiejack.penguinlib.util.icon.Icon;
+import uk.joshiejack.penguinlib.util.icon.ItemIcon;
 
 import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Objects;
 
 public class Products implements IProducts {
-    public static final Products NONE = new Products(Integer.MAX_VALUE, null);
+    public static final Products NONE = new Products(Integer.MAX_VALUE, null, ItemIcon.EMPTY);
     private static final List<ItemStack> EMPTY = Lists.newArrayList(ItemStack.EMPTY);
     private final ResourceLocation lootTable;
     private final int dayBetween;
+    private final Icon icon;
 
-    public Products(int daysBetween, ResourceLocation lootTable){
+    public Products(int daysBetween, ResourceLocation lootTable, Icon icon) {
+        this.icon = icon;
         this.dayBetween = daysBetween;
         this.lootTable = lootTable;
+    }
+
+    @Override
+    public Icon getIcon() {
+        return icon;
     }
 
     @Override
@@ -34,8 +43,9 @@ public class Products implements IProducts {
     }
 
     /** Size will be 0, 1 or 2 **/
+    @Override
     public List<ItemStack> getProduct(MobEntity entity, @Nullable PlayerEntity player) {
-        if (lootTable == null)
+        if (lootTable == null || entity.level.isClientSide)
             return EMPTY;
         LootContext.Builder lootcontext$builder = (new LootContext.Builder((ServerWorld)entity.level))
                 .withParameter(LootParameters.ORIGIN, entity.position())

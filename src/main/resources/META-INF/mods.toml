@@ -22,6 +22,6 @@ license="MIT"
 [[dependencies.husbandry]]
     modId="penguinlib"
     mandatory=true
-    versionRange="[0.3.0-12,)"
+    versionRange="[0.3.0-21,)"
     ordering="NONE"
     side="BOTH"

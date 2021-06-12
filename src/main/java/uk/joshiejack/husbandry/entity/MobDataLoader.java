@@ -19,6 +19,7 @@ import uk.joshiejack.husbandry.entity.stats.Species;
 import uk.joshiejack.husbandry.network.RequestDataPacket;
 import uk.joshiejack.penguinlib.events.DatabaseLoadedEvent;
 import uk.joshiejack.penguinlib.network.PenguinNetwork;
+import uk.joshiejack.penguinlib.util.icon.ItemIcon;
 
 import java.util.List;
 import java.util.Map;
@@ -37,7 +38,7 @@ public class MobDataLoader {
             event.table("mob_traits").where("species=" + name)
                     .forEach(trait -> traits.add(TRAITS.get(trait.get("trait").toString())));
             Products products = row.get("products loot table").equals("none") ? Products.NONE :
-                    new Products(row.get("product frequency"), row.getRL("products loot table"));
+                    new Products(row.get("product frequency"), row.getRL("products loot table"), new ItemIcon(row.item("product icon")));
             Species type = new Species(row.get("min age"), row.get("max age"),
                     row.item("treat item"),
                     row.get("generic treats"), row.get("species treats")

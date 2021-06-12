@@ -45,17 +45,18 @@ public class CleanableTrait implements IDataTrait, IInteractiveTrait, INewDayTra
     public boolean onRightClick(IMobStats<?> stats, PlayerEntity player, Hand hand) {
         if (player.getItemInHand(hand).getItem() == HusbandryItems.BRUSH.get() && clean(stats)) {
             World world = player.level;
-            MobEntity target = stats.getEntity();
+            MobEntity entity = stats.getEntity();
             if (world.isClientSide) {
+                if (world.getDayTime() % 3 ==0) player.swing(hand);
                 for (int j = 0; j < 30D; j++) {
-                    double d7 = (target.xo - 0.5D) + world.random.nextFloat();
-                    double d8 = (target.yo - 0.5D) + world.random.nextFloat();
-                    double d9 = (target.zo - 0.5D) + world.random.nextFloat();
-                    world.addParticle(ParticleTypes.HAPPY_VILLAGER, d8, 1.0D + d7 - 0.125D, d9, 0, 0, 0);
+                    double x = (entity.xo - 0.5D) + world.random.nextFloat();
+                    double y = (entity.yo - 0.5D) + world.random.nextFloat();
+                    double z = (entity.zo - 0.5D) + world.random.nextFloat();
+                    world.addParticle(ParticleTypes.CRIT, x, 1D + y, z, 0, 0, 0);
                 }
             }
 
-            world.playSound(player, player.xo, player.yo, player.zo, Husbandry.HusbandrySounds.BRUSH.get(), SoundCategory.PLAYERS, 1.5F, 1F);
+            world.playSound(player, player.xo, player.yo, player.zo, Husbandry.HusbandrySounds.BRUSH.get(), SoundCategory.PLAYERS, 1.5F, player.level.random.nextFloat() * 0.1F + 0.9F);
             return true;
         }
 
@@ -65,12 +66,14 @@ public class CleanableTrait implements IDataTrait, IInteractiveTrait, INewDayTra
     public boolean clean(IMobStats<?> stats) {
         if (!cleaned) {
             cleanliness++;
-            if (cleanliness == 100) {
+            if (cleanliness == 50) {
                 setCleaned(stats, true);
             }
+
+            return true;
         }
 
-        return cleaned;
+        return false;
     }
 
     public void setCleaned(IMobStats<?> stats, boolean cleaned) {

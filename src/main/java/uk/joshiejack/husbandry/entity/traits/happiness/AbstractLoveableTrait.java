@@ -8,11 +8,20 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import uk.joshiejack.husbandry.Husbandry;
 import uk.joshiejack.husbandry.api.IMobStats;
+import uk.joshiejack.husbandry.api.trait.IIconTrait;
 import uk.joshiejack.husbandry.api.trait.IRenderTrait;
+import uk.joshiejack.penguinlib.util.icon.Icon;
+import uk.joshiejack.penguinlib.util.icon.TextureIcon;
 
-public class AbstractLoveableTrait implements IRenderTrait {
+public class AbstractLoveableTrait implements IRenderTrait, IIconTrait {
     private static final ResourceLocation MINECRAFT_ICONS = new ResourceLocation("minecraft", "textures/gui/icons.png");
-    private static final ResourceLocation HUSBANDRY_ICONS = new ResourceLocation(Husbandry.MODID, "textures/gui/icons.png");
+    public static final ResourceLocation HUSBANDRY_ICONS = new ResourceLocation(Husbandry.MODID, "textures/gui/icons.png");
+    public static final Icon ICON = new TextureIcon(HUSBANDRY_ICONS, 32, 0);
+
+    @Override
+    public Icon getIcon(IMobStats<?> stats) {
+        return stats.isUnloved() ? ICON.shadowed() : ICON;
+    }
 
     @OnlyIn(Dist.CLIENT)
     @Override

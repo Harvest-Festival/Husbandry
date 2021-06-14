@@ -6,7 +6,6 @@ import uk.joshiejack.husbandry.api.trait.INewDayTrait;
 import uk.joshiejack.penguinlib.data.TimeUnitRegistry;
 
 public class RequiresFoodTrait implements INewDayTrait {
-
     @Override
     public void onNewDay(IMobStats<?> stats) {
         int hunger = stats.getHunger();

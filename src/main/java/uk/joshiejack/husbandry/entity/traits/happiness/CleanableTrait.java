@@ -63,7 +63,7 @@ public class CleanableTrait implements IDataTrait, IInteractiveTrait, INewDayTra
         return false;
     }
 
-    public boolean clean(IMobStats<?> stats) {
+    private boolean clean(IMobStats<?> stats) {
         if (!cleaned) {
             cleanliness++;
             if (cleanliness == 50) {

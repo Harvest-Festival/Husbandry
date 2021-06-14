@@ -12,7 +12,6 @@ import uk.joshiejack.husbandry.entity.ai.EatFoodGoal;
 public class EatsSlopTrait extends AbstractFoodTrait {
     public static final ITag.INamedTag<Item> SLOP = ItemTags.createOptional(new ResourceLocation(Husbandry.MODID, "slop"));
 
-
     @Override
     protected ITag.INamedTag<Item> getFoodTag() {
         return SLOP;

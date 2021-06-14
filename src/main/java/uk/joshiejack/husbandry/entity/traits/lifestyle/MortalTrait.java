@@ -24,7 +24,6 @@ public class MortalTrait implements INewDayTrait, IDataTrait {
         }
     }
 
-
     @Override
     public void load(CompoundNBT nbt) {
         age = nbt.getInt("Age");

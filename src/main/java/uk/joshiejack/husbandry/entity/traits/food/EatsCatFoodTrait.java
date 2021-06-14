@@ -9,7 +9,6 @@ import uk.joshiejack.husbandry.Husbandry;
 public class EatsCatFoodTrait extends AbstractFoodTrait {
     public static final ITag.INamedTag<Item> CAT_FOOD = ItemTags.createOptional(new ResourceLocation(Husbandry.MODID, "cat_food"));
 
-
     @Override
     protected ITag.INamedTag<Item> getFoodTag() {
         return CAT_FOOD;

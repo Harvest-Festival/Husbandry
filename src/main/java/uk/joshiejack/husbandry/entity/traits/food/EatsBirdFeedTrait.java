@@ -12,7 +12,6 @@ import uk.joshiejack.husbandry.entity.ai.EatFoodGoal;
 public class EatsBirdFeedTrait extends AbstractFoodTrait {
     public static final ITag.INamedTag<Item> BIRD_FEED = ItemTags.createOptional(new ResourceLocation(Husbandry.MODID, "bird_feed"));
 
-
     @Override
     protected ITag.INamedTag<Item> getFoodTag() {
         return BIRD_FEED;

@@ -19,7 +19,6 @@ import java.util.Objects;
 public class EatsGrassTrait extends AbstractFoodTrait {
     public static final ITag.INamedTag<Item> HAY = ItemTags.createOptional(new ResourceLocation(Husbandry.MODID, "hay"));
 
-
     @Override
     protected ITag.INamedTag<Item> getFoodTag() {
         return HAY;

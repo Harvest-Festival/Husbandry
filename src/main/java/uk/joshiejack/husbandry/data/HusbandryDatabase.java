@@ -50,7 +50,7 @@ public class HusbandryDatabase extends AbstractDatabaseProvider {
                 .assign(EntityType.SHEEP).withTraits("diurnal", "eats_grass", "cleanable", "shearable", "faster_product_reset").build(this);
         MobType.createMammal("horse").withLifespan(25,30).withTreat(HusbandryItems.HORSE_TREAT.get()).levelUpWith(22,10).withGestationPeriod(24).withMaturityAt(12).assign(EntityType.HORSE)
                 .withTraits("aquaphobic", "diurnal", "eats_grass", "cleanable", "pet").build(this);
-        MobType.createMammal("llama").withLifespan(15,25).withTreat(HusbandryItems.SHEEP_TREAT.get()).levelUpWith(7,24).withGestationPeriod(11).withMaturityAt(10).assign(EntityType.LLAMA)
+        MobType.createMammal("llama").withLifespan(15,25).withTreat(HusbandryItems.LLAMA_TREAT.get()).levelUpWith(7,24).withGestationPeriod(11).withMaturityAt(10).assign(EntityType.LLAMA)
                 .withTraits("diurnal", "eats_grass", "cleanable", "pet").build(this);
         MobType.createSmallMammal("rabbit").withLifespan(8,12).withTreat(HusbandryItems.RABBIT_TREAT.get()).levelUpWith(14,14).withGestationPeriod(4).withMaturityAt(3).withProducts(4, "rabbit_foot", Items.RABBIT_FOOT)
                 .withTraits("eats_rabbit_food", "drops_product").assign(EntityType.RABBIT).build(this);

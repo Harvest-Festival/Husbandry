@@ -65,6 +65,18 @@ public class IMobStatsJS {
         return stats.getHappiness();
     }
 
+    public void setHappiness(int value) {
+        stats.setHappiness(value);
+    }
+
+    public int getHappinessModifier() {
+        return stats.getHappinessModifier();
+    }
+
+    public void setHappinessModifier(int value) {
+        stats.setHappinessModifier(value);
+    }
+
     public void decreaseHappiness(int happiness) {
         stats.decreaseHappiness(happiness);
     }
@@ -101,8 +113,16 @@ public class IMobStatsJS {
         return stats.isHungry();
     }
 
+    public int getMaxHearts() {
+        return stats.getMaxHearts();
+    }
+
     public int getHearts() {
         return stats.getHearts();
+    }
+
+    public void setHearts(int value) {
+        stats.setHearts(value);
     }
 
     public int getMaxRelationship() {
@@ -111,5 +131,9 @@ public class IMobStatsJS {
 
     public void resetProduct() {
         stats.resetProduct();
+    }
+
+    public boolean isDomesticated() {
+        return stats.isDomesticated();
     }
 }

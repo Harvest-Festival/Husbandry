@@ -6,6 +6,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tags.ITag;
 import net.minecraft.util.Hand;
 import net.minecraftforge.common.util.Lazy;
+import uk.joshiejack.husbandry.Husbandry;
 import uk.joshiejack.husbandry.api.IMobStats;
 import uk.joshiejack.husbandry.api.trait.IIconTrait;
 import uk.joshiejack.husbandry.api.trait.IInteractiveTrait;
@@ -35,7 +36,7 @@ public abstract class AbstractFoodTrait implements IJoinWorldTrait, IInteractive
         if (!getFoodTag().contains(held.getItem()))
             return false;
         stats.feed();
-        stats.increaseHappiness(100);
+        stats.increaseHappiness(Husbandry.HusbandryConfig.fedGain.get());
         held.shrink(1);
         return true;
     }

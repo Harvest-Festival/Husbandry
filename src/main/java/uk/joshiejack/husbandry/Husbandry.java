@@ -11,11 +11,14 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.common.extensions.IForgeContainerType;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.GatherDataEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -74,6 +77,7 @@ public class Husbandry {
         HusbandrySounds.SOUNDS.register(eventBus);
         HusbandryTileEntities.TILE_ENTITIES.register(eventBus);
         HusbandryAPI.instance = new HusbandryAPIImpl();
+        ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, HusbandryConfig.create());
     }
 
     private void registerTrait(Class<? extends IMobTrait> data) {
@@ -166,6 +170,42 @@ public class Husbandry {
         @Override
         public <E extends MobEntity> IMobStats<E> getStatsForEntity(E entity) {
             return (IMobStats<E>) MobStats.getStats(entity);
+        }
+    }
+
+    public static class HusbandryConfig {
+        public static ForgeConfigSpec.IntValue maxHappiness;
+        public static ForgeConfigSpec.IntValue hungerHappinessLoss;
+        public static ForgeConfigSpec.IntValue hurtHappinessLossModifier;
+        public static ForgeConfigSpec.IntValue dirtyHappinessLoss;
+        public static ForgeConfigSpec.IntValue wrongTreatLoss;
+        public static ForgeConfigSpec.IntValue lovedGain;
+        public static ForgeConfigSpec.IntValue fedGain;
+        public static ForgeConfigSpec.IntValue cleanedGain;
+        public static ForgeConfigSpec.IntValue genericTreatGain;
+        public static ForgeConfigSpec.IntValue typeTreatGain;
+        public static ForgeConfigSpec.IntValue outsideGain;
+        public static ForgeConfigSpec.IntValue birthGain;
+
+        HusbandryConfig(ForgeConfigSpec.Builder builder) {
+            builder.push("Happiness Settings");
+            maxHappiness = builder.defineInRange("Maximum happiness", 30000, 100, 100000000);
+            hungerHappinessLoss = builder.defineInRange("Happiness lost from hunger", 1, 0, 100000);
+            hurtHappinessLossModifier = builder.defineInRange("Happiness loss from hurt multiplier", 5, 0, 100);
+            dirtyHappinessLoss = builder.defineInRange("Happiness lost from being unclean", 1, 0, 100000);
+            wrongTreatLoss = builder.defineInRange("Happiness lost from incorrect treat type", 500, 0, 100000);
+            lovedGain = builder.defineInRange("Happiness gained from petting/carrying", 100, 0, 100000);
+            fedGain = builder.defineInRange("Happiness gained from hand feeding", 100, 0, 100000);
+            cleanedGain = builder.defineInRange("Happiness gained from cleaning", 30, 0, 100000);
+            genericTreatGain = builder.defineInRange("Happiness gained from generic treats", 100, 0, 100000);
+            typeTreatGain = builder.defineInRange("Happiness gained from type treats", 250, 0, 100000);
+            outsideGain = builder.defineInRange("Happiness gained from being outside in the sun", 2, 0, 100000);
+            birthGain = builder.defineInRange("Happiness gained from giving birth", 100, 0, 100000);
+            builder.pop();
+        }
+
+        public static ForgeConfigSpec create() {
+            return new ForgeConfigSpec.Builder().configure(HusbandryConfig::new).getValue();
         }
     }
 }

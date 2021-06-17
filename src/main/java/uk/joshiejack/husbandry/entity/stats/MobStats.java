@@ -12,14 +12,17 @@ import net.minecraft.util.Hand;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.common.util.INBTSerializable;
+import net.minecraftforge.common.util.Lazy;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
+import uk.joshiejack.husbandry.Husbandry;
 import uk.joshiejack.husbandry.api.IMobStats;
 import uk.joshiejack.husbandry.api.trait.*;
 import uk.joshiejack.husbandry.entity.ai.AbstractMoveToBlockGoal;
 import uk.joshiejack.husbandry.entity.traits.TraitType;
 import uk.joshiejack.husbandry.entity.traits.product.AbstractMobProductTrait;
 import uk.joshiejack.husbandry.network.SendDataPacket;
+import uk.joshiejack.husbandry.network.SetHappinessPacket;
 import uk.joshiejack.husbandry.network.SpawnHeartsPacket;
 import uk.joshiejack.penguinlib.network.PenguinNetwork;
 import uk.joshiejack.penguinlib.util.helpers.generic.MathsHelper;
@@ -34,7 +37,7 @@ import java.util.Objects;
 import static uk.joshiejack.husbandry.entity.stats.CapabilityStatsHandler.MOB_STATS_CAPABILITY;
 
 public class MobStats<E extends MobEntity> implements ICapabilityProvider, INBTSerializable<CompoundNBT>, IMobStats<E> {
-    private static final int MAX_RELATIONSHIP = 30000;
+    private static final Lazy<Integer> MAX_RELATIONSHIP = Lazy.of(() -> Husbandry.HusbandryConfig.maxHappiness.get());
     private final ListMultimap<TraitType, IMobTrait> traits;
     protected final E entity;
     protected final Species species;
@@ -97,7 +100,7 @@ public class MobStats<E extends MobEntity> implements ICapabilityProvider, INBTS
 
         if (!eaten) {
             hunger++;
-            decreaseHappiness(1);
+            decreaseHappiness(Husbandry.HusbandryConfig.hungerHappinessLoss.get());
         }
 
         loved = false;
@@ -129,6 +132,13 @@ public class MobStats<E extends MobEntity> implements ICapabilityProvider, INBTS
     }
 
     @Override
+    public void setHappiness(int happiness) {
+        this.happiness = happiness;
+        if (!entity.level.isClientSide)
+            PenguinNetwork.sendToNearby(new SetHappinessPacket(entity.getId(), happiness), entity);
+    }
+
+    @Override
     public int getHappinessModifier() {
         return happinessDivisor;
     }
@@ -138,9 +148,10 @@ public class MobStats<E extends MobEntity> implements ICapabilityProvider, INBTS
         happinessDivisor = value;
     }
 
+
     @Override
     public void decreaseHappiness(int happiness) {
-        this.happiness = MathsHelper.constrainToRangeInt(this.happiness - happiness, 0, MAX_RELATIONSHIP / happinessDivisor);
+        this.happiness = MathsHelper.constrainToRangeInt(this.happiness - happiness, 0, MAX_RELATIONSHIP.get() / happinessDivisor);
         if (!entity.level.isClientSide) {
             PenguinNetwork.sendToNearby(new SpawnHeartsPacket(entity.getId(), false), entity);
         }
@@ -148,7 +159,7 @@ public class MobStats<E extends MobEntity> implements ICapabilityProvider, INBTS
 
     @Override
     public void increaseHappiness(int happiness) {
-        this.happiness = MathsHelper.constrainToRangeInt(this.happiness + happiness, 0, MAX_RELATIONSHIP / happinessDivisor);
+        this.happiness = MathsHelper.constrainToRangeInt(this.happiness + happiness, 0, MAX_RELATIONSHIP.get() / happinessDivisor);
         if (!entity.level.isClientSide) {
             PenguinNetwork.sendToNearby(new SpawnHeartsPacket(entity.getId(), true), entity);
         }
@@ -182,7 +193,7 @@ public class MobStats<E extends MobEntity> implements ICapabilityProvider, INBTS
     @Override
     public boolean setLoved() {
         this.loved = true;
-        increaseHappiness(100);
+        increaseHappiness(Husbandry.HusbandryConfig.lovedGain.get());
         return this.loved;
     }
 
@@ -204,17 +215,25 @@ public class MobStats<E extends MobEntity> implements ICapabilityProvider, INBTS
 
     @Override
     public int getMaxHearts() {
-        return (MAX_RELATIONSHIP / happinessDivisor) / (MAX_RELATIONSHIP/10);
+        return (MAX_RELATIONSHIP.get() / happinessDivisor) / (MAX_RELATIONSHIP.get()/10);
     }
 
     @Override
     public int getHearts() {
-        return (int) ((((double) happiness) / MAX_RELATIONSHIP) * 10); //0 > 10
+        return (int) ((((double) happiness) / MAX_RELATIONSHIP.get()) * 10); //0 > 10
+    }
+
+    @Override
+    public void setHearts(int hearts) {
+        hearts = Math.max(0, Math.min(10, hearts));
+        this.happiness = hearts * (MAX_RELATIONSHIP.get()/ 10);
+        if (!entity.level.isClientSide)
+            PenguinNetwork.sendToNearby(new SetHappinessPacket(entity.getId(), happiness), entity);
     }
 
     @Override
     public int getMaxRelationship() {
-        return MAX_RELATIONSHIP;
+        return MAX_RELATIONSHIP.get();
     }
 
     @Nullable

@@ -32,7 +32,7 @@ public class CleanableTrait implements IDataTrait, IInteractiveTrait, INewDayTra
         setCleaned(stats, false);
         cleanliness = MathsHelper.constrainToRangeInt(cleanliness - 10, -100, 100);
         if (cleanliness <= 0) {
-            stats.decreaseHappiness(1); //We dirty, so we no happy
+            stats.decreaseHappiness(Husbandry.HusbandryConfig.dirtyHappinessLoss.get()); //We dirty, so we no happy
         }
     }
 
@@ -82,7 +82,7 @@ public class CleanableTrait implements IDataTrait, IInteractiveTrait, INewDayTra
         else {
             this.cleaned = cleaned;
             if (cleaned) {
-                stats.increaseHappiness(30);
+                stats.increaseHappiness(Husbandry.HusbandryConfig.cleanedGain.get());
             }
 
             PenguinNetwork.sendToNearby(new SetCleanedStatusPacket(entity.getId(), cleaned), entity);

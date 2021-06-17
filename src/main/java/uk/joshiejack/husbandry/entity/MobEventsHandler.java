@@ -16,6 +16,7 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import uk.joshiejack.husbandry.Husbandry;
 import uk.joshiejack.husbandry.api.trait.IJoinWorldTrait;
 import uk.joshiejack.husbandry.entity.stats.MobStats;
 import uk.joshiejack.husbandry.entity.traits.TraitType;
@@ -46,7 +47,7 @@ public class MobEventsHandler {
     public static void onLivingHurt(LivingHurtEvent event) {
         MobStats<?> stats = MobStats.getStats(event.getEntity());
         if (stats != null)
-            stats.decreaseHappiness((int) (5 * event.getAmount()));
+            stats.decreaseHappiness((int) (Husbandry.HusbandryConfig.hurtHappinessLossModifier.get() * event.getAmount()));
     }
 
     @SubscribeEvent

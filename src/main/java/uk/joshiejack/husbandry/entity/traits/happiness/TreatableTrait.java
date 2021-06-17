@@ -58,7 +58,7 @@ public class TreatableTrait implements IDataTrait, IInteractiveTrait, INewDayTra
         if (!generic) { //Feeding the wrong treat will upset them!
             if (stats.getSpecies().getTreat() != held.getItem() && !annoyed) {
                 annoyed = true;
-                stats.decreaseHappiness(500);
+                stats.decreaseHappiness(Husbandry.HusbandryConfig.wrongTreatLoss.get());
                 held.shrink(1);
                 return true;
             }
@@ -72,7 +72,7 @@ public class TreatableTrait implements IDataTrait, IInteractiveTrait, INewDayTra
             } else speciesTreatsGiven++;
 
             held.shrink(1); //Remove it
-            stats.increaseHappiness(generic ? 250 : 100);
+            stats.increaseHappiness(generic ? Husbandry.HusbandryConfig.typeTreatGain.get() : Husbandry.HusbandryConfig.genericTreatGain.get());
             treated = true;
             return true;
         }

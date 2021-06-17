@@ -9,6 +9,8 @@ public interface IMobStats<E extends MobEntity> {
 
     int getHappiness();
 
+    void setHappiness(int value);
+
     int getHappinessModifier();
 
     void setHappinessModifier(int value);
@@ -35,8 +37,9 @@ public interface IMobStats<E extends MobEntity> {
 
     int getHearts();
 
+    void setHearts(int hearts);
+
     int getMaxRelationship();
 
     void resetProduct();
-
 }

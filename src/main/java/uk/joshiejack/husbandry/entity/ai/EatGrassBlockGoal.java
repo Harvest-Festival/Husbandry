@@ -19,6 +19,8 @@ public class EatGrassBlockGoal extends AbstractMoveToBlockGoal {
 
     public EatGrassBlockGoal(MobEntity entity, IMobStats<?> stats) {
         super(entity, stats, ABOVE, 8);
+        verticalSearchStart = -1;
+        verticalOffset = 1;
     }
 
     @Override

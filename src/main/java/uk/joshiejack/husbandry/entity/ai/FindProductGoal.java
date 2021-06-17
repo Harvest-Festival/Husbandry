@@ -26,7 +26,8 @@ public class FindProductGoal extends AbstractMoveToBlockGoal {
     @Override
     protected boolean isValidTarget(@Nonnull IWorldReader world, @Nonnull BlockPos pos) {
         BlockState below = world.getBlockState(pos.below());
-        return below.getBlock().canSustainPlant(below, entity.level, pos.below(), Direction.UP, (BushBlock) Blocks.DANDELION);
+        return below.getBlock().canSustainPlant(below, entity.level, pos.below(), Direction.UP, (BushBlock) Blocks.DANDELION)
+                && world.getBlockState(pos).isAir(world, pos);
     }
 
     @Override

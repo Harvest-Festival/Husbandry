@@ -65,6 +65,7 @@ rabbit,treatable
 rabbit,astraphobic
 rabbit,eats_rabbit_food
 rabbit,drops_product
+rabbit,more_product_chance
 cat,mortal
 cat,mammal
 cat,carriable

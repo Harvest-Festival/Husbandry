@@ -34,16 +34,15 @@ public abstract class AbstractHideInsideGoal extends AbstractMoveToBlockGoal {
     @Override
     protected boolean isValidTarget(@Nonnull IWorldReader world, @Nonnull BlockPos pos) {
         return world.getBlockState(pos.above()).getCollisionShape(world, pos.above()).isEmpty()
-            && world.getBlockState(pos.above()).getCollisionShape(world, pos.above(2)).isEmpty()
+            && world.getBlockState(pos.above(2)).getCollisionShape(world, pos.above(2)).isEmpty()
                 && !world.canSeeSky(pos.above());
     }
 
     @Override
     public void tick() {
         super.tick();
-        if (isNearDestination()) {
-            if (canStopHiding()) tryTicks = 2000;
-        }
+        if (isNearDestination() && canStopHiding())
+            tryTicks = 2000;
     }
 
     protected abstract boolean canStopHiding();

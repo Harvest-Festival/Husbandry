@@ -21,6 +21,7 @@ import uk.joshiejack.husbandry.api.trait.*;
 import uk.joshiejack.husbandry.entity.ai.AbstractMoveToBlockGoal;
 import uk.joshiejack.husbandry.entity.traits.TraitType;
 import uk.joshiejack.husbandry.entity.traits.product.AbstractMobProductTrait;
+import uk.joshiejack.husbandry.entity.traits.product.MoreProductChanceTrait;
 import uk.joshiejack.husbandry.network.SendDataPacket;
 import uk.joshiejack.husbandry.network.SetHappinessPacket;
 import uk.joshiejack.husbandry.network.SpawnHeartsPacket;
@@ -69,7 +70,8 @@ public class MobStats<E extends MobEntity> implements ICapabilityProvider, INBTS
         });
 
         this.traits.get(TraitType.INIT).forEach(trait -> ((IInitTrait)trait).initTrait(this));
-        this.products = (AbstractMobProductTrait) this.traits.get(TraitType.DATA).stream().filter(t -> t instanceof AbstractMobProductTrait).findFirst().orElse(null);
+        this.products = (AbstractMobProductTrait) this.traits.get(TraitType.DATA).stream()
+                .filter(t -> t instanceof AbstractMobProductTrait).findFirst().orElse(new MoreProductChanceTrait());
         this.capability = LazyOptional.of(() -> this);
     }
 

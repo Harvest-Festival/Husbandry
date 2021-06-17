@@ -16,10 +16,10 @@ public abstract class AbstractMoveToBlockGoal extends Goal {
     protected int tryTicks;
     private int maxStayTicks;
     protected BlockPos blockPos = BlockPos.ZERO;
-    private boolean reachedTarget;
     private final int searchRange;
-    private final int verticalSearchRange;
+    protected int verticalSearchRange;
     protected int verticalSearchStart;
+    protected int verticalOffset;
     protected final IMobStats<?> stats;
     protected final Orientation orientation;
 
@@ -31,25 +31,22 @@ public abstract class AbstractMoveToBlockGoal extends Goal {
         this.searchRange = searchLength;
         this.verticalSearchStart = 0;
         this.verticalSearchRange = 1;
+        this.verticalOffset = 0;
         this.setFlags(EnumSet.of(Goal.Flag.MOVE, Goal.Flag.JUMP));
     }
 
-    protected boolean isReachedTarget() {
-        return this.reachedTarget;
-    }
-
-    public boolean isNearDestination() {
-        return isReachedTarget();
+    protected boolean isNearDestination() {
+        return isNearDestination(blockPos);
     }
 
     private boolean isNearDestination(BlockPos pos) {
         switch (orientation) {
             case ABOVE:
-                return entity.blockPosition().closerThan(pos, 1);
+                return entity.blockPosition().closerThan(pos, 1.5);
             case IN:
-                entity.blockPosition().closerThan(pos, 1);
+                return entity.blockPosition().closerThan(pos, 1);
             case BESIDE:
-                entity.blockPosition().closerThan(pos, 2.5);
+                return entity.blockPosition().closerThan(pos, 2.5);
             default:
                 return false;
         }
@@ -58,17 +55,12 @@ public abstract class AbstractMoveToBlockGoal extends Goal {
     @Override
     public void tick() {
         if (!isNearDestination(blockPos)) {
-            this.reachedTarget = false;
             ++this.tryTicks;
-
             if (this.tryTicks % 40 == 0) {
-                entity.getNavigation().moveTo((double) ((float) blockPos.getX()) + 0.5D,
-                        blockPos.getY() + 1, (double) ((float) blockPos.getZ()) + 0.5D, 1D);
+                moveMobToBlock();
             }
-        } else {
-            this.reachedTarget = true;
+        } else
             --this.tryTicks;
-        }
     }
 
     public void resetRunTimer() {
@@ -108,7 +100,8 @@ public abstract class AbstractMoveToBlockGoal extends Goal {
     }
 
     protected void moveMobToBlock() {
-        this.entity.getNavigation().moveTo((double)((float)this.blockPos.getX()) + 0.5D, (double)(this.blockPos.getY() + 1), (double)((float)this.blockPos.getZ()) + 0.5D, this.speedModifier);
+        entity.getNavigation().moveTo((double) ((float) blockPos.getX()) + 0.5D,
+                blockPos.getY() + verticalOffset, (double) ((float) blockPos.getZ()) + 0.5D, speedModifier);
     }
 
     protected boolean findNearestBlock() {
@@ -117,11 +110,11 @@ public abstract class AbstractMoveToBlockGoal extends Goal {
         BlockPos blockpos = this.entity.blockPosition();
         BlockPos.Mutable blockpos$mutable = new BlockPos.Mutable();
 
-        for (int k = this.verticalSearchStart; k <= j; k = k > 0 ? -k : 1 - k) {
+        for (int k = verticalSearchStart; k >= -j; k--) {
             for (int l = 0; l < i; ++l) {
                 for (int i1 = 0; i1 <= l; i1 = i1 > 0 ? -i1 : 1 - i1) {
                     for (int j1 = i1 < l && i1 > -l ? l : 0; j1 <= l; j1 = j1 > 0 ? -j1 : 1 - j1) {
-                        blockpos$mutable.setWithOffset(blockpos, i1, k - 1, j1);
+                        blockpos$mutable.setWithOffset(blockpos, i1, k, j1);
                         if (this.entity.isWithinRestriction(blockpos$mutable) && this.isValidTarget(this.entity.level, blockpos$mutable)) {
                             this.blockPos = blockpos$mutable;
                             return true;

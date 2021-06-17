@@ -6,6 +6,7 @@ import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ITag;
+import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.vector.Vector3d;
@@ -63,6 +64,7 @@ public class MobEventsHandler {
                     int newHappiness = stats.getHappiness();
                     if (newHappiness != happiness)
                         event.getPlayer().giveExperiencePoints((int) Math.ceil((newHappiness - happiness)/100D));
+                    event.setCancellationResult(ActionResultType.SUCCESS);
                     event.setCanceled(true);
                 }
             }

@@ -35,8 +35,11 @@ public abstract class AbstractFoodTrait implements IJoinWorldTrait, IInteractive
         ItemStack held = player.getItemInHand(hand);
         if (!getFoodTag().contains(held.getItem()))
             return false;
-        stats.feed();
-        stats.increaseHappiness(Husbandry.HusbandryConfig.fedGain.get());
+        if (stats.isHungry()) {
+            stats.feed();
+            stats.increaseHappiness(Husbandry.HusbandryConfig.fedGain.get());
+        }
+        
         held.shrink(1);
         return true;
     }

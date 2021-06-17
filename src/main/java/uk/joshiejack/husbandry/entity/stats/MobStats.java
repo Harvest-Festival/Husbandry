@@ -41,7 +41,6 @@ public class MobStats<E extends MobEntity> implements ICapabilityProvider, INBTS
     private final ListMultimap<TraitType, IMobTrait> traits;
     protected final E entity;
     protected final Species species;
-    private int town;
     private int happiness; //Current mob happiness
     private int happinessDivisor = 5; //Maximum happiness for this mob currently, increased by treats
     private int hunger; //How many days the mob has been without food
@@ -51,6 +50,7 @@ public class MobStats<E extends MobEntity> implements ICapabilityProvider, INBTS
     private boolean eaten; //If the mob has eaten today
     private final AbstractMobProductTrait products;
     private final LazyOptional<MobStats<?>> capability;
+    private boolean domesticated;
 
     public MobStats(E entity, @Nonnull Species species) {
         this.entity = entity;
@@ -127,6 +127,11 @@ public class MobStats<E extends MobEntity> implements ICapabilityProvider, INBTS
     }
 
     @Override
+    public boolean isDomesticated() {
+        return domesticated;
+    }
+
+    @Override
     public int getHappiness() {
         return happiness;
     }
@@ -169,6 +174,7 @@ public class MobStats<E extends MobEntity> implements ICapabilityProvider, INBTS
      * @return true if the event should be canceled
      */
     public boolean onEntityInteract(PlayerEntity player, Hand hand) {
+        domesticated = true; //Interaction started, so mark them as domesticated, maybe make this more complicated later
         List<IInteractiveTrait> traits = getTraits(TraitType.ACTION);
         return traits.stream().anyMatch(trait ->
                 trait.onRightClick(this, player, hand));
@@ -251,7 +257,7 @@ public class MobStats<E extends MobEntity> implements ICapabilityProvider, INBTS
     @Override
     public CompoundNBT serializeNBT() {
         CompoundNBT tag = new CompoundNBT();
-        tag.putInt("Town", town);
+        tag.putBoolean("Domesticated", domesticated);
         tag.putInt("Happiness", happiness);
         tag.putInt("HappinessDivisor", happinessDivisor);
         tag.putInt("Hunger", hunger);
@@ -266,7 +272,7 @@ public class MobStats<E extends MobEntity> implements ICapabilityProvider, INBTS
 
     @Override
     public void deserializeNBT(CompoundNBT nbt) {
-        town = nbt.getInt("Town");
+        domesticated = nbt.getBoolean("Domesticated");
         happiness = nbt.getInt("Happiness");
         happinessDivisor = nbt.getInt("HappinessDivisor");
         if (happinessDivisor == 0) happinessDivisor = 5; //Fix the divisor

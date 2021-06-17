@@ -4,7 +4,7 @@
 e2a15d691c29a2dc092d618f9b815b45372fdb10 assets/husbandry/blockstates/nest.json
 e89457f1f060ad76a4e311e4f821ee6487fb1337 assets/husbandry/blockstates/trough.json
 16677d1634b1dc3b6b76f7267b591885e507e2fa assets/husbandry/blockstates/truffle_block.json
-12530856ea9be864144705c65bc018c67b9920c1 assets/husbandry/lang/en_us.json
+7d755c739716fa750c2c57edde75c5c3b241afc4 assets/husbandry/lang/en_us.json
 c8bf332ee03cce0d32fd5638876a75bab794d66b assets/husbandry/models/item/bird_feed.json
 2e244225b765c5d0820395f776d2317e749cfeaf assets/husbandry/models/item/boiled_egg.json
 459cabd761463b478dc8b28dc8083552b895eda7 assets/husbandry/models/item/bowl.json
@@ -87,6 +87,7 @@ c086eb1bdd68e240f86ee33f76f103843e75db11 data/husbandry/recipes/bowl_note.json
 cbe900fce246b6e714b4af3eba048046f528c681 data/husbandry/recipes/chicken.json
 6c0bbba6f26a5504951fea5d4d065d0101a43755 data/husbandry/recipes/cleanliness_note.json
 33b18b03ffa33b0d8791cb4787d1f8b430e22083 data/husbandry/recipes/dinner_roll.json
+b0875ac0373536b2466423a97764a3c3af437a5d data/husbandry/recipes/domestication.json
 a0a6cc0a76657c0ea1b4b67c3347a93f826a5a8e data/husbandry/recipes/feeding_tray.json
 021f111d95b22cb0b291de150c706daed3dd6afc data/husbandry/recipes/feeding_tray_note.json
 b0875ac0373536b2466423a97764a3c3af437a5d data/husbandry/recipes/happiness_note.json

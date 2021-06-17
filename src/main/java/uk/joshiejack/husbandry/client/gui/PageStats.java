@@ -38,7 +38,7 @@ public class PageStats extends AbstractMultiPage.Both<MobStats<?>> {
     protected List<MobStats<?>> getEntries() {
         return Minecraft.getInstance().level.getLoadedEntitiesOfClass(MobEntity.class,
                 new AxisAlignedBB(Minecraft.getInstance().player.blockPosition()).inflate(64D)).stream()
-                .filter(e -> MobStats.getStats(e) != null)
+                .filter(e -> MobStats.getStats(e) != null && MobStats.getStats(e).isDomesticated())
                 .map(MobStats::getStats)
                 .collect(Collectors.toList());
     }

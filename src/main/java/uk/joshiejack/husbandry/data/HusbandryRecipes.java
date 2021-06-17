@@ -66,6 +66,7 @@ public class HusbandryRecipes extends RecipeProvider {
 
         //Guide book
         CategoryBuilder.category().withItemIcon(HusbandryItems.BRUSH.get())
+                .withNote("domestication").withNoteIcon().end()
                 .withNote("lifespan_note").withNoteIcon().setNoteType("lifespan").end()
                 .withNote("lifestyle_note").withNoteIcon().end()
                 .withNote("happiness_note").withNoteIcon().end()

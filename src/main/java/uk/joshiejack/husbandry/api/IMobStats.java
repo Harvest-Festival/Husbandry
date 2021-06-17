@@ -42,4 +42,6 @@ public interface IMobStats<E extends MobEntity> {
     int getMaxRelationship();
 
     void resetProduct();
+
+    boolean isDomesticated();
 }

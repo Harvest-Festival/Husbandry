@@ -2,6 +2,7 @@ package uk.joshiejack.husbandry.entity.ai;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.MobEntity;
+import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
@@ -33,8 +34,12 @@ public class DropsProductGoal extends AbstractMoveToBlockGoal {
                 (double) blockPos.getZ() + 0.5D, 10.0F, (float) entity.getMaxHeadXRot());
 
         if (isNearDestination()) {
-            for (ItemStack stack: stats.getSpecies().getProducts().getProduct(entity, null))
-                entity.spawnAtLocation(stack);
+            for (ItemStack stack: stats.getSpecies().getProducts().getProduct(entity, null)) {
+                ItemEntity itemEntity = entity.spawnAtLocation(stack);
+                if (itemEntity != null)
+                    itemEntity.lifespan = 24000 * 3;
+            }
+
             stats.setProduced(1);
             tryTicks = 9999;
         }

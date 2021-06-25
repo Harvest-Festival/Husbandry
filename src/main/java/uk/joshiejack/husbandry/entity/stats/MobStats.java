@@ -277,7 +277,7 @@ public class MobStats<E extends MobEntity> implements ICapabilityProvider, INBTS
         domesticated = nbt.getBoolean("Domesticated");
         happiness = nbt.getInt("Happiness");
         happinessDivisor = nbt.getInt("HappinessDivisor");
-        if (happinessDivisor == 0) happinessDivisor = 5; //Fix the divisor
+        if (happinessDivisor <= 0 || happinessDivisor > 5) happinessDivisor = 5; //Fix the divisor
         hunger = nbt.getInt("Hunger");
         childhood = nbt.getInt("Childhood");
         hasProduct = nbt.getBoolean("HasProduct");

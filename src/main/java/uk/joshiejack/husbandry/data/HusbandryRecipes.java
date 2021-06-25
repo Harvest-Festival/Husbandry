@@ -49,7 +49,7 @@ public class HusbandryRecipes extends RecipeProvider {
         ShapedRecipeBuilder.shaped(HusbandryItems.SICKLE::get).define('S', Items.FLINT).define('W', Tags.Items.RODS_WOODEN).pattern("SS").pattern(" W").pattern("W ").unlockedBy("has_cobble", has(Tags.Items.COBBLESTONE)).save(consumer, rl("stone_sickle"));
         ShapelessRecipeBuilder.shapeless(HusbandryItems.BIRD_FEED.get(), 12).requires(Tags.Items.SEEDS).requires(Tags.Items.SEEDS).requires(Tags.Items.SEEDS).unlockedBy("has_seeds", has(Tags.Items.SEEDS)).save(consumer, rl("bird_feed"));
         ShapelessRecipeBuilder.shapeless(HusbandryItems.SLOP.get(), 4).requires(PenguinTags.BREADS).requires(PenguinTags.CROPS_MELON).requires(Tags.Items.CROPS_WHEAT).unlockedBy("has_bread", has(PenguinTags.BREADS)).save(consumer, rl("slop"));
-        ShapelessRecipeBuilder.shapeless(HusbandryItems.MUG_OF_MILK.get(), 3).requires(Items.MILK_BUCKET).requires(PenguinItems.MUG.get()).requires(PenguinItems.MUG.get()).requires(PenguinItems.MUG.get()).unlockedBy("has_milk", has(Items.MILK_BUCKET)).save(consumer, "mug_of_milk");
+        ShapelessRecipeBuilder.shapeless(HusbandryItems.MUG_OF_MILK.get(), 3).requires(Items.MILK_BUCKET).requires(PenguinItems.MUG.get()).requires(PenguinItems.MUG.get()).requires(PenguinItems.MUG.get()).unlockedBy("has_milk", has(Items.MILK_BUCKET)).save(consumer, "hot_milk");
         cook(consumer, HusbandryItems.MUG_OF_MILK.get(), HusbandryItems.HOT_MILK.get(), 0.3F);
         ShapelessRecipeBuilder.shapeless(HusbandryItems.DINNER_ROLL.get()).requires(PenguinTags.BREADS).requires(HusbandryItemTags.BUTTER).requires(Tags.Items.EGGS).unlockedBy("has_eggs", has(Tags.Items.EGGS)).save(consumer, rl("dinner_roll"));
         cook(consumer, HusbandryItems.BOILED_EGG.get(), Items.EGG, 0.3F);

@@ -43,7 +43,7 @@ public class TreatableTrait implements IDataTrait, IInteractiveTrait, INewDayTra
                 && speciesTreatsGiven >= stats.getSpecies().getSpeciesTreats()) {
             genericTreatsGiven -= stats.getSpecies().getGenericTreats();
             speciesTreatsGiven -= stats.getSpecies().getSpeciesTreats();
-            stats.setHappinessModifier(stats.getHappiness() - 1);
+            stats.setHappinessModifier(stats.getHappinessModifier() - 1);
         }
 
         treated = false;

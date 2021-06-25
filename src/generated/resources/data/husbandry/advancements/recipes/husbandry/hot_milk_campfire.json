@@ -2,16 +2,16 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "husbandry:boiled_egg_campfire"
+      "husbandry:hot_milk_campfire"
     ]
   },
   "criteria": {
-    "has_boiled_egg": {
+    "has_hot_milk": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "husbandry:boiled_egg"
+            "item": "husbandry:mug_of_milk"
           }
         ]
       }
@@ -19,13 +19,13 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "husbandry:boiled_egg_campfire"
+        "recipe": "husbandry:hot_milk_campfire"
       }
     }
   },
   "requirements": [
     [
-      "has_boiled_egg",
+      "has_hot_milk",
       "has_the_recipe"
     ]
   ]

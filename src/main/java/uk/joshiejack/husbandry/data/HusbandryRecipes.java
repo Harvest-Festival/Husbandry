@@ -34,7 +34,7 @@ public class HusbandryRecipes extends RecipeProvider {
     }
 
     private void cook(@Nonnull Consumer<IFinishedRecipe> consumer, Item input, Item output, float experience) {
-        String name = input.getRegistryName().getPath();
+        String name = output.getRegistryName().getPath();
         CookingRecipeBuilder.cooking(Ingredient.of(input), output, experience, 100, IRecipeSerializer.SMOKING_RECIPE).unlockedBy("has_" + name, has(input)).save(consumer, rl(name + "_smoking"));
         CookingRecipeBuilder.cooking(Ingredient.of(input), output, experience, 600, IRecipeSerializer.CAMPFIRE_COOKING_RECIPE).unlockedBy("has_" + name, has(input)).save(consumer, rl(name + "_campfire"));
         CookingRecipeBuilder.smelting(Ingredient.of(input), output, experience, 200).unlockedBy("has_" + name, has(input)).save(consumer, rl(name + "_smelting"));
@@ -49,10 +49,10 @@ public class HusbandryRecipes extends RecipeProvider {
         ShapedRecipeBuilder.shaped(HusbandryItems.SICKLE::get).define('S', Items.FLINT).define('W', Tags.Items.RODS_WOODEN).pattern("SS").pattern(" W").pattern("W ").unlockedBy("has_cobble", has(Tags.Items.COBBLESTONE)).save(consumer, rl("stone_sickle"));
         ShapelessRecipeBuilder.shapeless(HusbandryItems.BIRD_FEED.get(), 12).requires(Tags.Items.SEEDS).requires(Tags.Items.SEEDS).requires(Tags.Items.SEEDS).unlockedBy("has_seeds", has(Tags.Items.SEEDS)).save(consumer, rl("bird_feed"));
         ShapelessRecipeBuilder.shapeless(HusbandryItems.SLOP.get(), 4).requires(PenguinTags.BREADS).requires(PenguinTags.CROPS_MELON).requires(Tags.Items.CROPS_WHEAT).unlockedBy("has_bread", has(PenguinTags.BREADS)).save(consumer, rl("slop"));
-        ShapelessRecipeBuilder.shapeless(HusbandryItems.MUG_OF_MILK.get(), 3).requires(Items.MILK_BUCKET).requires(PenguinItems.MUG.get()).requires(PenguinItems.MUG.get()).requires(PenguinItems.MUG.get()).unlockedBy("has_milk", has(Items.MILK_BUCKET)).save(consumer, "hot_milk");
+        ShapelessRecipeBuilder.shapeless(HusbandryItems.MUG_OF_MILK.get(), 3).requires(Items.MILK_BUCKET).requires(PenguinItems.MUG.get()).requires(PenguinItems.MUG.get()).requires(PenguinItems.MUG.get()).unlockedBy("has_milk", has(Items.MILK_BUCKET)).save(consumer, "mug_of_milk");
         cook(consumer, HusbandryItems.MUG_OF_MILK.get(), HusbandryItems.HOT_MILK.get(), 0.3F);
         ShapelessRecipeBuilder.shapeless(HusbandryItems.DINNER_ROLL.get()).requires(PenguinTags.BREADS).requires(HusbandryItemTags.BUTTER).requires(Tags.Items.EGGS).unlockedBy("has_eggs", has(Tags.Items.EGGS)).save(consumer, rl("dinner_roll"));
-        cook(consumer, HusbandryItems.BOILED_EGG.get(), Items.EGG, 0.3F);
+        cook(consumer, Items.EGG, HusbandryItems.BOILED_EGG.get(), 0.3F);
         ShapelessRecipeBuilder.shapeless(HusbandryItems.BUTTER.get(), 4).requires(Items.MILK_BUCKET).requires(Items.PAPER).unlockedBy("has_milk", has(Items.MILK_BUCKET)).save(consumer, rl("butter"));
         ShapelessRecipeBuilder.shapeless(HusbandryItems.ICE_CREAM.get()).requires(Items.MILK_BUCKET).requires(Tags.Items.EGGS).requires(PenguinItems.DEEP_BOWL.get()).unlockedBy("has_milk", has(Items.MILK_BUCKET)).save(consumer, "ice_cream");
         ShapedRecipeBuilder.shaped(HusbandryBlocks.NEST.get()).define('P', ItemTags.PLANKS).define('H', Blocks.HAY_BLOCK).pattern("PHP").pattern("PPP").unlockedBy("has_wood", has(ItemTags.PLANKS)).save(consumer, rl("nest"));

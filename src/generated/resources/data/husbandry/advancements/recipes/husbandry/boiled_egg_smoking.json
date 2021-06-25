@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "husbandry:boiled_egg_smelting"
+      "husbandry:boiled_egg_smoking"
     ]
   },
   "criteria": {
@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "item": "husbandry:boiled_egg"
+            "item": "minecraft:egg"
           }
         ]
       }
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "husbandry:boiled_egg_smelting"
+        "recipe": "husbandry:boiled_egg_smoking"
       }
     }
   },

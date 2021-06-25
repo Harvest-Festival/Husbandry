@@ -1,9 +1,9 @@
 {
   "type": "minecraft:smoking",
   "ingredient": {
-    "item": "husbandry:boiled_egg"
+    "item": "minecraft:egg"
   },
-  "result": "minecraft:egg",
+  "result": "husbandry:boiled_egg",
   "experience": 0.3,
   "cookingtime": 100
 }

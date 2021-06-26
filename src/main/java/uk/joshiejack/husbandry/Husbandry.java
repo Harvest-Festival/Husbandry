@@ -115,7 +115,7 @@ public class Husbandry {
         registerTrait(FasterProductResetTrait.class);
         registerTrait(FindsProductTrait.class);
         registerTrait(LaysEggTrait.class);
-        registerTrait(MilkableTrait.class);
+        registerTrait(Bucketable.class);
         registerTrait(MoreProductChanceTrait.class);
         registerTrait(MoreProductTrait.class);
         registerTrait(ShearableTrait.class);

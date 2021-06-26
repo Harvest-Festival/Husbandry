@@ -3,7 +3,7 @@ cow,12,20,husbandry:cow_treat,7,24,9,14,1,husbandry:entities/products/milk,minec
 chicken,3,10,husbandry:chicken_treat,5,26,3,3,1,husbandry:entities/products/chicken_egg,minecraft:egg
 pig,6,10,husbandry:pig_treat,20,10,4,4,1,husbandry:entities/products/truffle,husbandry:truffle_block
 sheep,8,12,husbandry:sheep_treat,2,29,5,4,7,husbandry:entities/products/wool,minecraft:white_wool
-horse,25,30,husbandry:horse_treat,22,10,24,12,0,none,minecraft:air
+horse,25,30,husbandry:horse_treat,10,22,24,12,0,none,minecraft:air
 llama,15,25,husbandry:llama_treat,7,24,11,10,0,none,minecraft:air
 rabbit,8,12,husbandry:rabbit_treat,14,14,4,3,4,husbandry:entities/products/rabbit_foot,minecraft:rabbit_foot
 cat,10,20,husbandry:cat_treat,3,24,5,7,0,none,minecraft:air

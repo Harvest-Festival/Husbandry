@@ -42,14 +42,14 @@ public class HusbandryDatabase extends AbstractDatabaseProvider {
         new TradeBuilder(VillagerProfession.SHEPHERD, 2, HusbandryItems.PARROT_TREAT.get()).setOutputAmount(3).setInputAmount(2).build(this);
         new TradeBuilder(VillagerProfession.SHEPHERD, 2, HusbandryItems.LLAMA_TREAT.get()).setOutputAmount(3).setInputAmount(2).build(this);
         MobType.createMammal("cow").withLifespan(12, 20).withTreat(HusbandryItems.COW_TREAT.get()).levelUpWith(7, 24).withGestationPeriod(9).withMaturityAt(14).withProducts(1, "milk", Items.MILK_BUCKET)
-                .assign(EntityType.COW).withTraits("diurnal", "eats_grass", "cleanable", "milkable", "more_product").build(this);
+                .assign(EntityType.COW).withTraits("diurnal", "eats_grass", "cleanable", "bucketable", "more_product").build(this);
         MobType.createBird("chicken").withLifespan(3, 10).withTreat(HusbandryItems.CHICKEN_TREAT.get()).levelUpWith(5,26).withGestationPeriod(3).withMaturityAt(3).withProducts(1, "chicken_egg", Items.EGG)
                 .assign(EntityType.CHICKEN).withTraits("aquaphobic", "diurnal", "lays_egg", "more_product").build(this);
         MobType.createMammal("pig").withLifespan(6, 10).withTreat(HusbandryItems.PIG_TREAT.get()).levelUpWith(20, 10).withGestationPeriod(4).withMaturityAt(4).withProducts(1, "truffle", HusbandryItems.TRUFFLE_BLOCK.get())
                 .assign(EntityType.PIG).withTraits("aquaphobic", "diurnal", "eats_slop", "cleanable", "pettable", "finds_product", "more_product_chance").build(this);
         MobType.createMammal("sheep").withLifespan(8,12).withTreat(HusbandryItems.SHEEP_TREAT.get()).levelUpWith(2,29).withGestationPeriod(5).withMaturityAt(4).withProducts(7, "wool", Items.WHITE_WOOL)
                 .assign(EntityType.SHEEP).withTraits("diurnal", "eats_grass", "cleanable", "shearable", "faster_product_reset").build(this);
-        MobType.createMammal("horse").withLifespan(25,30).withTreat(HusbandryItems.HORSE_TREAT.get()).levelUpWith(22,10).withGestationPeriod(24).withMaturityAt(12).assign(EntityType.HORSE)
+        MobType.createMammal("horse").withLifespan(25,30).withTreat(HusbandryItems.HORSE_TREAT.get()).levelUpWith(10,22).withGestationPeriod(24).withMaturityAt(12).assign(EntityType.HORSE)
                 .withTraits("aquaphobic", "diurnal", "eats_grass", "cleanable", "pet").build(this);
         MobType.createMammal("llama").withLifespan(15,25).withTreat(HusbandryItems.LLAMA_TREAT.get()).levelUpWith(7,24).withGestationPeriod(11).withMaturityAt(10).assign(EntityType.LLAMA)
                 .withTraits("diurnal", "eats_grass", "cleanable", "pet").build(this);

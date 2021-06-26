@@ -10,7 +10,7 @@ import uk.joshiejack.husbandry.api.trait.IInteractiveTrait;
 
 import java.util.List;
 
-public class MilkableTrait implements IInteractiveTrait {
+public class Bucketable implements IInteractiveTrait {
     @Override
     public boolean onRightClick(IMobStats<?> stats, PlayerEntity player, Hand hand) {
         if (player.getItemInHand(hand).getItem() == Items.BUCKET) {

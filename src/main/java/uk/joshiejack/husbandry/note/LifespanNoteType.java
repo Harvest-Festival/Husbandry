@@ -3,6 +3,7 @@ package uk.joshiejack.husbandry.note;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
+import uk.joshiejack.husbandry.Husbandry;
 import uk.joshiejack.husbandry.entity.stats.Species;
 import uk.joshiejack.penguinlib.note.Note;
 import uk.joshiejack.penguinlib.note.type.NoteType;
@@ -24,7 +25,8 @@ public class LifespanNoteType extends NoteType {
         Species.TYPES.forEach((type, species) -> {
             list.add(new StringTextComponent("\n ")); //newline before
             list.add(new TranslationTextComponent("note.type.husbandry.lifespan", type.getDescription(),
-                    (species.getMinAge() / Species.DAYS_PER_YEAR), (species.getMaxAge() / Species.DAYS_PER_YEAR)));
+                    (species.getMinAge() / Husbandry.HusbandryConfig.daysPerYear.get()),
+                    (species.getMaxAge() / Husbandry.HusbandryConfig.daysPerYear.get())));
         });
 
         return component;

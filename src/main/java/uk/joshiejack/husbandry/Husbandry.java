@@ -186,8 +186,12 @@ public class Husbandry {
         public static ForgeConfigSpec.IntValue typeTreatGain;
         public static ForgeConfigSpec.IntValue outsideGain;
         public static ForgeConfigSpec.IntValue birthGain;
+        public static ForgeConfigSpec.IntValue daysPerYear;
 
         HusbandryConfig(ForgeConfigSpec.Builder builder) {
+            builder.push("General Settings");
+            daysPerYear = builder.defineInRange("Animal lifespan days per year", 112, 7, 700000);
+            builder.pop();
             builder.push("Happiness Settings");
             maxHappiness = builder.defineInRange("Maximum happiness", 30000, 100, 100000000);
             hungerHappinessLoss = builder.defineInRange("Happiness lost from hunger", 1, 0, 100000);

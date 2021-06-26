@@ -14,6 +14,7 @@ import uk.joshiejack.penguinlib.data.TimeUnitRegistry;
 import uk.joshiejack.penguinlib.data.database.CSVUtils;
 import uk.joshiejack.penguinlib.data.generators.AbstractDatabaseProvider;
 import uk.joshiejack.penguinlib.data.generators.builders.Trade;
+import uk.joshiejack.penguinlib.data.generators.builders.TradeBuilder;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -38,8 +39,8 @@ public class HusbandryDatabase extends AbstractDatabaseProvider {
         new Trade(VillagerProfession.SHEPHERD, 2, HusbandryItems.PIG_TREAT.get()).setOutputAmount(3).setInputAmount(2).build(this);
         new Trade(VillagerProfession.SHEPHERD, 2, HusbandryItems.RABBIT_TREAT.get()).setOutputAmount(3).setInputAmount(2).build(this);
         new Trade(VillagerProfession.SHEPHERD, 2, HusbandryItems.SHEEP_TREAT.get()).setOutputAmount(3).setInputAmount(2).build(this);
-        new Trade(VillagerProfession.SHEPHERD, 2, HusbandryItems.PARROT_TREAT.get()).setOutputAmount(3).setInputAmount(2).build(this);
-        new Trade(VillagerProfession.SHEPHERD, 2, HusbandryItems.LLAMA_TREAT.get()).setOutputAmount(3).setInputAmount(2).build(this);
+        new TradeBuilder(VillagerProfession.SHEPHERD, 2, HusbandryItems.PARROT_TREAT.get()).setOutputAmount(3).setInputAmount(2).build(this);
+        new TradeBuilder(VillagerProfession.SHEPHERD, 2, HusbandryItems.LLAMA_TREAT.get()).setOutputAmount(3).setInputAmount(2).build(this);
         MobType.createMammal("cow").withLifespan(12, 20).withTreat(HusbandryItems.COW_TREAT.get()).levelUpWith(7, 24).withGestationPeriod(9).withMaturityAt(14).withProducts(1, "milk", Items.MILK_BUCKET)
                 .assign(EntityType.COW).withTraits("diurnal", "eats_grass", "cleanable", "milkable", "more_product").build(this);
         MobType.createBird("chicken").withLifespan(3, 10).withTreat(HusbandryItems.CHICKEN_TREAT.get()).levelUpWith(5,26).withGestationPeriod(3).withMaturityAt(3).withProducts(1, "chicken_egg", Items.EGG)

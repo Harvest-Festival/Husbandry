@@ -9,6 +9,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.util.ResourceLocation;
+import uk.joshiejack.husbandry.Husbandry;
 import uk.joshiejack.husbandry.api.ISpecies;
 import uk.joshiejack.husbandry.api.trait.IMobTrait;
 import uk.joshiejack.penguinlib.util.icon.ItemIcon;
@@ -22,7 +23,6 @@ import java.util.Map;
 public class Species implements ISpecies {
     public static final Map<EntityType<?>, Species> TYPES = Maps.newHashMap();
     public static final Species NONE = new Species(0, 0, Items.AIR, 0, 0, 0, 0, new Products(0, new ResourceLocation(Strings.EMPTY), ItemIcon.EMPTY), new ArrayList<>());
-    public static int DAYS_PER_YEAR = 120;
     //Min and max length of time this mob will live
     private final int minimumLifespan; //Years IRL
     private final int maximumLifespan; //Years IRL
@@ -35,8 +35,8 @@ public class Species implements ISpecies {
     private final Item treat;
 
     public Species(int minimumLifespan, int maximumLifespan, Item treat, int genericTreats, int speciesTreats, int daysToBirth, int daysToMaturity, @Nonnull Products products, List<IMobTrait> traits) {
-        this.minimumLifespan = minimumLifespan * DAYS_PER_YEAR;
-        this.maximumLifespan = maximumLifespan * DAYS_PER_YEAR;
+        this.minimumLifespan = minimumLifespan * Husbandry.HusbandryConfig.daysPerYear.get();
+        this.maximumLifespan = maximumLifespan * Husbandry.HusbandryConfig.daysPerYear.get();
         this.treat = treat;
         this.genericTreats = genericTreats;
         this.speciesTreats = speciesTreats;

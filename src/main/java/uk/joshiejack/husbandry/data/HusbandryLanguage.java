@@ -30,17 +30,18 @@ public class HusbandryLanguage extends LanguageProvider {
         addNoteTitle("pregnancy_note", "Pregnancy");
         addNoteTitle("products_note", "Products");
         addNoteTitle("treats_note", "Treating");
-        addNoteTitle("sickle_note", "Sickle & Fodder");
+        addNoteTitle("sickle_note", "Sickle and Fodder");
         addNoteTitle("bowl_note", "Food Bowl");
         addNoteTitle("trough_note", "Trough");
         addNoteTitle("feeding_tray_note", "Feeding Tray");
         addNoteTitle("nest_note", "Nest");
         addNoteTitle("incubator_note", "Incubator");
+        addNoteTitle("domestication", "Domestication");
         //TEXT
         addNoteText("domestication", "In order for an animal to appear in your book to learn about their statistics. You must domesticate them. All you have to do is interact with them in some way, whether it be petting them, feeding them or milking them. Just something involving an interaction and then they should appear in the book.");
         addNoteText("lifespan_note", "Animals no longer will live forever. They will live out their years happily until they reach a certain age. From that point onwards they have an ever increasing chance of dying until they reach the max age. At that point they will be lost to the world. You can see the lifespans for each animal below and on the next page.\n\n" + TextFormatting.BOLD + "Lifespans" + TextFormatting.RESET);
         addNoteText("lifestyle_note", "Each animal has its own lifestyle it likes to live. Some absolutely hate all of the elements and will seek shelter in the rain or at night. While others may not mind the rain. All however will seek shelter when there is a thunderstorm. They will become happy if they cannot find the shelter they need after a while.");
-        addNoteText("happiness_note", "Animals have a happiness level. You can improve this happiness by taking of them. You can pet your large animals each day or carry the smaller ones to make them happy. Some animals like to be cleaned and all of them like to be treated. Happiness determines how much the animal will produce for you. Each animal only starts off with two hearts available. You can increase the heart limit up to ten. To do this you will need to feed your animals generic treats and type treats.");
+        addNoteText("happiness_note", "Animals have a happiness level. You can improve this happiness by taking care of them. You can pet your large animals each day or carry the smaller ones to make them happy. Some animals like to be cleaned and all of them like to be treated. Happiness determines how much the animal will produce for you. Each animal only starts off with two hearts available. You can increase the heart limit up to ten. To do this you will need to feed your animals generic treats and type treats.");
         addNoteText("cleanliness_note", "The larger animals all liked to be cleaned daily. This will increase their happiness. To clean them you will need to get your hands on a brush. With a brush in hand simply hold down right click and keep brushing them until they display heart particles. You can check if an animal needs brushing in the stats section. The brush icon will be greyed out if they have not had a cleaning today.");
         addNoteText("hunger_note", "Animals need food in order to remain happy. They will not die of starvation by default but this can be enabled if you wish. Animals will not produce products if they have not fed been fed for a while. Feeding an animal by hand will increase their happiness while using the automated feeders will not but it will keep them producing products for you.");
         addNoteText("pregnancy_note", "Mammals can be impregnated by using the miracle potion. Each species has a different length of pregnancy. But after those days have passed they will have one to three babies.\n\n" + TextFormatting.BOLD + "Gestation" + TextFormatting.RESET);

@@ -7,7 +7,7 @@
   ],
   "key": {
     "S": {
-      "item": "minecraft:flint"
+      "item": "minecraft:cobblestone"
     },
     "W": {
       "tag": "forge:rods/wooden"

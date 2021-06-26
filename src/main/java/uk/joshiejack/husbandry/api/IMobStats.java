@@ -39,7 +39,7 @@ public interface IMobStats<E extends MobEntity> {
 
     void setHearts(int hearts);
 
-    int getMaxRelationship();
+    int getMaxHappiness();
 
     void resetProduct();
 

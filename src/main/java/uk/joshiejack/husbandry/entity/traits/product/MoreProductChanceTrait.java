@@ -12,8 +12,8 @@ public class MoreProductChanceTrait extends MoreProductTrait {
 
     @Override
     public void onBihourlyTick(IMobStats<?> stats) {
-        if ((productsProduced == 1 && (101 - MathsHelper.convertRange(0, stats.getMaxRelationship(), 1, 100, stats.getHappiness())) == 0) ||
-                (productsProduced == 2 && (201 - MathsHelper.convertRange(0, stats.getMaxRelationship(), 1, 200, stats.getHappiness())) == 0)) {
+        if ((productsProduced == 1 && (101 - MathsHelper.convertRange(0, stats.getMaxHappiness(), 1, 100, stats.getHappiness())) == 0) ||
+                (productsProduced == 2 && (201 - MathsHelper.convertRange(0, stats.getMaxHappiness(), 1, 200, stats.getHappiness())) == 0)) {
             stats.resetProduct();
         }
     }

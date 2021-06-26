@@ -11,7 +11,7 @@ public class MoreProductTrait extends AbstractMobProductTrait implements IInitTr
     private int productsPerDay = 1; //How many products the mobs give every 24 hours
 
     protected int recalculateProductsPerDay(IMobStats<?> stats) {
-        return MathsHelper.convertRange(0, stats.getMaxRelationship(), 1, 5, stats.getHappiness());
+        return MathsHelper.convertRange(0, stats.getMaxHappiness(), 1, 5, stats.getHappiness());
     }
 
     @Override

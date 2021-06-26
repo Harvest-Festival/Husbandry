@@ -240,7 +240,7 @@ public class MobStats<E extends MobEntity> implements ICapabilityProvider, INBTS
     }
 
     @Override
-    public int getMaxRelationship() {
+    public int getMaxHappiness() {
         return MAX_RELATIONSHIP.get();
     }
 

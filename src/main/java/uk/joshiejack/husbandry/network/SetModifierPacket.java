@@ -5,14 +5,14 @@ import uk.joshiejack.husbandry.entity.stats.MobStats;
 import uk.joshiejack.penguinlib.util.PenguinLoader;
 
 @PenguinLoader.Packet(NetworkDirection.PLAY_TO_CLIENT)
-public class SetProducedProductPacket extends AbstractSetValuePacket {
-    public SetProducedProductPacket() {}
-    public SetProducedProductPacket(int entityID, int value) {
+public class SetModifierPacket extends AbstractSetValuePacket {
+    public SetModifierPacket() {}
+    public SetModifierPacket(int entityID, int value) {
         super(entityID, value);
     }
 
     @Override
     public void handle(MobStats<?> stats) {
-        stats.setProduced(value);
+        stats.setHappinessModifier(value);
     }
 }

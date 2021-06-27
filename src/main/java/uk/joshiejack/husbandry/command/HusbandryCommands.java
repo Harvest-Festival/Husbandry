@@ -16,6 +16,7 @@ public class HusbandryCommands {
                         .requires(cs -> cs.hasPermission(2))
                         .then(SetHeartsCommand.register())
                         .then(SetHappinessCommand.register())
+                        .then(SetModifierCommand.register())
 
         );
     }

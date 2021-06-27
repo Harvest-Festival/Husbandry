@@ -152,9 +152,8 @@ public class MobStats<E extends MobEntity> implements ICapabilityProvider, INBTS
 
     @Override
     public void setHappinessModifier(int value) {
-        happinessDivisor = value;
+        happinessDivisor = Math.max(1, Math.min(5, value));
     }
-
 
     @Override
     public void decreaseHappiness(int happiness) {
@@ -223,7 +222,7 @@ public class MobStats<E extends MobEntity> implements ICapabilityProvider, INBTS
 
     @Override
     public int getMaxHearts() {
-        return (MAX_RELATIONSHIP.get() / happinessDivisor) / (MAX_RELATIONSHIP.get()/10);
+        return (5 - (happinessDivisor - 1)) * 2;
     }
 
     @Override
@@ -261,7 +260,7 @@ public class MobStats<E extends MobEntity> implements ICapabilityProvider, INBTS
         CompoundNBT tag = new CompoundNBT();
         tag.putBoolean("Domesticated", domesticated);
         tag.putInt("Happiness", happiness);
-        tag.putInt("HappinessDivisor", happinessDivisor);
+        tag.putByte("HappinessDivisor", (byte) happinessDivisor);
         tag.putInt("Hunger", hunger);
         tag.putInt("Childhood", childhood);
         tag.putBoolean("HasProduct", hasProduct);
@@ -276,8 +275,9 @@ public class MobStats<E extends MobEntity> implements ICapabilityProvider, INBTS
     public void deserializeNBT(CompoundNBT nbt) {
         domesticated = nbt.getBoolean("Domesticated");
         happiness = nbt.getInt("Happiness");
-        happinessDivisor = nbt.getInt("HappinessDivisor");
-        if (happinessDivisor <= 0 || happinessDivisor > 5) happinessDivisor = 5; //Fix the divisor
+        happinessDivisor = nbt.getByte("HappinessDivisor");
+        if (happinessDivisor <= 1) happinessDivisor = 1;
+        if (happinessDivisor >= 5) happinessDivisor = 5;
         hunger = nbt.getInt("Hunger");
         childhood = nbt.getInt("Childhood");
         hasProduct = nbt.getBoolean("HasProduct");

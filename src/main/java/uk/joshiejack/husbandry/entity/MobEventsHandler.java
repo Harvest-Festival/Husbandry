@@ -79,7 +79,7 @@ public class MobEventsHandler {
 
     @SubscribeEvent //Automatically dismount any entities than are on top of a player
     public static void onPlayerLoggedOut(PlayerEvent.PlayerLoggedOutEvent event) {
-        dismountMobs(event.getPlayer()); //TODO TEST
+        dismountMobs(event.getPlayer());
     }
 
     private static void dismountMobs(PlayerEntity player) {

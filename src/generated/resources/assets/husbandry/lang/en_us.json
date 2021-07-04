@@ -5,6 +5,7 @@
   "block.husbandry.nest": "Nest",
   "block.husbandry.trough": "Trough",
   "block.husbandry.truffle_block": "Truffle Block",
+  "gui.husbandry.noentity": "No domesticated entities could be found nearby. Interact with an animal to add it to the book.",
   "gui.husbandry.notes": "Notes",
   "gui.husbandry.stats": "Mob Stats",
   "item.husbandry.bird_feed": "Bird Feed",

@@ -17,6 +17,7 @@ public class HusbandryLanguage extends LanguageProvider {
         add("itemGroup.husbandry", "Husbandry");
         add("gui.husbandry.stats", "Mob Stats");
         add("gui.husbandry.notes", "Notes");
+        add("gui.husbandry.noentity", "No domesticated entities could be found nearby. Interact with an animal to add it to the book.");
         ForgeRegistries.ITEMS.getValues()
                 .stream().filter(i -> i.getRegistryName().getNamespace().equals(Husbandry.MODID))
                 .forEach(item -> add(item, WordUtils.capitalizeFully(item.getRegistryName().getPath().replace("_", " "))));

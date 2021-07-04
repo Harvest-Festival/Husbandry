@@ -7,6 +7,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import uk.joshiejack.husbandry.Husbandry;
 import uk.joshiejack.husbandry.block.HusbandryBlocks;
+import uk.joshiejack.husbandry.inventory.MobTrackerContainer;
 import uk.joshiejack.penguinlib.item.base.BookItem;
 import uk.joshiejack.penguinlib.item.base.PenguinItem;
 
@@ -28,7 +29,7 @@ public class HusbandryItems {
     public static final RegistryObject<Item> MUG_OF_MILK = ITEMS.register("mug_of_milk", () -> new PenguinItem(new PenguinItem.Properties().useAction(UseAction.DRINK).finishUsing(removePotionEffects).food(HusbandryFoods.MUG_OF_MILK).tab(Husbandry.TAB)));
     public static final RegistryObject<Item> HOT_MILK = ITEMS.register("hot_milk", () -> new PenguinItem(new PenguinItem.Properties().useAction(UseAction.DRINK).finishUsing(removePotionEffects).food(HusbandryFoods.HOT_MILK).tab(Husbandry.TAB)));
     public static final RegistryObject<Item> TRUFFLE = ITEMS.register("truffle", () -> new Item(new Item.Properties().food(HusbandryFoods.TRUFFLE).tab(Husbandry.TAB)));
-    public static final RegistryObject<Item> MOB_TRACKER = ITEMS.register("mob_tracker", () -> new BookItem(new Item.Properties().stacksTo(1).tab(Husbandry.TAB), Husbandry.HusbandryContainers.BOOK::get));
+    public static final RegistryObject<Item> MOB_TRACKER = ITEMS.register("mob_tracker", () -> new BookItem(new Item.Properties().stacksTo(1).tab(Husbandry.TAB), () -> (id, inv, p) -> new MobTrackerContainer(id), false));
     public static final RegistryObject<Item> BRUSH = ITEMS.register("brush", () -> new Item(new Item.Properties().stacksTo(1).durability(64).tab(Husbandry.TAB)));
     public static final RegistryObject<Item> MIRACLE_POTION = ITEMS.register("miracle_potion", () -> new Item(new Item.Properties().stacksTo(16).tab(Husbandry.TAB)));
     public static final RegistryObject<Item> SICKLE = ITEMS.register("sickle", () -> new SickleItem(ItemTier.STONE));

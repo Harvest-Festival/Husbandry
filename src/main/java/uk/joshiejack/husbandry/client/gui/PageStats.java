@@ -29,6 +29,13 @@ public class PageStats extends AbstractMultiPage.Both<MobStats<?>> {
     }
 
     @Override
+    public void initLeft(Book book, int left, int top) {
+        super.initLeft(book, left, top);
+        if (entries.isEmpty())
+            book.addButton(new InformationLabel(left, top));
+    }
+
+    @Override
     protected void initEntry(Book book, int x, int y, int id, MobStats<?> stats) {
         book.addButton(new MobStatsLabel(stats, x + 20, y + 10 + id * 30, stats.getEntity().getName()));
     }

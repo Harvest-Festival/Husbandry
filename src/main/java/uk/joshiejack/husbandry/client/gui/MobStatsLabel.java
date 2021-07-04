@@ -35,10 +35,7 @@ public class MobStatsLabel extends Widget {
     @Override
     public void renderButton(@Nonnull MatrixStack matrix, int mouseX, int mouseY, float partialTicks) {
         Minecraft mc = Minecraft.getInstance();
-        RenderSystem.pushMatrix();
-        RenderSystem.translatef(0F, 0F, -1000.0F);
         InventoryScreen.renderEntityInInventory(x + 10, y + 16, 10, -180, 0, stats.getEntity());
-        RenderSystem.popMatrix();
         List<IRenderTrait> traits = stats.getTraits(TraitType.RENDER);
         traits.forEach(trait -> trait.render(matrix, this, x, y, stats));
 

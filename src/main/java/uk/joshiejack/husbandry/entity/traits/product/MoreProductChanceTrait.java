@@ -7,7 +7,8 @@ import uk.joshiejack.penguinlib.util.helpers.generic.MathsHelper;
 public class MoreProductChanceTrait extends MoreProductTrait {
     @Override
     protected int recalculateProductsPerDay(IMobStats<?> stats) {
-        return 3;
+        return MathsHelper.convertRange(0, stats.getMaxHappiness(), stats.getEntity().getRandom().nextInt(2),
+                2 + stats.getEntity().getRandom().nextInt(2), stats.getHappiness());
     }
 
     @Override

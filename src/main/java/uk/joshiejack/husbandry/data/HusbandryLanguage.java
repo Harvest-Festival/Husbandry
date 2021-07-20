@@ -7,11 +7,14 @@ import net.minecraftforge.registries.ForgeRegistries;
 import org.apache.commons.lang3.text.WordUtils;
 import uk.joshiejack.husbandry.Husbandry;
 
+import java.util.Objects;
+
 public class HusbandryLanguage extends LanguageProvider {
     public HusbandryLanguage(DataGenerator gen) {
         super(gen, Husbandry.MODID, "en_us");
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     protected void addTranslations() {
         add("itemGroup.husbandry", "Husbandry");
@@ -19,7 +22,7 @@ public class HusbandryLanguage extends LanguageProvider {
         add("gui.husbandry.notes", "Notes");
         add("gui.husbandry.noentity", "No domesticated entities could be found nearby. Interact with an animal to add it to the book.");
         ForgeRegistries.ITEMS.getValues()
-                .stream().filter(i -> i.getRegistryName().getNamespace().equals(Husbandry.MODID))
+                .stream().filter(i -> Objects.requireNonNull(i.getRegistryName()).getNamespace().equals(Husbandry.MODID))
                 .forEach(item -> add(item, WordUtils.capitalizeFully(item.getRegistryName().getPath().replace("_", " "))));
         add("note.category.husbandry.care_category", "Animal Care");
         //TITLES

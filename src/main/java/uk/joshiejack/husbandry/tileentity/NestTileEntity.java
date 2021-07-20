@@ -25,6 +25,7 @@ public class NestTileEntity extends AbstractInventoryTileEntity {
     @Override
     public void setItem(int slot, @Nonnull ItemStack stack) {
         super.setItem(slot, stack);
+        assert level != null;
         if (level.isClientSide) {
             requestModelDataUpdate();
             level.sendBlockUpdated(this.getBlockPos(), this.getBlockState(), this.getBlockState(), 3);

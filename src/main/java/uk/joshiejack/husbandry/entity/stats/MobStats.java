@@ -26,8 +26,8 @@ import uk.joshiejack.husbandry.network.SendDataPacket;
 import uk.joshiejack.husbandry.network.SetHappinessPacket;
 import uk.joshiejack.husbandry.network.SpawnHeartsPacket;
 import uk.joshiejack.penguinlib.network.PenguinNetwork;
-import uk.joshiejack.penguinlib.util.helpers.generic.MathsHelper;
-import uk.joshiejack.penguinlib.util.helpers.generic.ReflectionHelper;
+import uk.joshiejack.penguinlib.util.helpers.MathsHelper;
+import uk.joshiejack.penguinlib.util.helpers.ReflectionHelper;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;

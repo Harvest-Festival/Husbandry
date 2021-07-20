@@ -18,7 +18,7 @@ public class ShearableTrait implements IInteractiveTrait {
     public boolean onRightClick(IMobStats<?> stats, PlayerEntity player, Hand hand) {
         MobEntity mob = stats.getEntity();
         ItemStack held = player.getItemInHand(hand);
-        if (held.getItem() instanceof ShearsItem || Tags.Items.SHEARS.contains(held.getItem()) && stats.canProduceProduct()) {
+        if ((held.getItem() instanceof ShearsItem || Tags.Items.SHEARS.contains(held.getItem())) && stats.canProduceProduct()) {
             if (!player.level.isClientSide) {
                 Random rand = mob.getRandom();
                 for (ItemStack stack : stats.getSpecies().getProducts().getProduct(mob, player)) {

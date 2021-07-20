@@ -32,6 +32,7 @@ public class MobStatsLabel extends Widget {
                 .collect(Collectors.toList());
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public void renderButton(@Nonnull MatrixStack matrix, int mouseX, int mouseY, float partialTicks) {
         Minecraft mc = Minecraft.getInstance();

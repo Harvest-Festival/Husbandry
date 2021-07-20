@@ -3,12 +3,10 @@ package uk.joshiejack.husbandry.data;
 import joptsimple.internal.Strings;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.fml.RegistryObject;
-import net.minecraftforge.registries.DeferredRegister;
 import uk.joshiejack.husbandry.Husbandry;
 import uk.joshiejack.husbandry.item.HusbandryItems;
 
@@ -23,8 +21,9 @@ public class HusbandryItemModels extends ItemModelProvider {
         return path.contains("feed") || path.contains("food") || path.equals("fodder") | path.equals("slop");
     }
 
-    private void registerModels(DeferredRegister<Item> items) {
-        items.getEntries().stream()
+    @Override
+    protected void registerModels() {
+        HusbandryItems.ITEMS.getEntries().stream()
                 .map(RegistryObject::get)
                 .forEach(item -> {
                     String path = Objects.requireNonNull(item.getRegistryName()).getPath();
@@ -43,10 +42,5 @@ public class HusbandryItemModels extends ItemModelProvider {
                         }
                     }
                 });
-    }
-
-    @Override
-    protected void registerModels() {
-        registerModels(HusbandryItems.ITEMS);
     }
 }

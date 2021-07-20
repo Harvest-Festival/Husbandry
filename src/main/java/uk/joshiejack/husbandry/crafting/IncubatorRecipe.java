@@ -25,6 +25,7 @@ import uk.joshiejack.penguinlib.item.crafting.AbstractSimplePenguinRecipe;
 
 import javax.annotation.Nonnull;
 import java.lang.reflect.InvocationTargetException;
+import java.util.Objects;
 
 public class IncubatorRecipe extends AbstractSimplePenguinRecipe<EntityType<?>> {
     private final RangedInteger amount;
@@ -47,7 +48,7 @@ public class IncubatorRecipe extends AbstractSimplePenguinRecipe<EntityType<?>> 
             }
 
             entity.moveTo(pos.getX(), pos.getY(), pos.getZ(), 0.0F, 0.0F);
-            if (entity instanceof AgeableEntity && stack.hasTag() && stack.getTag().contains("HeartLevel")) {
+            if (entity instanceof AgeableEntity && stack.hasTag() && Objects.requireNonNull(stack.getTag()).contains("HeartLevel")) {
                 IMobStats<?> babyStats = HusbandryAPI.instance.getStatsForEntity((AgeableEntity) entity);
                 if (babyStats != null)
                     babyStats.increaseHappiness(stack.getTag().getInt("HeartLevel") / 2);

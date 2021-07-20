@@ -105,13 +105,12 @@ public abstract class AbstractMoveToBlockGoal extends Goal {
     }
 
     protected boolean findNearestBlock() {
-        int i = this.searchRange;
         int j = this.verticalSearchRange;
         BlockPos blockpos = this.entity.blockPosition();
         BlockPos.Mutable blockpos$mutable = new BlockPos.Mutable();
 
         for (int k = verticalSearchStart; k >= -j; k--) {
-            for (int l = 0; l < i; ++l) {
+            for (int l = 0; l < this.searchRange; ++l) {
                 for (int i1 = 0; i1 <= l; i1 = i1 > 0 ? -i1 : 1 - i1) {
                     for (int j1 = i1 < l && i1 > -l ? l : 0; j1 <= l; j1 = j1 > 0 ? -j1 : 1 - j1) {
                         blockpos$mutable.setWithOffset(blockpos, i1, k, j1);

@@ -16,6 +16,7 @@ public class HusbandryBlockTags extends BlockTagsProvider {
         super(generator, Husbandry.MODID, existingFileHelper);
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     protected void addTags() {
         tag(MobEventsHandler.PREVENTS_PASSENGER_DROP).addTags(BlockTags.BUTTONS, BlockTags.DOORS, BlockTags.FENCE_GATES, Tags.Blocks.CHESTS).add(Blocks.LEVER);

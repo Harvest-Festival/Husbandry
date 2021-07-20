@@ -7,7 +7,7 @@ import uk.joshiejack.husbandry.api.IMobStats;
 import uk.joshiejack.husbandry.api.ISpecies;
 import uk.joshiejack.husbandry.api.trait.IDataTrait;
 import uk.joshiejack.husbandry.api.trait.INewDayTrait;
-import uk.joshiejack.penguinlib.util.helpers.generic.MathsHelper;
+import uk.joshiejack.penguinlib.util.helpers.MathsHelper;
 
 public class MortalTrait implements INewDayTrait, IDataTrait {
     private static final DamageSource OLD_AGE = new DamageSource("oldage");

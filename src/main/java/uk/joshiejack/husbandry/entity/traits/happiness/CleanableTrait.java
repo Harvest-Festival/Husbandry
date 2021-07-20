@@ -18,7 +18,7 @@ import uk.joshiejack.husbandry.api.trait.INewDayTrait;
 import uk.joshiejack.husbandry.item.HusbandryItems;
 import uk.joshiejack.husbandry.network.SetCleanedStatusPacket;
 import uk.joshiejack.penguinlib.network.PenguinNetwork;
-import uk.joshiejack.penguinlib.util.helpers.generic.MathsHelper;
+import uk.joshiejack.penguinlib.util.helpers.MathsHelper;
 import uk.joshiejack.penguinlib.util.icon.Icon;
 import uk.joshiejack.penguinlib.util.icon.ItemIcon;
 

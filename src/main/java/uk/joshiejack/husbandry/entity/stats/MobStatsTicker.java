@@ -24,7 +24,7 @@ import static uk.joshiejack.husbandry.entity.stats.CapabilityStatsHandler.MOB_ST
 @Mod.EventBusSubscriber(modid = MODID)
 public class MobStatsTicker {
     private static final Set<MobStats<?>> stats = Sets.newHashSet();
-    private static List<Runnable> futures = new ArrayList<>();
+    private static final List<Runnable> futures = new ArrayList<>();
     private static boolean iterating;
 
     @SubscribeEvent

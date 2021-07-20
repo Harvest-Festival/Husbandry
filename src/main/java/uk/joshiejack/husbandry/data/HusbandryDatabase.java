@@ -13,7 +13,6 @@ import uk.joshiejack.husbandry.tileentity.HusbandryTileEntities;
 import uk.joshiejack.penguinlib.data.TimeUnitRegistry;
 import uk.joshiejack.penguinlib.data.database.CSVUtils;
 import uk.joshiejack.penguinlib.data.generators.AbstractDatabaseProvider;
-import uk.joshiejack.penguinlib.data.generators.builders.Trade;
 import uk.joshiejack.penguinlib.data.generators.builders.TradeBuilder;
 
 import java.util.ArrayList;
@@ -30,15 +29,15 @@ public class HusbandryDatabase extends AbstractDatabaseProvider {
     protected void addDatabaseEntries() {
         addTimeUnit("require_food_max_days", 3);
         addTimeUnitForMachine(HusbandryTileEntities.INCUBATOR.get(), TimeUnitRegistry.Defaults.WEEK.getValue());
-        new Trade(VillagerProfession.SHEPHERD, 1, HusbandryItems.GENERIC_TREAT.get()).setOutputAmount(5).build(this);
-        new Trade(VillagerProfession.SHEPHERD, 2, HusbandryItems.CAT_TREAT.get()).setOutputAmount(3).setInputAmount(2).build(this);
-        new Trade(VillagerProfession.SHEPHERD, 2, HusbandryItems.CHICKEN_TREAT.get()).setOutputAmount(3).setInputAmount(2).build(this);
-        new Trade(VillagerProfession.SHEPHERD, 2, HusbandryItems.COW_TREAT.get()).setOutputAmount(3).setInputAmount(2).build(this);
-        new Trade(VillagerProfession.SHEPHERD, 2, HusbandryItems.DOG_TREAT.get()).setOutputAmount(3).setInputAmount(2).build(this);
-        new Trade(VillagerProfession.SHEPHERD, 2, HusbandryItems.HORSE_TREAT.get()).setOutputAmount(3).setInputAmount(2).build(this);
-        new Trade(VillagerProfession.SHEPHERD, 2, HusbandryItems.PIG_TREAT.get()).setOutputAmount(3).setInputAmount(2).build(this);
-        new Trade(VillagerProfession.SHEPHERD, 2, HusbandryItems.RABBIT_TREAT.get()).setOutputAmount(3).setInputAmount(2).build(this);
-        new Trade(VillagerProfession.SHEPHERD, 2, HusbandryItems.SHEEP_TREAT.get()).setOutputAmount(3).setInputAmount(2).build(this);
+        new TradeBuilder(VillagerProfession.SHEPHERD, 1, HusbandryItems.GENERIC_TREAT.get()).setOutputAmount(5).build(this);
+        new TradeBuilder(VillagerProfession.SHEPHERD, 2, HusbandryItems.CAT_TREAT.get()).setOutputAmount(3).setInputAmount(2).build(this);
+        new TradeBuilder(VillagerProfession.SHEPHERD, 2, HusbandryItems.CHICKEN_TREAT.get()).setOutputAmount(3).setInputAmount(2).build(this);
+        new TradeBuilder(VillagerProfession.SHEPHERD, 2, HusbandryItems.COW_TREAT.get()).setOutputAmount(3).setInputAmount(2).build(this);
+        new TradeBuilder(VillagerProfession.SHEPHERD, 2, HusbandryItems.DOG_TREAT.get()).setOutputAmount(3).setInputAmount(2).build(this);
+        new TradeBuilder(VillagerProfession.SHEPHERD, 2, HusbandryItems.HORSE_TREAT.get()).setOutputAmount(3).setInputAmount(2).build(this);
+        new TradeBuilder(VillagerProfession.SHEPHERD, 2, HusbandryItems.PIG_TREAT.get()).setOutputAmount(3).setInputAmount(2).build(this);
+        new TradeBuilder(VillagerProfession.SHEPHERD, 2, HusbandryItems.RABBIT_TREAT.get()).setOutputAmount(3).setInputAmount(2).build(this);
+        new TradeBuilder(VillagerProfession.SHEPHERD, 2, HusbandryItems.SHEEP_TREAT.get()).setOutputAmount(3).setInputAmount(2).build(this);
         new TradeBuilder(VillagerProfession.SHEPHERD, 2, HusbandryItems.PARROT_TREAT.get()).setOutputAmount(3).setInputAmount(2).build(this);
         new TradeBuilder(VillagerProfession.SHEPHERD, 2, HusbandryItems.LLAMA_TREAT.get()).setOutputAmount(3).setInputAmount(2).build(this);
         MobType.createMammal("cow").withLifespan(12, 20).withTreat(HusbandryItems.COW_TREAT.get()).levelUpWith(7, 24).withGestationPeriod(9).withMaturityAt(14).withProducts(1, "milk", Items.MILK_BUCKET)

@@ -48,7 +48,7 @@ import uk.joshiejack.husbandry.note.PregnancyNoteType;
 import uk.joshiejack.husbandry.tileentity.HusbandryTileEntities;
 import uk.joshiejack.penguinlib.inventory.AbstractBookContainer;
 import uk.joshiejack.penguinlib.note.type.NoteType;
-import uk.joshiejack.penguinlib.util.helpers.generic.ReflectionHelper;
+import uk.joshiejack.penguinlib.util.helpers.ReflectionHelper;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;

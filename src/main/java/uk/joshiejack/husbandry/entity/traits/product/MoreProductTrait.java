@@ -4,7 +4,7 @@ import uk.joshiejack.husbandry.api.IMobStats;
 import uk.joshiejack.husbandry.api.trait.IBiHourlyTrait;
 import uk.joshiejack.husbandry.api.trait.IInitTrait;
 import uk.joshiejack.husbandry.api.trait.INewDayTrait;
-import uk.joshiejack.penguinlib.util.helpers.generic.MathsHelper;
+import uk.joshiejack.penguinlib.util.helpers.MathsHelper;
 
 //Mobs with this, have their products reset quicker based on happiness
 public class MoreProductTrait extends AbstractMobProductTrait implements IInitTrait, INewDayTrait, IBiHourlyTrait {

@@ -11,7 +11,7 @@ import net.minecraft.loot.LootTable;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.server.ServerWorld;
 import uk.joshiejack.husbandry.api.IProducts;
-import uk.joshiejack.penguinlib.util.helpers.minecraft.FakePlayerHelper;
+import uk.joshiejack.penguinlib.util.helpers.FakePlayerHelper;
 import uk.joshiejack.penguinlib.util.icon.Icon;
 import uk.joshiejack.penguinlib.util.icon.ItemIcon;
 

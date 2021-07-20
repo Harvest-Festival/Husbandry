@@ -50,7 +50,7 @@ public class EggSupplierBakedModel extends BakedModelWrapper<IBakedModel> {
     public List<BakedQuad> getQuads(@Nullable BlockState state, @Nullable Direction side, @Nonnull Random random, @Nonnull IModelData data) {
         if (state != null && data.hasProperty(property)) {
             ItemStack stack = data.getData(property);
-            if (!stack.isEmpty()) {
+            if (stack != null && !stack.isEmpty()) {
                 Map<Direction, List<BakedQuad>> map = getQuads(defaultItem(stack.getItem()));
                 if (map.containsKey(side)) return map.get(side);
                 else {

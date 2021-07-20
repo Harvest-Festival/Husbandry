@@ -22,6 +22,7 @@ import uk.joshiejack.penguinlib.item.PenguinItems;
 import uk.joshiejack.penguinlib.util.PenguinTags;
 
 import javax.annotation.Nonnull;
+import java.util.Objects;
 import java.util.function.Consumer;
 
 public class HusbandryRecipes extends RecipeProvider {
@@ -34,7 +35,7 @@ public class HusbandryRecipes extends RecipeProvider {
     }
 
     private void cook(@Nonnull Consumer<IFinishedRecipe> consumer, Item input, Item output, float experience) {
-        String name = output.getRegistryName().getPath();
+        String name = Objects.requireNonNull(output.getRegistryName()).getPath();
         CookingRecipeBuilder.cooking(Ingredient.of(input), output, experience, 100, IRecipeSerializer.SMOKING_RECIPE).unlockedBy("has_" + name, has(input)).save(consumer, rl(name + "_smoking"));
         CookingRecipeBuilder.cooking(Ingredient.of(input), output, experience, 600, IRecipeSerializer.CAMPFIRE_COOKING_RECIPE).unlockedBy("has_" + name, has(input)).save(consumer, rl(name + "_campfire"));
         CookingRecipeBuilder.smelting(Ingredient.of(input), output, experience, 200).unlockedBy("has_" + name, has(input)).save(consumer, rl(name + "_smelting"));

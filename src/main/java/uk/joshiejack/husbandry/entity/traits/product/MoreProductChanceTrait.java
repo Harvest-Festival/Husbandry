@@ -1,7 +1,7 @@
 package uk.joshiejack.husbandry.entity.traits.product;
 
 import uk.joshiejack.husbandry.api.IMobStats;
-import uk.joshiejack.penguinlib.util.helpers.generic.MathsHelper;
+import uk.joshiejack.penguinlib.util.helpers.MathsHelper;
 
 //Mobs with this, have their products reset quicker based on happiness
 public class MoreProductChanceTrait extends MoreProductTrait {

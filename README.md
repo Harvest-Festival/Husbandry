@@ -4,9 +4,7 @@
 
 Husbandry is the animal care element of Harvest Festival. It adds the requirement to look after your animals to make them happy. It gives animals a limited lifespan and has mammals be pregnant for several minecraft days. Also adds nests for chickens to lay their eggs and an incubator for you to hatch them. Pigs will "find" truffles randomly throughout their day. Treats will help level up animals so that they produce more products for you.
 
-More information about Husbandry and downloads can be found on //TODO
-
-If you have any questions, feel free to join the [Harvest Festival Discord](https://discord.gg/MRZAyze)
+More information about Husbandry and downloads can be found found at https://harvestfestivalwiki.com/Husbandry
 
 Adding Husbandry to your buildscript
 ---
